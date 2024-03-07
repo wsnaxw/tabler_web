@@ -34,7 +34,7 @@ const menuicon = [{icon:'<span class="nav-link-icon d-md-none d-lg-inline-block"
             '                  </span>'},
 ];
 
-
+ 
 
 
 $(document).ready(function() {
@@ -42,7 +42,7 @@ $(document).ready(function() {
 
 
 
-    // 检查token
+    // 检查token123123
 
     var x = localStorage.getItem("token");
     if (x==null||x.length<10){
