@@ -92,6 +92,15 @@ $(document).ready(function() {
 
     console.log('页面加载完成，可以开始执行初始化设置了！');
 
+    console.log()
+
+
+    let user = JSON.parse(localStorage.getItem('user'));
+
+    $('#userName').html(user.flowerName)
+
+    $('#userLevel').html(user.job)
+
     // 例如，为某个按钮绑定点击事件
     menuStart();
     $('#loginButton').click(function() {
