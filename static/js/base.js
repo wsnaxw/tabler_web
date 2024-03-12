@@ -111,7 +111,7 @@ $(document).ready(function() {
         loginOut();
     });
 
-
+    watermark.load({watermark_txt:user.flowerName,watermark_x_space:230})
 
     // 或者隐藏某个元素
     $('#myElement').hide();
@@ -281,4 +281,41 @@ function loginOut(){
     }
 
     window.location.href = '/fsf_b_web/sign_in.html'
+}
+
+
+
+
+function baseAjax(jsondata,uri){
+
+    let resultData;
+
+    $.ajax({
+        url: baseUri2+uri, // 替换为你的服务器端点
+        headers:{
+            'Token': localStorage.getItem('token'), // 设置自定义请求头
+            'Content-Type': 'application/json; charset=utf-8' // 设置内容类型为 JSON
+        },
+        data:jsondata,
+        type: 'POST', // 请求类型
+        dataType: 'json', // 预期服务器返回的数据类型
+        success: function(response) {
+            // 请求成功时执行的回调函数
+            // console.log('请求成功:', response);
+            // 在这里处理服务器返回的数据
+            if (response && response.code === 0 ) {
+                console.log(response.data)
+                resultData = response.data;
+
+            }
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error('请求失败:', textStatus, errorThrown);
+        }
+    });
+
+    return resultData;
+
+
 }
