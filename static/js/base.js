@@ -141,7 +141,7 @@ function menuStart() {
 
 function getMenuInfo(){
     $.ajax({
-        url: baseUri2+'/login/getMenu', // 替换为你的服务器端点
+        url: baseUri+'/login/getMenu', // 替换为你的服务器端点
         headers:{
             'Token': localStorage.getItem('token'), // 设置自定义请求头
             'Content-Type': 'application/json; charset=utf-8' // 设置内容类型为 JSON
@@ -291,7 +291,7 @@ function baseAjax(jsondata,uri){
     let resultData;
 
     $.ajax({
-        url: baseUri2+uri, // 替换为你的服务器端点
+        url: baseUri+uri, // 替换为你的服务器端点
         headers:{
             'Token': localStorage.getItem('token'), // 设置自定义请求头
             'Content-Type': 'application/json; charset=utf-8' // 设置内容类型为 JSON
