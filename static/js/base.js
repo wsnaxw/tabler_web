@@ -1,6 +1,7 @@
 var baseUri ='http://admin.fsfhr.com/api/fsfa';
 var baseUri1 ='http://admin.fsfhr.com/';
 var baseUri2 ='http://127.0.0.1:9090/fsfa'
+var baseUri3 ='http://127.0.0.1:9091/'
 const menuicon = [{icon:'<span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->\n' +
         '                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>\n' +
         '                  </span>'},
@@ -144,7 +145,8 @@ function getMenuInfo(){
         url: baseUri+'/login/getMenu', // 替换为你的服务器端点
         headers:{
             'Token': localStorage.getItem('token'), // 设置自定义请求头
-            'Content-Type': 'application/json; charset=utf-8' // 设置内容类型为 JSON
+            'Content-Type': 'application/json; charset=utf-8', // 设置内容类型为 JSON
+            'Access-Control-Allow-Origin':'*'
         },
         type: 'POST', // 请求类型
         dataType: 'json', // 预期服务器返回的数据类型
@@ -280,13 +282,13 @@ function loginOut(){
     localStorage.removeItem(keys[i]);
     }
 
-    window.location.href = '/fsf_b_web/sign_in.html'
+    window.location.href = '/tabler_web/sign_in.html'
 }
 
 
 
 
-function baseAjax(jsondata,uri){
+function baseAjax1(jsondata,uri){
 
     let resultData;
 
@@ -296,7 +298,7 @@ function baseAjax(jsondata,uri){
             'Token': localStorage.getItem('token'), // 设置自定义请求头
             'Content-Type': 'application/json; charset=utf-8' // 设置内容类型为 JSON
         },
-        data:jsondata,
+        data:JSON.stringify(jsondata),
         type: 'POST', // 请求类型
         dataType: 'json', // 预期服务器返回的数据类型
         success: function(response) {
@@ -306,7 +308,7 @@ function baseAjax(jsondata,uri){
             if (response && response.code === 0 ) {
                 console.log(response.data)
                 resultData = response.data;
-
+                return resultData;
             }
 
         },
@@ -318,4 +320,34 @@ function baseAjax(jsondata,uri){
     return resultData;
 
 
+}
+
+
+function baseAjax(jsondata,uri) {
+    // 返回一个Promise
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: baseUri2+uri, // 替换为你的服务器端点
+            headers:{
+                'Token': localStorage.getItem('token'), // 设置自定义请求头
+                'Content-Type': 'application/json; charset=utf-8' // 设置内容类型为 JSON
+            },
+            data:JSON.stringify(jsondata),
+            type: 'POST', // 请求类型
+            dataType: 'json', // 预期服务器返回的数据类型
+            success: function(response) {
+                // 请求成功时执行的回调函数
+                // console.log('请求成功:', response);
+                // 在这里处理服务器返回的数据
+                if (response && response.code === 0 ) {
+
+                    resolve(response.data);
+                }
+    
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                reject(new Error('请求失败: ' + textStatus));
+            }
+        });
+    });
 }
