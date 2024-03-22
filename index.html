@@ -697,7 +697,9 @@
                             </td>
                             <td class="td-truncate">
                               <div class="text-truncate">
-                                Change deprecated html tags to text decoration classes (#29604)
+                                <a onclick="newspaper(123)" class="btn" data-bs-toggle="modal" data-bs-target="#modal-large">
+                                  Large modal
+                                </a>
                               </div>
                             </td>
                             <td class="text-nowrap text-secondary">27 Nov 2019</td>
@@ -724,7 +726,23 @@
 
 
 
-
+              <div class="modal modal-blur fade" id="modal-large" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Large modal</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="modalbody">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi beatae delectus deleniti dolorem eveniet facere fuga iste nemo nesciunt nihil odio perspiciatis, quia quis reprehenderit sit tempora totam unde.
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
 
 

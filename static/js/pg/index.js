@@ -466,3 +466,13 @@ function qyph(){
 
 
 }
+
+
+
+function newspaper(obj){
+
+
+    $('#modalbody').html(obj)
+
+
+}
