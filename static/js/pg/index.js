@@ -91,16 +91,13 @@ function teamCheckData(){
 
 
     getData(data,'/home/indexData').then(data => {
-        console.log("teamCheckData");
         // 这里处理从getData返回的数据
-        console.log(data);
 
     if(data!=null){
 
-        console.log(data.addServiceFee);
 
         $('#hkje').html(data.addServiceFee);
-        $('#kpi').html(data.addKPIFee);
+        $('#kpi-money').html(data.addKPIFee);
         $('#tgkh').html(data.addRecommendNum);
         $('#khms').html(data.addFaceNum);
         $('#offer').html(data.addOfferNum);
@@ -140,7 +137,6 @@ async function getData123(){
     data.type =types[0]
 
 
-    console.log('getData');
 
 
 
@@ -166,7 +162,7 @@ async function getData(data,uri) {
         const obj = await baseAjax(data,uri);
         
         // 在这里处理数据
-        console.log(obj);
+        // console.log(obj);
         return obj; // 这里返回数据并不实际返回给调用者，因为这是一个异步函数
     } catch (error) {
         // 处理错误
@@ -180,9 +176,7 @@ function hkdata(){
 
 
     getData({},'/home/hkRank').then(data => {
-        console.log("hkdata");
         // 这里处理从getData返回的数据
-        console.log(data);
     }).catch(error => {
         // 处理错误
         console.error('获取数据失败:', error);
@@ -207,9 +201,7 @@ function sshk(){
 
 
     getData({},'/home/feeRank').then(data => {
-        console.log("sshk");
         // 这里处理从getData返回的数据
-        console.log(data);
 
         try {
 
@@ -255,9 +247,7 @@ function sstj(){
 
 
     getData({},'/home/recommendRank').then(data => {
-        console.log("sstj");
         // 这里处理从getData返回的数据
-        console.log(data);
 
         try {
 
@@ -316,9 +306,7 @@ function yjph(){
 
 
     getData({},'/home/kpiRank').then(data => {
-        console.log("yjph");
         // 这里处理从getData返回的数据
-        console.log(data);
 
         try {
 
@@ -372,9 +360,7 @@ function hkph(){
 
 
     getData({},'/home/hkRank').then(data => {
-        console.log("hkph");
         // 这里处理从getData返回的数据
-        console.log(data);
 
         try {
 
@@ -428,9 +414,7 @@ function qyph(){
 
 
     getData({},'/home/signRank').then(data => {
-        console.log("yjph");
         // 这里处理从getData返回的数据
-        console.log(data);
 
         try {
 
@@ -468,11 +452,24 @@ function qyph(){
 }
 
 
+function test1(){
+    alert(1)
+    $('#sidebar-menu').hide()
+}
 
 function newspaper(obj){
+    $('#modalbody').html(1)
+
+    
+
+    
 
 
-    $('#modalbody').html(obj)
+}
 
+
+function abc(){
+    // $('#modal-large').attr('aria-hidden','false')
+    $('#modalbody').trigger('click')
 
 }

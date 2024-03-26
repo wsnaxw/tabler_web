@@ -35,10 +35,131 @@
     </script>
 
   </head>
-  <body  id="webBody">
+  <body  id="webBody" class="layout-fluid">
     <div class="page">
 
-      <header class="navbar navbar-expand-md d-print-none fixed-top">
+
+      <!--      &lt;!&ndash; Sidebar &ndash;&gt;-->
+      
+      
+      <aside class="navbar navbar-vertical navbar-expand-lg"    >
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <h1 class="navbar-brand navbar-brand-autodark">
+            <a href="#" >
+              <img src="http://admin.fsfhr.com/banner.svg" width="110" height="32" alt="faithful" class="navbar-brand-image">
+            </a>
+          </h1>
+
+          <div class="collapse navbar-collapse"   id="sidebar-menu">
+            <ul class="navbar-nav pt-lg-3" id="menu">
+
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- navbar navbar-expand-md d-print-none d-none d-lg-flex -->
+      <!-- navbar navbar-expand-md d-print-none -->
+      <header class="navbar navbar-expand-md d-print-none d-none d-lg-flex fixed-top">
         <div class="container-xl">
 
 
@@ -175,38 +296,14 @@
       </header>
 
 
-<!--      &lt;!&ndash; Sidebar &ndash;&gt;-->
-      <aside class="navbar navbar-vertical navbar-expand-lg navbar-transparent">
-        <div class="container-fluid">
 
-
-
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <h1 class="navbar-brand navbar-brand-autodark">
-            <a href="#sidebar-menu">
-              <img src="http://admin.fsfhr.com/banner.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
-            </a>
-          </h1>
-
-          <div class="collapse navbar-collapse "   id="sidebar-menu">
-            <ul class="navbar-nav pt-lg-3" id="menu">
-
-              </li>
-            </ul>
-          </div>
-        </div>
-      </aside>
       <div class="page-wrapper">
 
 
 
         <!-- Page header -->
         <div class="page-header d-print-none">
-          <div class="container-xl">
-
-          </div>
+          
         </div>
 
 
@@ -221,54 +318,9 @@
 
 
 
-          <div class="container-xl">
-           
-        </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          <div class="container-xl">
+          <div class="container-xl" >
 
 
             <div class="row row-deck row-cards">
@@ -365,7 +417,7 @@
                                                   <div class="font-weight-medium" >
                                                      业绩金额
                                                   </div>
-                                                  <div class="text-muted text-red" id="kpi">
+                                                  <div class="text-muted text-red" id="kpi-money">
                                                       0
                                                   </div>
                                               </div>
@@ -726,16 +778,54 @@
 
 
 
-              <div class="modal modal-blur fade" id="modal-large" tabindex="-1" role="dialog" aria-hidden="true">
+
+              <div class="modal modal-blur fade" id="modal-large" tabindex="-1" role="dialog" aria-hidden="true" onclick="abc()">
                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <img src="http://admin.fsfhr.com/static/M2.a9d39170.png" alt="">
                     <div class="modal-header">
                         
 
-                    </div>
+                    
                     <div class="modal-body" id="modalbody">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi beatae delectus deleniti dolorem eveniet facere fuga iste nemo nesciunt nihil odio perspiciatis, quia quis reprehenderit sit tempora totam unde.
+
+                      <div class="alert alert-success alert-dismissible" role="alert">
+                        <h3 class="mb-1">Some Title</h3>
+                        <p>Lorem ipsum Minim ad pariatur eiusmod ea ut nulla aliqua est quis id dolore minim voluptate.</p>
+                        <div class="btn-list">
+                          <a href="#" class="btn btn-success">Okay</a>
+                          <a href="#" class="btn">Cancel</a>
+                        </div>
+                        <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
+                      </div>
+                      <div class="alert alert-info alert-dismissible" role="alert">
+                        <h3 class="mb-1">Some Title</h3>
+                        <p>Lorem ipsum Minim ad pariatur eiusmod ea ut nulla aliqua est quis id dolore minim voluptate.</p>
+                        <div class="btn-list">
+                          <a href="#" class="btn btn-info">Okay</a>
+                          <a href="#" class="btn">Cancel</a>
+                        </div>
+                        <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
+                      </div>
+                      <div class="alert alert-warning alert-dismissible" role="alert">
+                        <h3 class="mb-1">Some Title</h3>
+                        <p>Lorem ipsum Minim ad pariatur eiusmod ea ut nulla aliqua est quis id dolore minim voluptate.</p>
+                        <div class="btn-list">
+                          <a href="#" class="btn btn-warning">Okay</a>
+                          <a href="#" class="btn">Cancel</a>
+                        </div>
+                        <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
+                      </div>
+                      <div class="alert alert-danger alert-dismissible" role="alert">
+                        <h3 class="mb-1">Some Title</h3>
+                        <p>Lorem ipsum Minim ad pariatur eiusmod ea ut nulla aliqua est quis id dolore minim voluptate.</p>
+                        <div class="btn-list">
+                          <a href="#" class="btn btn-danger">Okay</a>
+                          <a href="#" class="btn">Cancel</a>
+                        </div>
+                        <a class="btn-close" data-bs-dismiss="alert" aria-label="close"></a>
+                      </div>
+                      
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
@@ -744,9 +834,6 @@
                   </div>
                 </div>
               </div>
-
-
-
 
 
 
