@@ -452,6 +452,50 @@ function qyph(){
 }
 
 
+
+
+function qyph(){
+
+
+    
+    $('#rankHead').html("")
+
+    $('#rankHead').html("<tr><th>归属公司</th><th>顾问名称</th><th>职级</th><th>签约数</th></tr>")
+
+
+    getData({},'/home/signRank').then(data => {
+        // 这里处理从getData返回的数据
+
+        try {
+
+            let str ='';
+            
+            $('#rankBody').html('')
+            
+            data.list.forEach(o=>{
+               
+
+                str += "<tr><td class='text-nowrap text-secondary' >"
+                + o.comName + "</td><td class='text-nowrap text-secondary'>"
+                + o.name +"</td><td class='text-secondary text-nowrap'>"
+                + o.roleName+"</td><td class='text-secondary text-nowrap' >"
+                + o.signNum+"</td>"
+                +"</tr>"
+
+
+
+            });
+
+            $('#rankBody').html(str)            
+        } catch (error) {
+        }
+    }).catch(error => {
+        // 处理错误
+        console.error('获取数据失败:', error);
+    });
+}
+
+
 function test1(){
     alert(1)
     $('#sidebar-menu').hide()
