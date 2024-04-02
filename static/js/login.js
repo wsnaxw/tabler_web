@@ -8,6 +8,10 @@ $(document).ready(function() {
     // 检查token
 
 
+    var isLogin = localStorage.getItem('isLogin')
+    console.log(isLogin)
+    if('yes'===isLogin)window.location.href =window.location.href.replace('/sign_in.html',"").replace('#',"")+ '/index.html'
+
 
     var x = localStorage.getItem("token");
     if (x==''||x==null){
@@ -232,6 +236,7 @@ function login(){
                 var myJSONString = JSON.stringify(response.data);
 
                 localStorage.setItem('user',myJSONString)
+                localStorage.setItem('isLogin','yes')
                 window.location.href =urltoHref+ '/index.html'
             } else {
                 $('#tip').html('账号密码错误！')
