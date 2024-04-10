@@ -52,6 +52,7 @@ $(document).ready(function(){
     sshk();
     sstj();
     yjph();
+    news();
 
     $('#yjph').click(function() {
         yjph();
@@ -301,6 +302,7 @@ function yjph(){
 
 
 
+    console.log('yjph')
 
 
 
@@ -327,6 +329,8 @@ function yjph(){
 
 
             });
+
+            console.log(str)
 
             $('#rankBody').html(str)            
         } catch (error) {
@@ -454,39 +458,52 @@ function qyph(){
 
 
 
-function qyph(){
+
+function news(){
+    // home/sysNotice
 
 
-    
-    $('#rankHead').html("")
-
-    $('#rankHead').html("<tr><th>归属公司</th><th>顾问名称</th><th>职级</th><th>签约数</th></tr>")
+    $('#xwgg').html("")
 
 
-    getData({},'/home/signRank').then(data => {
+    getData({},'/home/sysNotice').then(data => {
         // 这里处理从getData返回的数据
 
         try {
 
             let str ='';
             
-            $('#rankBody').html('')
             
             data.list.forEach(o=>{
                
+                var x ='';
 
-                str += "<tr><td class='text-nowrap text-secondary' >"
-                + o.comName + "</td><td class='text-nowrap text-secondary'>"
-                + o.name +"</td><td class='text-secondary text-nowrap'>"
-                + o.roleName+"</td><td class='text-secondary text-nowrap' >"
-                + o.signNum+"</td>"
+                if(o.type===0){
+                    x = dashijian;
+                }else if(o.type===1){
+                    x = dayuanbao;
+                }else{
+                    x = dazuanshi;
+                }
+
+
+                str += "<tr><td class='w-1' >"
+                + x + "</td><td class='td-truncate'><div class='text-truncate'><a"
+                +"  onclick='newspaper("+o.id+")' class='btn' data-bs-toggle='modal' data-bs-target='#modal-large'>"
+                + o.title +"</a></div></td><td class='text-nowrap text-secondary'>"
+                + o.publishTime+"</td>"
                 +"</tr>"
 
+
+                let jsonStr = JSON.stringify(o);
+                localStorage.removeItem(o.id)
+                // 将JSON字符串存储到localStorage中
+                localStorage.setItem(o.id, jsonStr);
 
 
             });
 
-            $('#rankBody').html(str)            
+            $('#xwgg').html(str)            
         } catch (error) {
         }
     }).catch(error => {
@@ -501,18 +518,46 @@ function test1(){
     $('#sidebar-menu').hide()
 }
 
-function newspaper(obj){
-    $('#modalbody').html(1)
+function newspaper(key){
+
+
+    // 从localStorage中获取JSON字符串
+let jsonStr = localStorage.getItem(key);
+
+// 将JSON字符串转换回对象
+let obj = JSON.parse(jsonStr);
+
+// 打印对象
+console.log(obj);
+
+if(obj.type===0){
+    $('#newsIMG').attr('src','http://admin.fsfhr.com/static/M2.a9d39170.png')
+}else if(obj.type===1){
+
+    $('#newsIMG').attr('src','http://admin.fsfhr.com/static/M1.c81a0062.png')
+}else{
+    $('#newsIMG').attr('src','http://admin.fsfhr.com/static/M4.b4387aef.png')
+}
+
+
+
+
+
+
+    $('#modalbody').html('<h1>'+obj.content+'</h1>')
 
     
-
-    
-
 
 }
 
 
 function abc(){
+
+
+
+
+
+
     // $('#modal-large').attr('aria-hidden','false')
     $('#modalbody').trigger('click')
 

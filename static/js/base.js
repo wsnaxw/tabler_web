@@ -35,7 +35,20 @@ const menuicon = [{icon:'<span class="nav-link-icon d-md-none d-lg-inline-block"
             '                  </span>'},
 ];
 
- 
+const dazuanshi = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" '+
+                          '    stroke="#87ceeb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" '+
+                          '    class="icon icon-tabler icons-tabler-outline icon-tabler-diamond"> '+
+                          '   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path> '+
+                          '   <path d="M6 5h12l3 5l-8.5 9.5a.7 .7 0 0 1 -1 0l-8.5 -9.5l3 -5"></path>'+
+                          '   <path d="M10 12l-2 -2.2l.6 -1"></path></svg>' 
+
+
+const dashijian = '  <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#fd7275"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-news"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11" /><path d="M8 8l4 0" /><path d="M8 12l4 0" /><path d="M8 16l4 0" /></svg>'
+
+const dayuanbao = '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#ffeb00"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-coin"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1" /><path d="M12 7v10" /></svg>'
+
+
+
 
 
 $(document).ready(function() {
@@ -195,7 +208,7 @@ function getMenuInfo(){
 
                         menuLevel2.forEach(o=>{
 
-                            dropmenu3.append("<a class=\"dropdown-item\" href='"+o.uri+" '>\n" +
+                            dropmenu3.append("<a class=\"dropdown-item\" href='/tabler_web"+o.url+" '>\n" +
                                 "" + o.name +
                                 "                      </a>")
 
