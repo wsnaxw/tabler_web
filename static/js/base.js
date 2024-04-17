@@ -62,7 +62,7 @@ $(document).ready(function() {
     if (x==null||x.length<10){
         //x 为null 需要重新请求 并且跳转网页
         console.log("x 为null 需要重新请求 并且跳转网页")
-        window.location.href = '/fsf_b_web/sign_in.html'
+        window.location.href = '/tabler_web/sign_in.html'
     }else {
         //判断token是否过期
         $.ajax({
@@ -82,13 +82,13 @@ $(document).ready(function() {
                     var code = response.data;
 
                     if (code == '1'){
-                        window.location.href = '/fsf_b_web/sign_in.html'
+                        window.location.href = '/tabler_web/sign_in.html'
                     }
 
                 } else {
                     // 处理无效数据的情况
                     console.error('请求未成功或数据格式不正确:', response);
-                    window.location.href = '/fsf_b_web/sign_in.html'
+                    window.location.href = '/tabler_web/sign_in.html'
                 }
 
             },
@@ -106,7 +106,6 @@ $(document).ready(function() {
 
     console.log('页面加载完成，可以开始执行初始化设置了！');
 
-    console.log()
 
 
     let user = JSON.parse(localStorage.getItem('user'));
@@ -294,11 +293,14 @@ function loginOut(){
     for (let i = 0; i < keys.length; i++) {
     localStorage.removeItem(keys[i]);
     }
+    deleteCookie('isLogin');
 
     window.location.href = '/tabler_web/sign_in.html'
 }
 
-
+function deleteCookie(name) {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+}
 
 
 function baseAjax1(jsondata,uri){

@@ -1,8 +1,8 @@
 $(document).ready(function(){
 
 
-
-
+    //判断是否有需要阅读得新闻，有的话插入模态框 并show 模态框
+    // $('#modal-large').modal('show')
 
     var checkbox1 = document.querySelectorAll('input[name="type"][type="checkbox"]');
 
@@ -489,7 +489,7 @@ function news(){
 
                 str += "<tr><td class='w-1' >"
                 + x + "</td><td class='td-truncate'><div class='text-truncate'><a"
-                +"  onclick='newspaper("+o.id+")' class='btn' data-bs-toggle='modal' data-bs-target='#modal-large'>"
+                +"  onclick='newspaper("+o.id+")' data-bs-toggle='modal' data-bs-target='#modal-large'>"
                 + o.title +"</a></div></td><td class='text-nowrap text-secondary'>"
                 + o.publishTime+"</td>"
                 +"</tr>"

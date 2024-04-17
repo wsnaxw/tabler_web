@@ -8,7 +8,10 @@ $(document).ready(function() {
     // 检查token
 
 
-    var isLogin = localStorage.getItem('isLogin')
+    const isLogin = getCookie('isLogin');
+
+
+
     console.log(isLogin)
     if('yes'===isLogin)window.location.href =window.location.href.replace('/sign_in.html',"").replace('#',"")+ '/index.html'
 
@@ -235,8 +238,22 @@ function login(){
 
                 var myJSONString = JSON.stringify(response.data);
 
-                localStorage.setItem('user',myJSONString)
-                localStorage.setItem('isLogin','yes')
+                localStorage.setItem('user',myJSONString);
+
+                deleteCookie('isLogin');
+
+                setCookieForMidnight('isLogin','yes');
+
+
+
+
+
+
+
+
+
+
+
                 window.location.href =urltoHref+ '/index.html'
             } else {
                 $('#tip').html('账号密码错误！')
@@ -259,6 +276,31 @@ function login(){
 
 }
 
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+}
+
+function deleteCookie(name) {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+}
+
+
+function setCookieForMidnight(key, value) {
+    // 获取当前日期和时间
+    const now = new Date();
+
+    // 设置cookie的过期时间为今天晚上12点
+    const expiryDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0); // 次日0点0分0秒
+
+    // 创建cookie字符串
+    const cookieString = `${key}=${encodeURIComponent(value)}; expires=${expiryDate.toUTCString()}; path=/`;
+
+    // 设置cookie
+    document.cookie = cookieString;
+}
 // /go to index
 
     function addWatermark(){
