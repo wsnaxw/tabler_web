@@ -1,6 +1,8 @@
 $(document).ready(function(){
 
+    var customerId = getParameterByName('customerId');
 
+    console.log('customerId:'+customerId)
     checkboxChcek()
     //默认进行分页数据查询
     getPage(1);
@@ -29,13 +31,12 @@ function getPage(pageNo){
 
 
 
-    var pageSize = $('#pageSize').val();  
 
     let queryData = formCheck()
     queryData.pageNo = pageNo;
     queryData.pageSize = 10;
 
-    console.log(queryData)
+    // console.log(queryData)
 
 
     $('#data').html('');
@@ -118,10 +119,7 @@ function getPage(pageNo){
                             level1=customerIcon.vip0;
                     }
 
-                    console.log(customerIcon)
-
-                    console.log('level'+level)
-                    console.log('level1'+level1)
+          
 
                     var name = o.name+'';
 
@@ -174,7 +172,7 @@ function getPage(pageNo){
 
                     str+="<tr><td>"
                         +sourceType1+"</td><td>"
-                        +vip1+level1+name+"</td><td>"
+                        +vip1+level1+"<span style='font-weight: bold;' class ='bg-primary-lt'><a onclick='checkDetail("+o.id+")'>"+name+"</a></span></td><td>"
                         +certification1+"</td><td >"
                         +jobBeansNum+"</td><td >"
                         
@@ -187,22 +185,67 @@ function getPage(pageNo){
                         "</tr>";
                 }
                 $('#data').html(str);
+
+
+
+                var pageCount = obj.data.count
+
+                $('#totalPageNum').html('');
+                $('#totalPageNum').html(pageCount);
+
+                var totalPage = obj.data.totalPage;
+
+
+                $('#totalPageNum1').html('');
+                $('#totalPageNum1').html(totalPage);
                 //上一页页数
                 var forward = pageNo-1;
+                var forward1 = '';
                 if(pageNo==1){
                     forward=1;
+                    forward1 = '<li class="page-item disabled">'
+                    +'<a class="page-link" href="#"  tabindex="1" aria-disabled="true">'
+                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 6l-6 6l6 6"></path></svg>'
+                      +'prev'
+                    +'</a>'
+                  +'</li>'
+                }else {
+                    forward1 = '<li class="page-item" >'
+                    +'<a class="page-link" href="#" onclick="getPage('+forward+');">'
+                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 6l-6 6l6 6"></path></svg>'
+                      +'prev'
+                    +'</a>'
+                  +'</li>'
                 }
                 //下一页页数
                 var backwards = pageNo+1;
+                var backwards1 = '';
                 if(pageNo===obj.data.totalPage){
                     backwards=pageNo;
+
+                    backwards1 = '<li class="page-item disabled">'
+                    +'<a class="page-link" href="#"  tabindex="1" aria-disabled="true">'
+                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg>'
+                      +'next'
+                    +'</a>'
+                  +'</li>'
+                }else{
+                    backwards1 = '<li class="page-item">'
+                    +'<a class="page-link" href="#"  onclick="getPage('+backwards+');" >'
+                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg>'
+                      +'next'
+                    +'</a>'
+                  +'</li>'
                 }
+
+                str='';
+                str+=forward1;
+
                 //添加首页/上一页按钮功能
-                str="<a href='javascript:getPage(1);' id='forward' class='btn btn-hover radius'>首页</a><a onclick='getPage("+forward+");' id='lastPage' class='btn btn-hover radius'><span>上一页</span></a> ";
                 var count = 0;//记录第一次循环页数按钮, 用来控制显示的按钮数不得超过5个
                 var index = 0;//第二次循环页数
                 var pages= pageNo;
-                for(var i=1;i<=obj.data.totalPage;i++){
+                for(var i=1;i<=totalPage;i++){
                     if(pageNo>1){
                         i=pageNo++;
                         index = count++;
@@ -210,9 +253,9 @@ function getPage(pageNo){
                             break;
                         }
                         if(i==pages){
-                            str+="<a class='btn btn-hover' style='color: #fff;background-color: #5a98de;border-color: #5a98de;' href='javascript:getPage("+(i)+")'>"+(i)+"</a>"
+                            str+= '<li class="page-item active" ><a class="page-link" href="#"  onclick="getPage('+i+');" >'+i+'</a></li>'
                         }else{
-                            str+="<a class='btn btn-hover' href='javascript:getPage("+i+")'>"+i+"</a>"
+                            str+= '<li class="page-item" ><a class="page-link" href="#"  onclick="getPage('+i+');" >'+i+'</a></li>'
                         }
                     }else{
                         count++;
@@ -221,18 +264,19 @@ function getPage(pageNo){
                             break;
                         }else{
                             if(i===pageNo){
-                                str+="<a class='btn btn-hover' style='color: #fff;background-color: #5a98de;border-color: #5a98de;' href='javascript:getPage("+i+")'>"+i+"</a>"
+                                str+= '<li class="page-item active" ><a class="page-link" href="#"  onclick="getPage('+i+');" >'+i+'</a></li>'
                             }else{
-                                str+="<a class='btn btn-hover' href='javascript:getPage("+i+")'>"+i+"</a>"
+                                str+= '<li class="page-item" ><a class="page-link" href="#"  onclick="getPage('+i+');" >'+i+'</a></li>'
                             }
                         }
                     }
                 }
-                str+="<a onclick='getPage("+backwards+");' id='nextPage' class='btn btn-hover radius'><span>下一页</span></a><input type='text' value='' name='skip' id='skip' class='input-text' style='width:50px' data-options='required:false' onkeydown='if(event.keyCode==13){return false;}'/><a href='#' onclick='jump("+obj.data.totalPage+")' id='forward' class='btn btn-hover radius'>跳</a><a href='javascript:getPage("+obj.data.totalPage+");' id='forward' class='btn btn-hover radius'>尾页</a>";
-                $("#DataTables_Table_0_info").html("显示"+pageSize+"条,总 条 数  "+obj.data.count+"共"+obj.data.totalPage+"页");
-                $("#pageDiv").html(str)
-                $("#count").html(obj.data.count);
-                // $('#select111').html("<button class='btn btn-hover' onclick='getPage("+i+")'>查询</button>");
+
+                str+=backwards1;
+
+
+                $('#pageSelect').html('');
+                $('#pageSelect').html(str);
 
             }
 
@@ -306,7 +350,7 @@ function formCheck(){
     let data = cleanseJSON(sourceData);
 
 
-    console.log(data)
+    // console.log(data)
 
     return data;
 
@@ -392,15 +436,34 @@ function checkboxChcek(){
 
 
 
+}
+
+function searchList(){
+    getPage(1)
+}
 
 
+function checkDetail(id){
+    //跳转页面并且携带参数
 
+    var customerId = id;
 
+// 创建一个新的URL，携带参数
+var url = 'list.html?customerId=' + encodeURIComponent(customerId) ;
 
+// 使用jQuery来跳转到新页面
+// window.location.href = url;
 
+window.open(url, '_blank');
 
+}
 
-
-
-
+function getParameterByName(name) {
+     url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
 }

@@ -366,3 +366,14 @@ function baseAjax(jsondata,uri) {
         });
     });
 }
+
+
+
+
+
+function indexSearch(){
+
+
+
+    
+}
