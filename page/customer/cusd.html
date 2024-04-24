@@ -1,0 +1,838 @@
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta19
+* @link https://tabler.io
+* Copyright 2018-2023 The Tabler Authors
+* Copyright 2018-2023 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>客户详情页</title>
+    <!-- CSS files -->
+    <script src="../../static/js/tabler.min.js"></script>
+    <link rel="stylesheet" href="../../static/css/tabler.min.css">
+    <link rel="icon" href="../../static/img/favicon.ico" type="image/x-icon" />
+    <script src="../../static/js/jquery.min.js"></script>
+    <script src="../../static/js/base.js?1"></script>
+    <script src="../../static/js/watermark.js"></script>
+    <script src="../../static/js/pg/cus/list.js"></script>
+    <script>
+      function dark(){
+        let body = document.getElementById('webBody')
+        body.setAttribute("data-bs-theme","dark")
+      }
+
+      function light(){
+        let body = document.getElementById('webBody')
+        body.setAttribute("data-bs-theme","")
+      }
+
+    </script>
+
+  </head>
+  <body  id="webBody" class="layout-fluid">
+    <div class="page">
+
+
+      <!--      &lt;!&ndash; Sidebar &ndash;&gt;-->
+      
+      
+      <aside class="navbar navbar-vertical navbar-expand-lg"    >
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <h1 class="navbar-brand navbar-brand-autodark">
+            <a href="#" >
+              <img src="http://admin.fsfhr.com/banner.svg" width="110" height="32" alt="faithful" class="navbar-brand-image">
+            </a>
+          </h1>
+
+          <div class="collapse navbar-collapse"   id="sidebar-menu">
+            <ul class="navbar-nav pt-lg-3" id="menu">
+
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- navbar navbar-expand-md d-print-none d-none d-lg-flex -->
+      <!-- navbar navbar-expand-md d-print-none -->
+      <header class="navbar navbar-expand-md d-print-none d-none d-lg-flex fixed-top">
+        <div class="container-xl">
+
+
+
+          <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal p-0 pe-md-6">
+          </h1>
+          <div class="navbar-nav flex-row order-md-last">
+            <div class="nav-item d-none d-md-flex me-3">
+              <div class="btn-list">
+                <div class="input-icon">
+                    <span class="input-icon-addon">
+                      <!-- Download SVG icon from http://tabler-icons.io/i/search -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path d="M21 21l-6 -6"></path></svg>
+                    </span>
+                  <input type="text" value="" class="form-control" id="indexsearch" placeholder="客户名/人选名/项目名" aria-label="Search in website" data-listener-added_8ff64168="true">
+                </div>
+                <a onclick="indexSearch()" class="btn btn-blue" target="_blank" rel="noreferrer">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/brand-github -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"></path></svg>
+                  查询
+                </a>
+              </div>
+            </div>
+            <div class="d-none d-md-flex">
+              <a   onclick="dark()" class="nav-link px-0 hide-theme-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="Enable dark mode" data-bs-original-title="Enable dark mode">
+                <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path></svg>
+              </a>
+              <a onclick="light()" class="nav-link px-0 hide-theme-light" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="Enable light mode" data-bs-original-title="Enable light mode">
+                <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"></path></svg>
+              </a>
+              <div class="nav-item dropdown d-none d-md-flex me-3">
+                <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1" aria-label="Show notifications">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/bell -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path><path d="M9 17v1a3 3 0 0 0 6 0v-1"></path></svg>
+                  <span class="badge bg-red"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
+                  <div class="card">
+                    <div class="card-header">
+                      <h3 class="card-title">Last updates</h3>
+                    </div>
+                    <div class="list-group list-group-flush list-group-hoverable">
+                      <div class="list-group-item">
+                        <div class="row align-items-center">
+                          <div class="col-auto"><span class="status-dot status-dot-animated bg-red d-block"></span></div>
+                          <div class="col text-truncate">
+                            <a href="#" class="text-body d-block">Example 1</a>
+                            <div class="d-block text-muted text-truncate mt-n1">
+                              Change deprecated html tags to text decoration classes (#29604)
+                            </div>
+                          </div>
+                          <div class="col-auto">
+                            <a href="#" class="list-group-item-actions">
+                              <!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                              <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path></svg>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="list-group-item">
+                        <div class="row align-items-center">
+                          <div class="col-auto"><span class="status-dot d-block"></span></div>
+                          <div class="col text-truncate">
+                            <a href="#" class="text-body d-block">Example 2</a>
+                            <div class="d-block text-muted text-truncate mt-n1">
+                              justify-content:between ⇒ justify-content:space-between (#29734)
+                            </div>
+                          </div>
+                          <div class="col-auto">
+                            <a href="#" class="list-group-item-actions show">
+                              <!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                              <svg xmlns="http://www.w3.org/2000/svg" class="icon text-yellow" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path></svg>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="list-group-item">
+                        <div class="row align-items-center">
+                          <div class="col-auto"><span class="status-dot d-block"></span></div>
+                          <div class="col text-truncate">
+                            <a href="#" class="text-body d-block">Example 3</a>
+                            <div class="d-block text-muted text-truncate mt-n1">
+                              Update change-version.js (#29736)
+                            </div>
+                          </div>
+                          <div class="col-auto">
+                            <a href="#" class="list-group-item-actions">
+                              <!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                              <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path></svg>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="list-group-item">
+                        <div class="row align-items-center">
+                          <div class="col-auto"><span class="status-dot status-dot-animated bg-green d-block"></span></div>
+                          <div class="col text-truncate">
+                            <a href="#" class="text-body d-block">Example 4</a>
+                            <div class="d-block text-muted text-truncate mt-n1">
+                              Regenerate package-lock.json (#29730)
+                            </div>
+                          </div>
+                          <div class="col-auto">
+                            <a href="#" class="list-group-item-actions">
+                              <!-- Download SVG icon from http://tabler-icons.io/i/star -->
+                              <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path></svg>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="nav-item dropdown">
+              <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
+                <div class="d-none d-xl-block ps-2">
+                  <div id="userName">12321</div>
+                  <div class="mt-1 small text-muted" id="userLevel">123</div>
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <a href="#" class="dropdown-item">个人中心</a>
+                <a href="#" class="dropdown-item">修改密码</a>
+                <div class="dropdown-divider"></div>
+                <a id="logOut" class="dropdown-item">退出</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+
+
+      <div class="page-wrapper">
+
+
+
+        <!-- Page header -->
+        <div class="page-header d-print-none">
+          客户详情
+        </div>
+
+
+
+
+        <!-- Page body -->
+        <div class="page-body container-xl">
+
+
+
+
+
+          <div class="container-xl" >
+
+
+            <div class="row row-deck row-cards">
+
+
+
+              <div class="col-lg-12">
+                <div class="card">
+                
+                  <div class="card-body" id="formdata">
+
+                    <div class="row row-cards"> 
+                    
+
+                      <div class="col-md-5">
+                        <div class="card">
+                          <div class="card-header">
+                            <h3 class="card-title">基本信息：客户名-客户编码</h3>
+                            <div class="card-actions">
+                              <a href="#" class="btn btn-primary">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg>
+                                新增职位
+                              </a>
+                            </div>
+                          </div>
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-sm-2">
+                                <strong>归属公司</strong>
+                              </div>
+                              <div class="col-sm-2">
+                                <span>成都</span>
+                              </div>
+                              <div class="col-sm-2">
+                                <strong>推荐人</strong>
+                              </div>
+                              <div class="col-sm-2">
+                                <span>成都</span>
+                              </div>
+                              <div class="col-3">
+
+                              </div>  
+                              <div class="col-1">
+                                <a href="#" >
+                                  <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#82d7f7"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
+                                </a>
+                              </div>
+
+                            </div>
+                            <div class="row">
+                              
+                              <div class="col-md-2">
+                                <strong>客户来源</strong>
+                              </div>
+                              <div class="col-md-2">
+                                <span>成都</span>
+                              </div>
+                              
+                              <div class="col-md-2">
+                                <strong>服务顾问</strong>
+                              </div>
+                              <div class="col-md-2">
+                                <span>成都</span>
+                              </div>
+                            </div>
+                            <div class="row">
+                              
+                              <div class="col-md-2">
+                                <strong>公司网站</strong>
+                              </div>
+                              <div class="col-md-2">
+                                <span>成都</span>
+                              </div>
+                              
+                              <div class="col-md-2">
+                                <strong>创建时间</strong>
+                              </div>
+                              <div class="col-md-5">
+                                <span>2024-03-29</span>
+                              </div>
+                            </div>
+                            <div class="row">
+                              
+                              <div class="col-md-5">
+                                <a href="#" class="btn btn-primary">申请签约</a>
+                              </div>
+                              
+                            </div>
+
+
+                          </div>
+                        </div>
+                      </div>
+
+
+
+
+                      <div class="col-lg-2">
+                        <label class="form-label" style="font-weight: bold;">客户名</label>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="">
+                      </div>
+                      <div class="col-lg-2">
+                        <label class="form-label" style="font-weight: bold;">服务顾问</label>
+                        <input type="text" class="form-control" name="appUserName" id="appUserName" placeholder="">
+                      </div>
+                      <div class="col-lg-2">
+                        <label class="form-label" style="font-weight: bold;">归属公司</label>
+                        <input type="text" class="form-control" name="employComId" id="employComId" placeholder="成都公司">
+                      </div>
+                      <div class="col-lg-2">
+                        <div class="form-label" style="font-weight: bold">客户来源</div>
+                        <select class="form-select" id="sourceType" name="sourceType">
+                          <option selected value="">全部</option>
+                          <option value="1">广告呼入</option>
+                          <option value="2">主动BD</option>
+                          <option value="3">电销开发</option>
+                          <option value="0">公共池</option>
+                        </select>
+                      </div>
+                      <div class="col-lg-2">
+                        <div class="form-label" style="font-weight: bold">客户状态</div>
+                        <select class="form-select" id="state" name="state">
+                          <option selected value="">全部</option>
+                          <option value="0">潜在客户</option>
+                          <option value="1">签约运作</option>
+                          <option value="2">签约暂停</option>
+                          <option value="3">签约终止</option>
+                        </select>
+                      </div>
+                      <div class="col-lg-2">
+                        <div class="form-label" style="font-weight: bold">客户等级</div>
+                        <select class="form-select" name="level" id="level">
+                          <option selected value="">全部</option>
+                          <option value="0">普通</option>
+                          <option value="1">VIP1</option>
+                          <option value="2">VIP2</option>
+                          <option value="3">VIP3</option>
+                          <option value="4">VIP4</option>
+                          <option value="5">VIP5</option>
+                        </select>
+                      </div>
+                    </div>
+  
+                    <div class="row"> 
+                  
+                      <div class="col-lg-2">
+                          <div class="form-label" style="font-weight: bold;">公司规模</div>
+                          <select class="form-select" id="customerSize" name="customerSize">
+                            <option selected value="">全部</option>
+                            <option value="0">0-15人</option>
+                            <option value="1">15-50人</option>
+                            <option value="2">50-100人</option>
+                            <option value="3">100-500人</option>
+                            <option value="4">500-1000人</option>
+                            <option value="5">1000-10000人</option>
+                            <option value="6">10000人以上</option>
+                          </select>
+                      </div>  
+                      <div class="col-lg-2">
+                        <div class="form-label" style="font-weight: bold;">所属行业</div>
+                        <select class="form-select" id="industryType" name="industryType">
+                          <option selected value="">不限</option>
+                          <option value="互联网 / 游戏 / 软件">互联网 / 游戏 / 软件</option>
+                          <option value="电子 / 通信 / 硬件">电子 / 通信 / 硬件</option>
+                          <option value="房地产 / 建筑 / 物业 ">房地产 / 建筑 / 物业 </option>
+                          <option value="经济">经济</option>
+                          <option value="消费品">消费品</option>
+                          <option value="汽车 / 机械 / 制造">汽车 / 机械 / 制造</option>
+                          <option value="广告 / 传媒 / 教育 / 文化">广告 / 传媒 / 教育 / 文化</option>
+                          <option value="交通 / 贸易 / 物流">交通 / 贸易 / 物流</option>
+                          <option value="制药 / 医用器械">制药 / 医用器械</option>
+                          <option value="能源 / 化工 / 环保">能源 / 化工 / 环保</option>
+                          <option value="政府 / 农林牧渔">政府 / 农林牧渔</option>
+                        </select>
+                      </div>
+                      <div class="col-lg-2" >
+                        <div class="form-label" style="font-weight: bold;">是否认证</div>
+                        <div class="form-selectgroup form-selectgroup-pills">
+                          <label class="form-selectgroup-item">
+                            <input type="checkbox" name="certification" value="1" id="certificationYes" value="HTML" class="form-selectgroup-input" >
+                            <span class="form-selectgroup-label">是</span>
+                          </label>  
+                          <label class="form-selectgroup-item">
+                            <input type="checkbox" name="certification" value="0" id="certificationNo" value="HTML" class="form-selectgroup-input" >
+                            <span class="form-selectgroup-label">否</span>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-lg-2" >
+                        <div class="form-label" style="font-weight: bold;">是否大客户</div>
+                        <div class="form-selectgroup form-selectgroup-pills">
+                          <label class="form-selectgroup-item">
+                            <input type="checkbox" name="vip" value="1" class="form-selectgroup-input" >
+                            <span class="form-selectgroup-label">是</span>
+                          </label>  
+                          <label class="form-selectgroup-item">
+                            <input type="checkbox" name="vip" value="0" class="form-selectgroup-input" >
+                            <span class="form-selectgroup-label">否</span>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-lg-2" >
+                        <div class="form-label" style="font-weight: bold;">客户归属</div>
+                        <div class="form-selectgroup form-selectgroup-pills">
+                          <label class="form-selectgroup-item">
+                            <input type="checkbox" name="belong" value="1" class="form-selectgroup-input" >
+                            <span class="form-selectgroup-label">我的</span>
+                          </label>  
+                          <label class="form-selectgroup-item">
+                            <input type="checkbox" name="belong" value="2" class="form-selectgroup-input" >
+                            <span class="form-selectgroup-label">团队</span>
+                          </label>
+                        </div>
+                      </div>
+  
+                      <div class="col-lg-2" >
+                        <div class="form-label" style="font-weight: bold;">&nbsp;</div>
+                        <a href="#" onclick="clearForm()" class="btn btn-link ms-auto">清空 </a>
+                      
+                        <a href="#" onclick="searchList()" class="btn btn-primary ms-auto">查询</a>
+                      </div>
+                    </div>
+
+
+
+                  </div>
+      
+      
+      
+      
+                 
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
+      
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-body">
+
+                    <div class="table-responsive">
+                      <table class="table card-table table-vcenter text-nowrap datatable">
+                        <thead>
+                          									
+                          <tr>
+                            <th class="w-1">来源</th>
+                            <th class="w-1">客户名称</th>
+                            <th>认证</th>
+                            <th>招聘人数</th>
+                            <th>执行团队</th>
+                            <th>归属公司</th>
+                            <th>客户状态</th>
+                            <th>最后沟通</th>
+                            <th>记录</th>
+                            <th>操作</th>
+                          </tr>
+                        </thead>
+                        <tbody id="data">
+                          <tr>
+                            <td>主动BD</td>
+                            <td class="text-nowrap text-secondary">
+
+                              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-diamond"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 5h12l3 5l-8.5 9.5a.7 .7 0 0 1 -1 0l-8.5 -9.5l3 -5" /><path d="M10 12l-2 -2.2l.6 -1" /></svg>
+                              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M10 10v4a2 2 0 1 0 4 0v-4a2 2 0 1 0 -4 0z" /></svg>
+
+                              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#ea0b0b"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M10 10v4a2 2 0 1 0 4 0v-4a2 2 0 1 0 -4 0z" /></svg>
+                              中元汇吉生物技术股份有限公司
+                              
+                              
+                            </td>
+                            <td>
+                              <div class="avatar avatar-sm bg-red-lt" >否</div>
+                            </td>
+                            <td>
+                              2
+                            </td>
+                            <td>
+                              
+                            </td>
+                            <td>
+                              成都公司
+                            </td>
+                            <td>
+                              潜在客户
+                            </td>
+                            <td>2024-03-29 16:12:56</td>
+                            <td>
+                              <div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">0</div>
+
+                            </td>
+                            <td class="text-end">
+                              <span class="dropdown">
+                                <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                  <a class="dropdown-item" href="#">
+                                    Action
+                                  </a>
+                                  <a class="dropdown-item" href="#">
+                                    Another action
+                                  </a>
+                                </div>
+                              </span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>主动BD</td>
+                            <td class="text-nowrap text-secondary">
+                              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#e6b400"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M10 10v4a2 2 0 1 0 4 0v-4a2 2 0 1 0 -4 0z" /></svg>
+                              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#e6b400"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-1"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M10 10l2 -2v8" /></svg>
+                              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#e6b400"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M10 8h3a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 0 -1 1v2a1 1 0 0 0 1 1h3" /></svg>
+                              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#e6b400"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-3"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M10 9a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1" /></svg>
+                              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#e6b400"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-4"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M10 8v3a1 1 0 0 0 1 1h3" /><path d="M14 8v8" /></svg>
+                              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#e6b400"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M10 15a1 1 0 0 0 1 1h2a1 1 0 0 0 1 -1v-2a1 1 0 0 0 -1 -1h-3v-4h4" /></svg>
+                              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-diamond"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 5h12l3 5l-8.5 9.5a.7 .7 0 0 1 -1 0l-8.5 -9.5l3 -5" /><path d="M10 12l-2 -2.2l.6 -1" /></svg>
+                              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#ea0b0b"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-1"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M10 10l2 -2v8" /></svg>
+                              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#82d7f7"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-diamond"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 5h12l3 5l-8.5 9.5a.7 .7 0 0 1 -1 0l-8.5 -9.5l3 -5" /><path d="M10 12l-2 -2.2l.6 -1" /></svg>
+                              
+                            </td>
+                            <td>
+                              <div class="avatar avatar-sm bg-red text-red-fg"  >否
+                              </div>
+                            </td>
+                            <td>
+                              2
+                            </td>
+                            <td>
+                              
+                            </td>
+                            <td>
+                              成都公司
+                            </td>
+                            <td>
+                              潜在客户
+                            </td>
+                            <td>2024-03-29 16:12:56</td>
+                            <td>
+                              <div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">0</div>
+
+                            </td>
+                            <td class="text-end">
+                              <span class="dropdown">
+                                <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                  <a class="dropdown-item" href="#">
+                                    Action
+                                  </a>
+                                  <a class="dropdown-item" href="#">
+                                    Another action
+                                  </a>
+                                </div>
+                              </span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>主动BD</td>
+                            <td class="text-nowrap text-secondary">
+
+                              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-diamond"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 5h12l3 5l-8.5 9.5a.7 .7 0 0 1 -1 0l-8.5 -9.5l3 -5" /><path d="M10 12l-2 -2.2l.6 -1" /></svg>
+                              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M10 10v4a2 2 0 1 0 4 0v-4a2 2 0 1 0 -4 0z" /></svg>
+
+                              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#ea0b0b"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M10 10v4a2 2 0 1 0 4 0v-4a2 2 0 1 0 -4 0z" /></svg>
+                              中元汇吉生物技术股份有限公司
+                              
+                              
+                            </td>
+                            <td>
+                              <span style="color: red;">否</span>
+                            </td>
+                            <td>
+                              2
+                            </td>
+                            <td>
+                              
+                            </td>
+                            <td>
+                              成都公司
+                            </td>
+                            <td>
+                              潜在客户
+                            </td>
+                            <td>2024-03-29 16:12:56</td>
+                            <td>
+                              <div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">0</div>
+
+                            </td>
+                            <td class="text-end">
+                              <span class="dropdown">
+                                <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                  <a class="dropdown-item" href="#">
+                                    Action
+                                  </a>
+                                  <a class="dropdown-item" href="#">
+                                    Another action
+                                  </a>
+                                </div>
+                              </span>
+                            </td>
+                          </tr>
+                    
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="card-footer d-flex align-items-center">
+                      <p class="m-0 text-muted">共<span id="totalPageNum">0</span>条 &nbsp;<span id="totalPageNum1"></span>页</p>
+                      <ul class="pagination m-0 ms-auto" id="pageSelect">
+                        <li class="page-item ">
+                          <a class="page-link" href="#" tabindex="1" aria-disabled="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 6l-6 6l6 6"></path></svg>
+                            prev
+                          </a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        <li class="page-item">
+                          <a class="page-link" href="#">
+                            next 
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+            
+
+
+
+            
+
+            
+          </div>
+        </div>
+        
+
+      
+
+
+       
+        <footer class="footer footer-transparent d-print-none">
+          <div class="container-xl">
+            <div class="row text-center align-items-center flex-row-reverse">
+                <ul class="list-inline list-inline-dots mb-0">
+                  <li class="list-inline-item">
+                    Copyright &nbsp;©&nbsp;2021&nbsp;费思福(成都)人力资源咨询有限公司&nbsp;蜀ICP备2021005893号-2
+                  </li>
+                </ul>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+   
+  </body>
+</html>
