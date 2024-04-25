@@ -257,13 +257,26 @@ function sstj(){
             $('#sstj').html('')
             
             data.list.forEach(o=>{
+
+                var tn= "</td><td style='color:transparent;text-shadow:#111 0 0 5px;'>"
+
+                if(o.talentName==='**'){
+                     tn= tn+o.talentName
+
+                }else{
+                    tn =  "</td><td class='text-secondary text-nowrap'>"+o.talentName ;
+                }
+
                
 
                 str += "<tr><td class='w-1'  style='color: red;'>"
                 + o.stateName + "</td><td class='text-nowrap text-secondary'>"
                 + o.comName +"</td><td class='text-secondary text-nowrap'>"
-                + o.userName+"</td><td class='text-secondary text-nowrap' >"
-                + o.talentName+"</td><td class='text-nowrap' style='color: red;'>"  
+                + o.userName
+                + tn
+                // + "</td><td class='text-secondary text-nowrap' style='color:transparent;text-shadow:#111 0 0 5px;'>"
+                + "</td><td class='text-nowrap' style='color:red'>"  
+                // + tn
                 + o.salary+"万</td><td class='text-secondary text-nowrap'>"
                 +o.job +"</td>"
                 
