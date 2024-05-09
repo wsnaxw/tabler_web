@@ -42,11 +42,13 @@
       <!--      &lt;!&ndash; Sidebar &ndash;&gt;-->
       
       
-      <aside class="navbar navbar-vertical navbar-expand-lg"    >
+      <aside class="navbar navbar-vertical navbar-expand-lg">
         <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+          <a class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-controls="sidebar-menu" aria-expanded="true" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon" style="color: black;">
+            </span>
+          </a>
+          <a href="#" class="btn navbar-toggler"></a>
           <h1 class="navbar-brand navbar-brand-autodark">
             <a href="#" >
               <img src="http://admin.fsfhr.com/banner.svg" width="110" height="32" alt="faithful" class="navbar-brand-image">
@@ -58,6 +60,7 @@
 
               </li>
             </ul>
+         
           </div>
         </div>
       </aside>
@@ -339,7 +342,7 @@
                     <div class="row row-cards"> 
                     
 
-                      <div class="col-md-6 col-lg-6">
+                      <div class="col-lg-6">
                         <div class="card">
                           <div class="card-status-start bg-primary"> 
 
@@ -861,10 +864,10 @@
                 <div class="card">
                   <div class="card-body align-items-center">
                       <button class="btn btn-outline-primary active" onclick="kzxx()" >扩展信息<span class="badge bg-yellow-lt ms-2">1</span></button>
-                      <button class="btn btn-outline-primary ">人选信息<span class="badge bg-yellow-lt ms-2">2</span></button>
-                      <button class="btn btn-outline-primary ">职位<span class="badge bg-yellow-lt ms-2">3</span></button>
-                      <button class="btn btn-outline-primary ">文件<span class="badge bg-yellow-lt ms-2">4</span></button>
-                      <button class="btn btn-outline-primary ">转移<span class="badge bg-yellow-lt ms-2">5</span></button>
+                      <button class="btn btn-outline-primary " onclick="rxxx()">人选信息<span class="badge bg-yellow-lt ms-2">2</span></button>
+                      <button class="btn btn-outline-primary " onclick="job()">职位<span class="badge bg-yellow-lt ms-2">3</span></button>
+                      <button class="btn btn-outline-primary " onclick="file()">文件<span class="badge bg-yellow-lt ms-2">4</span></button>
+                      <button class="btn btn-outline-primary " onclick="move()">转移<span class="badge bg-yellow-lt ms-2">5</span></button>
                   </div>
                 </div>
               </div>
@@ -873,8 +876,8 @@
 
               <div id="exploredtable">
                 
-                <div class="row row-cards" id="X12312" >
-                  <div class="col-6">
+                <div class="row row-cards" id="kzxxdiv" style="display: none;">
+                  <div class="col-lg-12">
                     <div class="card card-body-scrollable">
 
                       <div class="card-header">
@@ -949,7 +952,7 @@
                                 <div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">0</div>
   
                               </td>
-                              <td class="text-end">
+                              <td >
                                 <a class="btn btn-ghost-info" href="#">
                                   修改
                                 </a>
@@ -968,20 +971,342 @@
     
                   <div class="col-6">
                     <div class="card">
-                      <div class="card-body align-items-center">
-                          <button class="btn btn-outline-primary active" onclick="kzxx()" >扩展信息<span class="badge bg-yellow-lt ms-2">1</span></button>
-                          <button class="btn btn-outline-primary ">人选信息<span class="badge bg-yellow-lt ms-2">2</span></button>
-                          <button class="btn btn-outline-primary ">职位<span class="badge bg-yellow-lt ms-2">3</span></button>
-                          <button class="btn btn-outline-primary ">文件<span class="badge bg-yellow-lt ms-2">4</span></button>
-                          <button class="btn btn-outline-primary ">转移<span class="badge bg-yellow-lt ms-2">5</span></button>
+                      <div class="card card-body-scrollable">
+
+                        <div class="card-header">
+                          <h3 class="card-title">子公司</h3>
+                            <div class="card-actions">
+                              <a href="#" class="btn btn-ghost-primary">
+                                新增
+                              </a>
+                            </div>
+                        </div>
+  
+                        <div class="card-body align-items-center">
+                          <table class="table card-table table-vcenter text-nowrap datatable ">
+                            <thead>
+                                          
+                              <tr>
+                                <th class="w-1">公司名称</th>
+                                <th class="w-1">服务顾问</th>
+                                <th>操作</th>
+                                
+                              </tr>
+                            </thead>
+                            <tbody id="data1">
+                              <tr>
+                                <td class="text-nowrap text-secondary">成都sdasdA公司</td>
+                                <td>
+                                  z张三
+                                </td>
+                             
+                                
+                                <td >
+                                  <a class="btn btn-ghost-info" href="#">
+                                    修改
+                                  </a>
+                                  <a class="btn btn-ghost-warning" href="#">
+                                    删除
+                                  </a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="text-nowrap text-secondary">成都sdasdA公司</td>
+                                <td>
+                                  z张三
+                                </td>
+                             
+                                
+                                <td >
+                                  <a class="btn btn-ghost-info" href="#">
+                                    修改
+                                  </a>
+                                  <a class="btn btn-ghost-warning" href="#">
+                                    删除
+                                  </a>
+                                </td>
+                              </tr>
+                              
+                        
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="card">
+                      <div class="card card-body-scrollable">
+
+                        <div class="card-header">
+                          <h3 class="card-title">关联公司</h3>
+                            <div class="card-actions">
+                              <a href="#" class="btn btn-ghost-primary">
+                                新增
+                              </a>
+                            </div>
+                        </div>
+  
+                        <div class="card-body align-items-center">
+                          <table class="table card-table table-vcenter text-nowrap datatable ">
+                            <thead>
+                                          
+                              <tr>
+                                <th class="w-1">公司名称</th>
+                                <th class="w-1">服务顾问</th>
+                                <th>操作</th>
+                                
+                              </tr>
+                            </thead>
+                            <tbody id="data1">
+                              <tr>
+                                <td class="text-nowrap text-secondary">成都sdasdA公司</td>
+                                <td>
+                                  z张三
+                                </td>
+                             
+                                
+                                <td >
+                                  <a class="btn btn-ghost-info" href="#">
+                                    修改
+                                  </a>
+                                  <a class="btn btn-ghost-warning" href="#">
+                                    删除
+                                  </a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="text-nowrap text-secondary">成都sdasdA公司</td>
+                                <td>
+                                  z张三
+                                </td>
+                             
+                                
+                                <td >
+                                  <a class="btn btn-ghost-info" href="#">
+                                    修改
+                                  </a>
+                                  <a class="btn btn-ghost-warning" href="#">
+                                    删除
+                                  </a>
+                                </td>
+                              </tr>
+                              
+                        
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
+                <!-- -->
 
-                
+                <div class="row row-cards" id="rxxxdiv" >
+                  <div class="col-lg-12">
+                    <div class="card card-body-scrollable">
+                      <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
+                          <li class="nav-item" role="presentation">
+                            <a id="yjph" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab">全部</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">加项目</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">给客户</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">约面试</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">客户面试</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">确认offer</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">已入职</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">人选离职</a>
+                          </li>
+                      
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">放弃人选</a>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div class="card-body align-items-center">
+                        <table class="table card-table table-vcenter text-nowrap datatable ">
+                          <thead>
+
+                            <tr>
+                              <th>项目名称</th>
+                              <th>推荐人</th>
+                              <th>人选姓名</th>
+                              <th>当前公司</th>
+                              <th>当前职位</th>
+                              <th>推荐时间</th>
+                              <th>更新时间</th>
+                              <th>操作</th>
+                            </tr>
+                          </thead>
+                          <tbody id="data1">
+                            <tr>
+                              <td>算法工程师</td>
+                              <td>
   
+                                张三
+                                
+                                
+                              </td>
+                              <td>
+                                123
+                              </td>
+                              <td>
+                                2
+                              </td>
+                              <td>
+                                123
+                              </td>
+                         
+                              <td>202</td>
+                              <td>
+                                <div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">0</div>
+  
+                              </td>
+                              <td >
+                                <a class="btn btn-info" href="#">
+                                  查看
+                                </a>
+                           
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>主动BD</td>
+                              <td class="text-nowrap text-secondary">
+                                18812341234                                
+                              </td>
+                              <td>
+                                1
+                              </td>
+                              <td>
+                                2
+                              </td>
+                              <td>
+                                
+                              </td>
+                             
+                              <td>20256</td>
+                              <td>
+                                <div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">0</div>
+  
+                              </td>
+                              <td >
+                                <a class="btn btn-info" href="#">
+                                  查看
+                                </a>
+                              </td>
+                            </tr>
+                            
+                      
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+    
+                </div>
+
+                <!-- -->
+
+                <div class="row row-cards" id="jobdjv" >
+                  <div class="col-lg-12">
+                    <div class="card card-body-scrollable">
+                      <div class="card-header">
+                        <h3>职位信息</h3>
+                      </div>
+
+                      <div class="card-body align-items-center">
+                        <table class="table card-table table-vcenter text-nowrap datatable ">
+                          <thead>
+                            						
+                            <tr>
+                              <th>状态</th>
+                              <th>职位名称</th>
+                              <th>职位年薪</th>
+                              <th>客户</th>
+                              <th>地点</th>
+                              <th>更新时间</th>
+                              <th>操作</th>
+                            </tr>
+                          </thead>
+                          <tbody id="data1">
+                            <tr>
+                              <td>算法工程师</td>
+                              <td>
+  
+                                张三
+                                
+                                
+                              </td>
+                              <td>
+                                123
+                              </td>
+                              <td>
+                                2
+                              </td>
+                              <td>
+                                123
+                              </td>
+                         
+                              <td>202</td>
+                         
+                              <td >
+                                <a class="btn btn-info" href="#">
+                                  查看
+                                </a>
+                           
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>主动BD</td>
+                              <td class="text-nowrap text-secondary">
+                                18812341234                                
+                              </td>
+                              <td>
+                                1
+                              </td>
+                              <td>
+                                2
+                              </td>
+                              <td>
+                                
+                              </td>
+                             
+                              <td>20256</td>
+                       
+                              <td >
+                                <a class="btn btn-info" href="#">
+                                  查看
+                                </a>
+                              </td>
+                            </tr>
+                            
+                      
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+    
+                </div>
+  
+
+                <!--X-->
 
               </div>
 
