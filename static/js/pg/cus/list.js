@@ -449,7 +449,7 @@ function checkDetail(id){
     var customerId = id;
 
 // 创建一个新的URL，携带参数
-var url = 'list.html?customerId=' + encodeURIComponent(customerId) ;
+var url = 'cusd.html?customerId=' + encodeURIComponent(customerId) ;
 
 // 使用jQuery来跳转到新页面
 // window.location.href = url;
