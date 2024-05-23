@@ -1,0 +1,7 @@
+
+.list-group-item.divide-y {
+  width: 20vw; /* 設置寬度為視口寬度的35% */
+  max-width: 100%; /* 確保不會超出容器寬度 */
+  box-sizing: border-box; /* 包含padding和border在寬度計算內 */
+/* 其他你需要的樣式 */  
+}

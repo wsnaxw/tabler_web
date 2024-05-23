@@ -61,7 +61,7 @@ $(document).ready(function() {
     var x = localStorage.getItem("token");
     if (x==null||x.length<10){
         //x 为null 需要重新请求 并且跳转网页
-        console.log("x 为null 需要重新请求 并且跳转网页")
+        // console.log("x 为null 需要重新请求 并且跳转网页")
         window.location.href = '/tabler_web/sign_in.html'
     }else {
         //判断token是否过期
@@ -126,10 +126,24 @@ $(document).ready(function() {
 
     watermark.load({watermark_txt:user.flowerName,watermark_x_space:230})
 
+   
+
     // 或者隐藏某个元素
-    $('#myElement').hide();
 
     // 以及其他初始化操作...
+
+
+
+
+    menuClick();
+
+
+    menuActive();
+
+
+    usermessage()
+
+
 });
 
 
@@ -140,7 +154,7 @@ function menuStart() {
         getMenuInfo();
     }else{
         
-        $("#menu").html(menuStr);
+        $("#sidebar-menu").html(menuStr);
     }
 
 
@@ -167,7 +181,7 @@ function getMenuInfo(){
             // console.log('请求成功:', response);
             // 在这里处理服务器返回的数据
             if (response && response.code === 0 ) {
-                console.log(response.data)
+                // console.log(response.data)
 
                 //生成菜单
 
@@ -235,7 +249,7 @@ function getMenuInfo(){
                         let menu1 = $("<li class=\"nav-item\" id='"+menuLevel1[i].uri+"'>" +
                             "</li>");
 
-                        menu1.append(      "                <a class=\"nav-link\" href=\"./\" >\n" +
+                        menu1.append(      "                <a class=\"nav-link\" href=\"/tabler_web/index.html\" >\n" +
                             ""+   menuicon[i].icon +
                             "                  <span class=\"nav-link-title\">\n" +
                             ""                    +menuLevel1[i].name+
@@ -250,9 +264,9 @@ function getMenuInfo(){
 
                         const menuLevel2 = response.data.filter(obj => (obj.level===1 && obj.superUri === menuLevel1[i].uri ));
 
-                        console.log( menuLevel1[i].name  )
-                        console.log( menuLevel2  )
-                        console.log("----------------------")
+                        // console.log( menuLevel1[i].name  )
+                        // console.log( menuLevel2  )
+                        // console.log("----------------------")
 
 
 
@@ -267,7 +281,7 @@ function getMenuInfo(){
 
                 localStorage.setItem("menuStr",document.getElementById('menu').outerHTML)
 
-                console.log(menuLevel1)
+                // console.log(menuLevel1)
             }
 
         },
@@ -321,7 +335,7 @@ function baseAjax1(jsondata,uri){
             // console.log('请求成功:', response);
             // 在这里处理服务器返回的数据
             if (response && response.code === 0 ) {
-                console.log(response.data)
+                // console.log(response.data)
                 resultData = response.data;
                 return resultData;
             }
@@ -368,6 +382,23 @@ function baseAjax(jsondata,uri) {
 }
 
 
+async function getData(data,uri) {
+    try {
+
+
+
+
+        // 调用fetchData函数并等待结果
+        const obj = await baseAjax(data,uri);
+        
+        // 在这里处理数据
+        // console.log(obj);
+        return obj; // 这里返回数据并不实际返回给调用者，因为这是一个异步函数
+    } catch (error) {
+        // 处理错误
+        console.error('获取数据失败:', error);
+    }
+}
 
 
 
@@ -377,3 +408,162 @@ function indexSearch(){
 
     
 }
+
+function usermessage(){
+
+
+
+    $('#messagediv').show()
+    
+    $('#tripdiv').hide()
+
+    
+    getData({},'/home/selectMsgList').then(data => {
+        // 这里处理从getData返回的数据
+
+        
+        if (data==null||data.list==null||data.list.length<1){
+
+            $('#msgstr').html('')
+            $('#msgstr').html('<h3>无更多数据！</h3>')
+
+        };
+
+        try {
+
+            let str ='';
+            
+            $('#msgstr').html('')
+            
+            data.list.forEach(o=>{
+               
+
+
+                str += '<div class="row align-items-center col-lg-12">'+
+                '<div class="col-3"><span class="badge">'+o.sendName+'</span></div>'
+                +'<div class="col-9">'
+                +'<a href="#" class="text-body d-block"><span style="font-weight: bold;">'+o.name+'</span></a>'
+                +'<div class="d-block text-muted text-truncate mt-n1">'
+                + o.details
+                +'</div><span style="font-weight: bold;">'+o.createTime+'</span></div></div>'
+                
+           
+
+
+            });
+
+            $('#msgstr').html(str)            
+        } catch (error) {
+            
+        }
+
+    }).catch(error => {
+        // 处理错误
+        console.error('获取数据失败:', error);
+    });
+
+
+    
+
+}
+
+
+function usertrip(){
+
+
+    $('#tripdiv').show()
+    
+    $('#messagediv').hide()
+
+    getData({},'/home/selectTripList').then(data => {
+        // 这里处理从getData返回的数据
+
+        if (data==null||data.list==null||data.list.length<1){
+
+            $('#tripstr').html('')
+            $('#tripstr').html('<h3>无更多数据！</h3>')
+
+        };
+
+        try {
+
+            let str ='';
+            
+            $('#tripstr').html('')
+            
+            data.list.forEach(o=>{
+               
+
+
+                str+= '<div class="row align-items-center col-lg-12">'
+                +'<div class="col-4"><span class="badge">'+o.outType+'</span></div><div class="col-8">'
+                +'<a href="#" class="text-body d-block"><span style="font-weight: bold;">'+ o.time +'   '+o.name+'</span></a>'
+                +'<div class="d-block text-muted text-truncate mt-n1">'
+                + o.details+'</div></div></div>'
+             
+
+
+            });
+
+            $('#tripstr').html(str)            
+        } catch (error) {
+            
+        }
+
+    }).catch(error => {
+        // 处理错误
+        console.error('获取数据失败:', error);
+    });
+
+
+
+}
+
+
+function menuActive(){
+
+    let key = localStorage.getItem("nowactive")
+
+    if  (key==null || key=='')return;
+    // key = "/tabler_web/page/customer/list.html ";
+    $('a[href*="'+key+'"]').addClass("active");
+    $('a[href*="'+key+'"]').parent().parent().parent()
+    .siblings('a').attr("aria-expanded",true)
+
+    $('a[href*="'+key+'"]').parent().parent().parent().addClass("show")
+
+    // localStorage.setItem("nowactive",'')
+ 
+    
+}
+
+
+function menuClick(){
+
+var menudive = document.getElementById('sidebar-menu');
+
+// 获取testDiv内的所有a标签
+var aTags = menudive.querySelectorAll('a');
+
+// 遍历所有的a标签，并给它们添加点击事件监听器
+aTags.forEach(function(aTag) {
+    aTag.addEventListener('click', function(event) {
+        // 阻止a标签的默认行为（例如跳转）
+        // event.preventDefault();
+        
+        // 获取a标签的href属性值
+        // var hrefValue = this.href;
+
+        var hrefValue =  $(this).attr("href")
+
+        localStorage.setItem("nowactive",hrefValue);
+
+
+        
+        // 打印href值到控制台
+        // console.log(hrefValue);
+    });
+});
+
+}
+

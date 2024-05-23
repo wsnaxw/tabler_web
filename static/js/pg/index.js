@@ -269,7 +269,7 @@ function sstj(){
 
                
 
-                str += "<tr><td class='w-1'  style='color: red;'>"
+                str += "<tr><td class='text-nowrap'  style='color: red;'>"
                 + o.stateName + "</td><td class='text-nowrap text-secondary'>"
                 + o.comName +"</td><td class='text-secondary text-nowrap'>"
                 + o.userName
@@ -315,7 +315,7 @@ function yjph(){
 
 
 
-    console.log('yjph')
+    // console.log('yjph')
 
 
 
@@ -343,7 +343,7 @@ function yjph(){
 
             });
 
-            console.log(str)
+            // console.log(str)
 
             $('#rankBody').html(str)            
         } catch (error) {
@@ -541,7 +541,7 @@ let jsonStr = localStorage.getItem(key);
 let obj = JSON.parse(jsonStr);
 
 // 打印对象
-console.log(obj);
+// console.log(obj);
 
 if(obj.type===0){
     $('#newsIMG').attr('src','http://admin.fsfhr.com/static/M2.a9d39170.png')

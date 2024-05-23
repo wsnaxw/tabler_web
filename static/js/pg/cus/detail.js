@@ -35,6 +35,40 @@ $(document).ready(function(){
     $('#kzxxdiv').show()
 
 
+    // customer/getCustomerNumber 数据填充
+
+    //cclfq 沟通记录
+
+    // customer/selectCstById 基本信息
+
+    //customer/selectCTeamList团队成员
+
+    //customer/selectContactList 联系人
+
+    // customer/selectCustomerCompany 关联公司
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 })
