@@ -50,7 +50,7 @@ function getPage(pageNo){
         },
         dataType:'json',
         type:'post',
-        url:baseUri+'/customer/cstList',
+        url:baseUri+'/customer/myCustomerList',
         data:JSON.stringify(queryData),
         success:function(obj){
 
@@ -451,7 +451,7 @@ function checkDetail(id){
 
 
 // 创建一个新的URL，携带参数
-var url = 'cusd.html?customerId=' + encodeURIComponent(customerId)+'' ;
+var url = 'cusd.html?customerId=' + encodeURIComponent(customerId) ;
 
 // 使用jQuery来跳转到新页面
 // window.location.href = url;

@@ -5,3 +5,7 @@
   box-sizing: border-box; /* 包含padding和border在寬度計算內 */
 /* 其他你需要的樣式 */  
 }
+
+.ts-dropdown {
+  z-index: 99999999; /* 确保这个值高于 modal 的 z-index */
+}

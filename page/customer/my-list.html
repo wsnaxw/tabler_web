@@ -12,7 +12,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>客户列表</title>
+    <title>我的客户</title>
     <!-- CSS files -->
     <script src="../../static/js/tabler.min.js"></script>
     <link rel="stylesheet" href="../../static/css/tabler.min.css">
@@ -21,7 +21,7 @@
     <script src="../../static/js/jquery.min.js"></script>
     <script src="../../static/js/base.js?1"></script>
     <script src="../../static/js/watermark.js"></script>
-    <script src="../../static/js/pg/cus/list.js"></script>
+    <script src="../../static/js/pg/cus/mylist.js"></script>
     <script>
       function dark(){
         let body = document.getElementById('webBody')
@@ -387,13 +387,10 @@
                         <div class="form-label" style="font-weight: bold;">客户归属</div>
                         <div class="form-selectgroup form-selectgroup-pills">
                           <label class="form-selectgroup-item">
-                            <input type="checkbox" name="belong" value="1" class="form-selectgroup-input" >
+                            <input type="checkbox" name="belong" value="1" class="form-selectgroup-input" checked>
                             <span class="form-selectgroup-label">我的</span>
                           </label>  
-                          <label class="form-selectgroup-item">
-                            <input type="checkbox" name="belong" value="2" class="form-selectgroup-input" >
-                            <span class="form-selectgroup-label">团队</span>
-                          </label>
+                  
                         </div>
                       </div>
   

@@ -141,7 +141,7 @@ $(document).ready(function() {
     menuActive();
 
 
-    usermessage()
+    // usermessage();
 
 
 });
@@ -522,7 +522,19 @@ function usertrip(){
 
 function menuActive(){
 
-    let key = localStorage.getItem("nowactive")
+
+    let nowpagekey = pagemenukey;
+
+    let key;
+
+    if(nowpagekey!=null){
+         key = nowpagekey;
+    }else{
+        key = sessionStorage.getItem("nowactive")
+        pagemenukey = key;
+    }
+
+
 
     if  (key==null || key=='')return;
     // key = "/tabler_web/page/customer/list.html ";
@@ -537,7 +549,7 @@ function menuActive(){
     
 }
 
-
+let pagemenukey;
 function menuClick(){
 
 var menudive = document.getElementById('sidebar-menu');
@@ -556,7 +568,7 @@ aTags.forEach(function(aTag) {
 
         var hrefValue =  $(this).attr("href")
 
-        localStorage.setItem("nowactive",hrefValue);
+        sessionStorage.setItem("nowactive",hrefValue);
 
 
         
