@@ -1,8 +1,8 @@
 $(document).ready(function(){
 
-    var customerId = getParameterByName('customerId');
+    // var customerId = getParameterByName('customerId');
 
-    console.log('customerId:'+customerId)
+    // console.log('customerId:'+customerId)
     checkboxChcek()
     //默认进行分页数据查询
     getPage(1);
@@ -126,17 +126,17 @@ function getPage(pageNo){
 
 
 
-                    var certification = o.certification+'';
+                    // var certification = o.certification+'';
 
-                    var certification1 = '';
+                    // var certification1 = '';
 
-                    switch (certification) {
-                        case "1":
-                            certification1='<div class="avatar avatar-sm bg-red-lt" >是</div>';
-                            break;
-                        default:
-                            certification1='<div class="avatar avatar-sm bg-red-lt" >否</div>';
-                    }
+                    // switch (certification) {
+                    //     case "1":
+                    //         certification1='<div class="avatar avatar-sm bg-red-lt" >是</div>';
+                    //         break;
+                    //     default:
+                    //         certification1='<div class="avatar avatar-sm bg-red-lt" >否</div>';
+                    // }
 
                     var jobBeansNum = o.jobBeansNum+'';
 
@@ -173,7 +173,7 @@ function getPage(pageNo){
                     str+="<tr><td>"
                         +sourceType1+"</td><td>"
                         +vip1+level1+"<span style='font-weight: bold;' class ='bg-primary-lt'><a onclick='checkDetail("+o.customerId+")'>"+name+"</a></span></td><td>"
-                        +certification1+"</td><td >"
+                        // +certification1+"</td><td >"
                         +jobBeansNum+"</td><td >"
                         
                         +customerTeamBeans+"</td><td>"
@@ -469,3 +469,4 @@ function getParameterByName(name) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
+

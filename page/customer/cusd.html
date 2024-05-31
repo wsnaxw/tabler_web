@@ -21,6 +21,7 @@
     <link rel="icon" href="../../static/img/favicon.ico" type="image/x-icon" />
     <script src="../../static/js/jquery.min.js"></script>
     <script src="../../static/js/base.js?1"></script>
+    <script src="../../static/js/citycode.js" ></script>
 
    
     <script src="../../static/js/watermark.js"></script>
@@ -39,9 +40,9 @@
       
 
     </script>
-    <style>
- 
-    </style>
+<style>
+
+</style>
   </head>
   <body  id="webBody" class="layout-fluid">
     <div class="page">
@@ -278,6 +279,9 @@
         </div>
       </header>
 
+      <div id="messageContainer" class="message-container">
+        <!-- Messages will be added here dynamically -->
+      </div>
 
 
       <div class="page-wrapper">
@@ -328,15 +332,15 @@
 
                           </div>
                           <div class="card-header">
-                            <h3 class="card-title" id="basecname" style="font-weight: bold;">基本信息</h3><span class="badge bg-azure-lt" id="bmxx"></span>
+                            <h3 class="card-title" id="basecname" style="font-weight: bold;">基本信息</h3><span class="form-check-description" style="color: rgb(77, 150, 193);" id="bmxx" onclick="copyTextToClipboard('bmxx')"></span>
                             <div class="card-actions">
-                              <a href="#" class="btn btn-ghost-primary">
+                              <a href="#" class="btn btn-ghost-primary" onclick="showMessage(1)">
                                 新增职位 
                               </a>
                               
-                              <a href="#" class="btn btn-ghost-success" onclick="test()" id="isvip">
-                                认证
-                              </a>
+                              <!-- <a href="#" class="btn btn-ghost-success"  id="isvip">
+                                申请认证
+                              </a> -->
                               <a href="#" class="btn btn-ghost-info"  data-bs-toggle='modal' data-bs-target='#modal-small'>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path><path d="M16 5l3 3"></path></svg>
                               </a>
@@ -354,6 +358,8 @@
                                 </dd>
                               <dt class="col-5">服务顾问:</dt>
                               <dd class="col-7" id="fwgw">无</dd>
+                              <dt class="col-5">签约状态:</dt>
+                              <dd class="col-7" id="signstate">无</dd>
                               <dt class="col-5">公司网站:</dt>
                               <dd class="col-7" id="website">无</dd>
                               <dt class="col-5">创建时间:</dt>
@@ -417,7 +423,7 @@
                                             回款金额
                                         </div>
                                         <div class="text-muted text-red" >
-                                           <strong id="hkje">0</strong>
+                                           <strong id="hkje">0</strong>万元
                                         </div>
                                     </div>
                                 </div>
@@ -547,11 +553,11 @@
               <div class="col-lg-12">
                 <div class="card">
                   <div class="card-body align-items-center">
-                      <button class="btn btn-outline-primary active" onclick="kzxx()" >扩展信息<span class="badge bg-yellow-lt ms-2">1</span></button>
-                      <button class="btn btn-outline-primary " onclick="rxxx()">人选信息<span class="badge bg-yellow-lt ms-2">2</span></button>
-                      <button class="btn btn-outline-primary " onclick="job()">职位<span class="badge bg-yellow-lt ms-2">3</span></button>
-                      <button class="btn btn-outline-primary " onclick="file()">文件<span class="badge bg-yellow-lt ms-2">4</span></button>
-                      <button class="btn btn-outline-primary " onclick="move()">转移<span class="badge bg-yellow-lt ms-2">5</span></button>
+                      <button class="btn btn-outline-primary active" onclick="kzxx()" >扩展信息</button>
+                      <button class="btn btn-outline-primary " onclick="rxxx()">人选信息<span class="badge bg-yellow-lt ms-2" id="rxxxnum">0</span></button>
+                      <button class="btn btn-outline-primary " onclick="job()">职位<span class="badge bg-yellow-lt ms-2" id="zwnum">0</span></button>
+                      <button class="btn btn-outline-primary " onclick="file()">文件<span class="badge bg-yellow-lt ms-2" id="fileCount">0</span></button>
+                      <button class="btn btn-outline-primary " onclick="move()">转移<span class="badge bg-yellow-lt ms-2" id="zycs">0</span></button>
                   </div>
                 </div>
               </div>
@@ -566,6 +572,11 @@
 
                       <div class="card-header">
                         客户联系人
+                        <div class="card-actions">
+                          <a href="#" class="btn btn-ghost-primary">
+                            新增
+                          </a>
+                        </div>
                       </div>
 
                       <div class="card-body align-items-center">
@@ -576,78 +587,21 @@
                           <thead>
                             						
                             <tr>
-                              <th class="w-1">联系人</th>
-                              <th class="w-1">手机</th>
+                              <th >联系人</th>
+                              <th >手机</th>
                               <th>微信</th>
                               <th>职务</th>
                               <th>邮箱地址</th>
-                              <th>归属公司</th>
                               <th>备注</th>
                               <th>操作</th>
                             </tr>
                           </thead>
                           <tbody id="khlxrdata">
                             <tr>
-                              <td>张三三</td>
-                              <td class="text-nowrap text-secondary">
-  
-                                13990001000
-                                
-                                
-                              </td>
-                              <td>
-                                123
-                              </td>
-                              <td>
-                                2
-                              </td>
-                              <td>
-                                123
-                              </td>
-                         
-                              <td>202</td>
-                              <td>
-                                <div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">0</div>
-  
-                              </td>
-                              <td >
-                                <a class="btn btn-ghost-info" href="#">
-                                  修改
-                                </a>
-                                <a class="btn btn-ghost-warning" href="#">
-                                  删除
-                                </a>
-                              </td>
+                              <td colspan="8" style="font-weight: bold;text-align: center;">暂无数据 </td>
                             </tr>
-                            <tr>
-                              <td>主动BD</td>
-                              <td class="text-nowrap text-secondary">
-                                18812341234                                
-                              </td>
-                              <td>
-                                1
-                              </td>
-                              <td>
-                                2
-                              </td>
-                              <td>
-                                
-                              </td>
-                             
-                              <td>20256</td>
-                              <td>
-                                <div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">0</div>
-  
-                              </td>
-                              <td >
-                                <a class="btn btn-ghost-info" href="#">
-                                  修改
-                                </a>
-                                <a class="btn btn-ghost-warning" href="#">
-                                  删除
-                                </a>
-                              </td>
-                            </tr>
+                            
+                           
                             
                       
                           </tbody>
@@ -674,45 +628,17 @@
                             <thead>
                                           
                               <tr>
-                                <th class="w-1">公司名称</th>
-                                <th class="w-1">服务顾问</th>
-                                <th>操作</th>
+                                <th >公司名称</th>
+                                <th >添加日期</th>
+                     
                                 
                               </tr>
                             </thead>
                             <tbody id="childdata">
                               <tr>
-                                <td class="text-nowrap text-secondary">成都sdasdA公司</td>
-                                <td>
-                                  z张三
-                                </td>
-                             
-                                
-                                <td >
-                                  <a class="btn btn-ghost-info" href="#">
-                                    修改
-                                  </a>
-                                  <a class="btn btn-ghost-warning" href="#">
-                                    删除
-                                  </a>
-                                </td>
+                                <td colspan="2" style="font-weight: bold;text-align: center;">暂无数据 </td>
                               </tr>
-                              <tr>
-                                <td class="text-nowrap text-secondary">成都sdasdA公司</td>
-                                <td>
-                                  z张三
-                                </td>
-                             
-                                
-                                <td >
-                                  <a class="btn btn-ghost-info" href="#">
-                                    修改
-                                  </a>
-                                  <a class="btn btn-ghost-warning" href="#">
-                                    删除
-                                  </a>
-                                </td>
-                              </tr>
+                              
                               
                         
                             </tbody>
@@ -739,45 +665,17 @@
                             <thead>
                                           
                               <tr>
-                                <th class="w-1">公司名称</th>
-                                <th class="w-1">服务顾问</th>
-                                <th>操作</th>
+                                <th>公司名称</th>
+                                <th>添加日期</th>
+                                
                                 
                               </tr>
                             </thead>
                             <tbody id="gldata">
                               <tr>
-                                <td class="text-nowrap text-secondary">成都sdasdA公司</td>
-                                <td>
-                                  z张三
-                                </td>
-                             
-                                
-                                <td >
-                                  <a class="btn btn-ghost-info" href="#">
-                                    修改
-                                  </a>
-                                  <a class="btn btn-ghost-warning" href="#">
-                                    删除
-                                  </a>
-                                </td>
+                                <td colspan="2" style="font-weight: bold;text-align: center;">暂无数据 </td>
                               </tr>
-                              <tr>
-                                <td class="text-nowrap text-secondary">成都sdasdA公司</td>
-                                <td>
-                                  z张三
-                                </td>
-                             
-                                
-                                <td >
-                                  <a class="btn btn-ghost-info" href="#">
-                                    修改
-                                  </a>
-                                  <a class="btn btn-ghost-warning" href="#">
-                                    删除
-                                  </a>
-                                </td>
-                              </tr>
+                              
                               
                         
                             </tbody>
@@ -796,32 +694,32 @@
                       <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
                           <li class="nav-item" role="presentation">
-                            <a id="yjph" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab">全部</a>
+                            <a id="yjph" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab" onclick="rxxx()">全部</a>
                           </li>
                           <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">加项目</a>
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(0)">加项目</a>
                           </li>
                           <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">给客户</a>
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(1)">给客户</a>
                           </li>
                           <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">约面试</a>
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(5)">约面试</a>
                           </li>
                           <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">客户面试</a>
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1"onclick="rxxx(6)">客户面试</a>
                           </li>
                           <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">确认offer</a>
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(8)">确认offer</a>
                           </li>
                           <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">已入职</a>
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(9)">已入职</a>
                           </li>
                           <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">人选离职</a>
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(10)">人选离职</a>
                           </li>
                       
                           <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1">放弃人选</a>
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(4)">放弃人选</a>
                           </li>
                         </ul>
                       </div>
@@ -834,70 +732,18 @@
                               <th>项目名称</th>
                               <th>推荐人</th>
                               <th>人选姓名</th>
-                              <th>当前公司</th>
-                              <th>当前职位</th>
+                              <th>当前公司</th> 
+                              <th>当前职位</th>                        
                               <th>推荐时间</th>
-                              <th>更新时间</th>
+   
                               <th>操作</th>
                             </tr>
                           </thead>
                           <tbody id="rxxxdata">
                             <tr>
-                              <td>算法工程师</td>
-                              <td>
-  
-                                张三
-                                
-                                
-                              </td>
-                              <td>
-                                123
-                              </td>
-                              <td>
-                                2
-                              </td>
-                              <td>
-                                123
-                              </td>
-                         
-                              <td>202</td>
-                              <td>
-                                <div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">0</div>
-  
-                              </td>
-                              <td >
-                                <a class="btn btn-info" href="#">
-                                  查看
-                                </a>
-                           
-                              </td>
+                              <td colspan="6" style="font-weight: bold;text-align: center;">暂无数据 </td>
                             </tr>
-                            <tr>
-                              <td>主动BD</td>
-                              <td class="text-nowrap text-secondary">
-                                18812341234                                
-                              </td>
-                              <td>
-                                1
-                              </td>
-                              <td>
-                                2
-                              </td>
-                              <td>
-                                
-                              </td>
-                             
-                              <td>20256</td>
-                              <td>
-                                <div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">0</div>
-  
-                              </td>
-                              <td >
-                                <a class="btn btn-info" href="#">
-                                  查看
-                                </a>
-                              </td>
-                            </tr>
+                            
                             
                       
                           </tbody>
@@ -1215,8 +1061,8 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M5 12l5 5l10 -10"></path></svg>
                   </div>
                   <div>
-                    <h4 class="alert-title">This is a custom alert box!</h4>
-                    <div class="text-secondary">Your account has been saved!</div>
+                    <h4 class="alert-title">成功</h4>
+                    <div class="text-secondary" id="modalshowstr"></div>
                   </div>
                 </div>
               </div>
@@ -1232,15 +1078,14 @@
           <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="formtitle">新增</h5>
+                <h5 class="modal-title" id="formtitle">新增团队成员</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
 
                 <div class="mb-3">
                   <label class="form-label">Tags input</label>
-                  <select type="text" class="form-select" placeholder="Select tags" id="select-tags1" value="" multiple>
-       
+                  <select type="text" class="form-select" placeholder="Select tags" id="addTeamMember">
                   </select>
                 </div>
                
@@ -1256,27 +1101,27 @@
                 <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
                   Cancel
                 </a>
-                <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal" onclick="addTeamList()">
                   <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
-                  Create new report
+                  新增
                 </a>
               </div>
             </div>
           </div>
         </div>
 
-        <script src="../../static/js/tom-select.base.min.js" defer></script>
-
+        <script src="../../static/js/tom-select.base.min.js" ></script>
+       
       
+      
+        <script>
+          // @formatter:off
+    
+        </script>
 
 
 
-
-
-<script>
-  
-</script>
 
 
 

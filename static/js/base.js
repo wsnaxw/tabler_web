@@ -543,7 +543,7 @@ function menuActive(){
     .siblings('a').attr("aria-expanded",true)
 
     $('a[href*="'+key+'"]').parent().parent().parent().addClass("show")
-
+    $('a[href*="'+key+'"]').parent().parent().parent().parent().addClass("active")
     // localStorage.setItem("nowactive",'')
  
     
@@ -579,3 +579,7 @@ aTags.forEach(function(aTag) {
 
 }
 
+function isNumeric(str) {  
+    var pattern = /^\d+(\.\d+)?$/;  
+    return pattern.test(str);  
+}  
