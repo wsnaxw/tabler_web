@@ -18,12 +18,15 @@
     <link rel="stylesheet" href="../../static/css/tabler.min.css">
     <link rel="stylesheet" href="../../static/css/tabler-vendors.min.css">
     <link rel="stylesheet" href="../../static/css/base.css">
+    <link rel="stylesheet" href="../../static/css/dropzone.css">
     <link rel="icon" href="../../static/img/favicon.ico" type="image/x-icon" />
     <script src="../../static/js/jquery.min.js"></script>
     <script src="../../static/js/base.js?1"></script>
     <script src="../../static/js/citycode.js" ></script>
 
-   
+    <link type="text/css" rel="stylesheet" href="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/skin/jedate.css">
+    <script type="text/javascript" src="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/src/jedate.js"></script>
+    <script type="text/javascript" src="https://gosspublic.alicdn.com/aliyun-oss-sdk-6.18.0.min.js"></script>
     <script src="../../static/js/watermark.js"></script>
     <script src="../../static/js/pg/cus/detail.js"></script>
     <script>
@@ -556,7 +559,7 @@
                       <button class="btn btn-outline-primary active" onclick="kzxx()" >扩展信息</button>
                       <button class="btn btn-outline-primary " onclick="rxxx()">人选信息<span class="badge bg-yellow-lt ms-2" id="rxxxnum">0</span></button>
                       <button class="btn btn-outline-primary " onclick="job()">职位<span class="badge bg-yellow-lt ms-2" id="zwnum">0</span></button>
-                      <button class="btn btn-outline-primary " onclick="file()">文件<span class="badge bg-yellow-lt ms-2" id="fileCount">0</span></button>
+                      <button class="btn btn-outline-primary " onclick="filedivshow()">文件<span class="badge bg-yellow-lt ms-2" id="fileCount">0</span></button>
                       <button class="btn btn-outline-primary " onclick="move()">转移<span class="badge bg-yellow-lt ms-2" id="zycs">0</span></button>
                   </div>
                 </div>
@@ -1074,7 +1077,7 @@
 
 
 
-        <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true" >
+        <div class="modal modal-blur fade" id="membermodal" tabindex="-1" role="dialog" aria-hidden="true" >
           <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -1084,7 +1087,7 @@
               <div class="modal-body">
 
                 <div class="mb-3">
-                  <label class="form-label">Tags input</label>
+                  <label class="form-label">选择成员</label>
                   <select type="text" class="form-select" placeholder="Select tags" id="addTeamMember">
                   </select>
                 </div>
@@ -1111,15 +1114,192 @@
           </div>
         </div>
 
+
+        <div class="modal modal-blur fade" id="modal-sign" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">申请签约</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="row mb-3">
+                  <div class="col-lg-6">
+                    <label class="form-label">签约比例</label>
+
+                    <div class="input-group input-group-flat">
+                      <input type="number" class="form-control" name="signPercent"  placeholder="请输入签约比例">
+                      <span class="input-group-text">
+                        <kbd>%</kbd>
+                      </span>
+                      <div class="invalid-feedback">不能为空</div>
+
+                    </div>  
+                  </div>
+                  <div class="col-lg-6">
+                    <label class="form-label">保用期</label>
+                    <div class="input-group input-group-flat">
+                      <input type="number" class="form-control" name="quotTime"  placeholder="请输入保用期月限">
+                      <span class="input-group-text">
+                        <kbd>月</kbd>
+                      </span>
+                      <div class="invalid-feedback">不能为空</div>
+                    </div>
+                   
+
+                  </div>
+                 
+                </div>
+        
+                <label class="form-label">是否支付首付款</label>
+                <div class="form-selectgroup-boxes row mb-3">
+                  <div class="col-lg-6">
+                    <label class="form-selectgroup-item">
+                      <input type="radio" name="isDownPayment" value="0" onclick="check1()" class="form-selectgroup-input" >
+                      <span class="form-selectgroup-label d-flex align-items-center p-3">
+                        <span class="me-3">
+                          <span class="form-selectgroup-check"></span>
+                        </span>
+                        <span class="form-selectgroup-label-content">
+                          <span class="form-selectgroup-title strong mb-1">否</span>
+                          <span class="d-block text-secondary">无需填写</span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-lg-6">
+                    <label class="form-selectgroup-item">
+                      <input type="radio" name="isDownPayment" value="1"  onclick="check2()"class="form-selectgroup-input" checked>
+                      <span class="form-selectgroup-label d-flex align-items-center p-3">
+                        <span class="me-3">
+                          <span class="form-selectgroup-check"></span>
+                        </span>
+                        <span class="form-selectgroup-label-content">
+                          <span class="form-selectgroup-title strong mb-1">是</span>
+                          <span class="d-block text-secondary">需要填写首付款金额</span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                <div class="row">
+                  
+                  <div class="col-lg-6">
+                    <div class="mb-3">
+                      <label class="form-label">首付款</label>
+                      <div class="input-group input-group-flat">
+                        <input type="number" class="form-control" name="downPayment"  autocomplete="off" placeholder="首付款">
+                        
+                        <span class="input-group-text">
+                          <kbd>元</kbd>
+                        </span>
+                        <div class="invalid-feedback">不能为空</div>
+
+                      </div>  
+                     
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6 mb-3">
+                   
+                    <label class="form-label">合同期限</label>
+                    <div class="input-group input-group-flat">
+                      <input type="text" class="jeinpbox form-control" name="dayRange"id="ymd033" placeholder="YYYY-MM-DD ~ YYYY-MM-DD">  
+                      <div class="invalid-feedback">不能为空</div>
+                    </div> 
+                   
+                     
+                  </div>
+                 
+                </div>
+
+                <div class="row">
+                  <h3 class="card-title">文件上传</h3>
+                    <form class="dropzone" id="dropzone-multiple"  autocomplete="off" novalidate>
+                      <div class="fallback">
+                        <input name="file" type="file" id="upload"  multiple  />
+                      </div>
+                    </form>
+                </div>
+
+              </div>  
+              <div class="modal-footer">
+                <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                  取消
+                </a>
+                <a href="#" class="btn btn-primary" onclick="signC()" >
+                  确认签约                  
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <script src="../../static/js/tom-select.base.min.js" ></script>
        
-      
+        <script src="../../static/js/dropzone-min.js?1692870487" ></script>
       
         <script>
           // @formatter:off
-    
+          // document.addEventListener("DOMContentLoaded", function() {
+          //   new Dropzone("#dropzone-multiple1",{
+          //     autoProcessQueue: false
+          //   })
+          // })
         </script>
-
 
 
 

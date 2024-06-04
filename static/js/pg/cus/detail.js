@@ -1,14 +1,50 @@
 
 
 
-$(document).ready(function(){
+$(function(){
 
     
     // @formatter:on
    
+    var myDropzone = new Dropzone("#dropzone-multiple", {
+        url:'test',
+        
+        autoProcessQueue: false, // 设置为false，表示不自动上传文件队列
+        // 其他配置选项...
+        init: function() {
+            this.on("success", function(file, response) {
+                // 假设服务器返回的response是一个对象，其中包含上传成功的信息
+                console.log("文件上传成功:", file,response);
+
+            // 创建一个新的<img>元素用于预览
+        
+          
+            // 将<img>元素添加到预览区域
+    
+                // 更新UI以显示上传成功
+                // 你可以根据需要自定义这部分代码
+                var previewElement = file.previewElement;
+                previewElement.classList.add("dz-success"); // 添加成功类
+                previewElement.classList.remove("dz-progress"); // 移除处理中类
+                // ...其他UI更新操作...
+                $('.dz-progress').each(function() {
+                    // 移除dz-processing类
+                    $(this).removeClass('dz-progress');
+                    // 添加dz-success类
+                    $(this).addClass('dz-success');
+                });
 
 
+            });
+        }
+    });
 
+    myDropzone.on("addedfile", function(file) {  
+        upload(file,myDropzone)
+        // 你可以在这里添加预览逻辑  
+        // myDropzone.createThumbnailFromUrl(...);  
+    });  
+      
     // let test1 = document.getElementById("test")
 
 
@@ -17,6 +53,7 @@ $(document).ready(function(){
     //     test()
 
     // })
+
 
 
     var customerId = getParameterByName('customerId');
@@ -38,7 +75,12 @@ $(document).ready(function(){
         this.classList.add('active');
       });
     });
-
+    jeDate("#ymd033",{
+        theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+        multiPane:false,
+        range:" ~ ",
+        format: "YYYY-MM-DD"
+    });
 
 
     $('#rxxxdiv').hide()
@@ -77,6 +119,8 @@ $(document).ready(function(){
 
 let csid ;
 
+
+let filenames =[]
 
 
 
@@ -221,7 +265,7 @@ function rxxx(state){
 
 }
 
-function file(){
+function filedivshow(){
 
 
 
@@ -280,8 +324,10 @@ function job(pageNo){
                             });
                         }
                         console.log(cityCode)
-                    }else if(isNumeric(o.cityCode)){
+                    }else if(!isNumeric(o.cityCode)){
                         cityCode = o.cityCode;
+                    }else{
+                        cityCode = '不限';
                     }
 
 
@@ -442,7 +488,7 @@ function baseinfo(customerId){
             }
 
             let state=data.state
-            state=3
+            state=1
 
             if(state==0){
 
@@ -450,7 +496,7 @@ function baseinfo(customerId){
 
 
             }else if(state==1){
-                $('#signstate').html(`签约运作 <a class="btn btn-outline-secondary" onclick="signCustomer()">暂停运作<a>`);
+                $('#signstate').html(`签约运作 (${data.createTime}~${data.createTime}) <a class="btn btn-outline-secondary" onclick="signCustomer()">暂停运作<a>`);
 
 
             }else if(state==2){
@@ -575,7 +621,7 @@ function teamlist(customerId){
             let str =''
 
             let newteammember=     
-            ' <span class="badge bg-green-lt" data-bs-toggle="modal" data-bs-target="#modal-report" onclick="newTeamList()">新增'
+            ' <span class="badge bg-green-lt" data-bs-toggle="modal" data-bs-target="#membermodal" onclick="newTeamList()">新增'
             +'<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg> </span>'  
        
 
@@ -637,7 +683,45 @@ function newTeamList(){
 
 function deletemember(uid){
 
-    alert(1)
+
+    var isConfirmed = confirm("您确定要删除吗？");
+
+    if (isConfirmed) {
+        // 用户点击了“确定”按钮
+        // 执行删除操作
+        console.log("删除操作已执行");
+
+        const options = {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            'token':localStorage.getItem('token')
+            },
+            body: JSON.stringify({ 'appUserId': uid,'customerId':csid }),
+            };
+
+            var url = baseUri+'/customer/delTeamPerson';
+        fetch(url,options)
+            .then(response => response.json())
+            .then(json => {
+    
+                showMessage(json.code)
+                teamlist(csid)
+            }).catch((error)=>{
+                
+            });
+
+
+
+
+
+
+
+    } else {
+        // 用户点击了“取消”按钮或关闭了对话框
+        console.log("删除操作被取消");
+    }
+
 
 
 }
@@ -897,9 +981,34 @@ function successalert(str){
 
 function signCustomer(){
 
+// 获取div元素
+var divElement = document.getElementById('modal-sign');
+
+// 获取div内所有的input元素
+var inputElements = divElement.querySelectorAll('input');
 
 
-  $('#modal-danger').modal('show')
+
+
+// 遍历input元素，并为每个元素添加input事件监听器
+inputElements.forEach(function(input) {
+    input.addEventListener('input', function() {
+        // 移除之前的valid和invalid类
+        this.classList.remove('is-valid', 'is-invalid','is-valid-lite','is-invalid-lite');
+        console.log(1)
+        // 根据输入内容添加相应的类
+        if (this.value.trim() !== '') {
+            this.classList.add('is-valid-lite');
+            this.classList.add('is-valid');
+        } else {
+            this.classList.add('is-invalid');
+            this.classList.add('is-invalid-lite');
+        }
+    });
+});
+
+
+  $('#modal-sign').modal('show')
 
 
 
@@ -920,6 +1029,11 @@ function showMessage(type,text) {
     }else if(type==1||type==='fail'){
         messageElement.className = 'message visible alert alert-warning';
         if(text==null)text='失败！！！';
+
+        messageElement.textContent = text;
+    }else if(type==2||type==='error'){
+        messageElement.className = 'message visible alert alert-warning';
+        if(text==null)text='异常！！！';
 
         messageElement.textContent = text;
     }else{
@@ -994,4 +1108,268 @@ function copyTextToClipboard(id) {
         
         document.body.removeChild(textArea);
     }
+}
+
+
+
+
+function signC(){
+
+
+    console.log(filenames)
+
+    // 获取div元素
+    var divElement = document.getElementById('modal-sign');
+ 
+    // 获取div内所有非disabled的input元素
+    var inputElements = divElement.querySelectorAll('input:not([disabled])');
+    var inputValues = {};
+    var isCheck = true;
+    // 遍历input元素，检查值是否为空，并进行提示
+    inputElements.forEach(function(input) {
+     input.classList.remove('is-valid', 'is-invalid','is-valid-lite','is-invalid-lite');
+     
+     // 根据输入内容添加相应的类
+     if (input.value.trim() !== '') {
+         inputValues[input.name]=input.value;
+      input.classList.add('is-valid');
+      input.classList.add('is-valid-lite');
+     } else {
+      input.classList.add('is-invalid');
+      input.classList.add('is-invalid-lite');
+      isCheck=false;
+     }
+ 
+    });
+
+
+    if(filenames.length==0){
+        alert('请上传文件')
+        return;
+    }
+    
+    inputValues['files']=filenames
+    console.log(inputValues)
+
+
+    if(!isCheck){
+         return;
+    }else{
+
+
+        const options = {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            'token':localStorage.getItem('token')
+            },
+            body: JSON.stringify({ 'appUserId': uid,'customerId':csid }),
+            };
+
+            var url = baseUri+'/customer/delTeamPerson';
+        fetch(url,options)
+            .then(response => response.json())
+            .then(json => {
+    
+                showMessage(json.code)
+                teamlist(csid)
+            }).catch((error)=>{
+                
+            });
+
+
+    }
+
+ // $('#modal-sign').modal('hide')
+
+
+
+}
+
+
+function check1(){
+    document.querySelector('input[name="downPayment"]').disabled=true;
+}
+
+
+function check2(){
+    document.querySelector('input[name="downPayment"]').disabled=false;
+}
+
+
+
+function upload1(){
+    let stsTokendata="" ;
+    let picnumber = "";
+
+    
+    getData({},'/login/getToken').then(data => {
+        // 这里处理从getData返回的数据
+        try {
+            localStorage.setItem("picnumber",data.token)
+        } catch (error) {
+        }
+
+    }).catch(error => {
+        // 处理错误
+        console.error('获取数据失败:', error);
+    });
+
+
+    getData({},'/admin/getALLSTSToken').then(data => {
+        // 这里处理从getData返回的数据
+        try {
+
+          
+           
+
+
+            localStorage.setItem("stsTokendata",data)
+
+           
+        } catch (error) {
+        }
+
+    }).catch(error => {
+        // 处理错误
+        console.error('获取数据失败:', error);
+    });
+
+    stsTokendata=JSON.parse(localStorage.getItem("stsTokendata")).credentials
+    picnumber = localStorage.getItem("picnumber")
+    console.log(stsTokendata)
+    
+
+    const client = new OSS({
+        // yourRegion填写Bucket所在地域。以华东1（杭州）为例，yourRegion填写为oss-cn-hangzhou。
+        region: "oss-cn-shanghai",
+        // 从STS服务获取的临时访问密钥（AccessKey ID和AccessKey Secret）。
+        accessKeyId: stsTokendata.accessKeyId,
+        accessKeySecret: stsTokendata.accessKeySecret,
+        // 从STS服务获取的安全令牌（SecurityToken）。
+        stsToken: stsTokendata.securityToken,
+        // 填写Bucket名称。
+        bucket: "faithful",
+      });
+
+      // 从输入框获取file对象，例如<input type="file" id="file" />。
+      // 创建并填写Blob数据。
+      //const data = new Blob(['Hello OSS']);
+      // 创建并填写OSS Buffer内容。
+      //const data = new OSS.Buffer(['Hello OSS']);
+
+      const upload = document.getElementById("upload");
+      var files = upload.files; // 获取FileList对象
+
+      if (files.length > 0) {
+          for (var i = 0; i < files.length; i++) {
+              var file = files[i]; // 获取单个File对象
+              console.log(file.name); // 打印文件名
+              // 在这里你可以对file对象进行其他操作，比如读取文件内容等
+
+
+              var path = '/fileserver/'+csid+"/"+picnumber+""/+file.name;
+              filenames.push(path)
+
+              putObject(path,file);
+          }
+      } else {
+          console.log('没有选择文件');
+      }
+      
+}
+
+async function putObject(path,data,client,myDropzone) {
+    try {
+      // 填写Object完整路径。Object完整路径中不能包含Bucket名称。
+      // 您可以通过自定义文件名（例如exampleobject.txt）或文件完整路径（例如exampledir/exampleobject.txt）的形式实现将数据上传到当前Bucket或Bucket中的指定目录。
+      // data对象可以自定义为file对象、Blob数据或者OSS Buffer。
+      const options = {
+        meta: { temp: "demo" },
+        mime: "json",
+        headers: { "Content-Type": "text/plain" },
+      };
+      const result = await client.put(path, data, options);
+      myDropzone.emit("success", data, result)
+      console.log(result);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  
+function upload(file,myDropzone){
+    let stsTokendata="" ;
+    let picnumber = "";
+
+    
+    getData({},'/login/getToken').then(data => {
+        // 这里处理从getData返回的数据
+        try {
+            localStorage.setItem("picnumber",data.token)
+        } catch (error) {
+        }
+
+    }).catch(error => {
+        // 处理错误
+        console.error('获取数据失败:', error);
+    });
+
+
+    getData({},'/admin/getALLSTSToken').then(data => {
+        // 这里处理从getData返回的数据
+        try {
+
+          
+           
+
+
+            localStorage.setItem("stsTokendata",data)
+
+           
+        } catch (error) {
+        }
+
+    }).catch(error => {
+        // 处理错误
+        console.error('获取数据失败:', error);
+    });
+
+    stsTokendata=JSON.parse(localStorage.getItem("stsTokendata")).credentials
+    picnumber = localStorage.getItem("picnumber")
+    
+
+    const client = new OSS({
+        // yourRegion填写Bucket所在地域。以华东1（杭州）为例，yourRegion填写为oss-cn-hangzhou。
+        region: "oss-cn-shanghai",
+        // 从STS服务获取的临时访问密钥（AccessKey ID和AccessKey Secret）。
+        accessKeyId: stsTokendata.accessKeyId,
+        accessKeySecret: stsTokendata.accessKeySecret,
+        // 从STS服务获取的安全令牌（SecurityToken）。
+        stsToken: stsTokendata.securityToken,
+        // 填写Bucket名称。
+        bucket: "faithful",
+      });
+
+      // 从输入框获取file对象，例如<input type="file" id="file" />。
+ 
+      // 创建并填写Blob数据。
+      //const data = new Blob(['Hello OSS']);
+      // 创建并填写OSS Buffer内容。
+      //const data = new OSS.Buffer(['Hello OSS']);
+
+    //   const upload = document.getElementById("upload");
+    //   var files = upload.files; // 获取FileList对象
+
+    
+    var path = '/fileserver/'+csid+"/"+picnumber+"/"+file.name;
+
+    console.log(path)
+    filenames.push(path)
+    console.log(filenames)
+
+    
+    // myDropzone.emit("thumbnail", file, 'http://faithful.oss-cn-shanghai.aliyuncs.com'+path)
+    putObject(path,file,client,myDropzone);
+      
 }
