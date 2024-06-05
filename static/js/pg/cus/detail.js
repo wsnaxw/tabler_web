@@ -5,19 +5,31 @@ $(function(){
 
     
     // @formatter:on
+
+    Dropzone.autoDiscover = false;
    
     var myDropzone = new Dropzone("#dropzone-multiple", {
         url:'test',
-        
+        dictDefaultMessage:"点击或拖拽文件到此上传！",
+        addRemoveLinks: true,//是否有删除文件的功能
+        dictRemoveFile: "移除",//移除文件链接的文本。只设置addRemoveLinks: true 没有这个 会找不到删除按钮
+        dictRemoveFileConfirmation: '确定删除此文件吗?',
+
         autoProcessQueue: false, // 设置为false，表示不自动上传文件队列
+        // acceptedFiles: ".jpg,.png,.jpeg.JPG,.PNG,.JPEG",//支持的格式
+        // accept: function(file, done) {
+      
+        // },
+
         // 其他配置选项...
         init: function() {
             this.on("success", function(file, response) {
                 // 假设服务器返回的response是一个对象，其中包含上传成功的信息
-                console.log("文件上传成功:", file,response);
+                // console.log("文件上传成功:", file,response);
+                // console.log("文件上传成功:", response);
 
             // 创建一个新的<img>元素用于预览
-        
+            file.url='/'+response.name
           
             // 将<img>元素添加到预览区域
     
@@ -25,17 +37,24 @@ $(function(){
                 // 你可以根据需要自定义这部分代码
                 var previewElement = file.previewElement;
                 previewElement.classList.add("dz-success"); // 添加成功类
-                previewElement.classList.remove("dz-progress"); // 移除处理中类
-                // ...其他UI更新操作...
-                $('.dz-progress').each(function() {
-                    // 移除dz-processing类
-                    $(this).removeClass('dz-progress');
-                    // 添加dz-success类
-                    $(this).addClass('dz-success');
-                });
+                // previewElement.classList.remove("dz-progress"); // 移除处理中类
+                previewElement.classList.remove("dz-processing");
+                // // ...其他UI更新操作...
+                // $('.dz-progress').each(function() {
+                //     // 移除dz-processing类
+                //     $(this).removeClass('dz-progress');
+                //     // 添加dz-success类
+                //     $(this).addClass('dz-success');
+                // });
 
 
             });
+            this.on("removedfile",function (file){
+                removeFileNames(file.url);
+                console.log(file)
+                console.log(filenames)
+            });
+    
         }
     });
 
@@ -120,9 +139,21 @@ $(function(){
 let csid ;
 
 
-let filenames =[]
+let filenames = []
 
+function addFileNames(value,key ) {
+    // 创建一个对象，包含键值对
+    let obj = {};
+    obj[key] = value;
+    
+    // 将对象添加到数组中
+    filenames.push(obj);
+}
 
+// 删除元素（通过键匹配）
+function removeFileNames(key) {
+    filenames = filenames.filter(obj => !obj.hasOwnProperty(key));
+}
 
 
 
@@ -311,7 +342,7 @@ function job(pageNo){
                 let str =''
                 json.data.list.forEach(o=>{
 
-                    console.log(o)
+                    // console.log(o)
 
                     let cityCode = '';
 
@@ -323,7 +354,7 @@ function job(pageNo){
                                 cityCode += cn.info(element).name + ' '
                             });
                         }
-                        console.log(cityCode)
+                        // console.log(cityCode)
                     }else if(!isNumeric(o.cityCode)){
                         cityCode = o.cityCode;
                     }else{
@@ -496,7 +527,7 @@ function baseinfo(customerId){
 
 
             }else if(state==1){
-                $('#signstate').html(`签约运作 (${data.createTime}~${data.createTime}) <a class="btn btn-outline-secondary" onclick="signCustomer()">暂停运作<a>`);
+                $('#signstate').html(`签约运作 (${data.contractDateStart}~${data.contractDateEnd}) <a class="btn btn-outline-secondary" onclick="signCustomer()">暂停运作<a>`);
 
 
             }else if(state==2){
@@ -936,7 +967,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function addTeamList(){
     var selectElement = document.getElementById('addTeamMember');
-    console.log(selectElement.value)
+    // console.log(selectElement.value)
 
     const options = {
         method: 'POST',
@@ -951,7 +982,7 @@ function addTeamList(){
     fetch(url,options)
         .then(response => response.json())
         .then(json => {
-            console.log(json)
+            // console.log(json)
             if(json.code==0){
                 
         teamlist(csid)
@@ -995,7 +1026,6 @@ inputElements.forEach(function(input) {
     input.addEventListener('input', function() {
         // 移除之前的valid和invalid类
         this.classList.remove('is-valid', 'is-invalid','is-valid-lite','is-invalid-lite');
-        console.log(1)
         // 根据输入内容添加相应的类
         if (this.value.trim() !== '') {
             this.classList.add('is-valid-lite');
@@ -1071,11 +1101,9 @@ function copyTextToClipboard(id) {
     // 使用 Clipboard API 复制文本到剪贴板
     if (navigator.clipboard) {
         navigator.clipboard.writeText(textToCopy).then(() => {
-            console.log('内容已复制到剪贴板');
             showMessage(0,'内容已复制到剪贴板');
         }).catch(err => {
             // 复制失败的处理
-            console.error('无法复制文本: ', err);
             showMessage(1,'无法复制文本，请尝试手动复制');
         });
     } else {
@@ -1116,7 +1144,6 @@ function copyTextToClipboard(id) {
 function signC(){
 
 
-    console.log(filenames)
 
     // 获取div元素
     var divElement = document.getElementById('modal-sign');
@@ -1144,35 +1171,36 @@ function signC(){
 
 
     if(filenames.length==0){
-        alert('请上传文件')
-        return;
+        $('#fileerror').show()
+        isCheck=false;
     }
     
     inputValues['files']=filenames
     console.log(inputValues)
 
 
+
     if(!isCheck){
          return;
     }else{
 
-
+        
+        inputValues['customerId']=csid;
         const options = {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
             'token':localStorage.getItem('token')
             },
-            body: JSON.stringify({ 'appUserId': uid,'customerId':csid }),
+            body:  JSON.stringify(inputValues) ,
             };
 
-            var url = baseUri+'/customer/delTeamPerson';
+            var url = baseUri+'/customer/signCustomer';
         fetch(url,options)
             .then(response => response.json())
             .then(json => {
     
                 showMessage(json.code)
-                teamlist(csid)
             }).catch((error)=>{
                 
             });
@@ -1180,7 +1208,7 @@ function signC(){
 
     }
 
- // $('#modal-sign').modal('hide')
+ $('#modal-sign').modal('hide')
 
 
 
@@ -1269,7 +1297,8 @@ function upload1(){
 
 
               var path = '/fileserver/'+csid+"/"+picnumber+""/+file.name;
-              filenames.push(path)
+
+              addFileNames(file.name,path)
 
               putObject(path,file);
           }
@@ -1291,14 +1320,38 @@ async function putObject(path,data,client,myDropzone) {
       };
       const result = await client.put(path, data, options);
       myDropzone.emit("success", data, result)
-      console.log(result);
+      myDropzone.emit("complete", data);
+    //   console.log(result);
     } catch (e) {
       console.log(e);
     }
   }
 
   
+
+  function checkFileExtension(file) {
+    // 定义一个允许的扩展名数组，注意不需要区分大小写
+    const allowedExtensions = ['jpg', 'png', 'jpeg'];
+
+    // 获取文件扩展名
+    const extension = file.name.toLowerCase().split('.').pop();
+
+    // 检查扩展名是否在允许的列表中
+    if (!allowedExtensions.includes(extension)) {
+        alert('请上传正确文件');
+        return false;
+    }
+
+    return true;
+}
+
 function upload(file,myDropzone){
+
+
+    if(!checkFileExtension(file)){return}
+
+
+
     let stsTokendata="" ;
     let picnumber = "";
 
@@ -1319,14 +1372,7 @@ function upload(file,myDropzone){
     getData({},'/admin/getALLSTSToken').then(data => {
         // 这里处理从getData返回的数据
         try {
-
-          
-           
-
-
             localStorage.setItem("stsTokendata",data)
-
-           
         } catch (error) {
         }
 
@@ -1351,21 +1397,13 @@ function upload(file,myDropzone){
         bucket: "faithful",
       });
 
-      // 从输入框获取file对象，例如<input type="file" id="file" />。
- 
-      // 创建并填写Blob数据。
-      //const data = new Blob(['Hello OSS']);
-      // 创建并填写OSS Buffer内容。
-      //const data = new OSS.Buffer(['Hello OSS']);
-
-    //   const upload = document.getElementById("upload");
-    //   var files = upload.files; // 获取FileList对象
 
     
     var path = '/fileserver/'+csid+"/"+picnumber+"/"+file.name;
 
-    console.log(path)
-    filenames.push(path)
+    
+    addFileNames(file.name,path)
+
     console.log(filenames)
 
     
