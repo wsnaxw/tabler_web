@@ -23,7 +23,7 @@
     <script src="../../static/js/jquery.min.js"></script>
     <script src="../../static/js/base.js?1"></script>
     <script src="../../static/js/citycode.js" ></script>
-
+    <script src="../../static/js/fslightbox.js" ></script>
     <link type="text/css" rel="stylesheet" href="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/skin/jedate.css">
     <script type="text/javascript" src="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/src/jedate.js"></script>
     <script type="text/javascript" src="https://gosspublic.alicdn.com/aliyun-oss-sdk-6.18.0.min.js"></script>
@@ -344,7 +344,7 @@
                               <!-- <a href="#" class="btn btn-ghost-success"  id="isvip">
                                 申请认证
                               </a> -->
-                              <a href="#" class="btn btn-ghost-info"  data-bs-toggle='modal' data-bs-target='#modal-small'>
+                              <a href="#" class="btn btn-ghost-info"  data-bs-toggle='modal' data-bs-target='#modal-edit' onclick="initEdit()">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path><path d="M16 5l3 3"></path></svg>
                               </a>
                             </div>
@@ -352,28 +352,44 @@
                           <div class="card-body">
 
                             <dl class="row">
-                              <dt class="col-5">归属公司:</dt>
-                              <dd class="col-7" id="gsgs">无</dd>
-                              <dt class="col-5">推荐人:</dt>
-                              <dd class="col-7" id="tjr">无</dd>
-                              <dt class="col-5">客户来源:</dt>
-                              <dd class="col-7"><span class="flag flag-country-pl" id="khly">无</span>
+                              <dt class="col-3">归属公司:</dt>
+                              <dd class="col-3" id="gsgs">无</dd>
+                              <dt class="col-3">推荐人:</dt>
+                              <dd class="col-3" id="tjr">无</dd>
+
+
+                              <dt class="col-3">客户来源:</dt>
+                              <dd class="col-3"><span class="flag flag-country-pl" id="khly">无</span>
                                 </dd>
-                              <dt class="col-5">服务顾问:</dt>
-                              <dd class="col-7" id="fwgw">无</dd>
-                              <dt class="col-5">签约状态:</dt>
-                              <dd class="col-7" id="signstate">无</dd>
-                              <dt class="col-5">公司网站:</dt>
-                              <dd class="col-7" id="website">无</dd>
-                              <dt class="col-5">创建时间:</dt>
-                              <dd class="col-7" id="cjsj">无</dd>
-                              <dt class="col-5">执行团队:</dt>
-                              <dd class="col-7">
+                              <dt class="col-3">服务顾问:</dt>
+                              <dd class="col-3" id="fwgw">无</dd>
+                     
+                              <dt class="col-3">所属行业:</dt>
+                              <dd class="col-9" id="syhy">无</dd>
+                        
+
+                              <dt class="col-3">公司规模:</dt>
+                              <dd class="col-3" id="gsgm">无</dd>
+                              <dt class="col-3">公司性质:</dt>
+                              <dd class="col-3" id="gsxz">无</dd>
+                              
+                              <dt class="col-3">公司地址:</dt>
+                              <dd class="col-3" id="raddress">无</dd>
+                              <dt class="col-3">公司网站:</dt>
+                              <dd class="col-3" id="website">无</dd>
+
+
+                              <dt class="col-3">创建时间:</dt>
+                              <dd class="col-9" id="cjsj">无</dd>
+                              <dt class="col-3">执行团队:</dt>
+                              <dd class="col-9">
                                 <div id="teamlist">
                                   
                                 </div>
                             
                               </dd>  
+                              <dt class="col-3">签约状态:</dt>
+                              <dd class="col-9" id="signstate">无</dd>
                             </dl>
 
                            
@@ -388,7 +404,7 @@
                           <div class="card-header">
                             <h3 class="card-title">沟通记录</h3>
                             <div class="card-actions">
-                              <a href="#" class="btn btn-ghost-primary">
+                              <a href="#" class="btn btn-ghost-primary"   data-bs-toggle='modal' data-bs-target='#modal-newc' onclick="initEdit()">
                                 新增沟通记录
                               </a>
                               <a class="btn btn-info" data-bs-toggle="offcanvas" href="#offcanvasEnd" role="button" aria-controls="offcanvasEnd" onclick="cclfq()">
@@ -859,48 +875,13 @@
                             						
                             <tr>
                               <th>文件名</th>
-                              <th>上传者</th>
                               <th>操作</th>
                             </tr>
                           </thead>
                           <tbody id="filedata">
                             <tr>
-                              <td>
-  
-                                公司资质.jpg
-                                
-                                
-                              </td>
-                              <td>
-                                张三
-                              </td>
-                              
-                              <td >
-                                <a class="btn btn-info" href="#">
-                                  查看
-                                </a>
-                           
-                              </td>
+                              <td colspan="2" style="font-weight: bold;text-align: center;">暂无数据 </td>
                             </tr>
-                            <tr>
-                              <td>
-  
-                                公司资质.jpg
-                                
-                                
-                              </td>
-                              <td>
-                                张三
-                              </td>
-                              
-                              <td >
-                                <a class="btn btn-info" href="#">
-                                  查看
-                                </a>
-                           
-                              </td>
-                            </tr>
-                            
                       
                           </tbody>
                         </table>
@@ -931,34 +912,11 @@
                               <th>转出人员</th>
                               <th>接收人员</th>
                               <th>转移时间</th>
+                              <th>备注</th>
                             </tr>
                           </thead>
                           <tbody id="movedata">
-                            <tr>
-                              <td>张三</td>
-                              <td>
-  
-                                李四
-                                
-                              </td>
-                              <td>
-                                2024-04-51 15:11:15
-                              </td>
-                             
-                            </tr>
-                            <tr>
-                              <td>张三</td>
-                              <td>
-  
-                                李四
-                                
-                              </td>
-                              <td>
-                                2024-04-51 15:11:15
-                              </td>
-                             
-                            </tr>
-                            
+                           
                       
                           </tbody>
                         </table>
@@ -1237,6 +1195,201 @@
 
 
 
+        <div class="modal modal-blur fade" id="modal-edit" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">修改客户信息</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="card-body">
+
+
+                  <div class="row mb-3">
+                    <div class="col-lg-6">
+                      <label class="form-label"  style="font-weight: bold;">所属行业</label>
+
+                      <div class="input-group input-group-flat">
+                        <select class="form-select" id="industryType" name="industryType">
+                          <option selected value="不限">不限</option>
+                          <option value="互联网 / 游戏 / 软件">互联网 / 游戏 / 软件</option>
+                          <option value="电子 / 通信 / 硬件">电子 / 通信 / 硬件</option>
+                          <option value="房地产 / 建筑 / 物业 ">房地产 / 建筑 / 物业 </option>
+                          <option value="经济">经济</option>
+                          <option value="消费品">消费品</option>
+                          <option value="汽车 / 机械 / 制造">汽车 / 机械 / 制造</option>
+                          <option value="广告 / 传媒 / 教育 / 文化">广告 / 传媒 / 教育 / 文化</option>
+                          <option value="交通 / 贸易 / 物流">交通 / 贸易 / 物流</option>
+                          <option value="制药 / 医用器械">制药 / 医用器械</option>
+                          <option value="能源 / 化工 / 环保">能源 / 化工 / 环保</option>
+                          <option value="政府 / 农林牧渔">政府 / 农林牧渔</option>
+                        </select>
+
+                      </div>  
+                    </div>
+                    <div class="col-lg-6">
+                      <label class="form-label" style="font-weight: bold;">公司性质</label>
+                      <div class="input-group input-group-flat">
+                        <select class="form-select" id="customerNature" name="customerNature">
+                        
+                          <option value="0">国企</option>
+                          <option value="1" selected>民营企业</option>
+                          <option value="2">合资</option>
+                          <option value="3">外资（欧美）</option>
+                          <option value="4">外资（非欧美）</option>
+                          <option value="5">外企代表处</option>
+                          <option value="6">政府机关</option>
+                          <option value="6">事业单位</option>
+                          <option value="6">非营利组织</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-lg-6">
+                      <label class="form-label" style="font-weight: bold;">公司规模</label>
+                      <div class="input-group input-group-flat">
+                        <select class="form-select" id="customerSize" name="customerSize">
+                          <option selected value="0">0-15人</option>
+                          <option value="1">15-50人</option>
+                          <option value="2">50-100人</option>
+                          <option value="3">100-500人</option>
+                          <option value="4">500-1000人</option>
+                          <option value="5">1000-10000人</option>
+                          <option value="6">10000人以上</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                      <label class="form-label" style="font-weight: bold;">对外名称</label>
+                      <div class="input-group input-group-flat">
+                        <input type="text" class="form-control" name="outName">
+                      </div>
+                    </div>
+
+
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-lg-6">
+                      <label class="form-label" style="font-weight: bold;">公司地址</label>
+                      <div class="input-group input-group-flat">
+                        <input type="text" class="form-control" name="registeredAddress">
+                      </div>
+                    </div>
+
+                    
+                    <div class="col-lg-6">
+                      <label class="form-label" style="font-weight: bold;">公司网站</label>
+                      <div class="input-group input-group-flat">
+                        <input type="text" class="form-control" name="webSite">
+                      </div>
+                    </div>
+
+
+
+
+
+
+
+                  </div>
+
+
+                  
+
+                 
+                 
+
+                </div>
+                
+
+              </div>  
+              <div class="modal-footer">
+                <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                  取消
+                </a>
+                <a href="#" class="btn btn-primary" onclick="editCustomer()" >
+                  确认修改                 
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="modal modal-blur fade" id="modal-newc" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">新增沟通记录</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="card-body">
+
+                  <!-- 0 其他 1  2  3  -->
+                  <div class="row mb-3">
+                    <div class="col-lg-12">
+                      <div class="mb-3">
+                        <div class="form-label">类型</div>
+                        <div>
+                          <label class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="state" value="0" checked="">
+                            <span class="form-check-label">其他</span>
+                          </label>
+                          <label class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="state" value="1" >
+                            <span class="form-check-label">面试沟通</span>
+                          </label>
+                          <label class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="state" value="2">
+                            <span class="form-check-label">合同沟通</span>
+                          </label>
+                          <label class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="state" value="3">
+                            <span class="form-check-label">请款沟通</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                   
+                    
+                    <div class="col-lg-12 mb-3">
+                      <label class="form-label" style="font-weight: bold;">沟通内容</label>
+                      <textarea rows="5" class="form-control" placeholder="Here can be your description" name="content"></textarea>
+                    </div>
+
+
+
+
+
+
+
+                  </div>
+
+
+                  
+
+                 
+                 
+
+                </div>
+                
+
+              </div>  
+              <div class="modal-footer">
+                <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                  取消
+                </a>
+                <a href="#" class="btn btn-primary" onclick="newcc()" >
+                  新增                 
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
 
 
 
@@ -1245,13 +1398,20 @@
 
 
 
+        <div class="modal modal-blur fade" id="modal-pic" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+                <img id="picshow" alt="">
 
-
-
-
-
-
-
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+                
+              </div>
+            </div>
+          </div>
+        </div>
 
 
 

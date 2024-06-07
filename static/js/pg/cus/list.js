@@ -140,7 +140,6 @@ function getPage(pageNo){
 
                     var jobBeansNum = o.jobBeansNum+'';
 
-                    var customerTeamBeans=o.customerTeamBeans;
                     var comName=o.comName+'';
                     var state=o.state+'';
                     var state1= '';
@@ -165,7 +164,12 @@ function getPage(pageNo){
 
                     var numbers = '<div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">'+customerCommunicateBeansNum+'</div>'
 
-                    if (customerTeamBeans===undefined || customerTeamBeans==='' ||customerTeamBeans==null)customerTeamBeans='无';
+                    var cteams= '无';
+                    if (o.customerTeamBeans!=null&& o.customerTeamBeans.length>0){
+                      o.customerTeamBeans.forEach(element => {
+                        cteams += element.userName+' '
+                      });
+                    };
                     if (jobBeansNum==='0' )jobBeansNum='不限';
                     // if (com===undefined || com==='')com='暂无数据';
 
@@ -176,7 +180,7 @@ function getPage(pageNo){
                         // +certification1+"</td><td >"
                         +jobBeansNum+"</td><td >"
                         
-                        +customerTeamBeans+"</td><td>"
+                        +cteams+"</td><td>"
                         +comName+"</td>" +
                         "<td>"+state1+"</td>" +
                         "<td>"+updateTime+"</td>" +
@@ -277,6 +281,8 @@ function getPage(pageNo){
 
                 $('#pageSelect').html('');
                 $('#pageSelect').html(str);
+                document.getElementById('pageSelect').scrollIntoView({ behavior: 'smooth' });
+
 
             }
 

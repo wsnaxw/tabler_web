@@ -138,6 +138,7 @@ $(function(){
 
 let csid ;
 
+let editInfo = {}
 
 let filenames = []
 
@@ -159,7 +160,7 @@ function removeFileNames(key) {
 
 
 
-
+var lightbox = new FsLightbox();
 
 
 
@@ -290,7 +291,7 @@ function rxxx(state){
         });
 
 
-
+        refreshFsLightbox();
 
 
 
@@ -310,6 +311,74 @@ function filedivshow(){
 
     $('#kzxxdiv').hide()
     $('#filediv').show()
+
+
+
+    var data={'customerId':csid};
+
+    const options = {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'token':localStorage.getItem('token')
+        },
+        body: JSON.stringify(data),
+    };
+
+        var url = baseUri+'/customer/contractsQuery';
+    fetch(url,options)
+        .then(response => response.json())
+        .then(json => {
+
+           
+            if(json.data.list!=null&&json.data.list.length>0){
+
+                let str =''
+                json.data.list.forEach(o=>{
+
+                    const encodedComponent = o.url.replace(/ /g, '%20')
+                    const fullEncodedUri = "http://faithful.oss-cn-shanghai.aliyuncs.com" + encodedComponent;
+
+                    str +=
+
+                    `<tr>
+                    <td>${toStr(o.name)}</td>
+                    
+               
+                    <td >
+                    
+                      <a   class='btn btn-info' onclick=openimg("${fullEncodedUri}") >
+                      查看
+                    </a>
+                 
+                    </td>
+                  </tr>`
+
+                })
+
+                $("#filedata").html(str)                
+            }else{
+                $("#filedata").html(` <tr>
+                <td colspan="2" style="font-weight: bold;text-align: center;">暂无数据 </td>
+              </tr>`) 
+            }
+
+
+
+        }).catch((error)=>{
+            console.log(error)
+          
+        });
+
+
+
+
+
+
+
+
+
+
 
 }
 
@@ -445,6 +514,63 @@ function move(){
     $('#jobdjv').hide()
 
     $('#movediv').show()
+
+
+    
+
+    var data={'customerId':csid};
+
+    const options = {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'token':localStorage.getItem('token')
+        },
+        body: JSON.stringify(data),
+    };
+
+        var url = baseUri+'/customer/wolfq';
+    fetch(url,options)
+        .then(response => response.json())
+        .then(json => {
+
+           
+            if(json.data.list!=null&&json.data.list.length>0){
+
+                let str =''
+                json.data.list.forEach(o=>{
+
+              
+                    str +=
+
+                    `<tr>
+                    <td>${toStr(o.leaderName)}</td>
+                    <td>${toStr(o.userName)}</td>
+                    <td>${toStr(o.createTime)}</td>
+                    <td>${toStr(o.remark)}</td>
+                    
+               
+              
+                  </tr>`
+
+                })
+
+                $("#movedata").html(str)                
+            }else{
+                $("#movedata").html(` <tr>
+                <td colspan="4" style="font-weight: bold;text-align: center;">暂无数据 </td>
+              </tr>`) 
+            }
+
+
+
+        }).catch((error)=>{
+            console.log(error)
+          
+        });
+
+
+
 }
 
 
@@ -504,6 +630,17 @@ function baseinfo(customerId){
                     sourceType1='公共池' ;
             }
 
+
+
+            editInfo['industryType']=data.industryType
+            editInfo['customerSize']=data.customerSize
+
+            editInfo['customerNature']=data.customerNature
+            editInfo['outName']=data.outName
+
+            editInfo['registeredAddress']=data.registeredAddress
+            editInfo['webSite']=data.webSite
+
             
             $('#basecname').html(data.name);
             $('#bmxx').html(data.customerId);
@@ -513,13 +650,18 @@ function baseinfo(customerId){
             $('#fwgw').html(data.userName);
             $('#cjsj').html(data.createTime);
             $('#website').html(data.webSite!=""?data.webSite:'无');
+            $('#syhy').html(data.industryType);
+            // $('#gslx').html(data.companyType);
+            $('#raddress').html(data.registeredAddress);
+            $('#gsxz').html(data.comNature);
+            $('#gsgm').html(data.comSize);
+
             if(data.vip==1){
                 $('#isvip').html('已认证');
                 $('#isvip').click(alert('已认证'))
             }
 
             let state=data.state
-            state=1
 
             if(state==0){
 
@@ -527,15 +669,15 @@ function baseinfo(customerId){
 
 
             }else if(state==1){
-                $('#signstate').html(`签约运作 (${data.contractDateStart}~${data.contractDateEnd}) <a class="btn btn-outline-secondary" onclick="signCustomer()">暂停运作<a>`);
+                $('#signstate').html(`签约运作 (${data.contractDateStart}~${data.contractDateEnd}) <a class="btn btn-outline-secondary" onclick="changeCState(2)">暂停运作<a>`);
 
 
             }else if(state==2){
-                $('#signstate').html(`暂停运作 <a class="btn btn-outline-success" onclick="signCustomer()">恢复运作<a><a class="btn btn-outline-danger" onclick="signCustomer()">终止运作<a>`);
+                $('#signstate').html(`暂停运作 <a class="btn btn-outline-success" onclick="changeCState(1)">恢复运作<a><a class="btn btn-outline-danger" onclick="changeCState(3)">终止运作<a>`);
 
 
             }else if(state==3){
-                $('#signstate').html(`签约终止 <a class="btn btn-outline-primary " onclick="signCustomer()">转入公共池<a>`);
+                $('#signstate').html(`签约终止 <a class="btn btn-outline-primary " onclick="abandonCus()">转入公共池<a>`);
 
 
             }
@@ -1226,87 +1368,6 @@ function check2(){
 
 
 
-function upload1(){
-    let stsTokendata="" ;
-    let picnumber = "";
-
-    
-    getData({},'/login/getToken').then(data => {
-        // 这里处理从getData返回的数据
-        try {
-            localStorage.setItem("picnumber",data.token)
-        } catch (error) {
-        }
-
-    }).catch(error => {
-        // 处理错误
-        console.error('获取数据失败:', error);
-    });
-
-
-    getData({},'/admin/getALLSTSToken').then(data => {
-        // 这里处理从getData返回的数据
-        try {
-
-          
-           
-
-
-            localStorage.setItem("stsTokendata",data)
-
-           
-        } catch (error) {
-        }
-
-    }).catch(error => {
-        // 处理错误
-        console.error('获取数据失败:', error);
-    });
-
-    stsTokendata=JSON.parse(localStorage.getItem("stsTokendata")).credentials
-    picnumber = localStorage.getItem("picnumber")
-    console.log(stsTokendata)
-    
-
-    const client = new OSS({
-        // yourRegion填写Bucket所在地域。以华东1（杭州）为例，yourRegion填写为oss-cn-hangzhou。
-        region: "oss-cn-shanghai",
-        // 从STS服务获取的临时访问密钥（AccessKey ID和AccessKey Secret）。
-        accessKeyId: stsTokendata.accessKeyId,
-        accessKeySecret: stsTokendata.accessKeySecret,
-        // 从STS服务获取的安全令牌（SecurityToken）。
-        stsToken: stsTokendata.securityToken,
-        // 填写Bucket名称。
-        bucket: "faithful",
-      });
-
-      // 从输入框获取file对象，例如<input type="file" id="file" />。
-      // 创建并填写Blob数据。
-      //const data = new Blob(['Hello OSS']);
-      // 创建并填写OSS Buffer内容。
-      //const data = new OSS.Buffer(['Hello OSS']);
-
-      const upload = document.getElementById("upload");
-      var files = upload.files; // 获取FileList对象
-
-      if (files.length > 0) {
-          for (var i = 0; i < files.length; i++) {
-              var file = files[i]; // 获取单个File对象
-              console.log(file.name); // 打印文件名
-              // 在这里你可以对file对象进行其他操作，比如读取文件内容等
-
-
-              var path = '/fileserver/'+csid+"/"+picnumber+""/+file.name;
-
-              addFileNames(file.name,path)
-
-              putObject(path,file);
-          }
-      } else {
-          console.log('没有选择文件');
-      }
-      
-}
 
 async function putObject(path,data,client,myDropzone) {
     try {
@@ -1410,4 +1471,319 @@ function upload(file,myDropzone){
     // myDropzone.emit("thumbnail", file, 'http://faithful.oss-cn-shanghai.aliyuncs.com'+path)
     putObject(path,file,client,myDropzone);
       
+}
+
+function changeCState(state){
+
+
+    
+    var isConfirmed = confirm("是否变更状态？");
+
+    if (isConfirmed) {
+        const options = {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            'token':localStorage.getItem('token')
+            },
+            body: JSON.stringify({ 'state': state,'customerId':csid }),
+            };
+    
+            var url = baseUri2+'/customer/changeCustomerState';
+        fetch(url,options)
+            .then(response => response.json())
+            .then(json => {
+                // console.log(json)
+                if(json.code==0){
+                    
+            baseinfo(csid)
+            showMessage(0,'变更成功')
+                }
+    
+    
+    
+            }).catch((error)=>{
+                callback();
+            });
+
+
+
+
+
+    } else {
+        // 用户点击了“取消”按钮或关闭了对话框
+        console.log("删除操作被取消");
+    }
+
+    
+
+}
+
+
+function abandonCus(){
+
+    
+    var isConfirmed = confirm("是否将客户放入公共池？");
+
+    if (isConfirmed) {
+     
+        const options = {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            'token':localStorage.getItem('token')
+            },
+            body: JSON.stringify({ 'customerId':csid }),
+            };
+
+            var url = baseUri2+'/customer/abandonCustomer';
+        fetch(url,options)
+            .then(response => response.json())
+            .then(json => {
+                // console.log(json)
+                if(json.code==0){
+                    
+            showMessage(0,'转移成功')
+            location.reload();
+                }else{
+                    showMessage(1,json.message)
+                }
+            
+
+
+            }).catch((error)=>{
+                callback();
+            });
+
+
+
+
+    } else {
+        // 用户点击了“取消”按钮或关闭了对话框
+        console.log("删除操作被取消");
+    }
+
+}
+
+
+function initEdit(){
+
+
+
+    $('input[name="outName"]').val(editInfo.outName)
+
+
+    $('input[name="registeredAddress"]').val(editInfo.registeredAddress)
+
+    $('input[name="webSite"]').val(editInfo.webSite)
+
+
+
+    // 获取select元素
+    const selectElement1 = document.getElementById('customerSize');
+    // 遍历select元素下的所有option元素
+    for (let i = 0; i < selectElement1.options.length; i++) {
+        const option = selectElement1.options[i]; 
+        // 检查option的value是否和后端返回的customerType匹配
+        if (option.value === editInfo.customerSize.toString()) {
+            // 如果匹配，设置该option为selected
+            option.selected = true;
+            break; // 找到匹配项后，跳出循环
+        }
+    }
+
+
+    // 获取select元素
+    const selectElement2 = document.getElementById('customerNature');
+    // 遍历select元素下的所有option元素
+    for (let i = 0; i < selectElement2.options.length; i++) {
+        const option = selectElement2.options[i]; 
+        // 检查option的value是否和后端返回的customerType匹配
+        if (option.value === editInfo.customerNature.toString()) {
+            // 如果匹配，设置该option为selected
+            option.selected = true;
+            break; // 找到匹配项后，跳出循环
+        }
+    }
+
+
+        // 获取select元素
+        const selectElement3 = document.getElementById('industryType');
+        // 遍历select元素下的所有option元素
+        for (let i = 0; i < selectElement3.options.length; i++) {
+            const option = selectElement3.options[i]; 
+            // 检查option的value是否和后端返回的customerType匹配
+            if (option.value === editInfo.industryType.toString()) {
+                // 如果匹配，设置该option为selected
+                option.selected = true;
+                break; // 找到匹配项后，跳出循环
+            }
+        }
+    
+    
+
+
+
+
+}
+
+
+
+function editCustomer(){
+
+    // 获取 modal-edit 容器
+    var modalEditContainer = document.getElementById('modal-edit');
+
+    // 创建一个对象来存储表单值
+    var formValues = {};
+
+    var check=true;
+    // 遍历 modal-edit 容器内的所有 select 和 input 元素
+    var inputs = modalEditContainer.querySelectorAll('select, input');
+    inputs.forEach(function(input) {
+        // 获取元素的id作为键
+        var inputId = input.name;
+        if (inputId) { // 确保元素有id
+            // 获取元素的值
+            var value = input.value.trim(); // 去除值两侧的空白字符
+
+            // 判断值是否为空
+            if (value === '') {
+                check= false;
+            } else {
+            // 如果值不为空，则添加到formValues对象中
+            formValues[inputId] = value;
+            }
+        }
+    });
+
+
+
+    if(!check){
+        showMessage(1,'信息不能为空')
+    }else{
+
+        
+
+        if(objectsAreEqual(editInfo,formValues)){
+
+
+            $('#modal-edit').modal('hide');
+
+            return;
+        }
+
+
+
+    formValues['customerId']=csid;
+
+        const options = {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            'token':localStorage.getItem('token')
+            },
+            body: JSON.stringify(formValues),
+            };
+
+            var url = baseUri+'/customer/updateCustomer';
+        fetch(url,options)
+            .then(response => response.json())
+            .then(json => {
+    
+                showMessage(json.code)
+                baseinfo(csid)
+            }).catch((error)=>{
+                
+            });
+
+        $('#modal-edit').modal('hide')
+
+
+    }
+
+
+}
+
+
+function objectsAreEqual(obj1, obj2) {
+    // 如果两个对象不是同种类型，则它们不相等
+    if (typeof obj1 !== typeof obj2) {
+        return false;
+    }
+
+    // 如果它们都是原始类型，直接比较
+    if (typeof obj1 !== 'object' || obj1 === null || obj2 === null) {
+        return obj1 === obj2;
+    }
+
+    // 获取对象的所有键
+    const keys1 = Object.keys(obj1);
+    const keys2 = Object.keys(obj2);
+
+    // 如果键的数量不同，则对象不相等
+    if (keys1.length !== keys2.length) {
+        return false;
+    }
+
+    // 检查每个键的值是否相等
+    for (let key of keys1) {
+        if (!objectsAreEqual(obj1[key], obj2[key])) {
+            return false;
+        }
+    }
+
+    // 所有键的值都相等，对象相等
+    return true;
+}
+
+
+
+function openimg(url){
+
+
+    $('#picshow').attr('src',url)
+
+    $('#modal-pic').modal('show')
+
+
+}
+
+
+function newcc(){
+
+    var state = $('input[name="state"]:checked').val();
+
+    var content = $('textarea[name="content"]').val()
+    console.log(state,content)
+
+    var data={'customerId':csid,'state':toStr(state),'content':content,'customerName':'默认'};
+
+    const options = {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'token':localStorage.getItem('token')
+        },
+        body: JSON.stringify(data),
+    };
+
+        var url = baseUri+'/customer/addcc';
+    fetch(url,options)
+        .then(response => response.json())
+        .then(json => {
+
+            showMessage(json.code)
+            baseinfo(csid)
+
+
+            $('#modal-newc').modal('hide')
+
+
+        }).catch((error)=>{
+            console.log(error)
+          
+        });
+
+
 }

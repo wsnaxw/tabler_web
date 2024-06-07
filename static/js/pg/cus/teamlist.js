@@ -50,7 +50,7 @@ function getPage(pageNo){
         },
         dataType:'json',
         type:'post',
-        url:baseUri+'/customer/myCustomerList',
+        url:baseUri+'/customer/hzCustomerList',
         data:JSON.stringify(queryData),
         success:function(obj){
 
@@ -126,18 +126,6 @@ function getPage(pageNo){
 
 
 
-                    // var certification = o.certification+'';
-
-                    // var certification1 = '';
-
-                    // switch (certification) {
-                    //     case "1":
-                    //         certification1='<div class="avatar avatar-sm bg-red-lt" >是</div>';
-                    //         break;
-                    //     default:
-                    //         certification1='<div class="avatar avatar-sm bg-red-lt" >否</div>';
-                    // }
-
                     var jobBeansNum = o.jobBeansNum+'';
 
                     var comName=o.comName+'';
@@ -171,7 +159,6 @@ function getPage(pageNo){
                       });
                     };
                     if (jobBeansNum==='0' )jobBeansNum='不限';
-                    // if (com===undefined || com==='')com='暂无数据';
 
 
                     str+="<tr><td>"
@@ -185,7 +172,7 @@ function getPage(pageNo){
                         "<td>"+state1+"</td>" +
                         "<td>"+updateTime+"</td>" +
                         "<td>"+numbers+"</td>" +
-                        "<td><a herf='#' onclick='checkDetail("+o.customerId+")' class ='btn'>查看</a><a herf='#' class='btn' onclick='move("+o.customerId+")'>转移</a></td>" +
+                        "<td><a herf='#' onclick='checkDetail("+o.customerId+")' class ='btn'>查看</a></td>" +
                         "</tr>";
                 }
                 $('#data').html(str);

@@ -50,7 +50,7 @@ function getPage(pageNo){
         },
         dataType:'json',
         type:'post',
-        url:baseUri+'/customer/myCustomerList',
+        url:baseUri+'/customer/ggCustomerList',
         data:JSON.stringify(queryData),
         success:function(obj){
 
@@ -140,6 +140,7 @@ function getPage(pageNo){
 
                     var jobBeansNum = o.jobBeansNum+'';
 
+                  
                     var comName=o.comName+'';
                     var state=o.state+'';
                     var state1= '';
@@ -163,7 +164,6 @@ function getPage(pageNo){
                     var customerCommunicateBeansNum= o.customerCommunicateBeansNum+''
 
                     var numbers = '<div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">'+customerCommunicateBeansNum+'</div>'
-
                     var cteams= '无';
                     if (o.customerTeamBeans!=null&& o.customerTeamBeans.length>0){
                       o.customerTeamBeans.forEach(element => {
@@ -185,7 +185,7 @@ function getPage(pageNo){
                         "<td>"+state1+"</td>" +
                         "<td>"+updateTime+"</td>" +
                         "<td>"+numbers+"</td>" +
-                        "<td><a herf='#' onclick='checkDetail("+o.customerId+")' class ='btn'>查看</a><a herf='#' class='btn' onclick='move("+o.customerId+")'>转移</a></td>" +
+                        "<td><a herf='#' onclick='checkDetail("+o.customerId+")' class ='btn'>查看</a><a herf='#' class='btn' onclick='move("+o.customerId+")'>转为我的</a></td>" +
                         "</tr>";
                 }
                 $('#data').html(str);

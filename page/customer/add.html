@@ -1,0 +1,1006 @@
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta19
+* @link https://tabler.io
+* Copyright 2018-2023 The Tabler Authors
+* Copyright 2018-2023 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>新增客户</title>
+    <!-- CSS files -->
+    <script src="../../static/js/tabler.min.js"></script>
+    <link rel="stylesheet" href="../../static/css/tabler.min.css">
+    <link rel="stylesheet" href="../../static/css/base.css">
+    <link rel="icon" href="../../static/img/favicon.ico" type="image/x-icon" />
+    <script src="../../static/js/jquery.min.js"></script>
+    <script src="../../static/js/base.js?1"></script>
+    <script src="../../static/js/watermark.js"></script>
+    <script src="../../static/js/pg/cus/add.js"></script>
+    <script>
+      function dark(){
+        let body = document.getElementById('webBody')
+        body.setAttribute("data-bs-theme","dark")
+      }
+
+      function light(){
+        let body = document.getElementById('webBody')
+        body.setAttribute("data-bs-theme","")
+      }
+
+    </script>
+
+  </head>
+  <body  id="webBody" class="layout-fluid">
+    <div class="page">
+
+
+      <!--      &lt;!&ndash; Sidebar &ndash;&gt;-->
+      
+      
+      <aside class="navbar navbar-vertical navbar-expand-lg"    >
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <h1 class="navbar-brand navbar-brand-autodark">
+            <a href="#" >
+              <img src="http://admin.fsfhr.com/banner.svg" width="110" height="32" alt="faithful" class="navbar-brand-image">
+            </a>
+          </h1>
+
+          <div class="collapse navbar-collapse"   id="sidebar-menu">
+            <ul class="navbar-nav pt-lg-3" id="menu">
+
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- navbar navbar-expand-md d-print-none d-none d-lg-flex -->
+      <!-- navbar navbar-expand-md d-print-none -->
+      <header class="navbar navbar-expand-md d-print-none d-none d-lg-flex fixed-top">
+        <div class="container-xl">
+
+
+
+          <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal p-0 pe-md-6">
+          </h1>
+          <div class="navbar-nav flex-row order-md-last">
+            <div class="nav-item d-none d-md-flex me-3">
+              <div class="btn-list">
+                <div class="input-icon">
+                    <span class="input-icon-addon">
+                      <!-- Download SVG icon from http://tabler-icons.io/i/search -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path d="M21 21l-6 -6"></path></svg>
+                    </span>
+                  <input type="text" value="" class="form-control" id="indexsearch" placeholder="客户名/人选名/项目名" aria-label="Search in website" data-listener-added_8ff64168="true">
+                </div>
+                <a onclick="indexSearch()" class="btn btn-blue" target="_blank" rel="noreferrer">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/brand-github -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"></path></svg>
+                  查询
+                </a>
+              </div>
+            </div>
+            <div class="d-none d-md-flex">
+              <a   onclick="dark()" class="nav-link px-0 hide-theme-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="Enable dark mode" data-bs-original-title="Enable dark mode">
+                <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path></svg>
+              </a>
+              <a onclick="light()" class="nav-link px-0 hide-theme-light" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="Enable light mode" data-bs-original-title="Enable light mode">
+                <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"></path></svg>
+              </a>
+              <div class="nav-item dropdown d-none d-md-flex me-3">
+                <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1" aria-label="Show notifications" onclick="usermessage()" data-bs-auto-close="outside">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/bell -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path><path d="M9 17v1a3 3 0 0 0 6 0v-1"></path></svg>
+                  <span class="badge bg-red"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
+                  <div class="card">
+                    <div class="card-header">
+                      <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                          <a href="#" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab" onclick="usermessage()">信箱</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <a href="#" class="nav-link" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab" onclick="usertrip()">行程</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="list-group list-group-flush list-group-hoverable">
+                      <div id="messagediv">
+                        <div class="list-group-item divide-y"  id="msgstr"  >
+                          <h3></h3>
+                        </div>
+                      </div>                      
+                      <div id="tripdiv">
+                        <div class="list-group-item divide-y" id="tripstr">
+                          <h3></h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="nav-item dropdown">
+              <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
+                <div class="d-none d-xl-block ps-2">
+                  <div id="userName">无</div>
+                  <div class="mt-1 small text-muted" id="userLevel">无</div>
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <a href="#" class="dropdown-item">个人中心</a>
+                <a href="#" class="dropdown-item">修改密码</a>
+                <div class="dropdown-divider"></div>
+                <a id="logOut" class="dropdown-item">退出</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+
+
+      <div class="page-wrapper">
+
+
+
+        <!-- Page header -->
+        <div class="page-header d-print-none">
+        </div>
+
+
+
+
+        <!-- Page body -->
+        <div class="page-body container-xl">
+
+
+
+
+
+          <div class="container-xl" >
+
+
+            <div class="row row-deck row-cards">
+
+
+
+
+              <div class="col-lg-12">
+                <div class="row row-cards">
+                  <div class="col-6">
+                    <form class="card">
+                      <div class="card-header">
+                        <div class="col">
+                          
+                        <h3 class="card-title">基本信息</h3>
+                        </div>
+
+                        <div class="col-auto ms-auto d-print-none">
+                          <div class="d-flex">
+                            <div class="me-3">
+                              <a href="#" class="btn btn-info">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                                清空
+                              </a>
+                            </div>
+                            <a href="#" class="btn btn-success">
+                              <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg>
+                              新增
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-body">
+                        
+                        <div class="row row-cards">
+                          <div class="col-md-10">
+                            <div class="mb-3 row">
+                              <label class="col-3 form-label required" style="font-weight: bold;">客户名称</label>
+                              <div class="col">
+                                <input type="text" class="form-control " placeholder="客户名称" name="customerName" >
+                                <div class="invalid-feedback">名称不正确或不能为空！</div>
+                              </div>
+                              <small class="form-hint">客户名称必须以“有限公司、与限责任公司”结尾，如某集团有限公司、某有限责任公司</small>
+                            </div>
+                          </div>
+                          <div class="col-md-10">
+                            <div class="mb-3 row">
+                              <label class="col-3 form-label required" style="font-weight: bold;">对外展示名称</label>
+                              <div class="col">
+                                <input type="text" class="form-control" placeholder="对外展示名称" name="outName" >
+                                <div class="invalid-feedback">不能为空！</div>
+                              </div>
+                              
+                              <small class="form-hint">例：某能源发展公司、中某集团</small>
+                            </div>
+                          </div>
+               
+                          <div class="col-md-10">
+                            <div class="mb-3 row">
+                              <label class="form-label col-3 " style="font-weight: bold;">公司简介</label>
+                              <div class="col">
+                                <textarea rows="3" class="form-control" placeholder="company description" name="content"></textarea>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="mb-3 row">
+                              <label class="col-3 form-label required"  style="font-weight: bold;">所属行业</label>
+
+                              <div class="input-group input-group-flat col">
+                                <select class="form-select" id="industryType" name="industryType">
+                                  <option selected value="不限">不限</option>
+                                  <option value="互联网 / 游戏 / 软件">互联网 / 游戏 / 软件</option>
+                                  <option value="电子 / 通信 / 硬件">电子 / 通信 / 硬件</option>
+                                  <option value="房地产 / 建筑 / 物业 ">房地产 / 建筑 / 物业 </option>
+                                  <option value="经济">经济</option>
+                                  <option value="消费品">消费品</option>
+                                  <option value="汽车 / 机械 / 制造">汽车 / 机械 / 制造</option>
+                                  <option value="广告 / 传媒 / 教育 / 文化">广告 / 传媒 / 教育 / 文化</option>
+                                  <option value="交通 / 贸易 / 物流">交通 / 贸易 / 物流</option>
+                                  <option value="制药 / 医用器械">制药 / 医用器械</option>
+                                  <option value="能源 / 化工 / 环保">能源 / 化工 / 环保</option>
+                                  <option value="政府 / 农林牧渔">政府 / 农林牧渔</option>
+                                </select>
+
+                              </div>  
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="mb-3 row">
+                              <label class="form-label required col-3" style="font-weight: bold;">公司性质</label>
+                              <div class="input-group input-group-flat col">
+                                <select class="form-select" id="customerNature" name="customerNature">
+                                
+                                  <option value="0">国企</option>
+                                  <option value="1" selected>民营企业</option>
+                                  <option value="2">合资</option>
+                                  <option value="3">外资（欧美）</option>
+                                  <option value="4">外资（非欧美）</option>
+                                  <option value="5">外企代表处</option>
+                                  <option value="6">政府机关</option>
+                                  <option value="6">事业单位</option>
+                                  <option value="6">非营利组织</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="mb-3 row">
+                              <label class="form-label col-3" style="font-weight: bold;">公司规模</label>
+                              <div class="input-group input-group-flat col">
+                                <select class="form-select" id="customerSize" name="customerSize">
+                                  <option selected value="0">0-15人</option>
+                                  <option value="1">15-50人</option>
+                                  <option value="2">50-100人</option>
+                                  <option value="3">100-500人</option>
+                                  <option value="4">500-1000人</option>
+                                  <option value="5">1000-10000人</option>
+                                  <option value="6">10000人以上</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                    
+                          <div class="col-md-6">
+                            <div class="mb-3 row">
+                              <div class="form-label required col-3" style="font-weight: bold">客户来源</div>
+                              <div class="col">
+                                <select class="form-select" id="sourceType" name="sourceType">
+                                  <option value="1">广告呼入</option>
+                                  <option value="2" selected>主动BD</option>
+                                  <option value="3">电销开发</option>
+                                  <option value="0">公共池</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="mb-3 row">
+                              <label class="form-label col-3 " style="font-weight: bold;">公司地址</label>
+                              <div class="col">
+                                <input type="test" class="form-control" name="registeredAddress" placeholder="城市 or 详细地址">
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-6">
+                            <div class="mb-3 row">
+                              <label class="form-label col-3" style="font-weight: bold">客户状态</label>
+                              <div class="col">
+                                <label class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="state" value="0" checked="">
+                                  <span class="form-check-label">潜在客户</span>
+                                </label>
+                                
+                              </div>
+                            </div>
+                          </div>
+                        
+                        </div>
+                      </div>
+                      <div class="card-footer text-end">
+                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="col-6">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">HTTP Request</h3>
+                      </div>
+                      <div class="card-body">
+                        <div class="row row-cards">
+                          <div class="mb-3 col-sm-4 col-md-2">
+                            <label class="form-label required">Method</label>
+                            <select class="form-select">
+                              <option value="GET">GET</option>
+                              <option value="POST">POST</option>
+                              <option value="PUT">PUT</option>
+                              <option value="HEAD">HEAD</option>
+                              <option value="DELETE">DELETE</option>
+                              <option value="PATCH">PATCH</option>
+                            </select>
+                          </div>
+                          <div class="mb-3 col-sm-8 col-md-10">
+                            <label class="form-label required">URL</label>
+                            <input name="url" type="text" class="form-control" value="https://content.googleapis.com/discovery/v1/apis/surveys/v2/rest">
+                          </div>
+                        </div>
+                        <div class="form-label">Assertions</div>
+                        <div class="table-responsive">
+                          <table class="table mb-0">
+                            <thead>
+                              <tr>
+                                <th>Source</th>
+                                <th>Property</th>
+                                <th>Comparison</th>
+                                <th>Target</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <select class="form-select">
+                                    <option value="STATUS_CODE" selected="">Status code</option>
+                                    <option value="JSON_BODY">JSON body</option>
+                                    <option value="HEADERS">Headers</option>
+                                    <option value="TEXT_BODY">Text body</option>
+                                    <option value="RESPONSE_TIME">Response time</option>
+                                  </select>
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control"></td>
+                                <td>
+                                  <select class="form-select">
+                                    <option value="EQUALS" selected="">Equals</option>
+                                    <option value="NOT_EQUALS">Not equals</option>
+                                    <option value="HAS_KEY">Has key</option>
+                                    <option value="NOT_HAS_KEY">Not has key</option>
+                                    <option value="HAS_VALUE">Has value</option>
+                                    <option value="NOT_HAS_VALUE">Not has value</option>
+                                    <option value="IS_EMPTY">Is empty</option>
+                                    <option value="NOT_EMPTY">Is not empty</option>
+                                    <option value="GREATER_THAN">Greater than</option>
+                                    <option value="LESS_THAN">Less than</option>
+                                  </select>
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" value="200">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <select class="form-select">
+                                    <option value="STATUS_CODE">Status code</option>
+                                    <option value="JSON_BODY" selected="">JSON body</option>
+                                    <option value="HEADERS">Headers</option>
+                                    <option value="TEXT_BODY">Text body</option>
+                                    <option value="RESPONSE_TIME">Response time</option>
+                                  </select>
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" value="parameters.alt.type">
+                                </td>
+                                <td>
+                                  <select class="form-select">
+                                    <option value="EQUALS">Equals</option>
+                                    <option value="NOT_EQUALS">Not equals</option>
+                                    <option value="HAS_KEY">Has key</option>
+                                    <option value="NOT_HAS_KEY">Not has key</option>
+                                    <option value="HAS_VALUE" selected="">Has value</option>
+                                    <option value="NOT_HAS_VALUE">Not has value</option>
+                                    <option value="IS_EMPTY">Is empty</option>
+                                    <option value="NOT_EMPTY">Is not empty</option>
+                                    <option value="GREATER_THAN">Greater than</option>
+                                    <option value="LESS_THAN">Less than</option>
+                                  </select>
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" value="string">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <select class="form-select">
+                                    <option value="STATUS_CODE">Status code</option>
+                                    <option value="JSON_BODY">JSON body</option>
+                                    <option value="HEADERS">Headers</option>
+                                    <option value="TEXT_BODY">Text body</option>
+                                    <option value="RESPONSE_TIME" selected="">Response time</option>
+                                  </select>
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control"></td>
+                                <td>
+                                  <select class="form-select">
+                                    <option value="EQUALS">Equals</option>
+                                    <option value="NOT_EQUALS">Not equals</option>
+                                    <option value="HAS_KEY">Has key</option>
+                                    <option value="NOT_HAS_KEY">Not has key</option>
+                                    <option value="HAS_VALUE">Has value</option>
+                                    <option value="NOT_HAS_VALUE">Not has value</option>
+                                    <option value="IS_EMPTY">Is empty</option>
+                                    <option value="NOT_EMPTY">Is not empty</option>
+                                    <option value="GREATER_THAN">Greater than</option>
+                                    <option value="LESS_THAN" selected="">Less than</option>
+                                  </select>
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" value="500">
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>
+                                  <select class="form-select">
+                                    <option value="STATUS_CODE">Status code</option>
+                                    <option value="JSON_BODY">JSON body</option>
+                                    <option value="HEADERS" selected="">Headers</option>
+                                    <option value="TEXT_BODY">Text body</option>
+                                    <option value="RESPONSE_TIME">Response time</option>
+                                  </select>
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" value="content-type">
+                                </td>
+                                <td>
+                                  <select class="form-select">
+                                    <option value="EQUALS" selected="">Equals</option>
+                                    <option value="NOT_EQUALS">Not equals</option>
+                                    <option value="HAS_KEY">Has key</option>
+                                    <option value="NOT_HAS_KEY">Not has key</option>
+                                    <option value="HAS_VALUE">Has value</option>
+                                    <option value="NOT_HAS_VALUE">Not has value</option>
+                                    <option value="IS_EMPTY">Is empty</option>
+                                    <option value="NOT_EMPTY">Is not empty</option>
+                                    <option value="GREATER_THAN">Greater than</option>
+                                    <option value="LESS_THAN">Less than</option>
+                                  </select>
+                                </td>
+                                <td>
+                                  <input type="text" class="form-control" value="application/json; charset=UTF-8">
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="card-footer text-end">
+                        <button type="submit" class="btn btn-primary">Make request</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-header border-0">
+                    <div class="card-title">基本信息</div>
+                  </div>
+                  <div class="card-body" id="formdata">
+
+             
+
+                    <div class="row "> 
+                    
+                      <div class="col-lg-2">
+                        <label class="form-label" style="font-weight: bold;">客户名</label>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="">
+                      </div>
+                      <div class="col-lg-2">
+                        <label class="form-label" style="font-weight: bold;">服务顾问</label>
+                        <input type="text" class="form-control" name="appUserName" id="appUserName" placeholder="">
+                      </div>
+                      <div class="col-lg-2">
+                        <label class="form-label" style="font-weight: bold;">归属公司</label>
+                        <input type="text" class="form-control" name="employComId" id="employComId" placeholder="成都公司">
+                      </div>
+                      <div class="col-lg-2">
+                        <div class="form-label" style="font-weight: bold">客户来源</div>
+                        <select class="form-select" id="sourceType" name="sourceType">
+                          <option selected value="">全部</option>
+                          <option value="1">广告呼入</option>
+                          <option value="2">主动BD</option>
+                          <option value="3">电销开发</option>
+                          <option value="0">公共池</option>
+                        </select>
+                      </div>
+                      <div class="col-lg-2">
+                        <div class="form-label" style="font-weight: bold">客户状态</div>
+                        <select class="form-select" id="state" name="state">
+                          <option selected value="">全部</option>
+                          <option value="0">潜在客户</option>
+                          <option value="1">签约运作</option>
+                          <option value="2">签约暂停</option>
+                          <option value="3">签约终止</option>
+                        </select>
+                      </div>
+                      <div class="col-lg-2">
+                        <div class="form-label" style="font-weight: bold">客户等级</div>
+                        <select class="form-select" name="level" id="level">
+                          <option selected value="">全部</option>
+                          <option value="0">普通</option>
+                          <option value="1">VIP1</option>
+                          <option value="2">VIP2</option>
+                          <option value="3">VIP3</option>
+                          <option value="4">VIP4</option>
+                          <option value="5">VIP5</option>
+                        </select>
+                      </div>
+                    </div>
+  
+                    <div class="row"> 
+                  
+                      <div class="col-lg-2">
+                          <div class="form-label" style="font-weight: bold;">公司规模</div>
+                          <select class="form-select" id="customerSize" name="customerSize">
+                            <option selected value="">全部</option>
+                            <option value="0">0-15人</option>
+                            <option value="1">15-50人</option>
+                            <option value="2">50-100人</option>
+                            <option value="3">100-500人</option>
+                            <option value="4">500-1000人</option>
+                            <option value="5">1000-10000人</option>
+                            <option value="6">10000人以上</option>
+                          </select>
+                      </div>  
+                      <div class="col-lg-2">
+                        <div class="form-label" style="font-weight: bold;">所属行业</div>
+                        <select class="form-select" id="industryType" name="industryType">
+                          <option selected value="">不限</option>
+                          <option value="互联网 / 游戏 / 软件">互联网 / 游戏 / 软件</option>
+                          <option value="电子 / 通信 / 硬件">电子 / 通信 / 硬件</option>
+                          <option value="房地产 / 建筑 / 物业 ">房地产 / 建筑 / 物业 </option>
+                          <option value="经济">经济</option>
+                          <option value="消费品">消费品</option>
+                          <option value="汽车 / 机械 / 制造">汽车 / 机械 / 制造</option>
+                          <option value="广告 / 传媒 / 教育 / 文化">广告 / 传媒 / 教育 / 文化</option>
+                          <option value="交通 / 贸易 / 物流">交通 / 贸易 / 物流</option>
+                          <option value="制药 / 医用器械">制药 / 医用器械</option>
+                          <option value="能源 / 化工 / 环保">能源 / 化工 / 环保</option>
+                          <option value="政府 / 农林牧渔">政府 / 农林牧渔</option>
+                        </select>
+                      </div>
+                      <!-- <div class="col-lg-2" >
+                        <div class="form-label" style="font-weight: bold;">是否认证</div>
+                        <div class="form-selectgroup form-selectgroup-pills">
+                          <label class="form-selectgroup-item">
+                            <input type="checkbox" name="certification" value="1" id="certificationYes" value="HTML" class="form-selectgroup-input" >
+                            <span class="form-selectgroup-label">是</span>
+                          </label>  
+                          <label class="form-selectgroup-item">
+                            <input type="checkbox" name="certification" value="0" id="certificationNo" value="HTML" class="form-selectgroup-input" >
+                            <span class="form-selectgroup-label">否</span>
+                          </label>
+                        </div>
+                      </div> -->
+                      <div class="col-lg-2" >
+                        <div class="form-label" style="font-weight: bold;">是否大客户</div>
+                        <div class="form-selectgroup form-selectgroup-pills">
+                          <label class="form-selectgroup-item">
+                            <input type="checkbox" name="vip" value="1" class="form-selectgroup-input" >
+                            <span class="form-selectgroup-label">是</span>
+                          </label>  
+                          <label class="form-selectgroup-item">
+                            <input type="checkbox" name="vip" value="0" class="form-selectgroup-input" >
+                            <span class="form-selectgroup-label">否</span>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-lg-2" >
+                        <div class="form-label" style="font-weight: bold;">客户归属</div>
+                        <div class="form-selectgroup form-selectgroup-pills">
+                          <label class="form-selectgroup-item">
+                            <input type="checkbox" name="belong" value="1" class="form-selectgroup-input" >
+                            <span class="form-selectgroup-label">我的</span>
+                          </label>  
+                          <label class="form-selectgroup-item">
+                            <input type="checkbox" name="belong" value="2" class="form-selectgroup-input" >
+                            <span class="form-selectgroup-label">团队</span>
+                          </label>
+                        </div>
+                      </div>
+  
+                      <div class="col-lg-2" >
+                        <div class="form-label" style="font-weight: bold;">&nbsp;</div>
+                        <a href="#" onclick="clearForm()" class="btn btn-link ms-auto">清空 </a>
+                      
+                        <a href="#" onclick="searchList()" class="btn btn-primary ms-auto">查询</a>
+                      </div>
+                    </div>
+
+
+
+                  </div>
+      
+      
+      
+      
+                 
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
+      
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-body">
+
+                    <div class="table-responsive">
+                      <table class="table card-table table-vcenter text-nowrap datatable">
+                        <thead>
+                          									
+                          <tr>
+                            <th class="w-1">来源</th>
+                            <th class="w-1">客户名称</th>
+                            <!-- <th>认证</th> -->
+                            <th>招聘人数</th>
+                            <th>执行团队</th>
+                            <th>归属公司</th>
+                            <th>客户状态</th>
+                            <th>最后沟通</th>
+                            <th>记录</th>
+                            <th>操作</th>
+                          </tr>
+                        </thead>
+                        <tbody id="data">
+                          
+                    
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="card-footer d-flex align-items-center">
+                      <p class="m-0 text-muted">共<span id="totalPageNum">0</span>条 &nbsp;<span id="totalPageNum1"></span>页</p>
+                      <ul class="pagination m-0 ms-auto" id="pageSelect">
+                        
+                      </ul>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+            
+
+
+
+            
+
+            
+          </div>
+        </div>
+        
+
+      
+
+
+       
+        <footer class="footer footer-transparent d-print-none">
+          <div class="container-xl">
+            <div class="row text-center align-items-center flex-row-reverse">
+              <div class="col-lg-auto ms-lg-auto">
+                <ul class="list-inline list-inline-dots mb-0">
+                  <li class="list-inline-item"><a href="https://tabler.io/docs" target="_blank" class="link-secondary" rel="noopener">Documentation</a></li>
+                  <li class="list-inline-item"><a href="./license.html" class="link-secondary">License</a></li>
+                  <li class="list-inline-item"><a href="https://github.com/tabler/tabler" target="_blank" class="link-secondary" rel="noopener">Source code</a></li>
+                  <li class="list-inline-item">
+                    <a href="https://github.com/sponsors/codecalm" target="_blank" class="link-secondary" rel="noopener">
+                      <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon text-pink icon-filled icon-inline" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /></svg>
+                      Sponsor
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-12 col-lg-auto mt-3 mt-lg-0">
+                <ul class="list-inline list-inline-dots mb-0">
+                  <li class="list-inline-item">
+                    Copyright &copy; 2023
+                    <a href="." class="link-secondary">Tabler</a>.
+                    All rights reserved.
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="./changelog.html" class="link-secondary" rel="noopener">
+                      v1.0.0-beta19
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">New report</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" name="example-text-input" placeholder="Your report name">
+            </div>
+            <label class="form-label">Report type</label>
+            <div class="form-selectgroup-boxes row mb-3">
+              <div class="col-lg-6">
+                <label class="form-selectgroup-item">
+                  <input type="radio" name="report-type" value="1" class="form-selectgroup-input" checked>
+                  <span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">Simple</span>
+                      <span class="d-block text-muted">Provide only basic data needed for the report</span>
+                    </span>
+                  </span>
+                </label>
+              </div>
+              <div class="col-lg-6">
+                <label class="form-selectgroup-item">
+                  <input type="radio" name="report-type" value="1" class="form-selectgroup-input">
+                  <span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">Advanced</span>
+                      <span class="d-block text-muted">Insert charts and additional advanced analyses to be inserted in the report</span>
+                    </span>
+                  </span>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="mb-3">
+                  <label class="form-label">Report url</label>
+                  <div class="input-group input-group-flat">
+                    <span class="input-group-text">
+                      https://tabler.io/reports/
+                    </span>
+                    <input type="text" class="form-control ps-0"  value="report-01" autocomplete="off">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="mb-3">
+                  <label class="form-label">Visibility</label>
+                  <select class="form-select">
+                    <option value="1" selected>Private</option>
+                    <option value="2">Public</option>
+                    <option value="3">Hidden</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="mb-3">
+                  <label class="form-label">Client name</label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="mb-3">
+                  <label class="form-label">Reporting period</label>
+                  <input type="date" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div>
+                  <label class="form-label">Additional information</label>
+                  <textarea class="form-control" rows="3"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+              Cancel
+            </a>
+            <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+              <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+              Create new report
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
