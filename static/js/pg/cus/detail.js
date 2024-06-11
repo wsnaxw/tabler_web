@@ -1111,13 +1111,24 @@ function addTeamList(){
     var selectElement = document.getElementById('addTeamMember');
     // console.log(selectElement.value)
 
+
+     // 获取所有具有相同name属性的radio元素
+    var radios = document.getElementsByName('myRadio');
+    var jobManage ='0';
+    for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+            jobManage = radios[i].value;
+            break; 
+        }
+    }
+
     const options = {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
         'token':localStorage.getItem('token')
         },
-        body: JSON.stringify({ 'appUserId': selectElement.value,'customerId':csid }),
+        body: JSON.stringify({ 'appUserId': selectElement.value,'customerId':csid,"jobManage":jobManage }),
         };
 
         var url = baseUri+'/customer/addTeamPerson';

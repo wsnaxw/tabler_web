@@ -429,325 +429,205 @@
                         </div>
                       </div>
                       <div class="card-footer text-end">
-                        <button type="submit" class="btn btn-primary">Update Profile</button>
+                        <button type="submit" class="btn btn-primary">提交</button>
                       </div>
                     </form>
                   </div>
-                  <div class="col-6">
-                    <div class="card">
-                      <div class="card-header">
-                        <h3 class="card-title">HTTP Request</h3>
-                      </div>
-                      <div class="card-body">
-                        <div class="row row-cards">
-                          <div class="mb-3 col-sm-4 col-md-2">
-                            <label class="form-label required">Method</label>
-                            <select class="form-select">
-                              <option value="GET">GET</option>
-                              <option value="POST">POST</option>
-                              <option value="PUT">PUT</option>
-                              <option value="HEAD">HEAD</option>
-                              <option value="DELETE">DELETE</option>
-                              <option value="PATCH">PATCH</option>
-                            </select>
-                          </div>
-                          <div class="mb-3 col-sm-8 col-md-10">
-                            <label class="form-label required">URL</label>
-                            <input name="url" type="text" class="form-control" value="https://content.googleapis.com/discovery/v1/apis/surveys/v2/rest">
-                          </div>
+
+
+
+
+
+
+                  <div class="col-6 ">
+
+
+                    <div class="row row-cards">
+
+
+                      <div class="card">
+                        <div class="card-header">
+                          <h3 class="card-title">添加团队成员</h3>
                         </div>
-                        <div class="form-label">Assertions</div>
-                        <div class="table-responsive">
-                          <table class="table mb-0">
-                            <thead>
-                              <tr>
-                                <th>Source</th>
-                                <th>Property</th>
-                                <th>Comparison</th>
-                                <th>Target</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <td>
-                                  <select class="form-select">
-                                    <option value="STATUS_CODE" selected="">Status code</option>
-                                    <option value="JSON_BODY">JSON body</option>
-                                    <option value="HEADERS">Headers</option>
-                                    <option value="TEXT_BODY">Text body</option>
-                                    <option value="RESPONSE_TIME">Response time</option>
-                                  </select>
-                                </td>
-                                <td>
-                                  <input type="text" class="form-control"></td>
-                                <td>
-                                  <select class="form-select">
-                                    <option value="EQUALS" selected="">Equals</option>
-                                    <option value="NOT_EQUALS">Not equals</option>
-                                    <option value="HAS_KEY">Has key</option>
-                                    <option value="NOT_HAS_KEY">Not has key</option>
-                                    <option value="HAS_VALUE">Has value</option>
-                                    <option value="NOT_HAS_VALUE">Not has value</option>
-                                    <option value="IS_EMPTY">Is empty</option>
-                                    <option value="NOT_EMPTY">Is not empty</option>
-                                    <option value="GREATER_THAN">Greater than</option>
-                                    <option value="LESS_THAN">Less than</option>
-                                  </select>
-                                </td>
-                                <td>
-                                  <input type="text" class="form-control" value="200">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <select class="form-select">
-                                    <option value="STATUS_CODE">Status code</option>
-                                    <option value="JSON_BODY" selected="">JSON body</option>
-                                    <option value="HEADERS">Headers</option>
-                                    <option value="TEXT_BODY">Text body</option>
-                                    <option value="RESPONSE_TIME">Response time</option>
-                                  </select>
-                                </td>
-                                <td>
-                                  <input type="text" class="form-control" value="parameters.alt.type">
-                                </td>
-                                <td>
-                                  <select class="form-select">
-                                    <option value="EQUALS">Equals</option>
-                                    <option value="NOT_EQUALS">Not equals</option>
-                                    <option value="HAS_KEY">Has key</option>
-                                    <option value="NOT_HAS_KEY">Not has key</option>
-                                    <option value="HAS_VALUE" selected="">Has value</option>
-                                    <option value="NOT_HAS_VALUE">Not has value</option>
-                                    <option value="IS_EMPTY">Is empty</option>
-                                    <option value="NOT_EMPTY">Is not empty</option>
-                                    <option value="GREATER_THAN">Greater than</option>
-                                    <option value="LESS_THAN">Less than</option>
-                                  </select>
-                                </td>
-                                <td>
-                                  <input type="text" class="form-control" value="string">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <select class="form-select">
-                                    <option value="STATUS_CODE">Status code</option>
-                                    <option value="JSON_BODY">JSON body</option>
-                                    <option value="HEADERS">Headers</option>
-                                    <option value="TEXT_BODY">Text body</option>
-                                    <option value="RESPONSE_TIME" selected="">Response time</option>
-                                  </select>
-                                </td>
-                                <td>
-                                  <input type="text" class="form-control"></td>
-                                <td>
-                                  <select class="form-select">
-                                    <option value="EQUALS">Equals</option>
-                                    <option value="NOT_EQUALS">Not equals</option>
-                                    <option value="HAS_KEY">Has key</option>
-                                    <option value="NOT_HAS_KEY">Not has key</option>
-                                    <option value="HAS_VALUE">Has value</option>
-                                    <option value="NOT_HAS_VALUE">Not has value</option>
-                                    <option value="IS_EMPTY">Is empty</option>
-                                    <option value="NOT_EMPTY">Is not empty</option>
-                                    <option value="GREATER_THAN">Greater than</option>
-                                    <option value="LESS_THAN" selected="">Less than</option>
-                                  </select>
-                                </td>
-                                <td>
-                                  <input type="text" class="form-control" value="500">
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <select class="form-select">
-                                    <option value="STATUS_CODE">Status code</option>
-                                    <option value="JSON_BODY">JSON body</option>
-                                    <option value="HEADERS" selected="">Headers</option>
-                                    <option value="TEXT_BODY">Text body</option>
-                                    <option value="RESPONSE_TIME">Response time</option>
-                                  </select>
-                                </td>
-                                <td>
-                                  <input type="text" class="form-control" value="content-type">
-                                </td>
-                                <td>
-                                  <select class="form-select">
-                                    <option value="EQUALS" selected="">Equals</option>
-                                    <option value="NOT_EQUALS">Not equals</option>
-                                    <option value="HAS_KEY">Has key</option>
-                                    <option value="NOT_HAS_KEY">Not has key</option>
-                                    <option value="HAS_VALUE">Has value</option>
-                                    <option value="NOT_HAS_VALUE">Not has value</option>
-                                    <option value="IS_EMPTY">Is empty</option>
-                                    <option value="NOT_EMPTY">Is not empty</option>
-                                    <option value="GREATER_THAN">Greater than</option>
-                                    <option value="LESS_THAN">Less than</option>
-                                  </select>
-                                </td>
-                                <td>
-                                  <input type="text" class="form-control" value="application/json; charset=UTF-8">
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                      <div class="card-footer text-end">
-                        <button type="submit" class="btn btn-primary">Make request</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-
-
-              <div class="col-lg-12">
-                <div class="card">
-                  <div class="card-header border-0">
-                    <div class="card-title">基本信息</div>
-                  </div>
-                  <div class="card-body" id="formdata">
-
+                        <div class="card-body">
+                          <div class="row row-cards">
+                            <div class="mb-3 col-lg-6 row">
+                              <label class="form-label col-3"  style="font-weight: bold;">变更管理员</label>
+                              <div class="col">
+                                <label class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="isChangeManage" value="1" checked>
+                                  <span class="form-check-label">否</span>
+                                </label>
+                                <label class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="isChangeManage" value="2" >
+                                  <span class="form-check-label">是</span>
+                                </label>
+                              </div>
+                              <small class="form-hint">默认为当前客户创建者</small>
+                            </div>
+                          
+                            <div class="mb-3 col-lg-6 row">
+                              
+                              <div class="col">
+                                <select type="text" class="form-select" placeholder="输入名称查询选择新管理员" id="addTeamMember" disabled>
+                                </select>
+                              </div>
+                            </div>
+    
+                            <div class="mb-3 row">
+                              
+                              <label class="form-label col-3" style="font-weight: bold;">有职位管理</label>
+                              <div class="col">
+                                <select type="text" class="form-select" placeholder="输入名称查询选择新管理员" id="addTeamMember" >
+                                </select>
+                              </div>
+                                <small class="form-hint">可为当前客户创建新职位。</small>
+                            </div>
+                            <div class="mb-3 row">
+                              
+                              <label class="form-label col-3" style="font-weight: bold;">无职位管理</label>
+                              <div class="col">
+                                <select type="text" class="form-select" placeholder="输入名称查询选择新管理员" id="addTeamMember" >
+                                </select>
+                              </div>
+                                <small class="form-hint">无法为当前客户创建新职位。</small>
+                            </div>                
              
+                          </div>
+                        </div>
+                 
+                      </div>
 
-                    <div class="row "> 
+
+
+
+
+                      <div class="card">
+                        <div class="card-header">
+                          <h3 class="card-title">添加联系人</h3>
+                        </div>
+                        <div class="card-body">
+                          <div class="row row-cards">
+                            <div class="mb-3 col-lg-6 row">
+                              <label class="form-label col-3"  style="font-weight: bold;">变更管理员</label>
+                              <div class="col">
+                                <label class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="isChangeManage" value="1" checked>
+                                  <span class="form-check-label">否</span>
+                                </label>
+                                <label class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="isChangeManage" value="2" >
+                                  <span class="form-check-label">是</span>
+                                </label>
+                              </div>
+                              <small class="form-hint">默认为当前客户创建者</small>
+                            </div>
+                          
+                            <div class="mb-3 col-lg-6 row">
+                              
+                              <div class="col">
+                                <select type="text" class="form-select" placeholder="输入名称查询选择新管理员" id="addTeamMember" disabled>
+                                </select>
+                              </div>
+                            </div>
+    
+                            <div class="mb-3 row">
+                              
+                              <label class="form-label col-3" style="font-weight: bold;">有职位管理</label>
+                              <div class="col">
+                                <select type="text" class="form-select" placeholder="输入名称查询选择新管理员" id="addTeamMember" >
+                                </select>
+                              </div>
+                                <small class="form-hint">可为当前客户创建新职位。</small>
+                            </div>
+                            <div class="mb-3 row">
+                              
+                              <label class="form-label col-3" style="font-weight: bold;">无职位管理</label>
+                              <div class="col">
+                                <select type="text" class="form-select" placeholder="输入名称查询选择新管理员" id="addTeamMember" >
+                                </select>
+                              </div>
+                                <small class="form-hint">无法为当前客户创建新职位。</small>
+                            </div>                
+             
+                          </div>
+                        </div>
+                 
+                      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+
+
                     
-                      <div class="col-lg-2">
-                        <label class="form-label" style="font-weight: bold;">客户名</label>
-                        <input type="text" class="form-control" name="name" id="name" placeholder="">
-                      </div>
-                      <div class="col-lg-2">
-                        <label class="form-label" style="font-weight: bold;">服务顾问</label>
-                        <input type="text" class="form-control" name="appUserName" id="appUserName" placeholder="">
-                      </div>
-                      <div class="col-lg-2">
-                        <label class="form-label" style="font-weight: bold;">归属公司</label>
-                        <input type="text" class="form-control" name="employComId" id="employComId" placeholder="成都公司">
-                      </div>
-                      <div class="col-lg-2">
-                        <div class="form-label" style="font-weight: bold">客户来源</div>
-                        <select class="form-select" id="sourceType" name="sourceType">
-                          <option selected value="">全部</option>
-                          <option value="1">广告呼入</option>
-                          <option value="2">主动BD</option>
-                          <option value="3">电销开发</option>
-                          <option value="0">公共池</option>
-                        </select>
-                      </div>
-                      <div class="col-lg-2">
-                        <div class="form-label" style="font-weight: bold">客户状态</div>
-                        <select class="form-select" id="state" name="state">
-                          <option selected value="">全部</option>
-                          <option value="0">潜在客户</option>
-                          <option value="1">签约运作</option>
-                          <option value="2">签约暂停</option>
-                          <option value="3">签约终止</option>
-                        </select>
-                      </div>
-                      <div class="col-lg-2">
-                        <div class="form-label" style="font-weight: bold">客户等级</div>
-                        <select class="form-select" name="level" id="level">
-                          <option selected value="">全部</option>
-                          <option value="0">普通</option>
-                          <option value="1">VIP1</option>
-                          <option value="2">VIP2</option>
-                          <option value="3">VIP3</option>
-                          <option value="4">VIP4</option>
-                          <option value="5">VIP5</option>
-                        </select>
-                      </div>
-                    </div>
-  
-                    <div class="row"> 
-                  
-                      <div class="col-lg-2">
-                          <div class="form-label" style="font-weight: bold;">公司规模</div>
-                          <select class="form-select" id="customerSize" name="customerSize">
-                            <option selected value="">全部</option>
-                            <option value="0">0-15人</option>
-                            <option value="1">15-50人</option>
-                            <option value="2">50-100人</option>
-                            <option value="3">100-500人</option>
-                            <option value="4">500-1000人</option>
-                            <option value="5">1000-10000人</option>
-                            <option value="6">10000人以上</option>
-                          </select>
-                      </div>  
-                      <div class="col-lg-2">
-                        <div class="form-label" style="font-weight: bold;">所属行业</div>
-                        <select class="form-select" id="industryType" name="industryType">
-                          <option selected value="">不限</option>
-                          <option value="互联网 / 游戏 / 软件">互联网 / 游戏 / 软件</option>
-                          <option value="电子 / 通信 / 硬件">电子 / 通信 / 硬件</option>
-                          <option value="房地产 / 建筑 / 物业 ">房地产 / 建筑 / 物业 </option>
-                          <option value="经济">经济</option>
-                          <option value="消费品">消费品</option>
-                          <option value="汽车 / 机械 / 制造">汽车 / 机械 / 制造</option>
-                          <option value="广告 / 传媒 / 教育 / 文化">广告 / 传媒 / 教育 / 文化</option>
-                          <option value="交通 / 贸易 / 物流">交通 / 贸易 / 物流</option>
-                          <option value="制药 / 医用器械">制药 / 医用器械</option>
-                          <option value="能源 / 化工 / 环保">能源 / 化工 / 环保</option>
-                          <option value="政府 / 农林牧渔">政府 / 农林牧渔</option>
-                        </select>
-                      </div>
-                      <!-- <div class="col-lg-2" >
-                        <div class="form-label" style="font-weight: bold;">是否认证</div>
-                        <div class="form-selectgroup form-selectgroup-pills">
-                          <label class="form-selectgroup-item">
-                            <input type="checkbox" name="certification" value="1" id="certificationYes" value="HTML" class="form-selectgroup-input" >
-                            <span class="form-selectgroup-label">是</span>
-                          </label>  
-                          <label class="form-selectgroup-item">
-                            <input type="checkbox" name="certification" value="0" id="certificationNo" value="HTML" class="form-selectgroup-input" >
-                            <span class="form-selectgroup-label">否</span>
-                          </label>
-                        </div>
-                      </div> -->
-                      <div class="col-lg-2" >
-                        <div class="form-label" style="font-weight: bold;">是否大客户</div>
-                        <div class="form-selectgroup form-selectgroup-pills">
-                          <label class="form-selectgroup-item">
-                            <input type="checkbox" name="vip" value="1" class="form-selectgroup-input" >
-                            <span class="form-selectgroup-label">是</span>
-                          </label>  
-                          <label class="form-selectgroup-item">
-                            <input type="checkbox" name="vip" value="0" class="form-selectgroup-input" >
-                            <span class="form-selectgroup-label">否</span>
-                          </label>
-                        </div>
-                      </div>
-                      <div class="col-lg-2" >
-                        <div class="form-label" style="font-weight: bold;">客户归属</div>
-                        <div class="form-selectgroup form-selectgroup-pills">
-                          <label class="form-selectgroup-item">
-                            <input type="checkbox" name="belong" value="1" class="form-selectgroup-input" >
-                            <span class="form-selectgroup-label">我的</span>
-                          </label>  
-                          <label class="form-selectgroup-item">
-                            <input type="checkbox" name="belong" value="2" class="form-selectgroup-input" >
-                            <span class="form-selectgroup-label">团队</span>
-                          </label>
-                        </div>
-                      </div>
-  
-                      <div class="col-lg-2" >
-                        <div class="form-label" style="font-weight: bold;">&nbsp;</div>
-                        <a href="#" onclick="clearForm()" class="btn btn-link ms-auto">清空 </a>
-                      
-                        <a href="#" onclick="searchList()" class="btn btn-primary ms-auto">查询</a>
-                      </div>
-                    </div>
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    
                   </div>
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
+
+
+
                  
 
 
@@ -762,13 +642,26 @@
 
 
 
-                  
-      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 </div>
               </div>
 
 
 
+              
 
 
 
@@ -778,44 +671,10 @@
 
 
 
-              <div class="col-lg-12">
-                <div class="card">
-                  <div class="card-body">
 
-                    <div class="table-responsive">
-                      <table class="table card-table table-vcenter text-nowrap datatable">
-                        <thead>
-                          									
-                          <tr>
-                            <th class="w-1">来源</th>
-                            <th class="w-1">客户名称</th>
-                            <!-- <th>认证</th> -->
-                            <th>招聘人数</th>
-                            <th>执行团队</th>
-                            <th>归属公司</th>
-                            <th>客户状态</th>
-                            <th>最后沟通</th>
-                            <th>记录</th>
-                            <th>操作</th>
-                          </tr>
-                        </thead>
-                        <tbody id="data">
-                          
-                    
-                        </tbody>
-                      </table>
-                    </div>
-                    <div class="card-footer d-flex align-items-center">
-                      <p class="m-0 text-muted">共<span id="totalPageNum">0</span>条 &nbsp;<span id="totalPageNum1"></span>页</p>
-                      <ul class="pagination m-0 ms-auto" id="pageSelect">
-                        
-                      </ul>
-                    </div>
 
-                  </div>
-                </div>
-              </div>
 
+              
 
 
 
