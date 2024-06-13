@@ -4,9 +4,11 @@ $(function(){
 
     // var customerId = getParameterByName('customerId');
 
-    generateDropdown(positionList, 'selectdiv');
+    // generateDropdown(positionList, 'selectdiv1');
 
+    // traverseTree(positionList);
 
+    // 输出树形结构以验证层级标记
 
     // console.log('customerId:'+customerId)
     checkboxChcek()
@@ -14,21 +16,182 @@ $(function(){
     getPage(1);
 
 
+
+
+
+    const ct = document.getElementById("selectdiv");  
+    ct.innerHTML = '';  
+    // positionList.forEach(item=>{
+    //   if(item.children){
+    //     var dd = document.createElement('div');  
+    //     dd.classList.add('dropend');  
+    //     const link = document.createElement('a');  
+        // link.classList.add('dropdown-item', 'dropdown-toggle');  
+        // link.setAttribute('data-bs-toggle', 'dropdown');  
+        // link.setAttribute('data-bs-auto-close', 'outside');  
+        // link.setAttribute('role', 'button');  
+        // link.setAttribute('aria-expanded', 'false');  
+        // link.textContent = item.label;  
+    //     dd.appendChild(link);  
+    //     ct.appendChild(dd); 
+    //     var dd12 = document.createElement('div');  
+    //     dd12.classList.add('dropdown-menu');  
+    //     item.children.forEach(item1=>{           
+    //       var dd1 = document.createElement('div');        
+    //       dd1.classList.add('dropend');  
+    //       const link = document.createElement('a');  
+    //       link.classList.add('dropdown-item', 'dropdown-toggle');  
+    //       link.setAttribute('data-bs-toggle', 'dropdown');  
+    //       link.setAttribute('data-bs-auto-close', 'outside');  
+    //       link.setAttribute('role', 'button');  
+    //       link.setAttribute('aria-expanded', 'false');         
+    //       link.textContent = item1.label;  
+    //       dd1.appendChild(link);  
+    //       dd12.appendChild(dd1);   
+    //       var dd22 = document.createElement('div');  
+    //       dd22.classList.add('dropdown-menu');  
+    //       item1.children.forEach(item2=>{  
+    //        const link = document.createElement('a');  
+    //         link.classList.add('dropdown-item');  
+    //         link.setAttribute('onClick', 'chooseThis(this)');  
+    //         link.setAttribute('value', item2.value);  
+    //         link.textContent = item2.label;         
+    //         dd22.appendChild(link); 
+    //       })
+    //       dd1.appendChild(dd22); 
+    //     })
+    //     dd.appendChild(dd12)
+    //   }else{
+    //     const link = document.createElement('a');  
+    //     link.classList.add('dropdown-item');  
+    //     link.setAttribute('onClick', 'chooseThis(this)');  
+    //     link.setAttribute('value', item.value);  
+    //     link.textContent = item.label;  
+    //     ct.appendChild(link); 
+    //   }
+    // })
+
+
+
+
+
+
+
+    positionList.forEach(item => {  
+      if (item.children) {  
+        // 创建顶级下拉菜单  
+        var dropdownDiv = document.createElement('div');  
+        dropdownDiv.classList.add('dropend');  
+      
+        // 创建触发元素  
+        var link = document.createElement('a');  
+        link.classList.add('dropdown-item', 'dropdown-toggle');  
+        link.setAttribute('data-bs-toggle', 'dropdown');  
+        link.setAttribute('data-bs-auto-close', 'outside');  
+        link.setAttribute('role', 'button');  
+        link.setAttribute('aria-expanded', 'false');  
+        link.textContent = item.label;  
+      
+        // 创建顶级下拉菜单的内容容器  
+        var dropdownMenu = document.createElement('div');  
+        dropdownMenu.classList.add('dropdown-menu');  
+      
+        // 递归地构建子菜单  
+        buildDropdownMenu(item.children, dropdownMenu);  
+      
+        // 将触发元素和内容容器添加到顶级下拉菜单  
+        dropdownDiv.appendChild(link);  
+        dropdownDiv.appendChild(dropdownMenu);  
+      
+        // 将顶级下拉菜单添加到某个容器（例如ct）  
+        ct.appendChild(dropdownDiv);  
+      } else {  
+        // 创建非嵌套的下拉菜单项  
+        var link = document.createElement('a');  
+        link.classList.add('dropdown-item');  
+        link.setAttribute('onClick', 'chooseThis(this)');  
+        link.setAttribute('value', item.value);  
+        link.textContent = item.label;  
+        ct.appendChild(link);  
+      }  
+    });  
+
+
+
+
+
+
+
+
 })
 
 
 
+// 递归函数来构建子菜单  
+function buildDropdownMenu(items, parent) {  
+  items.forEach(item => {  
+    var dropdownDiv = document.createElement('div');  
+    
+  
+    var link = document.createElement('a');  
 
+  
+    var dropdownMenu = document.createElement('div');  
+    dropdownMenu.classList.add('dropdown-menu');  
+  
+    if (item.children) {  
+
+      dropdownDiv.classList.add('dropend');  
+
+      link.classList.add('dropdown-item', 'dropdown-toggle');  
+      link.setAttribute('data-bs-toggle', 'dropdown');  
+      link.setAttribute('data-bs-auto-close', 'outside');  
+      link.setAttribute('role', 'button');  
+      link.setAttribute('aria-expanded', 'false');  
+      link.textContent = item.label;  
+      
+      buildDropdownMenu(item.children, dropdownMenu);  
+      
+    } else {  
+      // 创建非嵌套的下拉菜单项  
+      link.classList.add('dropdown-item');  
+      link.setAttribute('onClick', 'chooseThis(this)');  
+      link.setAttribute('value', item.value);  
+      link.textContent = item.label;  
+      dropdownMenu.appendChild(link);  
+    }  
+  
+    dropdownDiv.appendChild(link); 
+    dropdownDiv.appendChild(dropdownMenu);  
+    parent.appendChild(dropdownDiv);  
+  });  
+}
 
 
 
 function chooseThis(o){
   console.log($(o).attr('value'))
 
+  $('.dropdown-menu.show').removeClass('show');
+  $('#test1').val($(o).attr('value'))
 
 }
 
-
+function traverseTree(node, level = 1) {
+  // 标记当前节点的层级
+  node.level = level;
+  if (!node.children) {
+    node.children = [];
+  }
+  // 如果有子节点，递归遍历子节点
+  console.log(node.children)
+  if (node.children) {
+      for (let child of node.children) {
+      
+          traverseTree(child, level + 1);
+      }
+  }
+}
 
 
 function generateDropdown(data, containerId) {  
@@ -75,6 +238,8 @@ function generateDropdown(data, containerId) {
       dropdown.appendChild(link);  
     });  
       
+
+    console.log(parent)
     // 如果这是顶级下拉菜单，则不需要包装在另一个dropend div中  
     if (parent) {  
       const dropend = document.createElement('div');  
@@ -112,21 +277,6 @@ function generateDropdown(data, containerId) {
 
 
 
-const customerIcon =
-{
-
-    vip0:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-0"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M10 10v4a2 2 0 1 0 4 0v-4a2 2 0 1 0 -4 0z"></path></svg>',
-    vip1:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e6b400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-1"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M10 10l2 -2v8"></path></svg>',
-    vip2:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e6b400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M10 8h3a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 0 -1 1v2a1 1 0 0 0 1 1h3"></path></svg>',
-    vip3:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e6b400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-3"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M10 9a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2h2a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1"></path></svg>',
-
-    vip4:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e6b400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-4"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M10 8v3a1 1 0 0 0 1 1h3"></path><path d="M14 8v8"></path></svg>',
-    vip5:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e6b400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-circle-number-5"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path><path d="M10 15a1 1 0 0 0 1 1h2a1 1 0 0 0 1 -1v-2a1 1 0 0 0 -1 -1h-3v-4h4"></path></svg>',
-    bigC:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#82d7f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-diamond"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M6 5h12l3 5l-8.5 9.5a.7 .7 0 0 1 -1 0l-8.5 -9.5l3 -5"></path><path d="M10 12l-2 -2.2l.6 -1"></path></svg>',
-    normalC:'<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-diamond"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M6 5h12l3 5l-8.5 9.5a.7 .7 0 0 1 -1 0l-8.5 -9.5l3 -5"></path><path d="M10 12l-2 -2.2l.6 -1"></path></svg>'
-
-};
-
 function getPage(pageNo){
 
 
@@ -162,131 +312,38 @@ function getPage(pageNo){
                 for(var i =0;i<obj.data.list.length;i++){
 
                     var o = obj.data.list[i];
-                    //来源
-                    var sourceType = o.sourceType+'';
+                  
+                    let cityCode = '';
 
-                    var sourceType1 = '';
-                    switch (sourceType) {
-                        case "1":
-                            sourceType1='广告呼入';
-                            break;
-                        case "2":
-                            sourceType1='主动BD';
-                            break;
-                        case "3":
-                            sourceType1='电销开发';
-                            break;
-                        default:
-                            sourceType1='公共池' ;
+                    if(o.cityCode!=null&&o.cityCode.length>4){
+                        let cityarray = splitOrGet(o.cityCode)
+                        if(cityarray!=null&&cityarray.length>0){
+                            cityarray.forEach(element => {
+                                cityCode += cn.info(element.trim()).name + ' '
+                            });
+                        }
+                        // console.log(cityCode)
+                    }else if(!isNumeric(o.cityCode)){
+                        cityCode = o.cityCode;
+                    }else{
+                        cityCode = '不限';
                     }
+
 
                     
 
 
-
-
-                    var vip = o.vip +'';
-                    var vip1 = '';
-
-                    switch (vip) {
-                        case "1":
-                            vip1=customerIcon.bigC;
-                            break;
-                        default:
-                            vip1=customerIcon.normalC ;
-                    }
-
-                    var level = o.level+'';
-
-                    var level1 = '';
-                    switch (level) {
-                        case "1":
-                            level1=customerIcon.vip1;
-                            break;
-                        case "2":
-                            level1=customerIcon.vip2;
-                            break;
-                        case "3":
-                            level1=customerIcon.vip3;
-                            break;
-                        case "4":
-                            level1=customerIcon.vip4;
-                            break;
-                        case "5":
-                            level1=customerIcon.vip5;
-                            break;
-                        default:
-                            level1=customerIcon.vip0;
-                    }
-
+                    str+= `<tr>
+                    <td>${o.stateData}</td>
+                    <td>${o.customerName}</td>
+                    <td><span style='font-weight: bold;' class ='bg-primary-lt'><a onclick='checkDetail("${o.projectId}")'>${o.name}</a></span></td>
+                    <td>${cityCode}</td>
+                    <td>${o.createTime}</td>
+                    <td><a herf="#" onclick="checkDetail(698345291966844928)" class="btn">查看</a><a herf="#" class="btn" onclick="move(698345291966844928)">转移</a></td></tr>`
           
 
-                    var name = o.name+'';
 
 
-
-
-                    // var certification = o.certification+'';
-
-                    // var certification1 = '';
-
-                    // switch (certification) {
-                    //     case "1":
-                    //         certification1='<div class="avatar avatar-sm bg-red-lt" >是</div>';
-                    //         break;
-                    //     default:
-                    //         certification1='<div class="avatar avatar-sm bg-red-lt" >否</div>';
-                    // }
-
-                    var jobBeansNum = o.jobBeansNum+'';
-
-                    var comName=o.comName+'';
-                    var state=o.state+'';
-                    var state1= '';
-                    switch (state) {
-                        case "1":
-                            state1='签约运作';
-                            break;
-                        case "2":
-                            state1='签约暂停';
-                            break;
-                        case "3":
-                            state1='签约终止';
-                            break;
-                        default:
-                            state1='潜在客户' ;
-                    }
-
-                    
-
-                    var updateTime=o.updateTime+'';
-                    var customerCommunicateBeansNum= o.customerCommunicateBeansNum+''
-
-                    var numbers = '<div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">'+customerCommunicateBeansNum+'</div>'
-
-                    var cteams= '无';
-                    if (o.customerTeamBeans!=null&& o.customerTeamBeans.length>0){
-                      o.customerTeamBeans.forEach(element => {
-                        cteams += element.userName+' '
-                      });
-                    };
-                    if (jobBeansNum==='0' )jobBeansNum='不限';
-                    // if (com===undefined || com==='')com='暂无数据';
-
-
-                    str+="<tr><td>"
-                        +sourceType1+"</td><td>"
-                        +vip1+level1+"<span style='font-weight: bold;' class ='bg-primary-lt'><a onclick='checkDetail("+o.customerId+")'>"+name+"</a></span></td><td>"
-                        // +certification1+"</td><td >"
-                        +jobBeansNum+"</td><td >"
-                        
-                        +cteams+"</td><td>"
-                        +comName+"</td>" +
-                        "<td>"+state1+"</td>" +
-                        "<td>"+updateTime+"</td>" +
-                        "<td>"+numbers+"</td>" +
-                        "<td><a herf='#' onclick='checkDetail("+o.customerId+")' class ='btn'>查看</a><a herf='#' class='btn' onclick='move("+o.customerId+")'>转移</a></td>" +
-                        "</tr>";
                 }
                 $('#data').html(str);
 

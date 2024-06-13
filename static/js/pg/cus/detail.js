@@ -420,7 +420,7 @@ function job(pageNo){
                         console.log(cityarray)
                         if(cityarray!=null&&cityarray.length>0){
                             cityarray.forEach(element => {
-                                cityCode += cn.info(element).name + ' '
+                                cityCode += cn.info(element.trim()).name + ' '
                             });
                         }
                         // console.log(cityCode)

@@ -583,3 +583,14 @@ function isNumeric(str) {
     var pattern = /^\d+(\.\d+)?$/;  
     return pattern.test(str);  
 }  
+
+function splitOrGet(str) {  
+    // 使用split方法根据'/'字符分割字符串  
+    // 如果没有'/'，split方法将返回只包含原字符串的数组  
+    const parts = str.split('/');  
+  
+
+  
+    // 否则，返回分割后的数组  
+    return parts;  
+} 
