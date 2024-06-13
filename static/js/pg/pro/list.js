@@ -19,7 +19,7 @@ $(function(){
 
 
 
-    const ct = document.getElementById("selectdiv");  
+    const ct = document.getElementById("jobdiv");  
     ct.innerHTML = '';  
     // positionList.forEach(item=>{
     //   if(item.children){
@@ -89,6 +89,7 @@ $(function(){
         link.setAttribute('data-bs-toggle', 'dropdown');  
         link.setAttribute('data-bs-auto-close', 'outside');  
         link.setAttribute('role', 'button');  
+        link.setAttribute('value', item.value);  
         link.setAttribute('aria-expanded', 'false');  
         link.textContent = item.label;  
       
@@ -147,6 +148,7 @@ function buildDropdownMenu(items, parent) {
       link.setAttribute('data-bs-toggle', 'dropdown');  
       link.setAttribute('data-bs-auto-close', 'outside');  
       link.setAttribute('role', 'button');  
+      link.setAttribute('value', item.value);  
       link.setAttribute('aria-expanded', 'false');  
       link.textContent = item.label;  
       
@@ -170,10 +172,33 @@ function buildDropdownMenu(items, parent) {
 
 
 function chooseThis(o){
-  console.log($(o).attr('value'))
+
+
+  
+
+
+  let str = '';
+
+  var showLinks = $('a.show');
+
+
+  if(showLinks.length>1){
+
+    showLinks.each(function() {
+  
+      str +=   $(this).attr('value') + ' / '
+  
+  
+    });
+  
+    str+=$(o).attr('value');
+    $('#jobinput').val(str)
+  }else{
+    $('#jobinput').val(str)
+  }
 
   $('.dropdown-menu.show').removeClass('show');
-  $('#test1').val($(o).attr('value'))
+
 
 }
 

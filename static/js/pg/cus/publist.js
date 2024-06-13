@@ -164,12 +164,14 @@ function getPage(pageNo){
                     var customerCommunicateBeansNum= o.customerCommunicateBeansNum+''
 
                     var numbers = '<div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">'+customerCommunicateBeansNum+'</div>'
-                    var cteams= '无';
+                    var cteams= '';
                     if (o.customerTeamBeans!=null&& o.customerTeamBeans.length>0){
                       o.customerTeamBeans.forEach(element => {
-                        cteams += element.userName+' '
+                        cteams += `<span class="badge badge-outline text-lime">${element.userName}</span>`
                       });
-                    };
+                    }else{
+                      cteams='无'
+                    }
                     if (jobBeansNum==='0' )jobBeansNum='不限';
                     // if (com===undefined || com==='')com='暂无数据';
 

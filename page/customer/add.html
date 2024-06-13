@@ -514,7 +514,7 @@
                                   清空
                                 </a>
                               </div>
-                              <a href="#" onclick="checkMember()" class="btn btn-success">
+                              <a onclick="addContacter()" class="btn btn-success">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                                 添加
                               </a>
@@ -522,12 +522,13 @@
                           </div>
                         </div>
                         <div class="card-body">
-                          <div class="row row-cards">
+                          <div class="row row-cards" id="contacter">
                             <div class="mb-3">
                               <dt class="col-3"  style="font-weight: bold;">联系人:</dt>
                               <dd class="col-9">
                                 <div id="teamlist">
-                                  <span class="badge bg-twitter-lt">zhangweijun<a onclick="deletemember(401965536176508928)" style="color: black;"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M18 6l-12 12"></path><path d="M6 6l12 12"></path></svg></a></span>
+
+                                  
                                 </div>
                             
                               </dd>  
@@ -537,51 +538,51 @@
                             <div class="mb-3 col-lg-4 row">
                               <label class="form-label col-3 required" style="font-weight: bold;">姓名</label>
                               <div class="col">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control"  name="contacterName" >
                               </div>
                             </div>
                             <div class="mb-3 col-lg-4 row">
                               <label class="form-label col-3 " style="font-weight: bold;">职位</label>
                               <div class="col">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="contacterJob">
                               </div>
                             </div>
                             <div class="mb-3 col-lg-4 row">
                               <label class="form-label col-3 " style="font-weight: bold;">座机</label>
                               <div class="col">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="contacterLandline">
                               </div>
                             </div>
                             <div class="mb-3 col-lg-4 row">
                               <label class="form-label col-3 required" style="font-weight: bold;">手机</label>
                               <div class="col">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="contacterPhone">
                               </div>
                             </div>
                  
                             <div class="mb-3 col-lg-4 row">
                               <label class="form-label col-3 " style="font-weight: bold;">邮箱</label>
                               <div class="col">
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="contacterEmail">
                               </div>
                             </div>
                             <div class="mb-3 col-lg-4 row">
                               <label class="form-label col-3 " style="font-weight: bold;">性别</label>
                               <div class="col">
                                 <label class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="isChangeManage" value="2" >
+                                  <input class="form-check-input" type="radio" name="contacterGender" value="1" >
                                   <span class="form-check-label">男</span>
                                 </label>
                                 <label class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="isChangeManage" value="2" >
+                                  <input class="form-check-input" type="radio" name="contacterGender" value="2" >
                                   <span class="form-check-label">女</span>
                                 </label>
                               </div>
                             </div>
-                            <div class="mb-3 col-lg-8 row">
-                              <label class="form-label col-3 " style="font-weight: bold;">备注</label>
-                              <div class="col">
-                                <textarea name="" id="" class="form-control" rows="2"></textarea>
+                            <div class="mb-3 col-lg-12 row">
+                              <label class="form-label col-1 " style="font-weight: bold;">备注</label>
+                              <div class="col col-7 ">
+                                <textarea class="form-control" rows="2" name="contacterRemark" ></textarea>
                               </div>
                             </div>
     
