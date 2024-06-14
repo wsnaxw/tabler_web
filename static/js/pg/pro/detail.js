@@ -4,80 +4,12 @@
 $(function(){
 
     
-    // @formatter:on
-
-    Dropzone.autoDiscover = false;
-   
-    var myDropzone = new Dropzone("#dropzone-multiple", {
-        url:'test',
-        dictDefaultMessage:"点击或拖拽文件到此上传！",
-        addRemoveLinks: true,//是否有删除文件的功能
-        dictRemoveFile: "移除",//移除文件链接的文本。只设置addRemoveLinks: true 没有这个 会找不到删除按钮
-        dictRemoveFileConfirmation: '确定删除此文件吗?',
-
-        autoProcessQueue: false, // 设置为false，表示不自动上传文件队列
-        // acceptedFiles: ".jpg,.png,.jpeg.JPG,.PNG,.JPEG",//支持的格式
-        // accept: function(file, done) {
-      
-        // },
-
-        // 其他配置选项...
-        init: function() {
-            this.on("success", function(file, response) {
-                // 假设服务器返回的response是一个对象，其中包含上传成功的信息
-                // console.log("文件上传成功:", file,response);
-                // console.log("文件上传成功:", response);
-
-            // 创建一个新的<img>元素用于预览
-            file.url='/'+response.name
-          
-            // 将<img>元素添加到预览区域
-    
-                // 更新UI以显示上传成功
-                // 你可以根据需要自定义这部分代码
-                var previewElement = file.previewElement;
-                previewElement.classList.add("dz-success"); // 添加成功类
-                // previewElement.classList.remove("dz-progress"); // 移除处理中类
-                previewElement.classList.remove("dz-processing");
-                // // ...其他UI更新操作...
-                // $('.dz-progress').each(function() {
-                //     // 移除dz-processing类
-                //     $(this).removeClass('dz-progress');
-                //     // 添加dz-success类
-                //     $(this).addClass('dz-success');
-                // });
+ 
 
 
-            });
-            this.on("removedfile",function (file){
-                removeFileNames(file.url);
-                console.log(file)
-                console.log(filenames)
-            });
-    
-        }
-    });
+    var workId = getParameterByName('workId');
 
-    myDropzone.on("addedfile", function(file) {  
-        upload(file,myDropzone)
-        // 你可以在这里添加预览逻辑  
-        // myDropzone.createThumbnailFromUrl(...);  
-    });  
-      
-    // let test1 = document.getElementById("test")
-
-
-    // test1.addEventListener('mouseenter',function(event){
-
-    //     test()
-
-    // })
-
-
-
-    var customerId = getParameterByName('customerId');
-
-    csid = customerId;
+    workId = workId;
 
     // console.log('customerId:'+BigInt(customerId))
     //默认进行分页数据查询
@@ -102,11 +34,7 @@ $(function(){
     });
 
 
-    $('#rxxxdiv').hide()
-    $('#movediv').hide()
-    $('#filediv').hide()
-    $('#jobdjv').hide()
-    $('#kzxxdiv').show()
+    $('#rxxxdiv').show()
 
 
     // customer/getCustomerNumber 数据填充

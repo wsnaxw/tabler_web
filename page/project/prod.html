@@ -1,0 +1,1277 @@
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta19
+* @link https://tabler.io
+* Copyright 2018-2023 The Tabler Authors
+* Copyright 2018-2023 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>职位详情页</title>
+    <!-- CSS files -->
+    <script src="../../static/js/tabler.min.js"></script>
+    <link rel="stylesheet" href="../../static/css/tabler.min.css">
+    <link rel="stylesheet" href="../../static/css/tabler-vendors.min.css">
+    <link rel="stylesheet" href="../../static/css/base.css">
+    <link rel="stylesheet" href="../../static/css/dropzone.css">
+    <link rel="icon" href="../../static/img/favicon.ico" type="image/x-icon" />
+    <script src="../../static/js/jquery.min.js"></script>
+    <script src="../../static/js/base.js?1"></script>
+    <script src="../../static/js/citycode.js" ></script>
+    <script src="../../static/js/fslightbox.js" ></script>
+    <link type="text/css" rel="stylesheet" href="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/skin/jedate.css">
+    <script type="text/javascript" src="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/src/jedate.js"></script>
+    <script type="text/javascript" src="https://gosspublic.alicdn.com/aliyun-oss-sdk-6.18.0.min.js"></script>
+    <script src="../../static/js/watermark.js"></script>
+    <script src="../../static/js/pg/pro/detail.js"></script>
+    <script>
+      function dark(){
+        let body = document.getElementById('webBody')
+        body.setAttribute("data-bs-theme","dark")
+      }
+
+      function light(){
+        let body = document.getElementById('webBody')
+        body.setAttribute("data-bs-theme","")
+      }
+
+      
+
+    </script>
+<style>
+
+</style>
+  </head>
+  <body  id="webBody" class="layout-fluid">
+    <div class="page">
+
+
+      <!--      &lt;!&ndash; Sidebar &ndash;&gt;-->
+      
+      
+      <aside class="navbar navbar-vertical navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-controls="sidebar-menu" aria-expanded="true" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon" style="color: black;">
+            </span>
+          </a>
+          <a href="#" class="btn navbar-toggler"></a>
+          <h1 class="navbar-brand navbar-brand-autodark">
+            <a href="#" >
+              <img src="http://admin.fsfhr.com/banner.svg" width="110" height="32" alt="faithful" class="navbar-brand-image">
+            </a>
+          </h1>
+
+          <div class="collapse navbar-collapse"   id="sidebar-menu">
+            <ul class="navbar-nav pt-lg-3" id="menu">
+
+              </li>
+            </ul>
+         
+          </div>
+        </div>
+      </aside>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- navbar navbar-expand-md d-print-none d-none d-lg-flex -->
+      <!-- navbar navbar-expand-md d-print-none -->
+      <header class="navbar navbar-expand-md d-print-none d-none d-lg-flex fixed-top" id="topbar">
+        <div class="container-xl">
+
+
+
+          <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal p-0 pe-md-6">
+          </h1>
+
+
+          <div class="navbar-nav flex-row order-md-last">
+
+
+
+            <div class="nav-item d-none d-md-flex me-3">
+              <div class="btn-list">
+                <div class="input-icon">
+                    <span class="input-icon-addon">
+                      <!-- Download SVG icon from http://tabler-icons.io/i/search -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path d="M21 21l-6 -6"></path></svg>
+                    </span>
+                  <input type="text" value="" class="form-control" id="indexsearch" placeholder="客户名/人选名/项目名" aria-label="Search in website" data-listener-added_8ff64168="true">
+                </div>
+                <a onclick="indexSearch()" class="btn btn-blue" target="_blank" rel="noreferrer">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/brand-github -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"></path></svg>
+                  查询
+                </a>
+              </div>
+            </div>
+
+
+            <div class="d-none d-md-flex">
+              <a   onclick="dark()" class="nav-link px-0 hide-theme-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="Enable dark mode" data-bs-original-title="Enable dark mode">
+                <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path></svg>
+              </a>
+              <a onclick="light()" class="nav-link px-0 hide-theme-light" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="Enable light mode" data-bs-original-title="Enable light mode">
+                <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"></path></svg>
+              </a>
+
+
+
+              <div class="nav-item dropdown d-none d-md-flex me-3">
+
+
+
+                <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1" aria-label="Show notifications" onclick="usermessage()" data-bs-auto-close="outside">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/bell -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path><path d="M9 17v1a3 3 0 0 0 6 0v-1"></path></svg>
+                </a>
+
+
+
+                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card ">
+                  
+                  <div class="card">
+                    <div class="card-header">
+                      <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                          <a href="#" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab" onclick="usermessage()">信箱</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <a href="#" class="nav-link" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab" onclick="usertrip()">行程</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="list-group list-group-flush list-group-hoverable">
+                      <div id="messagediv">
+                        <div class="list-group-item divide-y"  id="msgstr"  >
+                          <h3></h3>
+                        </div>
+                      </div>                      
+                      <div id="tripdiv">
+                        <div class="list-group-item divide-y" id="tripstr">
+                          <h3></h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+
+            <div class="nav-item dropdown">
+              <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
+                <div class="d-none d-xl-block ps-2">
+                  <div id="userName">12321</div>
+                  <div class="mt-1 small text-muted" id="userLevel">123</div>
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <a href="#" class="dropdown-item">个人中心</a>
+                <a href="#" class="dropdown-item">修改密码</a>
+                <div class="dropdown-divider"></div>
+                <a id="logOut" class="dropdown-item">退出</a>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+      </header>
+
+      <div id="messageContainer" class="message-container">
+        <!-- Messages will be added here dynamically -->
+      </div>
+
+
+      <div class="page-wrapper">
+
+
+
+        <!-- Page header -->
+        <div class="page-header d-print-none">
+          客户详情
+        </div>
+
+
+
+
+        <!-- Page body -->
+        <div class="page-body container-xl">
+
+
+
+
+
+          <div class="container-xl" >
+
+
+            <div class="row row-deck row-cards">
+
+
+
+              <div class="col-lg-12">
+
+
+                
+
+
+
+
+
+                <div class="card">
+                
+                  <div class="card-body" id="formdata">
+
+                    <div class="row row-cards"> 
+                    
+
+                      <div class="col-lg-12">
+                        <div class="card">
+                          <div class="card-status-start bg-primary"> 
+
+                          </div>
+                          <div class="card-header">
+                            <h2 class="card-title" id="basecname" style="font-weight: bold;">市场总监</h3>&nbsp;&nbsp;<span  style="color: red;font-weight: bold;" id="bmxx">20万</span>&nbsp;&nbsp; <span class="form-check-description" style="color: rgb(77, 150, 193);" id="bmxx" onclick="copyTextToClipboard('bmxx')"></span>
+                            <div class="card-actions">
+                              <a href="#" class="btn btn-ghost-primary" onclick="showMessage(1)">
+                                新增职位 
+                              </a>
+                              
+                              <!-- <a href="#" class="btn btn-ghost-success"  id="isvip">
+                                申请认证
+                              </a> -->
+                              <a href="#" class="btn btn-ghost-info"  data-bs-toggle='modal' data-bs-target='#modal-edit' onclick="initEdit()">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path><path d="M16 5l3 3"></path></svg>
+                              </a>
+                            </div>
+                          </div>
+                          <div class="card-body">
+
+
+                            <div class="row mb-3">
+                              
+                              <div class="col-lg-3 row">
+                                <h3 class="col">成都巨像有限测试公司
+                                </h3>
+                                <small class="form-hint">岗位编码：706344925460959232</small>
+                        
+                              </div>
+                              <div class="col-3">
+                                  
+                                <span>18 - 24 岁</span>
+                                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#000000"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-minus-vertical"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5v14" /></svg>
+                                <span>本科</span>
+                                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#000000"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-minus-vertical"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5v14" /></svg>
+                                <span>性别不限</span>
+
+                              </div>
+
+              
+                              <div class="col-lg-6">
+                               <span> 发布时间：2020-01-01</span>
+                              </div>
+
+
+
+                            </div>
+
+                            <dl class="row mb-3">
+                              <dt class="col-1">职位类别:</dt>
+                              <dd class="col-2" id="gsgs">销售岗位</dd>
+                              <dt class="col-1">招聘人数:</dt>
+                              <dd class="col-2" id="tjr">无</dd>
+                              <dt class="col-1">归属部门:</dt>
+                              <dd class="col-2" id="tjr">无</dd>
+                              <dt class="col-3"></dt>
+
+
+                              <dt class="col-1">工作地点:</dt>
+                              <dd class="col-2" id="gsgs">成都</dd>
+                              <dt class="col-1">紧急成都:</dt>
+                              <dd class="col-2" > <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#ff3d3d"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-flame"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.773 4.741 -3 6c-1.226 1.26 -2 3.24 -2 5a6 6 0 1 0 12 0c0 -1.532 -1.056 -3.94 -2 -5c-1.786 3 -2.791 3 -4 2z" /></svg>                              </dd>
+                              <dt class="col-1">状态:</dt>
+                              <dd class="col-2" id="gsgs"><span>运行中</span>&nbsp;<a class="btn btn-outline-info" onclick="signCustomer()">暂停</a></dd>
+
+                              <dt class="col-3"></dt>
+                              <dt class="col-1">执行团队:</dt>
+                              <dd class="col-9">
+                                <div id="teamlist">
+                                  <span class="tag">
+                                  白飞飞
+                                  <a onclick="deletemember(589678016880185344)" class="btn-close"></a>
+                                </span> 
+                                  <span class="badge bg-green-lt" data-bs-toggle="modal" data-bs-target="#membermodal" onclick="newTeamList()">新增<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg> </span>
+
+                              </div>
+                            
+                              </dd>  
+                            </dl>
+
+                           
+
+                          </div>
+                        </div>
+                      </div>
+
+
+                      
+
+
+                     
+
+
+
+                    </div>
+  
+                    
+
+
+
+                  </div>
+      
+      
+      
+      
+                 
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
+      
+                </div>
+              </div>
+
+
+
+
+
+              <div id="exploredtable">
+                
+              
+
+                <!-- -->
+
+                <div class="row row-cards" id="rxxxdiv" >
+                  <div class="col-lg-12">
+                    <div class="card card-body-scrollable">
+                      <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
+                          <li class="nav-item" role="presentation">
+                            <a id="yjph" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab" onclick="rxxx()">全部</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(0)">加项目</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(1)">给客户</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(5)">约面试</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1"onclick="rxxx(6)">客户面试</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(8)">确认offer</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(9)">已入职</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(10)">人选离职</a>
+                          </li>
+                      
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(4)">放弃人选</a>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div class="card-body align-items-center">
+                        <table class="table card-table table-vcenter text-nowrap datatable ">
+                          <thead>
+
+                            <tr>
+                              <th>项目名称</th>
+                              <th>推荐人</th>
+                              <th>人选姓名</th>
+                              <th>当前公司</th> 
+                              <th>当前职位</th>                        
+                              <th>推荐时间</th>
+   
+                              <th>操作</th>
+                            </tr>
+                          </thead>
+                          <tbody id="rxxxdata">
+                            <tr>
+                              <td colspan="7" style="font-weight: bold;text-align: center;">暂无数据 </td>
+                            </tr>
+                            
+                            
+                      
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+    
+                </div>
+
+                <!-- -->
+
+                
+
+                <!--X-->
+
+
+              </div>
+
+
+              
+
+              <div id="rxxqdiv">
+                
+              
+
+                <!-- -->
+
+                <div class="row row-cards" id="rxxxdiv" >
+                  <div class="col-lg-12">
+                    <div class="card card-body-scrollable">
+                      <div class="card-header">
+                        <h3>人选基本详情</h3>
+                        <div class="ms-auto">
+                          <a href="#" class="btn btn-info">编辑</a>
+                          <a href="#" class="btn btn-danger">关闭</a>
+                        </div>
+                  
+                      </div>
+
+                      <div class="card-body align-items-center">
+                        
+
+
+
+                        <div class="row row-cards"> 
+                    
+
+                          <div class="col-lg-12">
+                            <div class="card">
+                              
+                     
+                              <div class="card-body">
+    
+    
+                                <div class="row mb-3">
+                                  
+                                  <div class="col-lg-12">
+                                    <h3>张三
+                                    </h3>
+                                
+
+                                    <span>139****1233</span>
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#000000"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-minus-vertical"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5v14" /></svg>
+                                
+                                    <span>男</span>
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#000000"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-minus-vertical"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5v14" /></svg>
+
+                                    <span>本科</span>
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#000000"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-minus-vertical"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5v14" /></svg>
+                                    <span>24 岁</span>
+    
+                                  </div>
+   
+                                </div>
+    
+                                <dl class="row mb-3">
+                                  <dt class="col-1">职位类别:</dt>
+                                  <dd class="col-2" id="gsgs">销售岗位</dd>
+                                  <dt class="col-1">招聘人数:</dt>
+                                  <dd class="col-2" id="tjr">无</dd>
+                                  <dt class="col-1">归属部门:</dt>
+                                  <dd class="col-2" id="tjr">无</dd>
+                                  <dt class="col-3"></dt>
+    
+    
+                                  <dt class="col-1">工作地点:</dt>
+                                  <dd class="col-2" id="gsgs">成都</dd>
+                                  <dt class="col-1">紧急成都:</dt>
+                                  <dd class="col-2" > <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#ff3d3d"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-flame"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.773 4.741 -3 6c-1.226 1.26 -2 3.24 -2 5a6 6 0 1 0 12 0c0 -1.532 -1.056 -3.94 -2 -5c-1.786 3 -2.791 3 -4 2z" /></svg>                              </dd>
+                                  <dt class="col-1">状态:</dt>
+                                  <dd class="col-2" id="gsgs"><span>运行中</span>&nbsp;<a class="btn btn-outline-info" onclick="signCustomer()">暂停</a></dd>
+    
+                                  <dt class="col-3"></dt>
+                                  <dt class="col-1">执行团队:</dt>
+                                  <dd class="col-9">
+                                    <div id="teamlist">
+                                      <span class="tag">
+                                      白飞飞
+                                      <a onclick="deletemember(589678016880185344)" class="btn-close"></a>
+                                    </span> 
+                                      <span class="badge bg-green-lt" data-bs-toggle="modal" data-bs-target="#membermodal" onclick="newTeamList()">新增<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg> </span>
+    
+                                  </div>
+                                
+                                  </dd>  
+                                </dl>
+    
+                               
+    
+                              </div>
+                            </div>
+                          </div>
+    
+                          <div class="col-lg-12">
+                            <div class="card">
+                          
+                             
+                              <div class="card-body">
+    
+                                <div class="col-lg-12 row" >
+                                  <div class="col-lg-3">
+                                    操作
+                                  </div>
+                                  <div class="col-lg-3">
+                                    操作
+                                  </div>
+                                  <div class="col-lg-3">
+                                    操作
+                                  </div>
+                                  <div class="col-lg-3">
+                                    操作
+                                  </div>
+                                  <div class="col-lg-3">
+                                    操作
+                                  </div>
+
+
+                                </div>
+
+
+                               
+    
+                                
+    
+                               
+    
+                              </div>
+                            </div>
+                          </div>
+                          
+    
+    
+                         
+    
+    
+    
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      </div>
+                    </div>
+                  </div>
+    
+                </div>
+
+                <!-- -->
+
+                
+
+                <!--X-->
+
+
+              </div>
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+            
+
+
+
+            
+
+            
+          </div>
+        </div>
+        
+
+       
+
+       
+
+
+        <div class="modal modal-blur fade" id="modal-danger" tabindex="-1" aria-hidden="true" style="display: none;">
+          <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+           
+            <div class="modal-content modal-body">
+              
+              <div class="alert alert-success" role="alert">
+                <div class="d-flex">
+                  <div>
+                    <!-- Download SVG icon from http://tabler-icons.io/i/check -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M5 12l5 5l10 -10"></path></svg>
+                  </div>
+                  <div>
+                    <h4 class="alert-title">成功</h4>
+                    <div class="text-secondary" id="modalshowstr"></div>
+                  </div>
+                </div>
+              </div>
+          
+              
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="modal modal-blur fade" id="membermodal" tabindex="-1" role="dialog" aria-hidden="true" >
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="formtitle">新增团队成员</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+                
+                <div class="mb-3">
+                  <label class="form-label">职位管理权限</label>
+                  <div>
+                    <label class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="jobManage" value="1" checked>
+                      <span class="form-check-label">有职位管理权限</span>
+                    </label>
+                    <label class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="jobManage" value="2" >
+                      <span class="form-check-label">无职位管理权限</span>
+                    </label>
+                  </div>
+                  <small class="form-hint">默认不选择则都统一为有职位管理权限</small>
+                </div>
+               
+
+
+                <div class="mb-3">
+                  <label class="form-label">选择成员</label>
+                  <select type="text" class="form-select" placeholder="输入名称查询选择顾问" id="addTeamMember">
+                  </select>
+                </div>
+               
+    
+
+               
+
+
+              </div>
+    
+              
+              <div class="modal-footer">
+                <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                  Cancel
+                </a>
+                <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal" onclick="addTeamList()">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+                  新增
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="modal modal-blur fade" id="modal-sign" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">申请签约</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="row mb-3">
+                  <div class="col-lg-6">
+                    <label class="form-label">签约比例</label>
+
+                    <div class="input-group input-group-flat">
+                      <input type="number" class="form-control" name="signPercent"  placeholder="请输入签约比例">
+                      <span class="input-group-text">
+                        <kbd>%</kbd>
+                      </span>
+                      <div class="invalid-feedback">不能为空</div>
+
+                    </div>  
+                  </div>
+                  <div class="col-lg-6">
+                    <label class="form-label">保用期</label>
+                    <div class="input-group input-group-flat">
+                      <input type="number" class="form-control" name="quotTime"  placeholder="请输入保用期月限">
+                      <span class="input-group-text">
+                        <kbd>月</kbd>
+                      </span>
+                      <div class="invalid-feedback">不能为空</div>
+                    </div>
+                   
+
+                  </div>
+                 
+                </div>
+        
+                <label class="form-label">是否支付首付款</label>
+                <div class="form-selectgroup-boxes row mb-3">
+                  <div class="col-lg-6">
+                    <label class="form-selectgroup-item">
+                      <input type="radio" name="isDownPayment" value="0" onclick="check1()" class="form-selectgroup-input" >
+                      <span class="form-selectgroup-label d-flex align-items-center p-3">
+                        <span class="me-3">
+                          <span class="form-selectgroup-check"></span>
+                        </span>
+                        <span class="form-selectgroup-label-content">
+                          <span class="form-selectgroup-title strong mb-1">否</span>
+                          <span class="d-block text-secondary">无需填写</span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <div class="col-lg-6">
+                    <label class="form-selectgroup-item">
+                      <input type="radio" name="isDownPayment" value="1"  onclick="check2()"class="form-selectgroup-input" checked>
+                      <span class="form-selectgroup-label d-flex align-items-center p-3">
+                        <span class="me-3">
+                          <span class="form-selectgroup-check"></span>
+                        </span>
+                        <span class="form-selectgroup-label-content">
+                          <span class="form-selectgroup-title strong mb-1">是</span>
+                          <span class="d-block text-secondary">需要填写首付款金额</span>
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                <div class="row">
+                  
+                  <div class="col-lg-6">
+                    <div class="mb-3">
+                      <label class="form-label">首付款</label>
+                      <div class="input-group input-group-flat">
+                        <input type="number" class="form-control" name="downPayment"  autocomplete="off" placeholder="首付款">
+                        
+                        <span class="input-group-text">
+                          <kbd>元</kbd>
+                        </span>
+                        <div class="invalid-feedback">不能为空</div>
+
+                      </div>  
+                     
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-6 mb-3">
+                   
+                    <label class="form-label">合同期限</label>
+                    <div class="input-group input-group-flat">
+                      <input type="text" class="jeinpbox form-control" name="dayRange"id="ymd033" placeholder="YYYY-MM-DD ~ YYYY-MM-DD">  
+                      <div class="invalid-feedback">不能为空</div>
+                    </div> 
+                   
+                     
+                  </div>
+                 
+                </div>
+
+                <div class="row">
+                  <h3 class="card-title">文件上传  <span id="fileerror" style="color: red;display: none;">&nbsp;&nbsp; 文件不能为空！</span></h3>
+                    <form class="dropzone" id="dropzone-multiple"  autocomplete="off" novalidate>
+                   
+                    </form>
+                </div>
+
+              </div>  
+              <div class="modal-footer">
+                <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                  取消
+                </a>
+                <a href="#" class="btn btn-primary" onclick="signC()" >
+                  确认签约                  
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div class="modal modal-blur fade" id="modal-edit" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">修改客户信息</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="card-body">
+
+
+                  <div class="row mb-3">
+                    <div class="col-lg-6">
+                      <label class="form-label"  style="font-weight: bold;">所属行业</label>
+
+                      <div class="input-group input-group-flat">
+                        <select class="form-select" id="industryType" name="industryType">
+                          <option selected value="不限">不限</option>
+                          <option value="互联网 / 游戏 / 软件">互联网 / 游戏 / 软件</option>
+                          <option value="电子 / 通信 / 硬件">电子 / 通信 / 硬件</option>
+                          <option value="房地产 / 建筑 / 物业 ">房地产 / 建筑 / 物业 </option>
+                          <option value="经济">经济</option>
+                          <option value="消费品">消费品</option>
+                          <option value="汽车 / 机械 / 制造">汽车 / 机械 / 制造</option>
+                          <option value="广告 / 传媒 / 教育 / 文化">广告 / 传媒 / 教育 / 文化</option>
+                          <option value="交通 / 贸易 / 物流">交通 / 贸易 / 物流</option>
+                          <option value="制药 / 医用器械">制药 / 医用器械</option>
+                          <option value="能源 / 化工 / 环保">能源 / 化工 / 环保</option>
+                          <option value="政府 / 农林牧渔">政府 / 农林牧渔</option>
+                        </select>
+
+                      </div>  
+                    </div>
+                    <div class="col-lg-6">
+                      <label class="form-label" style="font-weight: bold;">公司性质</label>
+                      <div class="input-group input-group-flat">
+                        <select class="form-select" id="customerNature" name="customerNature">
+                        
+                          <option value="0">国企</option>
+                          <option value="1" selected>民营企业</option>
+                          <option value="2">合资</option>
+                          <option value="3">外资（欧美）</option>
+                          <option value="4">外资（非欧美）</option>
+                          <option value="5">外企代表处</option>
+                          <option value="6">政府机关</option>
+                          <option value="6">事业单位</option>
+                          <option value="6">非营利组织</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-lg-6">
+                      <label class="form-label" style="font-weight: bold;">公司规模</label>
+                      <div class="input-group input-group-flat">
+                        <select class="form-select" id="customerSize" name="customerSize">
+                          <option selected value="0">0-15人</option>
+                          <option value="1">15-50人</option>
+                          <option value="2">50-100人</option>
+                          <option value="3">100-500人</option>
+                          <option value="4">500-1000人</option>
+                          <option value="5">1000-10000人</option>
+                          <option value="6">10000人以上</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                      <label class="form-label" style="font-weight: bold;">对外名称</label>
+                      <div class="input-group input-group-flat">
+                        <input type="text" class="form-control" name="outName">
+                      </div>
+                    </div>
+
+
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col-lg-6">
+                      <label class="form-label" style="font-weight: bold;">公司地址</label>
+                      <div class="input-group input-group-flat">
+                        <input type="text" class="form-control" name="registeredAddress">
+                      </div>
+                    </div>
+
+                    
+                    <div class="col-lg-6">
+                      <label class="form-label" style="font-weight: bold;">公司网站</label>
+                      <div class="input-group input-group-flat">
+                        <input type="text" class="form-control" name="webSite">
+                      </div>
+                    </div>
+
+
+
+
+
+
+
+                  </div>
+
+
+                  
+
+                 
+                 
+
+                </div>
+                
+
+              </div>  
+              <div class="modal-footer">
+                <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                  取消
+                </a>
+                <a href="#" class="btn btn-primary" onclick="editCustomer()" >
+                  确认修改                 
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="modal modal-blur fade" id="modal-newc" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">新增沟通记录</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="card-body">
+
+                  <!-- 0 其他 1  2  3  -->
+                  <div class="row mb-3">
+                    <div class="col-lg-12">
+                      <div class="mb-3">
+                        <div class="form-label">类型</div>
+                        <div>
+                          <label class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="state" value="0" checked="">
+                            <span class="form-check-label">其他</span>
+                          </label>
+                          <label class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="state" value="1" >
+                            <span class="form-check-label">面试沟通</span>
+                          </label>
+                          <label class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="state" value="2">
+                            <span class="form-check-label">合同沟通</span>
+                          </label>
+                          <label class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="state" value="3">
+                            <span class="form-check-label">请款沟通</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                   
+                    
+                    <div class="col-lg-12 mb-3">
+                      <label class="form-label" style="font-weight: bold;">沟通内容</label>
+                      <textarea rows="5" class="form-control" placeholder="Here can be your description" name="content"></textarea>
+                    </div>
+
+
+
+
+
+
+
+                  </div>
+
+
+                  
+
+                 
+                 
+
+                </div>
+                
+
+              </div>  
+              <div class="modal-footer">
+                <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                  取消
+                </a>
+                <a href="#" class="btn btn-primary" onclick="newcc()" >
+                  新增                 
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+        <div class="modal modal-blur fade" id="modal-pic" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-body">
+                <img id="picshow" alt="">
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <script src="../../static/js/tom-select.base.min.js" ></script>
+       
+        <script src="../../static/js/dropzone-min.js?1692870487" ></script>
+      
+        <script>
+          // @formatter:off
+          // document.addEventListener("DOMContentLoaded", function() {
+          //   new Dropzone("#dropzone-multiple1",{
+          //     autoProcessQueue: false
+          //   })
+          // })
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+      <footer class="footer footer-transparent d-print-none">
+        <div class="container-xl">
+          <div class="row text-center align-items-center flex-row-reverse">
+            <div class="col-12">
+            <!-- <div class="col-12 col-lg-auto mt-3 mt-lg-0 text-center "> -->
+              <ul class="list-inline list-inline-dots mb-0">
+                <li class="list-inline-item">
+                  Copyright &copy; 2021  
+
+                  <a href="#" class="link-secondary"> 费思福(成都)人力资源咨询有限公司 </a>
+                
+                </li>
+                <li class="list-inline-item">
+                  蜀ICP备2021005893号-2
+          
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+      </div>
+    </div>
+    
+  </body>
+</html>

@@ -16,64 +16,78 @@ $(function(){
     getPage(1);
 
 
+    const provinces = cn.getProvinces()
+
+    console.log(cn.getPrefectures('100000'))
+
+
+    const citydiv = document.getElementById("citydiv");  
+    citydiv.innerHTML = '';  
+
+
+    provinces.forEach(province=>{
+      const citys = cn.getPrefectures(province.code)
+
+
+      if(citys.length>0){
+        var dd = document.createElement('div');  
+        dd.classList.add('dropend');  
+        const link = document.createElement('a');  
+        link.classList.add('dropdown-item', 'dropdown-toggle');  
+        link.setAttribute('data-bs-toggle', 'dropdown');  
+        link.setAttribute('data-bs-auto-close', 'outside');  
+        link.setAttribute('role', 'button');  
+        link.setAttribute('aria-expanded', 'false');  
+        link.textContent = province.name;  
+        dd.appendChild(link);  
+        citydiv.appendChild(dd); 
+        var dd22 = document.createElement('div');  
+        dd22.classList.add('dropdown-menu');  
+
+        
+
+        citys.forEach(city=>{  
+           const link = document.createElement('a');  
+            link.classList.add('dropdown-item');  
+            link.setAttribute('onClick', 'chooseThisCity(this)');  
+            link.setAttribute('value', city.code);  
+            link.textContent = city.name;         
+            dd22.appendChild(link); 
+          })
+
+          dd.appendChild(dd22)
+
+
+
+      }else{
+        const link = document.createElement('a');  
+        link.classList.add('dropdown-item');  
+        link.setAttribute('onClick', 'chooseThisCity(this)');  
+        link.setAttribute('value', province.code);  
+        link.textContent = province.name;  
+        citydiv.appendChild(link); 
+
+
+      }
+
+
+
+
+
+
+
+    })
+
+
+
+
+
+
 
 
 
     const ct = document.getElementById("jobdiv");  
     ct.innerHTML = '';  
-    // positionList.forEach(item=>{
-    //   if(item.children){
-    //     var dd = document.createElement('div');  
-    //     dd.classList.add('dropend');  
-    //     const link = document.createElement('a');  
-        // link.classList.add('dropdown-item', 'dropdown-toggle');  
-        // link.setAttribute('data-bs-toggle', 'dropdown');  
-        // link.setAttribute('data-bs-auto-close', 'outside');  
-        // link.setAttribute('role', 'button');  
-        // link.setAttribute('aria-expanded', 'false');  
-        // link.textContent = item.label;  
-    //     dd.appendChild(link);  
-    //     ct.appendChild(dd); 
-    //     var dd12 = document.createElement('div');  
-    //     dd12.classList.add('dropdown-menu');  
-    //     item.children.forEach(item1=>{           
-    //       var dd1 = document.createElement('div');        
-    //       dd1.classList.add('dropend');  
-    //       const link = document.createElement('a');  
-    //       link.classList.add('dropdown-item', 'dropdown-toggle');  
-    //       link.setAttribute('data-bs-toggle', 'dropdown');  
-    //       link.setAttribute('data-bs-auto-close', 'outside');  
-    //       link.setAttribute('role', 'button');  
-    //       link.setAttribute('aria-expanded', 'false');         
-    //       link.textContent = item1.label;  
-    //       dd1.appendChild(link);  
-    //       dd12.appendChild(dd1);   
-    //       var dd22 = document.createElement('div');  
-    //       dd22.classList.add('dropdown-menu');  
-    //       item1.children.forEach(item2=>{  
-    //        const link = document.createElement('a');  
-    //         link.classList.add('dropdown-item');  
-    //         link.setAttribute('onClick', 'chooseThis(this)');  
-    //         link.setAttribute('value', item2.value);  
-    //         link.textContent = item2.label;         
-    //         dd22.appendChild(link); 
-    //       })
-    //       dd1.appendChild(dd22); 
-    //     })
-    //     dd.appendChild(dd12)
-    //   }else{
-    //     const link = document.createElement('a');  
-    //     link.classList.add('dropdown-item');  
-    //     link.setAttribute('onClick', 'chooseThis(this)');  
-    //     link.setAttribute('value', item.value);  
-    //     link.textContent = item.label;  
-    //     ct.appendChild(link); 
-    //   }
-    // })
-
-
-
-
 
 
 
@@ -126,7 +140,7 @@ $(function(){
 
 })
 
-
+let flame = `<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#ff3d3d"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-flame"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.773 4.741 -3 6c-1.226 1.26 -2 3.24 -2 5a6 6 0 1 0 12 0c0 -1.532 -1.056 -3.94 -2 -5c-1.786 3 -2.791 3 -4 2z" /></svg>`
 
 // 递归函数来构建子菜单  
 function buildDropdownMenu(items, parent) {  
@@ -169,6 +183,15 @@ function buildDropdownMenu(items, parent) {
   });  
 }
 
+
+
+function chooseThisCity(o){
+  $('#cityinputshow').val($(o).text())
+  $('#cityinputvalue').val($(o).attr('value'))
+
+  $('.dropdown-menu.show').removeClass('show');
+
+}
 
 
 function chooseThis(o){
@@ -355,14 +378,30 @@ function getPage(pageNo){
                     }
 
 
-                    
+                    let level=''
+
+                    switch (o.level) {
+                      case "1":
+                        level=flame+flame+flame;
+                          break;
+                      case "2":
+                        level=flame+flame;
+                          break;
+     
+                      default:
+                        level=flame+flame+flame ;
+                  }
+
+
 
 
                     str+= `<tr>
-                    <td>${o.stateData}</td>
+                    <td>${level}</td>
                     <td>${o.customerName}</td>
                     <td><span style='font-weight: bold;' class ='bg-primary-lt'><a onclick='checkDetail("${o.projectId}")'>${o.name}</a></span></td>
                     <td>${cityCode}</td>
+                    <td>${o.stateData}</td>
+
                     <td>${o.createTime}</td>
                     <td><a herf="#" onclick="checkDetail(698345291966844928)" class="btn">查看</a><a herf="#" class="btn" onclick="move(698345291966844928)">转移</a></td></tr>`
           
@@ -635,11 +674,11 @@ function checkDetail(id){
     //跳转页面并且携带参数
 
     let bigNumber = BigInt(id);
-    let customerId = bigNumber.toString(); // 转换为字符串
+    let workId = bigNumber.toString(); // 转换为字符串
 
 
 // 创建一个新的URL，携带参数
-var url = 'cusd.html?customerId=' + encodeURIComponent(customerId)+'' ;
+var url = 'prod.html?workId=' + encodeURIComponent(workId)+'' ;
 
 // 使用jQuery来跳转到新页面
 // window.location.href = url;
