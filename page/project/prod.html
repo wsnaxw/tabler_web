@@ -335,7 +335,7 @@
 
                           </div>
                           <div class="card-header">
-                            <h2 class="card-title" id="basecname" style="font-weight: bold;">市场总监</h3>&nbsp;&nbsp;<span  style="color: red;font-weight: bold;" id="bmxx">20万</span>&nbsp;&nbsp; <span class="form-check-description" style="color: rgb(77, 150, 193);" id="bmxx" onclick="copyTextToClipboard('bmxx')"></span>
+                            <h2 class="card-title" id="jobName" style="font-weight: bold;">市场总监</h3>&nbsp;&nbsp;<span  style="color: red;font-weight: bold;" id="jboSalary">20万</span>&nbsp;&nbsp;<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#ff3d3d"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-flame"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.773 4.741 -3 6c-1.226 1.26 -2 3.24 -2 5a6 6 0 1 0 12 0c0 -1.532 -1.056 -3.94 -2 -5c-1.786 3 -2.791 3 -4 2z" /></svg>    
                             <div class="card-actions">
                               <a href="#" class="btn btn-ghost-primary" onclick="showMessage(1)">
                                 新增职位 
@@ -355,24 +355,24 @@
                             <div class="row mb-3">
                               
                               <div class="col-lg-3 row">
-                                <h3 class="col">成都巨像有限测试公司
+                                <h3 class="col" id="customerName">成都巨像有限测试公司
                                 </h3>
-                                <small class="form-hint">岗位编码：706344925460959232</small>
+                                <small class="form-hint" id="jobCode">岗位编码：706344925460959232</small>
                         
                               </div>
                               <div class="col-3">
                                   
-                                <span>18 - 24 岁</span>
+                                <span id="jobAge">18 - 24 岁</span>
                                 <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#000000"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-minus-vertical"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5v14" /></svg>
-                                <span>本科</span>
+                                <span id="jobEdu">本科</span>
                                 <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#000000"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-minus-vertical"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5v14" /></svg>
-                                <span>性别不限</span>
+                                <span id="jobGender">性别不限</span>
 
                               </div>
 
               
                               <div class="col-lg-6">
-                               <span> 发布时间：2020-01-01</span>
+                                发布时间：<span id="jobCreateTime"> 2020-01-01</span>
                               </div>
 
 
@@ -381,21 +381,20 @@
 
                             <dl class="row mb-3">
                               <dt class="col-1">职位类别:</dt>
-                              <dd class="col-2" id="gsgs">销售岗位</dd>
+                              <dd class="col-2" id="jobType">销售岗位</dd>
                               <dt class="col-1">招聘人数:</dt>
-                              <dd class="col-2" id="tjr">无</dd>
+                              <dd class="col-2" id="zprs">无</dd>
                               <dt class="col-1">归属部门:</dt>
-                              <dd class="col-2" id="tjr">无</dd>
+                              <dd class="col-2" id="gsbm">无</dd>
                               <dt class="col-3"></dt>
 
 
                               <dt class="col-1">工作地点:</dt>
-                              <dd class="col-2" id="gsgs">成都</dd>
-                              <dt class="col-1">紧急成都:</dt>
-                              <dd class="col-2" > <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#ff3d3d"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-flame"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.773 4.741 -3 6c-1.226 1.26 -2 3.24 -2 5a6 6 0 1 0 12 0c0 -1.532 -1.056 -3.94 -2 -5c-1.786 3 -2.791 3 -4 2z" /></svg>                              </dd>
+                              <dd class="col-2" id="jobAddress">成都</dd>
+                            
                               <dt class="col-1">状态:</dt>
-                              <dd class="col-2" id="gsgs"><span>运行中</span>&nbsp;<a class="btn btn-outline-info" onclick="signCustomer()">暂停</a></dd>
-
+                              <dd class="col-2" id="jobState"><span>运行中</span>&nbsp;<a class="btn btn-outline-info" onclick="signCustomer()">暂停</a></dd>
+                              <dt class="col-3"></dt>
                               <dt class="col-3"></dt>
                               <dt class="col-1">执行团队:</dt>
                               <dd class="col-9">
@@ -609,7 +608,7 @@
     
                                   <dt class="col-1">工作地点:</dt>
                                   <dd class="col-2" id="gsgs">成都</dd>
-                                  <dt class="col-1">紧急成都:</dt>
+                                  <dt class="col-1">紧急程度:</dt>
                                   <dd class="col-2" > <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#ff3d3d"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-flame"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.773 4.741 -3 6c-1.226 1.26 -2 3.24 -2 5a6 6 0 1 0 12 0c0 -1.532 -1.056 -3.94 -2 -5c-1.786 3 -2.791 3 -4 2z" /></svg>                              </dd>
                                   <dt class="col-1">状态:</dt>
                                   <dd class="col-2" id="gsgs"><span>运行中</span>&nbsp;<a class="btn btn-outline-info" onclick="signCustomer()">暂停</a></dd>

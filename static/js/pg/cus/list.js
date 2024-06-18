@@ -56,7 +56,11 @@ function getPage(pageNo){
 
             var str="";
             if(obj.data.list.length===0){
-                $('.table-sort tbody').append("<tr class='text-c'><td colspan='4'>没有数据 !</td></tr>");
+              $('.table-sort tbody').append("<tr class='text-c'><td colspan='4'>没有数据 !</td></tr>");
+              $('#pageSelect').html('');
+              $('#totalPageNum').html(0);
+              $('#totalPageNum1').html(0);
+                
             }else{
                 // $("#countsss").css("display","");
                 for(var i =0;i<obj.data.list.length;i++){

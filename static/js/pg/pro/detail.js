@@ -15,23 +15,6 @@ $(function(){
     //默认进行分页数据查询
 
     
-    const buttons = document.querySelectorAll('.card-body .btn');
-
-    // 为每个按钮添加点击事件监听器
-    buttons.forEach(button => {
-      button.addEventListener('click', function() {
-        // 移除所有按钮的active类
-        buttons.forEach(btn => btn.classList.remove('active'));
-        // 给当前点击的按钮添加active类
-        this.classList.add('active');
-      });
-    });
-    jeDate("#ymd033",{
-        theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-        multiPane:false,
-        range:" ~ ",
-        format: "YYYY-MM-DD"
-    });
 
 
     $('#rxxxdiv').show()

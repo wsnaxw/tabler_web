@@ -209,6 +209,12 @@ function kzxx(){
 
 }
 
+
+
+
+
+
+
 function rxxx(state){    
 
 
@@ -237,7 +243,7 @@ function rxxx(state){
     };
 
         var url = baseUri+'/customer/twffq';
-    fetch(url,options)
+    fetch(url,getFetchOptions(data))
         .then(response => response.json())
         .then(json => {
             if(json.data.list!=null&&json.data.list.length>0){
@@ -248,31 +254,12 @@ function rxxx(state){
 
                     `<tr>
                     <td>${toStr(o.projectName)}</td>
-                    <td>
-
-                    ${o.userName}
-                      
-                      
-                    </td>
-                    <td>
-                    ${o.talentName}
-                    </td>
-                    <td>
-                    ${o.company}
-                    </td>
-                    <td>
-                    ${o.job}
-                    </td>
-                    <td>
-                    ${o.createTime}
-                    </td>
-               
-                    <td >
-                      <a class="btn btn-info" onclick="checkTalent(${o.talentId})">
-                        人选详情
-                      </a>
-                 
-                    </td>
+                    <td>${o.userName}</td>
+                    <td>${o.talentName}</td>
+                    <td>${o.company}</td>
+                    <td>${o.job}</td>
+                    <td>${o.createTime}</td>
+                    <td ><a class="btn btn-info" onclick="checkTalent(${o.talentId})">人选详情</a></td>
                   </tr>`
 
                 })

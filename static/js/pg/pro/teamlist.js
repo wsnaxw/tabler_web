@@ -263,7 +263,7 @@ function getPage(pageNo){
         },
         dataType:'json',
         type:'post',
-        url:baseUri+'/project/selectPList',
+        url:baseUri+'/project/hzJobList',
         data:JSON.stringify(queryData),
         success:function(obj){
 

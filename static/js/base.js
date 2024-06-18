@@ -594,3 +594,17 @@ function splitOrGet(str) {
     // 否则，返回分割后的数组  
     return parts;  
 } 
+
+
+function getFetchOptions(data){
+    const options = {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'token':localStorage.getItem('token')
+        },
+        body: JSON.stringify(data),
+    };
+
+    return options;
+}
