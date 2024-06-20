@@ -312,15 +312,26 @@ function getPage(pageNo){
 
 
 
+                  var numbers = '<div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">'+o.recommendNumber+'</div>'
+                  var rnum = o.recruitNum;
+
+                  if(rnum==0){
+                    rnum = '若干'
+                  }
+
+
+
 
                     str+= `<tr>
                     <td>${level}</td>
                     <td>${o.customerName}</td>
                     <td><span style='font-weight: bold;' class ='bg-primary-lt'><a onclick='checkDetail("${o.projectId}")'>${o.name}</a></span></td>
                     <td>${cityCode}</td>
+                      <td>${rnum}</td>
                     <td>${o.stateData}</td>
 
                     <td>${o.createTime}</td>
+                    <td>${numbers}</td>
                     <td><a herf="#" onclick="checkDetail(698345291966844928)" class="btn">查看</a><a herf="#" class="btn" onclick="move(698345291966844928)">转移</a></td></tr>`
           
 

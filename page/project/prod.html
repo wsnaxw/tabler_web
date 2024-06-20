@@ -468,9 +468,9 @@
                   <div class="col-lg-12">
                     <div class="card card-body-scrollable">
                       <div class="card-header">
-                        <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
+                        <ul class="nav nav-tabs card-header-tabs nav-fill" data-bs-toggle="tabs" role="tablist">
                           <li class="nav-item" role="presentation">
-                            <a id="yjph" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab" onclick="rxxx()">全部</a>
+                            <a id="yjph" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab" onclick="rxxx()">全部<span class="badge bg-yellow-lt ms-2" id="rxxxnum">0</span></a>
                           </li>
                           <li class="nav-item" role="presentation">
                             <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(0)">加项目</a>
@@ -508,6 +508,7 @@
                               <th>项目名称</th>
                               <th>推荐人</th>
                               <th>人选姓名</th>
+                              <th>电话</th>
                               <th>当前公司</th> 
                               <th>当前职位</th>                        
                               <th>推荐时间</th>
@@ -517,7 +518,7 @@
                           </thead>
                           <tbody id="rxxxdata">
                             <tr>
-                              <td colspan="7" style="font-weight: bold;text-align: center;">暂无数据 </td>
+                              <td colspan="8" style="font-weight: bold;text-align: center;">暂无数据 </td>
                             </tr>
                             
                             
@@ -560,7 +561,7 @@
                   
                       </div>
 
-                      <div class="card-body align-items-center">
+                      <div class="card-body">
                         
 
 
@@ -568,7 +569,37 @@
                         <div class="row row-cards"> 
                     
 
-                          <div class="col-lg-12">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                          
+
+                          <div class="col-lg-6">
                             <div class="card">
                               
                      
@@ -577,7 +608,7 @@
     
                                 <div class="row mb-3">
                                   
-                                  <div class="col-lg-12">
+                                  <div >
                                     <h3>张三
                                     </h3>
                                 
@@ -597,35 +628,31 @@
                                 </div>
     
                                 <dl class="row mb-3">
-                                  <dt class="col-1">职位类别:</dt>
-                                  <dd class="col-2" id="gsgs">销售岗位</dd>
-                                  <dt class="col-1">招聘人数:</dt>
-                                  <dd class="col-2" id="tjr">无</dd>
-                                  <dt class="col-1">归属部门:</dt>
-                                  <dd class="col-2" id="tjr">无</dd>
-                                  <dt class="col-3"></dt>
-    
-    
-                                  <dt class="col-1">工作地点:</dt>
-                                  <dd class="col-2" id="gsgs">成都</dd>
-                                  <dt class="col-1">紧急程度:</dt>
-                                  <dd class="col-2" > <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#ff3d3d"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-flame"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.773 4.741 -3 6c-1.226 1.26 -2 3.24 -2 5a6 6 0 1 0 12 0c0 -1.532 -1.056 -3.94 -2 -5c-1.786 3 -2.791 3 -4 2z" /></svg>                              </dd>
-                                  <dt class="col-1">状态:</dt>
-                                  <dd class="col-2" id="gsgs"><span>运行中</span>&nbsp;<a class="btn btn-outline-info" onclick="signCustomer()">暂停</a></dd>
-    
-                                  <dt class="col-3"></dt>
-                                  <dt class="col-1">执行团队:</dt>
-                                  <dd class="col-9">
-                                    <div id="teamlist">
-                                      <span class="tag">
-                                      白飞飞
-                                      <a onclick="deletemember(589678016880185344)" class="btn-close"></a>
-                                    </span> 
-                                      <span class="badge bg-green-lt" data-bs-toggle="modal" data-bs-target="#membermodal" onclick="newTeamList()">新增<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg> </span>
-    
-                                  </div>
-                                
-                                  </dd>  
+                                  <dt class="col-2">当前公司:</dt>
+                                  <dd class="col-4" id="gsgs">比亚迪有限责任公司</dd>
+                                  <dt class="col-2">电子邮箱:</dt>
+                                  <dd class="col-4" id="tjr">123@qq.com</dd>
+                                </dl>
+                                <dl class="row mb-3">
+                                  <dt class="col-2">当前职位:</dt>
+                                  <dd class="col-4" id="tjr">无</dd>
+                                  <dt class="col-2">目前薪资:</dt>
+                                  <dd class="col-4" id="tjr">无</dd>
+                                </dl>
+                                <dl class="row mb-3">
+                                  <dt class="col-2">人选状态:</dt>
+                                  <dd class="col-4" id="gsgs">6</dd>
+                                  <dt class="col-2">保用期:</dt>
+                                  <dd class="col-4" id="gsgs">6</dd>
+                                </dl>
+                                <dl class="row mb-3">
+                                  <dt class="col-2">推荐人:</dt>
+                                  <dd class="col-4" >test</dd>
+                                  <dt class="col-6"></dt>
+                                </dl>
+                                <dl class="row mb-3">
+                                  <dt class="col-2">备注:</dt>
+                                  <dd class="col-6">cscstesttest</dd>  
                                 </dl>
     
                                
@@ -633,43 +660,49 @@
                               </div>
                             </div>
                           </div>
-    
-                          <div class="col-lg-12">
+
+
+                          <div class="col-lg-6">
                             <div class="card">
-                          
-                             
                               <div class="card-body">
-    
-                                <div class="col-lg-12 row" >
-                                  <div class="col-lg-3">
-                                    操作
-                                  </div>
-                                  <div class="col-lg-3">
-                                    操作
-                                  </div>
-                                  <div class="col-lg-3">
-                                    操作
-                                  </div>
-                                  <div class="col-lg-3">
-                                    操作
-                                  </div>
-                                  <div class="col-lg-3">
-                                    操作
-                                  </div>
-
-
-                                </div>
-
-
+                                <h3 class="card-title"> 
+                                  <span style="font-weight: bold;">当前流程</span>
+                                  <small class="form-hint">点击内容以编辑</small></h3>
                                
-    
-                                
-    
-                               
-    
+                                <ul class="steps steps-vertical">
+                                  <li class="step-item ">
+                                    <div class="h4 m-0" style="color: red;">入职</div>
+                                    <div class="text-secondary">2022-3-4</div>
+                                    <div style="border:black">
+                                      顾问 test 推荐的人选 测试数据 已经获得当前offer！<br>
+                                      职位：<br>
+                                      年薪：123万元<br>
+                                      预收服务费：100元<br>
+                                    
+                                    </div>
+                                  </li>
+                                  <li class="step-item ">
+                                    <div class="h4 m-0">发送offer</div>
+                                    <div class="text-secondary">2022-3-4</div>
+                                    <div >人选年薪1000</div>
+                                  </li>
+                                  <li class="step-item ">
+                                    <div class="h4 m-0">预约面试</div>
+                                    <div class="text-secondary">2022-3-4</div>
+                                    <div >客户于3天后面试</div>
+                                  </li>
+                                  <li class="step-item ">
+                                    <div class="h4 m-0">推给客户</div>
+                                    <div class="text-secondary">2022-3-4</div>
+                                    <div >顾问test推给客户</div>
+                                  </li>
+                                </ul>
                               </div>
+                     
+                              
                             </div>
                           </div>
+
                           
     
     
