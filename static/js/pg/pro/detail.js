@@ -7,32 +7,24 @@ $(function(){
  
 
 
-    var workId = getParameterByName('workId');
-
-    workId = workId;
-
-    // console.log('customerId:'+BigInt(customerId))
-    //默认进行分页数据查询
-
-    
+    workId = getParameterByName('workId');
 
 
-    $('#rxxxdiv').show()
 
 
     // customer/getCustomerNumber 数据填充
-    basedatanumber(customerId)
+    basedatanumber(workId)
     //cclfq 沟通记录
 
     // customer/selectCstById 基本信息
-    baseinfo(customerId)
-    //customer/selectCTeamList团队成员
-    teamlist(customerId)
-    //customer/selectContactList 联系人
-    contactList(customerId)
-    // customer/selectCustomerCompany 关联公司
-    custcom(customerId)
-
+    // baseinfo(workId)
+    // //customer/selectCTeamList团队成员
+    // teamlist(workId)
+    // //customer/selectContactList 联系人
+    // contactList(workId)
+    // // customer/selectCustomerCompany 关联公司
+    // custcom(workId)
+    rxxx('')
 
 
     
@@ -47,7 +39,7 @@ $(function(){
 
 
 
-let csid ;
+let workId;
 
 let editInfo = {}
 
@@ -123,19 +115,12 @@ function kzxx(){
 function rxxx(state){    
 
 
-
-
-    $('#movediv').hide()
-    $('#filediv').hide()
-    $('#jobdjv').hide()
-    $('#kzxxdiv').hide()
-    $('#rxxxdiv').show()
     var data={};
 
     if(state==null||state==undefined){
-        data ={'customerId':csid}
+        data ={'projectId':workId}
     }else{
-        data ={ 'state': state,'customerId':csid}
+        data ={ 'state': state,'projectId':workId}
     }
 
     const options = {
@@ -147,7 +132,7 @@ function rxxx(state){
         body: JSON.stringify(data),
     };
 
-        var url = baseUri+'/customer/twffq';
+        var url = baseUri+'/project/selectTPList';
     fetch(url,options)
         .then(response => response.json())
         .then(json => {
@@ -155,34 +140,118 @@ function rxxx(state){
 
                 let str =''
                 json.data.list.forEach(o=>{
+
+
+                    let operate = ``;
+                    let tpState ;
+
+                    switch (o.state) {
+                        case 0:
+                            operate=`
+                                    <a class="btn btn-teal btn-sm" onclick="operateTgkh('${o.talentId}','${o.id}')">
+                                        推给客户
+                                    </a>
+                                    <a class="btn btn-danger btn-sm" onclick="operateAbandon('${o.talentId}','${o.id}')">
+                                        放弃人选
+                                    </a>
+                                    `;
+                            break;
+                        case 1:
+                            operate=`
+                                    <a class="btn btn-yellow btn-sm" onclick="operateYyms('${o.talentId}','${o.id}')">
+                                        预约面试
+                                    </a>
+                                    <a class="btn btn-danger btn-sm" onclick="operateAbandon('${o.talentId}','${o.id}')">
+                                        放弃人选
+                                    </a>
+                                    `;
+                            break;
+                        case 5:
+                            operate=`
+                                    <a class="btn btn-yellow btn-sm" onclick="operateYyms('${o.talentId}','${o.id}')">
+                                        预约面试
+                                    </a>
+                                    <a class="btn btn-orange btn-sm" onclick="operateKhms('${o.talentId}','${o.id}')">
+                                        客户面试
+                                    </a>
+                                    <a class="btn btn-danger btn-sm" onclick="operateAbandon('${o.talentId}','${o.id}')">
+                                        放弃人选
+                                    </a>
+                                    `;
+                            break;
+                        case 6:
+                            operate=`
+                                    <a class="btn btn-yellow btn-sm" onclick="operateYyms('${o.talentId}','${o.id}')">
+                                        预约面试
+                                    </a>
+                                    <a class="btn btn-success btn-sm" onclick="operateOffer('${o.talentId}','${o.id}')">
+                                        确认offer
+                                    </a>
+                                    <a class="btn btn-danger btn-sm" onclick="operateAbandon('${o.talentId}','${o.id}')">
+                                        放弃人选
+                                    </a>
+                                    `;
+                        break;  
+                        case 8:
+                            operate=`
+                                    <a class="btn btn-primary btn-sm" onclick="operateOffer('${o.talentId}','${o.id}')">
+                                        确认入职
+                                    </a>
+                                    <a class="btn btn-danger btn-sm" onclick="operateAbandon('${o.talentId}','${o.id}')">
+                                        放弃人选
+                                    </a>
+                                    `;
+                        break; 
+                        case 9:
+                            operate=`
+                                    <a class="btn btn-secondary btn-sm" onclick="operateOffer('${o.talentId}','${o.id}')">
+                                        人选离职
+                                    </a>
+                                    <a class="btn btn-danger btn-sm" onclick="operateAbandon('${o.talentId}','${o.id}')">
+                                        放弃人选
+                                    </a>
+                                    `;
+                        break;                
+                        default:
+                            operate='' ;
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
                     str +=
 
                     `<tr>
-                    <td>${toStr(o.projectName)}</td>
                     <td>
-
                     ${o.userName}
-                      
-                      
+                    </td>
+                    <td><span style='font-weight: bold;' class ='bg-primary-lt'><a onclick='checkDetail('${o.talentId}','${o.id}')'>${o.talentName}</a></span></td>
+                    <td>
+                    ${o.phone}
                     </td>
                     <td>
-                    ${o.talentName}
+                    ${toStr(o.company)}
                     </td>
                     <td>
-                    ${o.company}
-                    </td>
-                    <td>
-                    ${o.job}
+                    ${toStr(o.job)}
                     </td>
                     <td>
                     ${o.createTime}
                     </td>
                
                     <td >
-                      <a class="btn btn-info" onclick="checkTalent(${o.talentId})">
-                        人选详情
+                      <a class="btn btn-info btn-sm" onclick="checkTalent('${o.talentId}','${o.id}')">
+                        沟通记录查询
                       </a>
-                 
+                      ${operate}
                     </td>
                   </tr>`
 
@@ -485,23 +554,23 @@ function move(){
 }
 
 
-function basedatanumber(customerId){
+function basedatanumber(pid){
 
-    getData({'customerId': customerId},'/customer/getCustomerNumber').then(data => {
+    getData({'projectId': pid},'/project/selectTPListNumber').then(data => {
         // 这里处理从getData返回的数据
 
         try {
 
-            $('#hkje').html(data.hkje);
-            $('#yzzw').html(data.yzzw);
-            $('#tjrs').html(data.tjrs);
-            $('#rzrs').html(data.rzrs);
-            $('#yyms').html(data.yyms);
+            $('#all').html(data.all);
+            $('#jxm').html(data.jxm);
+            $('#gkh').html(data.gkh);
+            $('#yms').html(data.yms);
+            $('#khms').html(data.khms);
 
-            $('#fileCount').html(data.fileCount);
-            $('#zycs').html(data.zycs);
-            $('#rxxxnum').html(data.rxxx);
-            $('#zwnum').html(data.yzzw); 
+            $('#offer').html(data.offer);
+            $('#yrz').html(data.yrz);
+            $('#rxlz').html(data.rxlz);
+            $('#fqrx').html(data.fqrx); 
             
 
 
@@ -520,8 +589,8 @@ function basedatanumber(customerId){
 }
 
 
-function baseinfo(customerId){
-    getData({'customerId': customerId},'/customer/selectCstById').then(data => {
+function baseinfo(workId){
+    getData({'projectId': customerId},'/customer/selectCstById').then(data => {
         // 这里处理从getData返回的数据
 
         try {

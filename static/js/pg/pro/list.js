@@ -332,7 +332,7 @@ function getPage(pageNo){
                     <td>${o.createTime}</td>
                     <td>${numbers}</td>
                     
-                    <td><a herf="#" onclick="checkDetail(698345291966844928)" class="btn">查看</a><a herf="#" class="btn" onclick="move(698345291966844928)">转移</a></td></tr>`
+                    <td><a herf="#" onclick="checkDetail('${o.projectId}')" class="btn">查看</a><a herf="#" class="btn" onclick="move('${o.projectId}')">转移</a></td></tr>`
           
 
 
