@@ -652,19 +652,19 @@ function baseinfo(customerId){
 
             if(state==0){
 
-                $('#signstate').html(`潜在客户 <a class="btn btn-outline-info" onclick="signCustomer()">申请签约<a>`);
+                $('#signstate').html(`潜在客户 <a class="btn btn-outline-info btn-sm" onclick="signCustomer()">申请签约<a>`);
 
 
             }else if(state==1){
-                $('#signstate').html(`签约运作 (${data.contractDateStart}~${data.contractDateEnd}) <a class="btn btn-outline-secondary" onclick="changeCState(2)">暂停运作<a>`);
+                $('#signstate').html(`签约运作 (${data.contractDateStart}~${data.contractDateEnd}) <a class="btn btn-outline-secondary btn-sm" onclick="changeCState(2)">暂停运作<a>`);
 
 
             }else if(state==2){
-                $('#signstate').html(`暂停运作 <a class="btn btn-outline-success" onclick="changeCState(1)">恢复运作<a><a class="btn btn-outline-danger" onclick="changeCState(3)">终止运作<a>`);
+                $('#signstate').html(`暂停运作 <a class="btn btn-outline-success btn-sm" onclick="changeCState(1)">恢复运作<a><a class="btn btn-outline-danger btn-sm" onclick="changeCState(3)">终止运作<a>`);
 
 
             }else if(state==3){
-                $('#signstate').html(`签约终止 <a class="btn btn-outline-primary " onclick="abandonCus()">转入公共池<a>`);
+                $('#signstate').html(`签约终止 <a class="btn btn-outline-primary btn-sm" onclick="abandonCus()">转入公共池<a>`);
 
 
             }
@@ -1490,7 +1490,7 @@ function changeCState(state){
             body: JSON.stringify({ 'state': state,'customerId':csid }),
             };
     
-            var url = baseUri2+'/customer/changeCustomerState';
+            var url = baseUri+'/customer/changeCustomerState';
         fetch(url,options)
             .then(response => response.json())
             .then(json => {
