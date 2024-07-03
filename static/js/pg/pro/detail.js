@@ -17,7 +17,7 @@ $(function(){
     //cclfq 沟通记录
 
     // customer/selectCstById 基本信息
-    // baseinfo(workId)
+    baseinfo(workId)
     // //customer/selectCTeamList团队成员
     // teamlist(workId)
     // //customer/selectContactList 联系人
@@ -589,27 +589,73 @@ function basedatanumber(pid){
 }
 
 
-function baseinfo(workId){
-    getData({'projectId': customerId},'/customer/selectCstById').then(data => {
+function baseinfo1(workId){
+    getData({'projectId': workId},'/project/selectPById').then(data => {
         // 这里处理从getData返回的数据
 
         try {
 
-            var sourceType1 = '';
-            switch (data.sourceType) {
-                case "1":
-                    sourceType1='广告呼入';
-                    break;
-                case "2":
-                    sourceType1='主动BD';
-                    break;
-                case "3":
-                    sourceType1='电销开发';
-                    break;
-                default:
-                    sourceType1='公共池' ;
+            console.log(data)
+            
+            let cityCode = '';
+
+            if(data.cityCode!=null&&data.cityCode.length>4){
+                let cityarray = splitOrGet(data.cityCode)
+                if(cityarray!=null&&cityarray.length>0){
+                    cityarray.forEach(element => {
+                        cityCode += cn.info(element.trim()).name + ' '
+                    });
+                }
+            }else if(!isNumeric(data.cityCode)){
+                cityCode = data.cityCode;
+            }else{
+                cityCode = '不限';
             }
 
+
+            let level=''
+
+            switch (o.level) {
+              case "1":
+                level=flame+flame+flame;
+                  break;
+              case "2":
+                level=flame+flame;
+                  break;
+
+              default:
+                level=flame+flame+flame ;
+          }
+
+          let requireEduStr = '';
+          switch (data.requireEdu) {
+            case 0:
+              str = '不限';
+              break;
+            case 1:
+              str = '初中以上';
+              break;
+            case 2:
+              str = '中专以上';
+              break;
+            case 3:
+              str = '高中以上';
+              break;
+            case 4:
+              str = '大专以上';
+              break;
+            case 5:
+              str = '本科以上';
+              break;
+            case 6:
+              str = '硕士以上';
+              break;
+            case 7:
+              str = '博士及以上';
+              break;
+            default:
+              str = '不限';
+          }
 
 
             editInfo['industryType']=data.industryType
@@ -622,45 +668,55 @@ function baseinfo(workId){
             editInfo['webSite']=data.webSite
 
             
-            $('#basecname').html(data.name);
-            $('#bmxx').html(data.customerId);
-            $('#gsgs').html(data.comName);
-            $('#tjr').html(data.recommenderName!=""?data.recommenderName:'无');
-            $('#khly').html(sourceType1);
-            $('#fwgw').html(data.userName);
-            $('#cjsj').html(data.createTime);
-            $('#website').html(data.webSite!=""?data.webSite:'无');
-            $('#syhy').html(data.industryType);
+            $('#customerName').html(data.customerName);
+            $('#customerId').html(data.customerId);
+            $('#jobCode').html('岗位编码：'+data.projectId);
+            $('#jobName').html(data.name);
+            $('#jboSalary').html(data.salary+'万');
+            $('#levelIcon').html(level);
+            $('#jobAge').html(
+                `${data.requireAgeS} ~ ${data.requireAgeE} 岁`
+            );
+            $('#jobEdu').html(requireEduStr);
             // $('#gslx').html(data.companyType);
-            $('#raddress').html(data.registeredAddress);
-            $('#gsxz').html(data.comNature);
-            $('#gsgm').html(data.comSize);
+            $('#jobAddress').html(cityCode);
+            $('#jobType').html(data.job);
+            $('#zprs').html(data.comSize);
 
-            if(data.vip==1){
-                $('#isvip').html('已认证');
-                $('#isvip').click(alert('已认证'))
-            }
 
             let state=data.state
 
+      
+
             if(state==0){
 
-                $('#signstate').html(`潜在客户 <a class="btn btn-outline-info" onclick="signCustomer()">申请签约<a>`);
+                $('#signstate').html(`未发布 <a class="btn btn-outline-info" onclick="signCustomer()">直接发布<a>`);
 
 
             }else if(state==1){
-                $('#signstate').html(`签约运作 (${data.contractDateStart}~${data.contractDateEnd}) <a class="btn btn-outline-secondary" onclick="changeCState(2)">暂停运作<a>`);
-
-
-            }else if(state==2){
-                $('#signstate').html(`暂停运作 <a class="btn btn-outline-success" onclick="changeCState(1)">恢复运作<a><a class="btn btn-outline-danger" onclick="changeCState(3)">终止运作<a>`);
+                $('#signstate').html(`运作中  <a class="btn btn-outline-secondary" onclick="changeCState(2)">暂停运作<a><a class="btn btn-outline-danger" onclick="changeCState(3)">结束运作<a>`);
 
 
             }else if(state==3){
-                $('#signstate').html(`签约终止 <a class="btn btn-outline-primary " onclick="abandonCus()">转入公共池<a>`);
+                $('#signstate').html(`暂停中 <a class="btn btn-outline-success" onclick="changeCState(1)">恢复运作<a><a class="btn btn-outline-danger" onclick="changeCState(3)">终止运作<a>`);
 
 
+            }else if(state==3){
+                $('#signstate').html(`已关闭`);
+
+
+            }else{
+                $('#signstate').html(`已结束`);
             }
+
+          
+
+
+
+
+
+
+
 
 
 
@@ -702,6 +758,255 @@ function baseinfo(workId){
     });
 
 }
+
+let flame = `<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#ff3d3d"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-flame"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.773 4.741 -3 6c-1.226 1.26 -2 3.24 -2 5a6 6 0 1 0 12 0c0 -1.532 -1.056 -3.94 -2 -5c-1.786 3 -2.791 3 -4 2z" /></svg>`
+
+
+
+
+function baseinfo(workId){
+    getData({'projectId': workId},'/project/selectPById').then(data => {
+        // 这里处理从getData返回的数据
+
+        try {
+            console.log(data)
+            $('#formdata').html('')
+            let cityCode = '';
+
+            if(data.cityCode!=null&&data.cityCode.length>4){
+                let cityarray = splitOrGet(data.cityCode)
+                if(cityarray!=null&&cityarray.length>0){
+                    cityarray.forEach(element => {
+                        cityCode += cn.info(element.trim()).name + ' '
+                    });
+                }
+            }else if(!isNumeric(data.cityCode)){
+                cityCode = data.cityCode;
+            }else{
+                cityCode = '不限';
+            }
+
+            let level=''
+
+            switch (data.level) {
+              case "1":
+                level=flame+flame+flame;
+                  break;
+              case "2":
+                level=flame+flame;
+                  break;
+
+              default:
+                level=flame+flame+flame ;
+          }
+
+
+          let jobGender=''
+
+            switch (data.requireGender) {
+              case 1:
+                jobGender='男'
+                  break;
+              case 2:
+                 jobGender='女'
+                  break;
+
+              default:
+                  jobGender='不限'
+          }
+
+
+
+          let requireEduStr = '';
+          switch (data.requireEdu) {
+            case 0:
+                requireEduStr = '不限';
+              break;
+            case 1:
+                requireEduStr = '初中以上';
+              break;
+            case 2:
+                requireEduStr = '中专以上';
+              break;
+            case 3:
+                requireEduStr = '高中以上';
+              break;
+            case 4:
+                requireEduStr = '大专以上';
+              break;
+            case 5:
+                requireEduStr = '本科以上';
+              break;
+            case 6:
+                requireEduStr = '硕士以上';
+              break;
+            case 7:
+                requireEduStr = '博士及以上';
+              break;
+            default:
+                requireEduStr = '不限';
+          }
+   
+
+          let state=''
+          if(data.state==0){
+
+           state =`<a class="btn btn-outline-info btn-sm" onclick="signCustomer()">直接发布</a>`;
+
+
+        }else if(data.state==1){
+            state =`<a class="btn btn-outline-secondary btn-sm" onclick="changeCState(2)">暂停</a><a class="btn btn-outline-danger btn-sm" onclick="changeCState(3)">结束</a>`;
+
+
+        }else if(data.state==3){
+            state =`<a class="btn btn-outline-success btn-sm" onclick="changeCState(1)">恢复</a><a class="btn btn-outline-danger btn-sm" onclick="changeCState(3)">终止</a>`;
+
+
+        
+        }
+
+        console.log(state)
+
+
+            let str =` <div class="row row-cards"> 
+                      <div class="col-lg-12">
+                        <div class="card">
+                          <div class="card-status-start bg-primary"></div>
+                          <div class="card-header">
+                            <h2 class="card-title" style="font-weight: bold;">${toStr(data.name)}</h2>&nbsp;&nbsp;<span  style="color: red;font-weight: bold;">${toStr(data.salary)}万</span>&nbsp;&nbsp;${toStr(level)}
+                            <div class="card-actions">
+                              <a href="#" class="btn btn-ghost-primary" onclick="showMessage(1)">
+                                新增职位 
+                              </a>
+                              <a href="#" class="btn btn-ghost-info"  data-bs-toggle='modal' data-bs-target='#modal-edit' onclick="initEdit()">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path><path d="M16 5l3 3"></path></svg>
+                              </a>
+                            </div>
+                          </div>
+                          <div class="card-body">
+                            <div class="row mb-3">
+                              <div class="col-lg-3 row">
+                                <h3 class="col" >${toStr(data.customerName)}</h3>
+                                <small class="form-hint">岗位编码：${toStr(data.projectId)}</small>
+                              </div>
+                              <div class="col-3">
+                                <span >${toStr(data.requireAgeS)} - ${toStr(data.requireAgeE)} 岁</span>
+                                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#000000"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-minus-vertical"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5v14" /></svg>
+                                <span >${requireEduStr}</span>
+                                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#000000"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-minus-vertical"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5v14" /></svg>
+                                <span>${jobGender}</span>
+                              </div>
+                              <div class="col-lg-6">
+                                创建时间：<span >${data.createTime}</span>
+                              </div>
+                            </div>
+                            <dl class="row mb-3">
+                              <dt class="col-1">职位类别:</dt>
+                              <dd class="col-2" id="jobType">${toStr(data.requireAgeS)}</dd>
+                              <dt class="col-1">招聘人数:</dt>
+                              <dd class="col-2" >${data.recruitNum}</dd>
+                              <dt class="col-1">归属部门:</dt>
+                              <dd class="col-2" >无</dd>
+                              <dt class="col-1">工作地点:</dt>
+                              <dd class="col-2">${toStr(cityCode)}</dd>
+                              <dt class="col-1">状态:</dt>
+                               <dd class="col-2"><span>${toStr(data.stateData)}</span>  ${state}</dd>
+                              <dt class="col-1">执行团队:</dt>
+                              <dd class="col-6">
+                                <div>
+                                  <span class="tag">
+                                  白飞飞
+                                  <a onclick="deletemember(589678016880185344)" class="btn-close"></a>
+                                  </span> 
+                                  <span class="badge bg-green-lt" data-bs-toggle="modal" data-bs-target="#membermodal" onclick="newTeamList()">新增<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg></span>
+                              </div>
+                              <dt class="col-2"></dt>
+                              <dt class="col-1">职位描述:</dt>
+                              <dd class="col-6">
+                                <span>
+                                  ${toStr(data.details)}
+                                </span>
+                              </dd>                          
+                            </dl>
+                          </div>
+                        </div>
+                      </div>
+                    </div>`
+            $('#formdata').html(str)
+               
+        } catch (error) {
+            
+        }
+
+    }).catch(error => {
+        // 处理错误
+        console.error('获取数据失败:', error);
+    });
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
