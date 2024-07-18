@@ -608,3 +608,10 @@ function getFetchOptions(data){
 
     return options;
 }
+
+function toStr(value) {
+    if (value === null || value === undefined) {
+        return '';
+    }
+    return value.toString();
+}

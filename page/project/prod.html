@@ -550,7 +550,7 @@
 
               
 
-              <div id="rxxqdiv">
+              <div id="rxxqdiv" style="display: none;">
                 
               
 
@@ -563,12 +563,12 @@
                         <h3>人选基本详情</h3>
                         <div class="ms-auto">
                           <a href="#" class="btn btn-info">编辑</a>
-                          <a href="#" class="btn btn-danger" onclick="closerxxq()">关闭</a>
+                          <a href="#" class="btn btn-danger" id='closerxxq'>关闭</a>
                         </div>
                   
                       </div>
 
-                      <div class="card-body">
+                      <div class="card-body" >
                         
 
 
@@ -610,7 +610,7 @@
                             <div class="card">
                               
                      
-                              <div class="card-body">
+                              <div class="card-body" id="talentDetailDiv">
     
     
                                 <div class="row mb-3">
@@ -676,11 +676,14 @@
                                   <span style="font-weight: bold;">当前流程</span>
                                   <small class="form-hint">点击内容以编辑</small></h3>
                                
-                                <ul class="steps steps-vertical">
+                                <ul class="steps steps-vertical" id="tpFlowDiv">
                                   <li class="step-item ">
                                     <div class="h4 m-0" style="color: red;">入职</div>
                                     <div class="text-secondary">2022-3-4</div>
                                     <div style="border:black">
+                                      <textarea >
+
+                                      </textarea>
                                       顾问 test 推荐的人选 测试数据 已经获得当前offer！<br>
                                       职位：<br>
                                       年薪：123万元<br>

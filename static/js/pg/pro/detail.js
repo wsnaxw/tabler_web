@@ -1,40 +1,39 @@
-
-
-
 $(function(){
-
-    
- 
-
-
     workId = getParameterByName('workId');
-
-
-
-
     //  数据填充
     basedatanumber(workId)
- 
-
     // 基本信息
     baseinfo(workId)
     // 团队成员
     teamlist(workId)
     rxxx('')
-    $('#rxxqdiv').hide()
+    // $('#rxxqdiv').hide();
+
+
+
+
+    $('#closerxxq').on('click', function(event) {
+        // 阻止事件的默认行为（如果有的话）
+        event.preventDefault();
+    
+        // 隐藏元素
+        $('#rxxqdiv').hide();
+        document.getElementById('rxxxdiv').scrollIntoView({ behavior: 'smooth' });
+    
+        // 确保没有其他代码导致页面滚动
+        // ... 其他逻辑 ...
+    });
+
+
+
+
+
+
 
 })
 
-
-
 let workId;
-
 let editInfo = {}
-
-
-
-
-
 
 function getParameterByName(name) {
     url = window.location.href;
@@ -47,20 +46,13 @@ function getParameterByName(name) {
 }
 
 
-
-
-
 function rxxx(state){    
-
-
     var data={};
-
     if(state==null||state==undefined){
         data ={'projectId':workId}
     }else{
         data ={ 'state': state,'projectId':workId}
     }
-
     const options = {
         method: 'POST',
         headers: {
@@ -154,19 +146,7 @@ function rxxx(state){
                             operate='' ;
                     }
 
-
-
-
-
-
-
-
-
-
-
-
                     str +=
-
                     `<tr>
                     <td>
                     ${o.userName}
@@ -202,16 +182,9 @@ function rxxx(state){
               </tr>`) 
             }
 
-
-
         }).catch((error)=>{
             callback();
         });
-
-
-
-
-
 
 }
 
@@ -221,36 +194,25 @@ function splitOrGet(str) {
     // 使用split方法根据'/'字符分割字符串  
     // 如果没有'/'，split方法将返回只包含原字符串的数组  
     const parts = str.split('/');  
-  
-
-  
+    
     // 否则，返回分割后的数组  
     return parts;  
 } 
 
 
-
 function basedatanumber(pid){
-
     getData({'projectId': pid},'/project/selectTPListNumber').then(data => {
-        // 这里处理从getData返回的数据
-
         try {
-
             $('#all').html(data.all);
             $('#jxm').html(data.jxm);
             $('#gkh').html(data.gkh);
             $('#yms').html(data.yms);
             $('#khms').html(data.khms);
-
             $('#offer').html(data.offer);
             $('#yrz').html(data.yrz);
             $('#rxlz').html(data.rxlz);
             $('#fqrx').html(data.fqrx); 
-            
-
-
-
+        
         } catch (error) {
             
         }
@@ -268,17 +230,11 @@ function basedatanumber(pid){
 let flame = `<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#ff3d3d"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-flame"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.773 4.741 -3 6c-1.226 1.26 -2 3.24 -2 5a6 6 0 1 0 12 0c0 -1.532 -1.056 -3.94 -2 -5c-1.786 3 -2.791 3 -4 2z" /></svg>`
 
 
-
-
 function baseinfo(workId){
     getData({'projectId': workId},'/project/selectPById').then(data => {
-        // 这里处理从getData返回的数据
-
         try {
-            console.log(data)
             $('#formdata').html('')
             let cityCode = '';
-
             if(data.cityCode!=null&&data.cityCode.length>4){
                 let cityarray = splitOrGet(data.cityCode)
                 if(cityarray!=null&&cityarray.length>0){
@@ -371,10 +327,7 @@ function baseinfo(workId){
         
         }
 
-        console.log(state)
-
-
-            let str =` <div class="row row-cards"> 
+        let str =` <div class="row row-cards"> 
                       <div class="col-lg-12">
                         <div class="card">
                           <div class="card-status-start bg-primary"></div>
@@ -425,7 +378,7 @@ function baseinfo(workId){
                               <dt class="col-1">职位描述:</dt>
                               <dd class="col-6">
                                 <span>
-                                  ${toStr(data.details)}
+                                  ${toTextbr(data.details)}
                                 </span>
                               </dd>                          
                             </dl>
@@ -445,10 +398,6 @@ function baseinfo(workId){
     });
 
 }
-
-
-
-
 
 
 
@@ -486,29 +435,13 @@ function teamlist(customerId){
                         <a onclick="deletemember(${o.userId})"  class="btn-close"></a>
                       </span>`
 
-
-
-
-
-
                 })
                 $('#teamlist').html(str+newteammember)
-
-
             }else{
-
-        
-
-
                 $('#teamlist').html(newteammember)
             }
 
-
-
-
-               
         } catch (error) {
-            
         }
 
     }).catch(error => {
@@ -525,12 +458,9 @@ function newTeamList(){
 }
 
 
-
 function deletemember(uid){
 
-
     var isConfirmed = confirm("您确定要删除吗？");
-
     if (isConfirmed) {
         // 用户点击了“确定”按钮
         // 执行删除操作
@@ -558,19 +488,12 @@ function deletemember(uid){
 
 
 
-
-
-
-
     } else {
         // 用户点击了“取消”按钮或关闭了对话框
         console.log("删除操作被取消");
     }
 
-
-
 }
-
 
 
 function toStr(value) {
@@ -579,8 +502,6 @@ function toStr(value) {
     }
     return value.toString();
 }
-
-
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -678,22 +599,16 @@ function addTeamList(){
 
 function successalert(str){
     $('#modalshowstr').html(str)
-    
     $('#modal-danger').modal('show')
-
 }
-
 
 
 function signCustomer(){
 
 // 获取div元素
 var divElement = document.getElementById('modal-sign');
-
 // 获取div内所有的input元素
 var inputElements = divElement.querySelectorAll('input');
-
-
 
 
 // 遍历input元素，并为每个元素添加input事件监听器
@@ -716,15 +631,9 @@ inputElements.forEach(function(input) {
   $('#modal-sign').modal('show')
 
 
-
-
-
-
-
 }
 
 function showMessage(type,text) {
-
     const messageElement = document.createElement('div');
     if(type==0||type==='success'){
         messageElement.className = 'message visible alert alert-success';
@@ -768,11 +677,7 @@ function showMessage(type,text) {
 }
 
 
-
-
 function signC(){
-
-
 
     // 获取div元素
     var divElement = document.getElementById('modal-sign');
@@ -839,8 +744,6 @@ function signC(){
 
  $('#modal-sign').modal('hide')
 
-
-
 }
 
 
@@ -858,7 +761,6 @@ function check2(){
 
 
 function changeCState(state){
-
 
     
     var isConfirmed = confirm("是否变更状态？");
@@ -903,51 +805,6 @@ function changeCState(state){
 
 }
 
-
-function abandonCus(){
-
-    
-    var isConfirmed = confirm("是否将客户放入公共池？");
-
-    if (isConfirmed) {
-     
-        const options = {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            'token':localStorage.getItem('token')
-            },
-            body: JSON.stringify({ 'customerId':csid }),
-            };
-
-            var url = baseUri2+'/customer/abandonCustomer';
-        fetch(url,options)
-            .then(response => response.json())
-            .then(json => {
-                // console.log(json)
-                if(json.code==0){
-                    
-            showMessage(0,'转移成功')
-            location.reload();
-                }else{
-                    showMessage(1,json.message)
-                }
-            
-
-
-            }).catch((error)=>{
-                callback();
-            });
-
-
-
-
-    } else {
-        // 用户点击了“取消”按钮或关闭了对话框
-        console.log("删除操作被取消");
-    }
-
-}
 
 
 function initEdit(){
@@ -1127,34 +984,242 @@ function objectsAreEqual(obj1, obj2) {
 
 
 function checkDetail(tanlentId,pid){
+    $('#rxxqdiv').show()
+    const options = {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'token':localStorage.getItem('token')
+        },
+        body: JSON.stringify({ 'id': pid }),
+        };
+
+        var url = baseUri+'/talent/selectTPById';
+    fetch(url,options)
+        .then(response => response.json())
+        .then(json => {
+
+
+            
+          let gender=''
+
+          switch (json.data.talentInfo.gender) {
+            case 1:
+                gender='男'
+                break;
+            case 2:
+                gender='女'
+                break;
+
+            default:
+                gender='无'
+        }
+
+
+
+        let requireEduStr = '';
+        switch (json.data.talentInfo.education) {
+          case 0:
+              requireEduStr = '无';
+            break;
+          case 1:
+              requireEduStr = '初中';
+            break;
+          case 2:
+              requireEduStr = '中专';
+            break;
+          case 3:
+              requireEduStr = '高中';
+            break;
+          case 4:
+              requireEduStr = '大专';
+            break;
+          case 5:
+              requireEduStr = '本科';
+            break;
+          case 6:
+              requireEduStr = '硕士';
+            break;
+          case 7:
+              requireEduStr = '博士';
+            break;
+          default:
+              requireEduStr = '无';
+        }
+
+
+        
+        let state = '';
+        switch (json.data.state) {
+          case 0:
+            state = '加项目';
+            break;
+          case 1:
+            state = '给客户';
+            break;
+          case 5:
+            state = '约面试';
+            break;
+          case 6:
+            state = '客户面试';
+            break;
+          case 8:
+            state = '确认offer';
+            break;
+          case 9:
+            state = '已入职';
+            break;
+          case 10:
+            state = '人选离职';
+            break;
+          case 4:
+            state = '放弃人选';
+            break;
+          default:
+            state = '加项目';
+        }
 
 
 
 
 
+            let basedata = `<div class="row mb-3">
+                                  <div >
+                                    <h3>${toStr(json.data.talentInfo.name)}</h3>
+                                    <span>${toStr(json.data.talentInfo.phone)}</span>
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#000000"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-minus-vertical"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5v14" /></svg>   
+                                    <span>${gender}</span>
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#000000"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-minus-vertical"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5v14" /></svg>
+                                    <span>${requireEduStr}</span>
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#000000"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-minus-vertical"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5v14" /></svg>
+                                    <span>${toStr(json.data.talentInfo.age)} 岁</span>
+                                  </div>
+                                </div>
+                                <dl class="row mb-3">
+                                  <dt class="col-2">当前公司:</dt>
+                                  <dd class="col-4">${toStr(json.data.talentInfo.lastCompany)}</dd>
+                                  <dt class="col-2">电子邮箱:</dt>
+                                  <dd class="col-4">${toStr(json.data.talentInfo.email)}</dd>
+                                </dl>
+                                <dl class="row mb-3">
+                                  <dt class="col-2">当前职位:</dt>
+                                  <dd class="col-4">${toStr(json.data.talentInfo.job)}</dd>
+                                  <dt class="col-2">目前薪资:</dt>
+                                  <dd class="col-4">${toStr(json.data.talentInfo.salary)}</dd>
+                                </dl>
+                                <dl class="row mb-3">
+                                  <dt class="col-2">人选状态:</dt>
+                                  <dd class="col-4">${state}</dd>
+                                  <dt class="col-2">保用期:</dt>
+                                  <dd class="col-4">${json.data.quot}</dd>
+                                </dl>
+                                <dl class="row mb-3">
+                                  <dt class="col-2">推荐人:</dt>
+                                  <dd class="col-4" >${json.data.userName}</dd>
+                                  <dt class="col-6"></dt>
+                                </dl>
+                                <dl class="row mb-3">
+                                  <dt class="col-2">备注:</dt>
+                                  <dd class="col-6">${toStr(json.data.remark)}</dd>  
+                                </dl>`
 
 
+            $('#talentDetailDiv').html('')
 
 
+            $('#talentDetailDiv').html(basedata)
+
+            
+            $('#tpFlowDiv').html('')
 
 
+            if(json.data.tpFlowList!=null&&json.data.tpFlowList.length>0){
 
 
+                
+                let datastr=``;
+                for(var i =0;i<json.data.tpFlowList.length;i++){
+                    let o = json.data.tpFlowList[i]
 
 
+                    
+                    let state1 = '';
+                    switch (o.state) {
+                    case '0':
+                        state1 = '加入项目';
+                        break;
+                    case '1':
+                        state1 = '推给客户';
+                        break;
+                    case '5':
+                        state1 = '预约面试';
+                        break;
+                    case '6':
+                        state1 = '客户面试';
+                        break;
+                    case '8':
+                        state1 = '确认offer';
+                        break;
+                    case '9':
+                        state1 = '人选入职';
+                        break;
+                    case '10':
+                        state1 = '人选离职';
+                        break;
+                    case '4':
+                        state1 = '放弃人选';
+                        break;
+                    default:
+                        state1 = '加项目';
+                    }
+
+                    let str=``
+                    if(i==0){
+                        str =`<li class="step-item ">
+                                    <div class="h4 m-0" style="color: red;">${state1}</div>
+                                    <div class="text-secondary">${o.createTime}</div>
+                                    <div style="border:black">
+                                    ${toTextbr(o.remark)}
+                                    </div>
+                                  </li>`;
+                    }else{
+                         str =`<li class="step-item ">
+                                    <div class="h4 m-0">${state1}</div>
+                                    <div class="text-secondary">${o.createTime}</div>
+                                    <div style="border:black">
+                                    ${toTextbr(o.remark)}
+                                    </div>
+                                  </li>`;
+                    }
+                 
+                              
+                    datastr+=str;
+
+                }
+
+                $('#tpFlowDiv').html(datastr)
 
 
+            }
 
 
-
-
-
-
+        }).catch((error)=>{
+            
+    })
 
 
     $('#rxxqdiv').show()
+    document.getElementById('rxxqdiv').scrollIntoView({ behavior: 'smooth' });
+
 }
 
-function closerxxq(){
-    $('#rxxqdiv').hide()
+
+
+function toTextbr(text){
+    if(text==null)return '';
+
+    return text.replace(/\n/g, '<br>');
+
+
+
 }

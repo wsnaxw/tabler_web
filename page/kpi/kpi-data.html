@@ -12,7 +12,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>客户列表</title>
+    <title>绩效数据汇总</title>
     <!-- CSS files -->
     <script src="../../static/js/tabler.min.js"></script>
     <link rel="stylesheet" href="../../static/css/tabler.min.css">
@@ -20,8 +20,10 @@
     <link rel="icon" href="../../static/img/favicon.ico" type="image/x-icon" />
     <script src="../../static/js/jquery.min.js"></script>
     <script src="../../static/js/base.js?1"></script>
+    <link type="text/css" rel="stylesheet" href="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/skin/jedate.css">
+    <script type="text/javascript" src="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/src/jedate.js"></script>
     <script src="../../static/js/watermark.js"></script>
-    <script src="../../static/js/pg/cus/list.js"></script>
+    <script src="../../static/js/pg/kpi/list.js"></script>
     <script>
       function dark(){
         let body = document.getElementById('webBody')
@@ -34,6 +36,7 @@
       }
 
     </script>
+
   </head>
   <body  id="webBody" class="layout-fluid">
     <div class="page">
@@ -278,130 +281,85 @@
 
                     <div class="row "> 
                     
+                     
                       <div class="col-lg-2">
-                        <label class="form-label" style="font-weight: bold;">客户名</label>
-                        <input type="text" class="form-control" name="name" id="name" placeholder="">
-                      </div>
-                      <div class="col-lg-2">
-                        <label class="form-label" style="font-weight: bold;">服务顾问</label>
+                        <label class="form-label" style="font-weight: bold;">顾问名称</label>
                         <input type="text" class="form-control" name="appUserName" id="appUserName" placeholder="">
                       </div>
-                      <div class="col-lg-2">
-                        <label class="form-label" style="font-weight: bold;">归属公司</label>
-                        <input type="text" class="form-control" name="employComId" id="employComId" placeholder="成都公司">
-                      </div>
-                      <div class="col-lg-2">
-                        <div class="form-label" style="font-weight: bold">客户来源</div>
-                        <select class="form-select" id="sourceType" name="sourceType">
-                          <option selected value="">全部</option>
-                          <option value="1">广告呼入</option>
-                          <option value="2">主动BD</option>
-                          <option value="3">电销开发</option>
-                          <option value="0">公共池</option>
-                        </select>
-                      </div>
-                      <div class="col-lg-2">
-                        <div class="form-label" style="font-weight: bold">客户状态</div>
-                        <select class="form-select" id="state" name="state">
-                          <option selected value="">全部</option>
-                          <option value="0">潜在客户</option>
-                          <option value="1">签约运作</option>
-                          <option value="2">签约暂停</option>
-                          <option value="3">签约终止</option>
-                        </select>
-                      </div>
-                      <div class="col-lg-2">
-                        <div class="form-label" style="font-weight: bold">客户等级</div>
-                        <select class="form-select" name="level" id="level">
-                          <option selected value="">全部</option>
-                          <option value="0">普通</option>
-                          <option value="1">VIP1</option>
-                          <option value="2">VIP2</option>
-                          <option value="3">VIP3</option>
-                          <option value="4">VIP4</option>
-                          <option value="5">VIP5</option>
-                        </select>
-                      </div>
-                    </div>
-  
-                    <div class="row"> 
-                  
-                      <div class="col-lg-2">
-                          <div class="form-label" style="font-weight: bold;">公司规模</div>
-                          <select class="form-select" id="customerSize" name="customerSize">
-                            <option selected value="">全部</option>
-                            <option value="0">0-15人</option>
-                            <option value="1">15-50人</option>
-                            <option value="2">50-100人</option>
-                            <option value="3">100-500人</option>
-                            <option value="4">500-1000人</option>
-                            <option value="5">1000-10000人</option>
-                            <option value="6">10000人以上</option>
-                          </select>
-                      </div>  
-                      <div class="col-lg-2">
-                        <div class="form-label" style="font-weight: bold;">所属行业</div>
-                        <select class="form-select" id="industryType" name="industryType">
-                          <option selected value="">不限</option>
-                          <option value="互联网 / 游戏 / 软件">互联网 / 游戏 / 软件</option>
-                          <option value="电子 / 通信 / 硬件">电子 / 通信 / 硬件</option>
-                          <option value="房地产 / 建筑 / 物业 ">房地产 / 建筑 / 物业 </option>
-                          <option value="经济">经济</option>
-                          <option value="消费品">消费品</option>
-                          <option value="汽车 / 机械 / 制造">汽车 / 机械 / 制造</option>
-                          <option value="广告 / 传媒 / 教育 / 文化">广告 / 传媒 / 教育 / 文化</option>
-                          <option value="交通 / 贸易 / 物流">交通 / 贸易 / 物流</option>
-                          <option value="制药 / 医用器械">制药 / 医用器械</option>
-                          <option value="能源 / 化工 / 环保">能源 / 化工 / 环保</option>
-                          <option value="政府 / 农林牧渔">政府 / 农林牧渔</option>
-                        </select>
-                      </div>
-                      <!-- <div class="col-lg-2" >
-                        <div class="form-label" style="font-weight: bold;">是否认证</div>
-                        <div class="form-selectgroup form-selectgroup-pills">
-                          <label class="form-selectgroup-item">
-                            <input type="checkbox" name="certification" value="1" id="certificationYes" value="HTML" class="form-selectgroup-input" >
-                            <span class="form-selectgroup-label">是</span>
-                          </label>  
-                          <label class="form-selectgroup-item">
-                            <input type="checkbox" name="certification" value="0" id="certificationNo" value="HTML" class="form-selectgroup-input" >
-                            <span class="form-selectgroup-label">否</span>
-                          </label>
+                 
+                     
+                      <div class="col-xl-3">
+                        <div class="mb=3">
+                            <label class="form-label"  style="font-weight: bold;">日期</label>
+                            <div class="col-md-6 col-xl-12" id="timeDate11" >
+                                <div class="jeinpbox"><input type="text" class="form-control" name="year" id="ymd01" placeholder="YYYY"></div>
+                            </div>
                         </div>
-                      </div> -->
-                      <div class="col-lg-2" >
-                        <div class="form-label" style="font-weight: bold;">是否大客户</div>
-                        <div class="form-selectgroup form-selectgroup-pills">
-                          <label class="form-selectgroup-item">
-                            <input type="checkbox" name="vip" value="1" class="form-selectgroup-input" >
-                            <span class="form-selectgroup-label">是</span>
-                          </label>  
-                          <label class="form-selectgroup-item">
-                            <input type="checkbox" name="vip" value="0" class="form-selectgroup-input" >
-                            <span class="form-selectgroup-label">否</span>
-                          </label>
+                        <div class="mb=3">
+                            <div class="col-md-6 col-xl-12" id="timeDate1111" >
+                                <div class="jeinpbox"><input type="text" class="form-control" name="yearRange" id="ymd011" placeholder="YYYY"></div>
+                            </div>
+                        </div>
+                        <div class="mb=3">
+                            <div class="col-md-6 col-xl-12" id="timeDate22" >
+                                <div class="jeinpbox"><input type="text" class="jeinput form-control" name="month" id="ymd02" placeholder="YYYY-MM"></div>
+                            </div>
+                        </div>
+                        <div class="mb=3">
+                            <div class="col-md-6 col-xl-12" id="timeDate2222" >
+                                <div class="jeinpbox"><input type="text" class="jeinput form-control" name="monthRange"id="ymd022" placeholder="YYYY-MM"></div>
+                            </div>
+                        </div>
+                        <div class="mb=3">
+                            <div class="col-md-6 col-xl-12" id="timeDate33" >
+                                <div class="jeinpbox"><input type="text" class="jeinput form-control" name="day"id="ymd03" placeholder="YYYY-MM-DD"></div>
+                            </div>
+                        </div>
+                        <div class="mb=3">
+                            <div class="col-md-6 col-xl-12" id="timeDate3333" >
+                                <div class="jeinpbox"><input type="text" class="jeinput form-control" name="dayRange"id="ymd033" placeholder="YYYY-MM-DD"></div>
+                            </div>
                         </div>
                       </div>
-                      <div class="col-lg-2" >
-                        <div class="form-label" style="font-weight: bold;">客户归属</div>
-                        <div class="form-selectgroup form-selectgroup-pills">
-                          <label class="form-selectgroup-item">
-                            <input type="checkbox" name="belong" value="1" class="form-selectgroup-input" >
-                            <span class="form-selectgroup-label">我的</span>
-                          </label>  
-                          <label class="form-selectgroup-item">
-                            <input type="checkbox" name="belong" value="2" class="form-selectgroup-input" >
-                            <span class="form-selectgroup-label">团队</span>
-                          </label>
+
+                      <div class="col-xl-4">
+                        <label class="form-label"  style="font-weight: bold;">类型</label>
+                        <div class="col-md-6 col-xl-12"  >
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="isYear" id="year"checked onclick="timeClickYear()">
+                                <span class="form-check-label">年</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="isMonth"id="month"  onclick="timeClickMonth()">
+                                <span class="form-check-label">月</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="isDay" id="day"  onclick="timeClickDay()">
+                                <span class="form-check-label">日</span>
+                            </label>
+                            <label class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="range" id="range" onclick="isRange()" >
+                                <span class="form-check-label">范围选择</span>
+                            </label>
                         </div>
                       </div>
-  
-                      <div class="col-lg-2" >
+
+                      <div class="col-lg-3" >
                         <div class="form-label" style="font-weight: bold;">&nbsp;</div>
                         <a href="#" onclick="clearForm()" class="btn btn-link ms-auto">清空 </a>
                       
                         <a href="#" onclick="searchList()" class="btn btn-primary ms-auto">查询</a>
+                        <a href="#" onclick="searchList()" class="btn btn-primary ms-auto">查询所有人</a>
                       </div>
+
+
+                    </div>
+  
+                    <div class="row"> 
+                  
+                    
+  
+                   
                     </div>
 
 
@@ -445,26 +403,26 @@
                 <div class="card">
                   <div class="card-body">
 
-                    <div class="table-responsive">
+                    <div class="table-responsive" id="table-default">
                       <table class="table card-table table-vcenter text-nowrap datatable">
                         <thead>
                           									
                           <tr>
-                            <th class="w-1">来源</th>
-                            <th class="w-1">客户名称</th>
-                            <!-- <th>认证</th> -->
-                            <th>招聘人数</th>
-                            <th>执行团队</th>
-                            <th>归属公司</th>
-                            <th>客户状态</th>
-                            <th>最后沟通</th>
-                            <th>记录</th>
-                            <th>操作</th>
+                            <th></th>
+                            <th>顾问名称</th>
+                            <th><button class="table-sort" data-sort="sort-tgkh">推给客户</button></th>
+                            <th><button class="table-sort" data-sort="sort-khms">客户面试</button></th>
+                            <th><button class="table-sort" data-sort="sort-offer">确认offer</button></th>
+                            <th><button class="table-sort" data-sort="sort-cgrz">成功入职</button></th>
+                            <th><button class="table-sort" data-sort="sort-lrrx">录入人选</button></th>
+                            <th><button class="table-sort" data-sort="sort-qykh">签约客户</button></th>
+                            <th><button class="table-sort" data-sort="sort-hkje">回款金额</button></th>
+                            <th><button class="table-sort" data-sort="sort-yjje">业绩金额</button></th>
+                            <th><button class="table-sort" data-sort="sort-date">日期</button></th>
                           </tr>
                         </thead>
-                        <tbody id="data">
-                          
-                    
+                        <tbody class="table-tbody" id="data">
+                        
                         </tbody>
                       </table>
                     </div>
@@ -521,9 +479,11 @@
             
           </div>
         </div>
-        
+        <script src="../../static/js/list.min.js" defer></script>
 
-      
+        <script defer>
+  
+        </script>
 
 
        
