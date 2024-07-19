@@ -186,7 +186,7 @@ function chooseThisCity(o){
   $('#cityinputshow').val($(o).text())
   $('#cityinputvalue').val($(o).attr('value'))
 
-  $('.dropdown-menu.show').removeClass('show');
+  $('#citymenu.show').removeClass('show');
 
 }
 
@@ -217,7 +217,7 @@ function chooseThis(o){
     $('#jobinput').val(str)
   }
 
-  $('.dropdown-menu.show').removeClass('show');
+  $('#jobmenu.show').removeClass('show');
 
 
 }

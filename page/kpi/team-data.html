@@ -12,22 +12,18 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>职位列表</title>
+    <title>团队数据</title>
     <!-- CSS files -->
     <script src="../../static/js/tabler.min.js"></script>
     <link rel="stylesheet" href="../../static/css/tabler.min.css">
     <link rel="stylesheet" href="../../static/css/base.css">
-    <link rel="stylesheet" href="../../static/css/tabler-vendors.min.css">
     <link rel="icon" href="../../static/img/favicon.ico" type="image/x-icon" />
     <script src="../../static/js/jquery.min.js"></script>
     <script src="../../static/js/base.js?1"></script>
+    <link type="text/css" rel="stylesheet" href="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/skin/jedate.css">
+    <script type="text/javascript" src="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/src/jedate.js"></script>
     <script src="../../static/js/watermark.js"></script>
-    <script src="../../static/js/citycode.js" ></script>
-
-       
-    <script src="../../static/js/pg/pro/Position.js"></script>
-    <script src="../../static/js/pg/pro/Industry.js"></script>
-    <script src="../../static/js/pg/pro/list.js"></script>
+    <script src="../../static/js/pg/kpi/team-list.js"></script>
     <script>
       function dark(){
         let body = document.getElementById('webBody')
@@ -39,36 +35,7 @@
         body.setAttribute("data-bs-theme","")
       }
 
-      
-
     </script>
-      <style>
-       .cascader-level {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.cascader-level li {
-  cursor: pointer;
-  padding: 5px;
-  border: 1px solid #ccc;
-  margin-bottom: 5px;
-}
-
-.cascader-level li.active {
-  background-color: #eee;
-}
-
-.cascader-level .children {
-  display: none;
-  margin-left: 20px;
-}
-
-.cascader-level .children.open {
-  display: block;
-}
-    </style>
 
   </head>
   <body  id="webBody" class="layout-fluid">
@@ -311,218 +278,87 @@
                 <div class="card">
                 
                   <div class="card-body" id="formdata">
-
-                    <div class="row mb-3"> 
+                    <form id="myForm">
+                      <div class="row "> 
                     
-                      <div class="col-lg-3 row">
-                        <label class="form-label col-3" style="font-weight: bold;">客户名</label>
-                        <div class="col">
-                          <input type="text" class="form-control" name="customerName">
+                     
+                        <div class="col-lg-2">
+                          <label class="form-label" style="font-weight: bold;">顾问名称</label>
+                          <input type="text" class="form-control" name="appUserName" id="appUserName" placeholder="">
                         </div>
-                      </div>
-                      <div class="col-lg-3 row">
-                        <label class="form-label col-3" style="font-weight: bold;">职位名称</label>
-                        <div class="col">
-                          <input type="text" class="form-control" name="name"  >
-                        </div>
-                      </div>
-
-
-                      <div class="col-lg-3 row">
-                        <label class="form-label col-3" style="font-weight: bold;">城市</label>
-                        <div class="nav-item dropdown col" >
-                          <input type="text" class="form-select dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="true" readonly id="cityinputshow">
-                          <input type="hidden" id="cityinputvalue" name="cityCode">
-                          <div class="dropdown-menu " id="citymenu"data-bs-popper="static" >
-                            <div class="dropdown-menu-columns">
-                              <div class="dropdown-menu-column" id="citydiv">
-
-
-
-                             
-                               
-
-
+                   
+                       
+                        <div class="col-xl-3" id="dateInput">
+                          <div class="mb=3">
+                              <label class="form-label"  style="font-weight: bold;">日期</label>
+                              <div class="col-md-6 col-xl-12" id="timeDate11" >
+                                  <div class="jeinpbox"><input type="text" class="form-control" name="year" id="ymd01" placeholder="YYYY"></div>
                               </div>
-                            
-                            
-                           
-                          
                           </div>
-                          </div>
-                        </div>
-                      </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                      <div class="col-lg-3 row">
-                        <label class="form-label col-3" style="font-weight: bold;">职位类别</label>
-                        <div class="nav-item dropdown col" >
-                          <input type="text" class="form-select dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="true" readonly name="job" id="jobinput">
-                          <div class="dropdown-menu " id="jobmenu" data-bs-popper="static" >
-                            <div class="dropdown-menu-columns">
-                              <div class="dropdown-menu-column" id="jobdiv">
-
-
-
-                             
-                               
-
-
+                          <div class="mb=3">
+                              <div class="col-md-6 col-xl-12" id="timeDate1111" >
+                                  <div class="jeinpbox"><input type="text" class="form-control" name="yearRange" id="ymd011" placeholder="YYYY"></div>
                               </div>
-                            
-                            
-                           
-                          
                           </div>
+                          <div class="mb=3">
+                              <div class="col-md-6 col-xl-12" id="timeDate22" >
+                                  <div class="jeinpbox"><input type="text" class="jeinput form-control" name="month" id="ymd02" placeholder="YYYY-MM"></div>
+                              </div>
                           </div>
-                        </div>
-                      </div>
-
-
-                    </div>
-                    <div class="row mb-3"> 
-
-
-
-
-                      <div class="col-lg-3 row">
-                        <label class="form-label col-3" style="font-weight: bold;">年龄</label>
-                        <div class="col">
-                          <input type="number" class="form-control col" name="requireAgeS" placeholder="最小年龄" >
-                        </div>
-                        <div class="col">
-                          <input type="number" class="form-control col" name="requireAgeE" placeholder="最大年龄">
-                        </div>
-
-
-                      </div>
-                      <div class="col-lg-3 row">
-                        <label class="form-label col-3" style="font-weight: bold;">性别</label>
-                        <div class="col">
-                          <label class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="requireGender" value="1" >
-                            <span class="form-check-label">男</span>
-                          </label>
-                          <label class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="requireGender" value="2" >
-                            <span class="form-check-label">女</span>
-                          </label>
-                          <label class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="requireGender" value="0" checked>
-                            <span class="form-check-label">不限</span>
-                          </label>
-                        </div>
-                      </div>
-
-                      <div class="col-lg-3 row">
-                        <label class="form-label col-3" style="font-weight: bold;">学历</label>
-                        <div class="col">
-                          <select class="form-select " id="state" name="requireEdu">
-                            <option selected value="">不限</option>
-                            <option value="2">中专</option>
-                            <option value="3">大专</option>
-                            <option value="4">大学</option>
-                            <option value="5">研究生</option>
-                            <option value="6">博士</option>
-                            <option value="7">博士后</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-lg-3 row">
-                        <label class="form-label col-3" style="font-weight: bold;">是否统招</label>
-                        <div class="col">
-                          <label class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="requireAllTime" value="1" >
-                            <span class="form-check-label">是</span>
-                          </label>
-                          <label class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="requireAllTime" value="2" >
-                            <span class="form-check-label">否</span>
-                          </label>
-                          <label class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="requireAllTime"  value="0" checked>
-                            <span class="form-check-label">不限制</span>
-                          </label>
-                        </div>
-                      </div>
-
-                    </div>
-                    <div class="row mb-3"> 
-
-
-
-                      <div class="col-lg-3 row">
-                        <label class="form-label col-3" style="font-weight: bold;">年薪</label>
-                        <div class="col">
-                          <input type="text" class="form-control " name="salary" >
-
-                        </div>
-                      </div>
-
-
-                      <div class="col-lg-3 row">
-                        <div class="form-label col-3" style="font-weight: bold">保用期</div>
-                        <div class="col">
-                          <div class="input-group input-group-flat">
-                            <input type="number" class="form-control" name="quotTime"  placeholder="请输入保用期月限">
-                            <span class="input-group-text">
-                              <kbd>月</kbd>
-                            </span>
+                          <div class="mb=3">
+                              <div class="col-md-6 col-xl-12" id="timeDate2222" >
+                                  <div class="jeinpbox"><input type="text" class="jeinput form-control" name="monthRange"id="ymd022" placeholder="YYYY-MM"></div>
+                              </div>
+                          </div>
+                          <div class="mb=3">
+                              <div class="col-md-6 col-xl-12" id="timeDate33" >
+                                  <div class="jeinpbox"><input type="text" class="jeinput form-control" name="day"id="ymd03" placeholder="YYYY-MM-DD"></div>
+                              </div>
+                          </div>
+                          <div class="mb=3">
+                              <div class="col-md-6 col-xl-12" id="timeDate3333" >
+                                  <div class="jeinpbox"><input type="text" class="jeinput form-control" name="dayRange"id="ymd033" placeholder="YYYY-MM-DD"></div>
+                              </div>
                           </div>
                         </div>
-                      </div>
-                      <div class="col-lg-3 row">
-                        <div class="form-label col-3" style="font-weight: bold">紧急程度</div>
-                        <div class="col">
-                          <select class="form-select"  name="level">
-                            <option selected value="">默认</option></optgroup>
-                            <option value="0">一般</option>
-                           
-                            <option value="1">紧急</option>
-                            <option value="2">特急</option>
-                          </select>
-                        </div>
-                      </div>
-       
-                      <div class="col-lg-3" >
-                        <div class="col">
-                         <a  onclick="clearForm()" class="btn btn-link ms-auto ">清空 </a>
-                         <a onclick="searchList()" class="btn btn-primary ms-auto ">查询</a>
-
-                        </div>
-                  
-                      </div>
-                    </div>
   
+                        <div class="col-xl-4">
+                          <label class="form-label"  style="font-weight: bold;">类型</label>
+                          <div class="col-md-6 col-xl-12"  >
+                              <label class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="isYear" id="year"checked onclick="timeClickYear()">
+                                  <span class="form-check-label">年</span>
+                              </label>
+                              <label class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="isMonth"id="month"  onclick="timeClickMonth()">
+                                  <span class="form-check-label">月</span>
+                              </label>
+                              <label class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="isDay" id="day"  onclick="timeClickDay()">
+                                  <span class="form-check-label">日</span>
+                              </label>
+                              <label class="form-check form-switch">
+                                  <input class="form-check-input" type="checkbox" name="range" id="range" onclick="isRange()" >
+                                  <span class="form-check-label">范围选择</span>
+                              </label>
+                          </div>
+                        </div>
+  
+                        <div class="col-lg-3" >
+                          <div class="form-label" style="font-weight: bold;">&nbsp;</div>
+                          <a href="#" onclick="clearForm()" class="btn btn-link ms-auto">清空 </a>
+                        
+                          <a href="#" onclick="searchList()" class="btn btn-primary ms-auto">查询</a>
+                          <a href="#" onclick="searchList(1)" class="btn btn-primary ms-auto">查询所有人</a>
+                        </div>
+  
+  
+                      </div>
+
+                    </form>
+                    
+  
+                
 
 
                   </div>
@@ -564,25 +400,26 @@
                 <div class="card">
                   <div class="card-body">
 
-                    <div class="table-responsive">
+                    <div class="table-responsive" id="table-default">
                       <table class="table card-table table-vcenter text-nowrap datatable">
                         <thead>
                           									
                           <tr>
-                            <th class="w-1">紧急程度</th>
-                            <th class="w-1">客户名称</th>
-                            <th class="w-1">职位名称</th>
-                            <th>工作地点</th>
-                            <th>招聘人数</th>
-                            <th >状态</th>
-                            <th>发布日期</th>
-                            <th>推荐人数</th>
-                            <th>操作</th>
+                            <th></th>
+                            <th>顾问名称</th>
+                            <th><button class="table-sort" data-sort="sort-tgkh">推给客户</button></th>
+                            <th><button class="table-sort" data-sort="sort-khms">客户面试</button></th>
+                            <th><button class="table-sort" data-sort="sort-offer">确认offer</button></th>
+                            <th><button class="table-sort" data-sort="sort-cgrz">成功入职</button></th>
+                            <th><button class="table-sort" data-sort="sort-lrrx">录入人选</button></th>
+                            <th><button class="table-sort" data-sort="sort-qykh">签约客户</button></th>
+                            <th><button class="table-sort" data-sort="sort-hkje">回款金额</button></th>
+                            <th><button class="table-sort" data-sort="sort-yjje">业绩金额</button></th>
+                            <th><button class="table-sort" data-sort="sort-date">日期</button></th>
                           </tr>
                         </thead>
-                        <tbody id="data">
-                          
-                    
+                        <tbody class="table-tbody" id="data">
+                        
                         </tbody>
                       </table>
                     </div>
@@ -639,10 +476,11 @@
             
           </div>
         </div>
-        
+        <script src="../../static/js/list.min.js" defer></script>
 
-      
-    <script src="../../static/js/tom-select.base.min.js"  ></script>
+        <script defer>
+  
+        </script>
 
 
        

@@ -40,3 +40,7 @@
   background-color: #f5f5f5; /* 你可以使用你喜欢的颜色 */
   cursor: pointer; /* 可选：显示鼠标悬停时的指针 */
 }
+.dropdown-item:hover {
+  background-color: #f5f5f5; /* 你可以使用你喜欢的颜色 */
+  cursor: pointer; /* 可选：显示鼠标悬停时的指针 */
+}
