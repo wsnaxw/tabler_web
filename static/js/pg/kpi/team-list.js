@@ -271,12 +271,12 @@ function getPage(pageNo,all){
         },
         dataType:'json',
         type:'post',
-        url:baseUri+'/home/allUserData',
+        url:baseUri+'/kpi/kpiTotal',
         data:JSON.stringify(data),
         success:function(obj){
 
             var str="";
-            if(obj.data.list.length===0){
+            if(obj.data.length===0){
               $('.table-sort tbody').append("<tr class='text-c'><td colspan='4'>没有数据 !</td></tr>");
               $('#pageSelect').html('');
               $('#totalPageNum').html(0);
@@ -284,10 +284,10 @@ function getPage(pageNo,all){
                 
             }else{
                 // $("#countsss").css("display","");
-                for(var i =0;i<obj.data.list.length;i++){
+                for(var i =0;i<obj.data.length;i++){
 
-                    var o = obj.data.list[i];
-        
+                    var o = obj.data[i];
+                    if("test"===o.userName)continue;
 
 
                     str+=
@@ -308,105 +308,7 @@ function getPage(pageNo,all){
                     `
                 }
                 $('#data').html(str);
-                const list = new List('table-default', {
-                  sortClass: 'table-sort',
-                  listClass: 'table-tbody',
-                  valueNames: [ 'sort-tgkh', 'sort-khms', 'sort-offer', 'sort-cgrz',
-                    'sort-lrrx','sort-qykh','sort-hkje','sort-yjje','sort-date'
-                    
-                  ]
-                });
-
-           
-                var pageCount = obj.data.count
-
-                $('#totalPageNum').html('');
-                $('#totalPageNum').html(pageCount);
-
-                var totalPage = obj.data.totalPage;
-
-
-                $('#totalPageNum1').html('');
-                $('#totalPageNum1').html(totalPage);
-                //上一页页数
-                var forward = pageNo-1;
-                var forward1 = '';
-                if(pageNo==1){
-                    forward=1;
-                    forward1 = '<li class="page-item disabled">'
-                    +'<a class="page-link" href="#"  tabindex="1" aria-disabled="true">'
-                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 6l-6 6l6 6"></path></svg>'
-                      +'prev'
-                    +'</a>'
-                  +'</li>'
-                }else {
-                    forward1 = '<li class="page-item" >'
-                    +'<a class="page-link" href="#" onclick="getPage('+forward+');">'
-                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 6l-6 6l6 6"></path></svg>'
-                      +'prev'
-                    +'</a>'
-                  +'</li>'
-                }
-                //下一页页数
-                var backwards = pageNo+1;
-                var backwards1 = '';
-                if(pageNo===obj.data.totalPage){
-                    backwards=pageNo;
-
-                    backwards1 = '<li class="page-item disabled">'
-                    +'<a class="page-link" href="#"  tabindex="1" aria-disabled="true">'
-                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg>'
-                      +'next'
-                    +'</a>'
-                  +'</li>'
-                }else{
-                    backwards1 = '<li class="page-item">'
-                    +'<a class="page-link" href="#"  onclick="getPage('+backwards+');" >'
-                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg>'
-                      +'next'
-                    +'</a>'
-                  +'</li>'
-                }
-
-                str='';
-                str+=forward1;
-
-                //添加首页/上一页按钮功能
-                var count = 0;//记录第一次循环页数按钮, 用来控制显示的按钮数不得超过5个
-                var index = 0;//第二次循环页数
-                var pages= pageNo;
-                for(var i=1;i<=totalPage;i++){
-                    if(pageNo>1){
-                        i=pageNo++;
-                        index = count++;
-                        if(index>4){
-                            break;
-                        }
-                        if(i==pages){
-                            str+= '<li class="page-item active" ><a class="page-link" href="#"  onclick="getPage('+i+');" >'+i+'</a></li>'
-                        }else{
-                            str+= '<li class="page-item" ><a class="page-link" href="#"  onclick="getPage('+i+');" >'+i+'</a></li>'
-                        }
-                    }else{
-                        count++;
-                        if(count>5){
-                            count=0;
-                            break;
-                        }else{
-                            if(i===pageNo){
-                                str+= '<li class="page-item active" ><a class="page-link" href="#"  onclick="getPage('+i+');" >'+i+'</a></li>'
-                            }else{
-                                str+= '<li class="page-item" ><a class="page-link" href="#"  onclick="getPage('+i+');" >'+i+'</a></li>'
-                            }
-                        }
-                    }
-                }
-
-                str+=backwards1;
-
-
-                $('#pageSelect').html('');
-                $('#pageSelect').html(str);
+                
                 document.getElementById('table-default').scrollIntoView({ behavior: 'smooth' });
 
 
