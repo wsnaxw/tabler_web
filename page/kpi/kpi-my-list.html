@@ -1,0 +1,528 @@
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta19
+* @link https://tabler.io
+* Copyright 2018-2023 The Tabler Authors
+* Copyright 2018-2023 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>我的绩效</title>
+    <!-- CSS files -->
+    <script src="../../static/js/tabler.min.js"></script>
+    <link rel="stylesheet" href="../../static/css/tabler.min.css">
+    <link rel="stylesheet" href="../../static/css/base.css">
+    <link rel="icon" href="../../static/img/favicon.ico" type="image/x-icon" />
+    <script src="../../static/js/jquery.min.js"></script>
+    <script src="../../static/js/base.js?1"></script>
+    <link type="text/css" rel="stylesheet" href="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/skin/jedate.css">
+    <script type="text/javascript" src="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/src/jedate.js"></script>
+    <script src="../../static/js/watermark.js"></script>
+    <script src="../../static/js/pg/kpi/kpi-my-list.js"></script>
+    <script>
+      function dark(){
+        let body = document.getElementById('webBody')
+        body.setAttribute("data-bs-theme","dark")
+      }
+
+      function light(){
+        let body = document.getElementById('webBody')
+        body.setAttribute("data-bs-theme","")
+      }
+
+    </script>
+    <style>
+      .hidden-row {
+        display: none;
+      }
+
+      .hidden-row.show {
+        display: table-row; /* 适用于<tr> */
+      }
+    </style>
+  </head>
+  <body  id="webBody" class="layout-fluid">
+    <div class="page">
+
+
+      <!--      &lt;!&ndash; Sidebar &ndash;&gt;-->
+      
+      
+      <aside class="navbar navbar-vertical navbar-expand-lg"    >
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <h1 class="navbar-brand navbar-brand-autodark">
+            <a href="#" >
+              <img src="http://admin.fsfhr.com/banner.svg" width="110" height="32" alt="faithful" class="navbar-brand-image">
+            </a>
+          </h1>
+
+          <div class="collapse navbar-collapse"   id="sidebar-menu">
+            <ul class="navbar-nav pt-lg-3" id="menu">
+
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- navbar navbar-expand-md d-print-none d-none d-lg-flex -->
+      <!-- navbar navbar-expand-md d-print-none -->
+      <header class="navbar navbar-expand-md d-print-none d-none d-lg-flex fixed-top">
+        <div class="container-xl">
+
+
+
+          <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal p-0 pe-md-6">
+          </h1>
+          <div class="navbar-nav flex-row order-md-last">
+            <div class="nav-item d-none d-md-flex me-3">
+              <div class="btn-list">
+                <div class="input-icon">
+                    <span class="input-icon-addon">
+                      <!-- Download SVG icon from http://tabler-icons.io/i/search -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path d="M21 21l-6 -6"></path></svg>
+                    </span>
+                  <input type="text" value="" class="form-control" id="indexsearch" placeholder="客户名/人选名/项目名" aria-label="Search in website" data-listener-added_8ff64168="true">
+                </div>
+                <a onclick="indexSearch()" class="btn btn-blue" target="_blank" rel="noreferrer">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/brand-github -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"></path></svg>
+                  查询
+                </a>
+              </div>
+            </div>
+            <div class="d-none d-md-flex">
+              <a   onclick="dark()" class="nav-link px-0 hide-theme-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="Enable dark mode" data-bs-original-title="Enable dark mode">
+                <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path></svg>
+              </a>
+              <a onclick="light()" class="nav-link px-0 hide-theme-light" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="Enable light mode" data-bs-original-title="Enable light mode">
+                <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"></path></svg>
+              </a>
+              <div class="nav-item dropdown d-none d-md-flex me-3">
+                <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1" aria-label="Show notifications" onclick="usermessage()" data-bs-auto-close="outside">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/bell -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path><path d="M9 17v1a3 3 0 0 0 6 0v-1"></path></svg>
+                  <span class="badge bg-red"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
+                  <div class="card">
+                    <div class="card-header">
+                      <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                          <a href="#" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab" onclick="usermessage()">信箱</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <a href="#" class="nav-link" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab" onclick="usertrip()">行程</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="list-group list-group-flush list-group-hoverable">
+                      <div id="messagediv">
+                        <div class="list-group-item divide-y"  id="msgstr"  >
+                          <h3></h3>
+                        </div>
+                      </div>                      
+                      <div id="tripdiv">
+                        <div class="list-group-item divide-y" id="tripstr">
+                          <h3></h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="nav-item dropdown">
+              <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
+                <div class="d-none d-xl-block ps-2">
+                  <div id="userName">无</div>
+                  <div class="mt-1 small text-muted" id="userLevel">无</div>
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <a href="#" class="dropdown-item">个人中心</a>
+                <a href="#" class="dropdown-item">修改密码</a>
+                <div class="dropdown-divider"></div>
+                <a id="logOut" class="dropdown-item">退出</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+
+
+      <div class="page-wrapper">
+
+
+
+        <!-- Page header -->
+        <div class="page-header d-print-none">
+        </div>
+
+
+
+
+        <!-- Page body -->
+        <div class="page-body container-xl">
+
+
+
+
+
+          <div class="container-xl" >
+
+
+            <div class="row row-deck row-cards">
+
+
+
+              <div class="col-lg-12">
+                <div class="card">
+                
+                  <div class="card-body" id="formdata">
+                    <form id="myForm">
+                      <div class="row "> 
+                    
+                     
+                        <div class="col-lg-2">
+                          <label class="form-label" style="font-weight: bold;">顾问名称</label>
+                          <input type="text" class="form-control" name="appUserName" id="appUserName" placeholder="">
+                        </div>
+                   
+                       
+                        <div class="col-xl-3" id="dateInput">
+                          <div class="mb=3">
+                              <label class="form-label"  style="font-weight: bold;">日期</label>
+                              <div class="col-md-6 col-xl-12" id="timeDate11" >
+                                  <div class="jeinpbox"><input type="text" class="form-control" name="year" id="ymd01" placeholder="YYYY"></div>
+                              </div>
+                          </div>
+                          <div class="mb=3">
+                              <div class="col-md-6 col-xl-12" id="timeDate1111" >
+                                  <div class="jeinpbox"><input type="text" class="form-control" name="yearRange" id="ymd011" placeholder="YYYY"></div>
+                              </div>
+                          </div>
+                          <div class="mb=3">
+                              <div class="col-md-6 col-xl-12" id="timeDate22" >
+                                  <div class="jeinpbox"><input type="text" class="jeinput form-control" name="month" id="ymd02" placeholder="YYYY-MM"></div>
+                              </div>
+                          </div>
+                          <div class="mb=3">
+                              <div class="col-md-6 col-xl-12" id="timeDate2222" >
+                                  <div class="jeinpbox"><input type="text" class="jeinput form-control" name="monthRange"id="ymd022" placeholder="YYYY-MM"></div>
+                              </div>
+                          </div>
+                          <div class="mb=3">
+                              <div class="col-md-6 col-xl-12" id="timeDate33" >
+                                  <div class="jeinpbox"><input type="text" class="jeinput form-control" name="day"id="ymd03" placeholder="YYYY-MM-DD"></div>
+                              </div>
+                          </div>
+                          <div class="mb=3">
+                              <div class="col-md-6 col-xl-12" id="timeDate3333" >
+                                  <div class="jeinpbox"><input type="text" class="jeinput form-control" name="dayRange"id="ymd033" placeholder="YYYY-MM-DD"></div>
+                              </div>
+                          </div>
+                        </div>
+  
+                        <div class="col-xl-4">
+                          <label class="form-label"  style="font-weight: bold;">类型</label>
+                          <div class="col-md-6 col-xl-12"  >
+                              <label class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="isYear" id="year"checked onclick="timeClickYear()">
+                                  <span class="form-check-label">年</span>
+                              </label>
+                              <label class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="isMonth"id="month"  onclick="timeClickMonth()">
+                                  <span class="form-check-label">月</span>
+                              </label>
+                              <label class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="isDay" id="day"  onclick="timeClickDay()">
+                                  <span class="form-check-label">日</span>
+                              </label>
+                              <label class="form-check form-switch">
+                                  <input class="form-check-input" type="checkbox" name="range" id="range" onclick="isRange()" >
+                                  <span class="form-check-label">范围选择</span>
+                              </label>
+                          </div>
+                        </div>
+  
+                        <div class="col-lg-3" >
+                          <div class="form-label" style="font-weight: bold;">&nbsp;</div>
+                          <a href="#" onclick="clearForm()" class="btn btn-link ms-auto">清空 </a>
+                        
+                          <a href="#" onclick="searchList()" class="btn btn-primary ms-auto">查询</a>
+                          <a href="#" onclick="searchList(1)" class="btn btn-primary ms-auto">查询所有人</a>
+                        </div>
+  
+  
+                      </div>
+
+                    </form>
+                    
+  
+                
+
+
+                  </div>
+      
+      
+      
+      
+                 
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  
+      
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-body">
+
+                    <div class="table-responsive" id="table-default">
+                      <table class="table card-table table-vcenter text-nowrap datatable">
+                        <thead>
+                          									
+                          <tr>
+                            <th></th>
+                            <th>顾问名称</th>
+                            <th>期数</th>
+                            <th>职级</th>
+                            <th>推给客户</th>
+                            <th>客户面试</th>
+                            <th>确认offer</th>
+                            <th>成功入职</th>
+                            <th>录入人选</th>
+                            <th>签约客户</th>
+                            <th>业绩金额</th>
+                            <th>考核分数</th>
+                          </tr>
+                        </thead>
+                        <tbody class="table-tbody" id="data">
+                        
+                        </tbody>
+                      </table>
+                    </div>
+             
+
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+            
+
+
+
+            
+
+            
+          </div>
+        </div>
+        <script src="../../static/js/list.min.js" defer></script>
+
+        <script defer>
+            $('.clickable').click(function() {
+            // 获取data-target属性中的ID列表
+            var $targets = $(this).data('target').split(',');
+            console.log(targets)
+            // 遍历ID列表，并切换对应隐藏行的.active类
+            $targets.forEach(function(id) {
+              var $targetRow = $(id);
+              $targetRow.toggleClass('active');
+            });
+            
+            // 如果你不希望同时展开多个组，可以在这里添加逻辑来关闭其他所有组
+            // 但由于每个组都有独立的点击事件和ID列表，所以这一步通常是可选的
+          });
+        </script>
+
+
+       
+        <footer class="footer footer-transparent d-print-none">
+          <div class="container-xl">
+            <div class="row text-center align-items-center flex-row-reverse">
+              <div class="col-12">
+              <!-- <div class="col-12 col-lg-auto mt-3 mt-lg-0 text-center "> -->
+                <ul class="list-inline list-inline-dots mb-0">
+                  <li class="list-inline-item">
+                    Copyright &copy; 2021  
+
+                    <a href="#" class="link-secondary"> 费思福(成都)人力资源咨询有限公司 </a>
+                  
+                  </li>
+                  <li class="list-inline-item">
+                    蜀ICP备2021005893号-2
+             
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    
+  </body>
+</html>
