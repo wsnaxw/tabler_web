@@ -23,6 +23,11 @@
     <link type="text/css" rel="stylesheet" href="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/skin/jedate.css">
     <script type="text/javascript" src="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/src/jedate.js"></script>
     <script src="../../static/js/watermark.js"></script>
+    
+        
+    <link rel="stylesheet" href="../../static/css/tabler-vendors.min.css">
+    <script src="../../static/js/tom-select.base.min.js" ></script>
+
     <script src="../../static/js/pg/kpi/kpi-my-list.js"></script>
     <script>
       function dark(){
@@ -290,74 +295,31 @@
                       <div class="row "> 
                     
                      
-                        <div class="col-lg-2">
+                        <div class="col-lg-3">
                           <label class="form-label" style="font-weight: bold;">顾问名称</label>
-                          <input type="text" class="form-control" name="appUserName" id="appUserName" placeholder="">
+                          <input type="text" class="form-select" placeholder="输入名称查询选择需要查看的顾问" id="comMember"  >
                         </div>
                    
                        
-                        <div class="col-xl-3" id="dateInput">
+                        <div class="col-xl-2" id="dateInput">
                           <div class="mb=3">
                               <label class="form-label"  style="font-weight: bold;">日期</label>
                               <div class="col-md-6 col-xl-12" id="timeDate11" >
                                   <div class="jeinpbox"><input type="text" class="form-control" name="year" id="ymd01" placeholder="YYYY"></div>
                               </div>
                           </div>
-                          <div class="mb=3">
-                              <div class="col-md-6 col-xl-12" id="timeDate1111" >
-                                  <div class="jeinpbox"><input type="text" class="form-control" name="yearRange" id="ymd011" placeholder="YYYY"></div>
-                              </div>
-                          </div>
-                          <div class="mb=3">
-                              <div class="col-md-6 col-xl-12" id="timeDate22" >
-                                  <div class="jeinpbox"><input type="text" class="jeinput form-control" name="month" id="ymd02" placeholder="YYYY-MM"></div>
-                              </div>
-                          </div>
-                          <div class="mb=3">
-                              <div class="col-md-6 col-xl-12" id="timeDate2222" >
-                                  <div class="jeinpbox"><input type="text" class="jeinput form-control" name="monthRange"id="ymd022" placeholder="YYYY-MM"></div>
-                              </div>
-                          </div>
-                          <div class="mb=3">
-                              <div class="col-md-6 col-xl-12" id="timeDate33" >
-                                  <div class="jeinpbox"><input type="text" class="jeinput form-control" name="day"id="ymd03" placeholder="YYYY-MM-DD"></div>
-                              </div>
-                          </div>
-                          <div class="mb=3">
-                              <div class="col-md-6 col-xl-12" id="timeDate3333" >
-                                  <div class="jeinpbox"><input type="text" class="jeinput form-control" name="dayRange"id="ymd033" placeholder="YYYY-MM-DD"></div>
-                              </div>
-                          </div>
+                          
                         </div>
   
-                        <div class="col-xl-4">
-                          <label class="form-label"  style="font-weight: bold;">类型</label>
-                          <div class="col-md-6 col-xl-12"  >
-                              <label class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="isYear" id="year"checked onclick="timeClickYear()">
-                                  <span class="form-check-label">年</span>
-                              </label>
-                              <label class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="isMonth"id="month"  onclick="timeClickMonth()">
-                                  <span class="form-check-label">月</span>
-                              </label>
-                              <label class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="isDay" id="day"  onclick="timeClickDay()">
-                                  <span class="form-check-label">日</span>
-                              </label>
-                              <label class="form-check form-switch">
-                                  <input class="form-check-input" type="checkbox" name="range" id="range" onclick="isRange()" >
-                                  <span class="form-check-label">范围选择</span>
-                              </label>
-                          </div>
+                        <div class="col-lg-4" >
+                        
                         </div>
   
                         <div class="col-lg-3" >
                           <div class="form-label" style="font-weight: bold;">&nbsp;</div>
                           <a href="#" onclick="clearForm()" class="btn btn-link ms-auto">清空 </a>
                         
-                          <a href="#" onclick="searchList()" class="btn btn-primary ms-auto">查询</a>
-                          <a href="#" onclick="searchList(1)" class="btn btn-primary ms-auto">查询所有人</a>
+                          <a href="#" onclick="getPage()" class="btn btn-primary ms-auto">查询</a>
                         </div>
   
   

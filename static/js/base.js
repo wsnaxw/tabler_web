@@ -1,4 +1,4 @@
-var baseUri ='http://admin.fsfhr.com/api/fsfa';
+let baseUri ='http://admin.fsfhr.com/api/fsfa';
 var baseUri1 ='http://admin.fsfhr.com/';
 var baseUri2 ='http://127.0.0.1:9090/fsfa'
 var baseUri3 ='http://127.0.0.1:9091/'
@@ -34,29 +34,16 @@ const menuicon = [{icon:'<span class="nav-link-icon d-md-none d-lg-inline-block"
             '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart-minus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.5 12.572l-2.494 2.47m-5.006 4.958l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /><path d="M16 19h6" /></svg>'+
             '                  </span>'},
 ];
-
 const dazuanshi = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" '+
                           '    stroke="#87ceeb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" '+
                           '    class="icon icon-tabler icons-tabler-outline icon-tabler-diamond"> '+
                           '   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path> '+
                           '   <path d="M6 5h12l3 5l-8.5 9.5a.7 .7 0 0 1 -1 0l-8.5 -9.5l3 -5"></path>'+
                           '   <path d="M10 12l-2 -2.2l.6 -1"></path></svg>' 
-
-
 const dashijian = '  <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#fd7275"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-news"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11" /><path d="M8 8l4 0" /><path d="M8 12l4 0" /><path d="M8 16l4 0" /></svg>'
-
 const dayuanbao = '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#ffeb00"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-coin"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1" /><path d="M12 7v10" /></svg>'
 
-
-
-
-
-$(document).ready(function() {
-
-
-
-
-    // 检查token123123
+$(function(){
 
     var x = localStorage.getItem("token");
     if (x==null||x.length<10){
@@ -74,11 +61,7 @@ $(document).ready(function() {
             },
             dataType: 'json', // 预期服务器返回的数据类型
             success: function(response) {
-                // 请求成功时执行的回调函数
-                // console.log('请求成功:', response);
-                // 在这里处理服务器返回的数据
                 if (response && response.code === 0 ) {
-                    // 无效token 跳转页面
                     var code = response.data;
 
                     if (code == '1'){
@@ -86,34 +69,19 @@ $(document).ready(function() {
                     }
 
                 } else {
-                    // 处理无效数据的情况
                     console.error('请求未成功或数据格式不正确:', response);
                     window.location.href = '/tabler_web/sign_in.html'
                 }
 
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                // 请求失败时执行的回调函数
                 console.error('请求失败:', textStatus, errorThrown);
-                // 在这里处理请求失败的情况
             }
         });
-
-
-
     }
-
-
-    console.log('页面加载完成，可以开始执行初始化设置了！');
-
-
-
     let user = JSON.parse(localStorage.getItem('user'));
-
     $('#userName').html(user.flowerName)
-
     $('#userLevel').html(user.job)
-
     // 例如，为某个按钮绑定点击事件
     menuStart();
     $('#loginButton').click(function() {
@@ -123,45 +91,19 @@ $(document).ready(function() {
     $('#logOut').click(function() {
         loginOut();
     });
-
     watermark.load({watermark_txt:user.flowerName,watermark_x_space:230})
-
-   
-
-    // 或者隐藏某个元素
-
-    // 以及其他初始化操作...
-
-
-
-
     menuClick();
-
-
     menuActive();
-
-
     // usermessage();
-
-
 });
 
-
 function menuStart() {
-
     let menuStr = localStorage.getItem("menuStr")
     if (menuStr===null ||menuStr ==='' || menuStr.length<100){
         getMenuInfo();
-    }else{
-        
+    }else{  
         $("#sidebar-menu").html(menuStr);
     }
-
-
-
-
-
-
 }
 
 
@@ -177,27 +119,11 @@ function getMenuInfo(){
         type: 'POST', // 请求类型
         dataType: 'json', // 预期服务器返回的数据类型
         success: function(response) {
-            // 请求成功时执行的回调函数
-            // console.log('请求成功:', response);
-            // 在这里处理服务器返回的数据
             if (response && response.code === 0 ) {
-                // console.log(response.data)
-
-                //生成菜单
-
-                //一级菜单
-
                 const menuLevel1 = response.data.filter(obj => obj.level===0);
-                //
-
                 $("#menu").html("");
-
                 for (let i =0 ;i<menuLevel1.length;i++){
-
-
                     if (menuLevel1[i].uri !== 'home'){
-
-
                         let menu1 = $("<li class=\"nav-item dropdown\" id='"+menuLevel1[i].uri+"'>" +
                             "</li>");
 
@@ -225,25 +151,11 @@ function getMenuInfo(){
                                 "" + o.name +
                                 "                      </a>")
 
-
-
                         })
-
-
-
-
                         dropmenu2.append(dropmenu3)
                         dropmenu.append(dropmenu2);
-
-
                         menu1.append(dropmenu)
-
-
-
-
                         $("#menu").append(menu1);
-
-
 
                     }else {
                         let menu1 = $("<li class=\"nav-item\" id='"+menuLevel1[i].uri+"'>" +
@@ -260,45 +172,18 @@ function getMenuInfo(){
                     }
 
                     if (menuLevel1[i].uri !== 'home'){
-
-
                         const menuLevel2 = response.data.filter(obj => (obj.level===1 && obj.superUri === menuLevel1[i].uri ));
-
-                        // console.log( menuLevel1[i].name  )
-                        // console.log( menuLevel2  )
-                        // console.log("----------------------")
-
-
-
-
-
-
                     }
-
-
                 }
-
-
                 localStorage.setItem("menuStr",document.getElementById('menu').outerHTML)
-
-                // console.log(menuLevel1)
             }
 
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            // 请求失败时执行的回调函数
-            console.error('请求失败:', textStatus, errorThrown);
-            // 在这里处理请求失败的情况
+            // console.error('请求失败:', textStatus, errorThrown);
         }
     });
-
-
 }
-
-
-
-
-
 
 function loginOut(){
     const keys = Object.keys(localStorage);
@@ -316,63 +201,22 @@ function deleteCookie(name) {
     document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
 }
 
-
-function baseAjax1(jsondata,uri){
-
-    let resultData;
-
-    $.ajax({
-        url: baseUri+uri, // 替换为你的服务器端点
-        headers:{
-            'Token': localStorage.getItem('token'), // 设置自定义请求头
-            'Content-Type': 'application/json; charset=utf-8' // 设置内容类型为 JSON
-        },
-        data:JSON.stringify(jsondata),
-        type: 'POST', // 请求类型
-        dataType: 'json', // 预期服务器返回的数据类型
-        success: function(response) {
-            // 请求成功时执行的回调函数
-            // console.log('请求成功:', response);
-            // 在这里处理服务器返回的数据
-            if (response && response.code === 0 ) {
-                // console.log(response.data)
-                resultData = response.data;
-                return resultData;
-            }
-
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.error('请求失败:', textStatus, errorThrown);
-        }
-    });
-
-    return resultData;
-
-
-}
-
-
 function baseAjax(jsondata,uri) {
     // 返回一个Promise
     return new Promise((resolve, reject) => {
         $.ajax({
-            url: baseUri+uri, // 替换为你的服务器端点
+            url: baseUri+uri,
             headers:{
-                'Token': localStorage.getItem('token'), // 设置自定义请求头
-                'Content-Type': 'application/json; charset=utf-8' // 设置内容类型为 JSON
+                'Token': localStorage.getItem('token'), 
+                'Content-Type': 'application/json; charset=utf-8'
             },
             data:JSON.stringify(jsondata),
-            type: 'POST', // 请求类型
-            dataType: 'json', // 预期服务器返回的数据类型
+            type: 'POST', 
+            dataType: 'json', 
             success: function(response) {
-                // 请求成功时执行的回调函数
-                // console.log('请求成功:', response);
-                // 在这里处理服务器返回的数据
                 if (response && response.code === 0 ) {
-
                     resolve(response.data);
                 }
-    
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 reject(new Error('请求失败: ' + textStatus));
@@ -384,13 +228,8 @@ function baseAjax(jsondata,uri) {
 
 async function getData(data,uri) {
     try {
-
-
-
-
         // 调用fetchData函数并等待结果
         const obj = await baseAjax(data,uri);
-        
         // 在这里处理数据
         // console.log(obj);
         return obj; // 这里返回数据并不实际返回给调用者，因为这是一个异步函数
@@ -447,9 +286,6 @@ function usermessage(){
                 + o.details
                 +'</div><span style="font-weight: bold;">'+o.createTime+'</span></div></div>'
                 
-           
-
-
             });
 
             $('#msgstr').html(str)            
@@ -461,9 +297,6 @@ function usermessage(){
         // 处理错误
         console.error('获取数据失败:', error);
     });
-
-
-    
 
 }
 
@@ -515,18 +348,11 @@ function usertrip(){
         console.error('获取数据失败:', error);
     });
 
-
-
 }
 
-
 function menuActive(){
-
-
     let nowpagekey = pagemenukey;
-
     let key;
-
     if(nowpagekey!=null){
          key = nowpagekey;
     }else{
@@ -614,4 +440,13 @@ function toStr(value) {
         return '';
     }
     return value.toString();
+}
+function getParameterByName(name) {
+    url = window.location.href;
+   name = name.replace(/[\[\]]/g, "\\$&");
+   var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+       results = regex.exec(url);
+   if (!results) return null;
+   if (!results[2]) return '';
+   return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
