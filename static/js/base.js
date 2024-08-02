@@ -95,6 +95,29 @@ $(function(){
     menuClick();
     menuActive();
     // usermessage();
+    
+  document.addEventListener('keydown', function(event) {
+    // 监听左右方向键
+    if (event.key === "ArrowLeft") {
+      leftpage()
+    } else if (event.key === "ArrowRight") {
+     rightpage()
+    }else if (event.target.id != 'indexsearch'&&event.key === "Enter") {
+        searchList()
+    }
+  });
+
+  var inputElement = document.getElementById('indexsearch');
+
+  inputElement.addEventListener('keydown', function(event) {
+      // 检查是否是回车键
+      if (event.key === "Enter") {
+          event.preventDefault();
+
+          var inputValue = this.value; // 或者使用 event.target.value
+          console.log(inputValue);
+      }
+  });
 });
 
 function menuStart() {
@@ -450,3 +473,22 @@ function getParameterByName(name) {
    if (!results[2]) return '';
    return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
+let arrowPageNo =1;
+let arrowTotalPage =1
+function leftpage(){
+
+    if(arrowPageNo!=null&&arrowPageNo>1){
+      getPage(arrowPageNo-1) 
+  
+    }
+  
+  }
+  
+  function rightpage(){
+    let maxPage = arrowTotalPage - arrowPageNo;
+  
+    if(arrowPageNo!=null&&arrowPageNo>0&&maxPage>0){
+      getPage(arrowPageNo+1) 
+    }
+  
+  }

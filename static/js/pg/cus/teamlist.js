@@ -31,6 +31,7 @@ function getPage(pageNo){
 
 
 
+  arrowPageNo=pageNo;
 
     let queryData = formCheck()
     queryData.pageNo = pageNo;
@@ -191,7 +192,7 @@ function getPage(pageNo){
 
                 var totalPage = obj.data.totalPage;
 
-
+                arrowTotalPage = totalPage;
                 $('#totalPageNum1').html('');
                 $('#totalPageNum1').html(totalPage);
                 //上一页页数

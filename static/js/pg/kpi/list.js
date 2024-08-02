@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(function(){
 
     // var customerId = getParameterByName('customerId');
     jeDate("#ymd03",{
@@ -257,7 +257,7 @@ function getPage(pageNo,all){
     data.pageSize = 15;
   }
 
-
+  arrowPageNo=pageNo;
 
 
     $('#data').html('');
@@ -324,7 +324,7 @@ function getPage(pageNo,all){
                 $('#totalPageNum').html(pageCount);
 
                 var totalPage = obj.data.totalPage;
-
+                arrowTotalPage = totalPage;
 
                 $('#totalPageNum1').html('');
                 $('#totalPageNum1').html(totalPage);

@@ -32,6 +32,7 @@ function getPage(pageNo){
 
 
 
+  arrowPageNo=pageNo;
     let queryData = formCheck()
     queryData.pageNo = pageNo;
     queryData.pageSize = 10;
@@ -203,7 +204,7 @@ function getPage(pageNo){
                 $('#totalPageNum').html(pageCount);
 
                 var totalPage = obj.data.totalPage;
-
+                arrowTotalPage = totalPage;
 
                 $('#totalPageNum1').html('');
                 $('#totalPageNum1').html(totalPage);
