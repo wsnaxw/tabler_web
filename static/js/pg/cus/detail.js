@@ -1421,7 +1421,7 @@ function upload(file,myDropzone){
     getData({},'/login/getToken').then(data => {
         // 这里处理从getData返回的数据
         try {
-            localStorage.setItem("picnumber",data.token)
+            sessionStorage.setItem("picnumber",data.token)
         } catch (error) {
         }
 
@@ -1434,7 +1434,7 @@ function upload(file,myDropzone){
     getData({},'/admin/getALLSTSToken').then(data => {
         // 这里处理从getData返回的数据
         try {
-            localStorage.setItem("stsTokendata",data)
+            sessionStorage.setItem("stsTokendata",data)
         } catch (error) {
         }
 
@@ -1443,8 +1443,8 @@ function upload(file,myDropzone){
         console.error('获取数据失败:', error);
     });
 
-    stsTokendata=JSON.parse(localStorage.getItem("stsTokendata")).credentials
-    picnumber = localStorage.getItem("picnumber")
+    stsTokendata=JSON.parse(sessionStorage.getItem("stsTokendata")).credentials
+    picnumber = sessionStorage.getItem("picnumber")
     
 
     const client = new OSS({
