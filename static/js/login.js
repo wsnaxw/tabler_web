@@ -100,7 +100,7 @@ function getCode(){
             if (response && response.code === 0) {
                 // 假设服务器返回的JSON数据结构为 { success: true, captcha: '1234' }
                 var captcha = response.data.verifyCode;
-                localStorage.setItem('code',captcha);
+                sessionStorage.setItem('code',captcha);
                 // 显示验证码
                 $('#captcha').html('验证码：' + captcha);
             } else {
@@ -178,7 +178,7 @@ function  check(account,pwd,verifyCode) {
     }
 
 
-    var code = localStorage.getItem("code");
+    var code = sessionStorage.getItem("code");
 
 
     if (verifyCode != code) {
@@ -238,7 +238,7 @@ function login(){
 
                 var myJSONString = JSON.stringify(response.data);
 
-                localStorage.setItem('user',myJSONString);
+                sessionStorage.setItem('user',myJSONString);
 
                 deleteCookie('isLogin');
 
