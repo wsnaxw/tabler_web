@@ -49,6 +49,8 @@
       .hidden-row.show {
         display: table-row; /* 适用于<tr> */
       }
+
+ 
     </style>
   </head>
   <body  id="webBody" class="layout-fluid">
@@ -412,6 +414,44 @@
 
 
 
+            </div>
+
+
+
+            <div class="modal modal-blur fade" id="kpopmodal" tabindex="-1" role="dialog" aria-hidden="true" >
+              <div class="modal-dialog modal-lg " role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="kpoptitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+    
+                    <div class="card">
+                      <div class="card-body">
+    
+                        <div class="table-responsive">
+                          <table class="table card-table table-vcenter text-nowrap datatable" id="kpopdata">
+                          
+                          </table>
+                        </div>
+                        <div class="card-footer d-flex align-items-center">
+                          <p class="m-0 text-muted">共<span id="totalPageNum">0</span>条 &nbsp;<span id="totalPageNum1"></span>页</p>
+                          <ul class="pagination m-0 ms-auto" id="pageSelect">
+                            
+                          </ul>
+                        </div>
+    
+                      </div>
+                    </div>
+                
+    
+    
+                  </div>
+        
+                  
+                </div>
+              </div>
             </div>
 
 

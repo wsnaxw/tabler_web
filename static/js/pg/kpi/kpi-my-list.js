@@ -172,15 +172,15 @@ function getPage(){
                     <tr name="${i}" class="hidden-row">
                         <td></td>
                         <td></td>
-                        <td><span style="font-weight: bold;" class="bg-azure-lt">${toStr(child.dataTime)}</span></td>    
-                        <td ></td>
-                        <td style='color:#49b6ff'>${toStr(child.tgkh)}</td>    
-                        <td >${toStr(child.khms)}</td>
-                        <td >${toStr(child.offer)}</td>    
-                        <td >${toStr(child.cgrz)}</td>
-                        <td >${toStr(child.lrrx)}</td>    
-                        <td >${toStr(child.qykh)}</td>
-                        <td >${toStr(child.fee)}</td>    
+                        <td><span style="font-weight: bold;" class="bg-azure-lt">${toStr(child.dataTime)}</span></td><td ></td>
+                        <td style='color:#49b6ff'><a onclick="kpiPop1(1,'${toStr(child.userId)}','${toStr(child.dataTime)}',1,${toStr(child.tgkh)})">${toStr(child.tgkh)}</a></td> 
+                        <td style='color:#49b6ff'><a onclick="kpiPop1(2,'${toStr(child.userId)}','${toStr(child.dataTime)}',1,${toStr(child.khms)})">${toStr(child.khms)}</a></td>    
+                        <td style='color:#49b6ff'><a onclick="kpiPop1(3,'${toStr(child.userId)}','${toStr(child.dataTime)}',1,${toStr(child.offer)})">${toStr(child.offer)}</a></td>    
+                        <td style='color:#49b6ff'><a onclick="kpiPop1(4,'${toStr(child.userId)}','${toStr(child.dataTime)}',1,${toStr(child.cgrz)})">${toStr(child.cgrz)}</a></td>    
+                        <td style='color:#49b6ff'><a onclick="kpiPop1(5,'${toStr(child.userId)}','${toStr(child.dataTime)}',1,${toStr(child.lrrx)})">${toStr(child.lrrx)}</a></td>    
+                        <td style='color:#49b6ff'><a onclick="kpiPop1(6,'${toStr(child.userId)}','${toStr(child.dataTime)}',1,${toStr(child.qykh)})">${toStr(child.qykh)}</a></td>    
+                        <td style='color:#49b6ff'><a onclick="kpiPop1(7,'${toStr(child.userId)}','${toStr(child.dataTime)}',1,${toStr(child.fee)})">${toStr(child.fee)}</a></td>       
+           
                         <td ></td>
                       </tr>
                     ` 
@@ -213,5 +213,264 @@ function clearForm(){
 }
 
 
+function kpiPop1(type,appUserId,date,pageNo,number){
+
+  if(number==0)return;
 
 
+  let title,uri = '';
+
+  let thead = ` <tr>
+              <th>人选名称</th>
+              <th>岗位名称</th>
+              <th>公司名称</th>
+              <th>日期</th>
+              </tr>`;
+
+  switch(type){
+    case 1:
+      title='推给客户-人选列表';
+      uri='kpiPop1'
+      break;
+    case 2:
+        title='客户面试-人选列表';
+        uri='kpiPop6'
+      
+      break;  
+    case 3:
+      title='offer-人选列表';
+      uri='kpiPop8'
+    
+      break;
+    case 4:
+      title='入职-人选列表';
+      uri='kpiPop9'
+     
+      break;      
+    case 5:
+      title='录入-人选列表';
+      uri='kpiPop12'
+      thead=` <tr>
+              <th>录入日期</th>
+              <th>人选名称</th>
+              <th>岗位名称</th>
+              </tr>`
+      break;
+    case 6:
+      title='签约客户-客户列表';
+      uri='kpiPop13'
+      thead=` <tr>
+              <th>签约日期</th>
+              <th>客户名称</th>
+              </tr>`
+      break;      
+    case 7:
+      title='业绩明细';
+      uri='kpiFeePop'
+      thead=` <tr>
+              <th>业绩日期</th>
+              <th>客户名称</th>
+              <th>回款金额</th>
+              <th>业绩比例</th>
+              <th>业绩金额</th>
+              <th>回款用户</th>
+              </tr>`
+      break;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  $("#kpoptitle").html(`${title}`)
+  $("#kpopdata").html("");
+  $("#kpopmodal").modal("show")
+
+  $.ajax({
+    headers:{
+        'token':localStorage.getItem("token"),
+        Accept:'application/json',
+        'Content-Type':'application/json;charset=UTF-8'
+    },
+    dataType:'json',
+    type:'post',
+    url:baseUri+'/kpi/'+uri,
+    data:JSON.stringify({"appUserId":appUserId,"time":date,"pageNo":pageNo,"pageSize":10}),
+    success:function(obj){
+
+        var str="";
+        if(obj.data.list.length===0){
+          $('#kpopdata').append(`<div style="text-align: center;"><h1>没有数据</h1></div>`);
+          $('#pageSelect').html('');
+          $('#totalPageNum').html(0);
+          $('#totalPageNum1').html(0);
+            
+        }else{
+            // $("#countsss").css("display","");
+            for(var i =0;i<obj.data.list.length;i++){
+
+                var o = obj.data.list[i];
+
+
+                if(type==5){
+                  str+=
+                  `<tr> 
+                     <td >${toStr(o.createTime)}</td>   
+                      <td ><a onclick=checktalentdetail("${toStr(o.talentId)}")>${o.talentName}</a></td>
+                      <td >${toStr(o.job)}</td>    
+                     
+                    </tr>`
+                }else if(type==6){
+                  str+=
+                  `<tr> 
+                      <td >${toStr(o.createTime)}</td>    
+                      <td ><a onclick=checktalentdetail("${toStr(o.customerName)}")>${o.customerName}</a></td>
+                    </tr>`
+                }else if(type==7){
+                  str+=
+                  `<tr> 
+                      <td >${toStr(o.createTime)}</td>    
+                      <td >${toStr(o.customerName)}</td>
+                      <td >${toStr(o.serviceFee)}</td>
+                      <td >${toStr(o.rate)}</td>
+                      <td >${toStr(o.kpiFee)}</td>    
+                      <td >${toStr(o.userName)}</td>
+                    </tr>`
+                }else{
+
+                  str+=
+                  `<tr> 
+                      <td ><a onclick=checktalentdetail("${toStr(o.talentId)}")>${o.talentName}</a></td>
+                      <td >${toStr(o.job)}</td>    
+                      <td >${toStr(o.company)}</td>
+                      <td >${toStr(o.createTime)}</td>    
+                    </tr>`
+                 
+                }
+    
+
+
+        
+
+            }
+            $('#kpopdata').html(`<thead>
+              ${thead}
+              </thead>
+              <tbody>${str}</tbody>`);
+
+
+              var pageCount = obj.data.count
+
+                $('#totalPageNum').html('');
+                $('#totalPageNum').html(pageCount);
+
+                var totalPage = obj.data.totalPage;
+                arrowTotalPage = totalPage;
+
+                $('#totalPageNum1').html('');
+                $('#totalPageNum1').html(totalPage);
+                //上一页页数
+                var forward = pageNo-1;
+                var forward1 = '';
+                if(pageNo==1){
+                    forward=1;
+                    forward1 = '<li class="page-item disabled">'
+                    +'<a class="page-link" href="#"  tabindex="1" aria-disabled="true">'
+                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 6l-6 6l6 6"></path></svg>'
+                      +'prev'
+                    +'</a>'
+                  +'</li>'
+                }else {
+                    forward1 = '<li class="page-item" >'
+                    +'<a class="page-link" href="#" onclick="kpiPop1('+appUserId+","+date+","+forward+');">'
+                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 6l-6 6l6 6"></path></svg>'
+                      +'prev'
+                    +'</a>'
+                  +'</li>'
+                }
+                //下一页页数
+                var backwards = pageNo+1;
+                var backwards1 = '';
+                if(pageNo===obj.data.totalPage){
+                    backwards=pageNo;
+
+                    backwards1 = '<li class="page-item disabled">'
+                    +'<a class="page-link" href="#"  tabindex="1" aria-disabled="true">'
+                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg>'
+                      +'next'
+                    +'</a>'
+                  +'</li>'
+                }else{
+                    backwards1 = '<li class="page-item">'
+                    +'<a class="page-link" href="#"  onclick="kpiPop1('+appUserId+","+date+","+backwards+');" >'
+                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg>'
+                      +'next'
+                    +'</a>'
+                  +'</li>'
+                }
+
+                str='';
+                str+=forward1;
+
+                //添加首页/上一页按钮功能
+                var count = 0;//记录第一次循环页数按钮, 用来控制显示的按钮数不得超过5个
+                var index = 0;//第二次循环页数
+                var pages= pageNo;
+                for(var i=1;i<=totalPage;i++){
+                    if(pageNo>1){
+                        i=pageNo++;
+                        index = count++;
+                        if(index>4){
+                            break;
+                        }
+                        if(i==pages){
+                            str+= '<li class="page-item active" ><a class="page-link" href="#"  onclick="kpiPop1('+appUserId+","+date+","+i+');" >'+i+'</a></li>'
+                        }else{
+                            str+= '<li class="page-item" ><a class="page-link" href="#"  onclick="kpiPop1('+appUserId+","+date+","+i+');" >'+i+'</a></li>'
+                        }
+                    }else{
+                        count++;
+                        if(count>5){
+                            count=0;
+                            break;
+                        }else{
+                            if(i===pageNo){
+                                str+= '<li class="page-item active" ><a class="page-link" href="#"  onclick="kpiPop1('+appUserId+","+date+","+i+');" >'+i+'</a></li>'
+                            }else{
+                                str+= '<li class="page-item" ><a class="page-link" href="#"  onclick="kpiPop1('+appUserId+","+date+","+i+');" >'+i+'</a></li>'
+                            }
+                        }
+                    }
+                }
+
+                str+=backwards1;
+
+
+                $('#pageSelect').html('');
+                $('#pageSelect').html(str);
+        }
+    }
+  });
+
+
+
+
+
+
+}
+
+
+function checktalentdetail(talentId){
+  alert(talentId)
+}
