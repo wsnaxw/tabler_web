@@ -12,7 +12,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>我的绩效</title>
+    <title>签约排行</title>
     <!-- CSS files -->
     <script src="../../static/js/tabler.min.js"></script>
     <link rel="stylesheet" href="../../static/css/tabler.min.css">
@@ -23,12 +23,7 @@
     <link type="text/css" rel="stylesheet" href="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/skin/jedate.css">
     <script type="text/javascript" src="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/src/jedate.js"></script>
     <script src="../../static/js/watermark.js"></script>
-    
-        
-    <link rel="stylesheet" href="../../static/css/tabler-vendors.min.css">
-    <script src="../../static/js/tom-select.base.min.js" ></script>
-
-    <script src="../../static/js/pg/kpi/kpi-my-list.js"></script>
+    <script src="../../static/js/pg/kpi/sign-rank.js"></script>
     <script>
       function dark(){
         let body = document.getElementById('webBody')
@@ -41,17 +36,7 @@
       }
 
     </script>
-    <style>
-      .hidden-row {
-        display: none;
-      }
 
-      .hidden-row.show {
-        display: table-row; /* 适用于<tr> */
-      }
-
- 
-    </style>
   </head>
   <body  id="webBody" class="layout-fluid">
     <div class="page">
@@ -294,45 +279,39 @@
                 
                   <div class="card-body" id="formdata">
                     <form id="myForm">
-                      <div class="row  mb-3"> 
+                      <div class="row "> 
                     
-                     
-                        <div class="col-lg-3">
-                          <label class="form-label" style="font-weight: bold;">顾问名称</label>
-                          <input type="text" class="form-select" placeholder="输入名称查询选择需要查看的顾问" id="comMember"  >
-                        </div>
-                   
+     
                        
-                        <div class="col-xl-2" id="dateInput">
+                        <div class="col-xl-3" id="dateInput">
                           <div class="mb=3">
-                              <label class="form-label"  style="font-weight: bold;">日期</label>
-                              <div class="col-md-6 col-xl-12" id="timeDate11" >
-                                  <div class="jeinpbox"><input type="text" class="form-control" name="year" id="ymd01" placeholder="YYYY" autocomplete="off"></div>
+                              <label class="form-label"  style="font-weight: bold;">开始时间：</label>
+                              <div class="col-md-6 col-xl-12"  >
+                                  <div class="jeinpbox"><input type="text" class="form-control" name="startTime" id="ymd01" placeholder="YYYY-MM-DD"></div>
                               </div>
                           </div>
-                          
+                     
                         </div>
-  
-                        <div class="col-lg-4" >
-                        
+                        <div class="col-xl-3" id="dateInput">
+                          <div class="mb=3">
+                            <label class="form-label"  style="font-weight: bold;">结束时间：</label>
+                            <div class="col-md-6 col-xl-12" >
+                                <div class="jeinpbox"><input type="text" class="form-control" name="endTime" id="ymd02" placeholder="YYYY-MM-DD"></div>
+                            </div>
+                          </div>
+                     
                         </div>
+                   
+                  
   
                         <div class="col-lg-3" >
                           <div class="form-label" style="font-weight: bold;">&nbsp;</div>
                           <a href="#" onclick="clearForm()" class="btn btn-link ms-auto">清空 </a>
                         
-                          <a href="#" onclick="getPage()" class="btn btn-primary ms-auto">查询</a>
+                          <a href="#" onclick="searchList()" class="btn btn-primary ms-auto">查询</a>
                         </div>
   
   
-                      </div>
-                      <div class="row">
-                        <div class="col-lg-6" id="teamlistdiv">
-                        
-                        </div>
-                        
-  
-
                       </div>
 
                     </form>
@@ -385,18 +364,11 @@
                         <thead>
                           									
                           <tr>
-                            <th></th>
                             <th>顾问名称</th>
-                            <th>期数</th>
+                            <th>签约数量</th>
+
+                            <th>归属公司</th>
                             <th>职级</th>
-                            <th>推给客户</th>
-                            <th>客户面试</th>
-                            <th>确认offer</th>
-                            <th>成功入职</th>
-                            <th>录入人选</th>
-                            <th>签约客户</th>
-                            <th>业绩金额</th>
-                            <th>考核分数</th>
                           </tr>
                         </thead>
                         <tbody class="table-tbody" id="data">
@@ -404,62 +376,29 @@
                         </tbody>
                       </table>
                     </div>
-             
-
-                  </div>
-                </div>
-              </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-            </div>
-
-
-
-            <div class="modal modal-blur fade" id="kpopmodal" tabindex="-1" role="dialog" aria-hidden="true" >
-              <div class="modal-dialog modal-lg " role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="kpoptitle"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-    
-                    <div class="card">
-                      <div class="card-body">
-    
-                        <div class="table-responsive">
-                          <table class="table card-table table-vcenter text-nowrap datatable" id="kpopdata">
-                          
-                          </table>
-                        </div>
-                        <div class="card-footer d-flex align-items-center">
-                          <p class="m-0 text-muted">共<span id="totalPageNum">0</span>条 &nbsp;<span id="totalPageNum1"></span>页</p>
-                          <ul class="pagination m-0 ms-auto" id="pageSelect">
-                            
-                          </ul>
-                        </div>
-    
-                      </div>
+                    <div class="card-footer d-flex align-items-center">
+                      <p class="m-0 text-muted">共<span id="totalPageNum">0</span>条 &nbsp;<span id="totalPageNum1"></span>页</p>
+                      <ul class="pagination m-0 ms-auto" id="pageSelect">
+                        
+                      </ul>
                     </div>
-                
-    
-    
+
                   </div>
-        
-                  
                 </div>
               </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
 
 
@@ -493,19 +432,7 @@
         <script src="../../static/js/list.min.js" defer></script>
 
         <script defer>
-            $('.clickable').click(function() {
-            // 获取data-target属性中的ID列表
-            var $targets = $(this).data('target').split(',');
-            console.log(targets)
-            // 遍历ID列表，并切换对应隐藏行的.active类
-            $targets.forEach(function(id) {
-              var $targetRow = $(id);
-              $targetRow.toggleClass('active');
-            });
-            
-            // 如果你不希望同时展开多个组，可以在这里添加逻辑来关闭其他所有组
-            // 但由于每个组都有独立的点击事件和ID列表，所以这一步通常是可选的
-          });
+  
         </script>
 
 

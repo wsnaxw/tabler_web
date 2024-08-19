@@ -4,6 +4,7 @@ $(function(){
       format: "YYYY"
   });
   getPage();
+  teamList()
 })
 let icon_right = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-big-right-lines">
   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -23,16 +24,25 @@ function clickable(obj){
 }
 
 function getFormDate() {
+
+
+
   let form = document.getElementById('myForm');  // 用你的form的ID替换'myForm' 
   let formData = new FormData(form);
+
   let object = {};
   for (let pair of formData.entries()) {
       object[pair[0]] = pair[1];
   }
   let newJsonData = removeEmptyValues(object);
-  if( comMember.items !=null){
+
+  if( comMember.items !=null&&comMember.getValue()!=''){
+
+
     newJsonData.appUserId=comMember.getValue();
   }
+
+
   return newJsonData;
 }
 
@@ -473,4 +483,56 @@ function kpiPop1(type,appUserId,date,pageNo,number){
 
 function checktalentdetail(talentId){
   alert(talentId)
+}
+
+
+function teamList(){
+  const options = {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    'token':localStorage.getItem('token')
+    }
+  };
+
+  var url = baseUri+'/kpi/teamList';
+  fetch(url,options)
+    .then(response => response.json())
+    .then(json => {
+
+       
+        if(json.data!=null&&json.data.length>0){
+          
+          $("#teamlistdiv").html('') 
+
+            let str =''
+            json.data.forEach(o=>{
+
+
+                str +=
+                `<span class="tag">
+                            <a href="#" onclick="checkteammember(this)">${o.name}</a>
+                            <input type="hidden" value="${toStr(o.userId)}" name="appUserId" disabled>
+                          </span>`
+
+            })
+
+            $("#teamlistdiv").html(str)                
+        }
+
+
+    }).catch((error)=>{
+        console.log(error)
+      
+    });
+}
+
+function checkteammember(element){
+  var nextElement = $(element).next();
+  nextElement.prop("disabled",false)
+  
+  
+  getPage();
+  nextElement.prop("disabled",true)
+  
 }
