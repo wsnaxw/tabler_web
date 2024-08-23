@@ -12,7 +12,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>回款排行</title>
+    <title>实时回款排行</title>
     <!-- CSS files -->
     <script src="../../static/js/tabler.min.js"></script>
     <link rel="stylesheet" href="../../static/css/tabler.min.css">
@@ -23,7 +23,7 @@
     <link type="text/css" rel="stylesheet" href="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/skin/jedate.css">
     <script type="text/javascript" src="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/src/jedate.js"></script>
     <script src="../../static/js/watermark.js"></script>
-    <script src="../../static/js/pg/kpi/pay-rank.js"></script>
+    <script src="../../static/js/pg/kpi/pb-rank.js"></script>
     <script>
       function dark(){
         let body = document.getElementById('webBody')
@@ -365,11 +365,12 @@
                         <thead>
                           									
                           <tr>
-                            <th>顾问名称</th>
-                            <th>回款金额</th>
-
                             <th>归属公司</th>
-                            <th>职级</th>
+                            <th>顾问名称</th>
+                            <th >回款金额</th>
+                            <th class="w-1">客户名称</th>
+                
+                            <th>回款时间</th>
                           </tr>
                         </thead>
                         <tbody class="table-tbody" id="data">

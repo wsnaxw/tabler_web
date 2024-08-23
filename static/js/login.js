@@ -8,7 +8,7 @@ $(document).ready(function() {
     // 检查token
 
 
-    const isLogin = getCookie('isLogin');
+    const isLogin = sessionStorage.getItem('isLogin');
 
 
 
@@ -244,7 +244,7 @@ function login(){
 
                 setCookieForMidnight('isLogin','yes');
 
-
+                sessionStorage.setItem('isLogin','yes');
 
 
 

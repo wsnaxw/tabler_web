@@ -1,6 +1,6 @@
 let baseUri ='http://admin.fsfhr.com/api/fsfa';
+// let baseUri ='http://127.0.0.1:9090/fsfa';
 var baseUri1 ='http://admin.fsfhr.com/';
-var baseUri2 ='http://127.0.0.1:9090/fsfa'
 const menuicon = [{icon:'<span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->\n' +
         '                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l-2 0l9 -9l9 9l-2 0" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>\n' +
         '                  </span>'},
@@ -60,6 +60,7 @@ $(function(){
             },
             dataType: 'json', // 预期服务器返回的数据类型
             success: function(response) {
+                console.log(response)
                 if (response && response.code === 0 ) {
                     var code = response.data;
 
@@ -78,7 +79,13 @@ $(function(){
             }
         });
     }
-    let user = JSON.parse(localStorage.getItem('user'));
+    let user = JSON.parse(sessionStorage.getItem('user'));
+    console.log(user)
+    if(user == null){
+        deleteCookie('isLogin')
+        window.location.href = '/tabler_web/sign_in.html'
+    }
+
     $('#userName').html(user.flowerName)
     $('#userLevel').html(user.job)
     // 例如，为某个按钮绑定点击事件
@@ -197,6 +204,7 @@ function getMenuInfo(){
                         const menuLevel2 = response.data.filter(obj => (obj.level===1 && obj.superUri === menuLevel1[i].uri ));
                     }
                 }
+                console.log(document.getElementById('menu').outerHTML)
                 sessionStorage.setItem("menuStr",document.getElementById('menu').outerHTML)
             }
 
