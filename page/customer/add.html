@@ -292,7 +292,7 @@
                                 清空
                               </a>
                             </div>
-                            <a href="#" class="btn btn-success">
+                            <a href="#" onclick="checkMember()" class="btn btn-success">
                               <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                               <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg>
                               新增
@@ -300,7 +300,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="card-body">
+                      <div class="card-body" id="baseinfo">
                         
                         <div class="row row-cards">
                           <div class="col-md-10">
@@ -337,72 +337,64 @@
                             <div class="mb-3 row">
                               <label class="col-3 form-label required"  style="font-weight: bold;">所属行业</label>
 
-                              <div class="input-group input-group-flat col">
-                                <select class="form-select" id="industryType" name="industryType">
-                                  <option selected value="不限">不限</option>
-                                  <option value="互联网 / 游戏 / 软件">互联网 / 游戏 / 软件</option>
-                                  <option value="电子 / 通信 / 硬件">电子 / 通信 / 硬件</option>
-                                  <option value="房地产 / 建筑 / 物业 ">房地产 / 建筑 / 物业 </option>
-                                  <option value="经济">经济</option>
-                                  <option value="消费品">消费品</option>
-                                  <option value="汽车 / 机械 / 制造">汽车 / 机械 / 制造</option>
-                                  <option value="广告 / 传媒 / 教育 / 文化">广告 / 传媒 / 教育 / 文化</option>
-                                  <option value="交通 / 贸易 / 物流">交通 / 贸易 / 物流</option>
-                                  <option value="制药 / 医用器械">制药 / 医用器械</option>
-                                  <option value="能源 / 化工 / 环保">能源 / 化工 / 环保</option>
-                                  <option value="政府 / 农林牧渔">政府 / 农林牧渔</option>
-                                </select>
+                              <select class="form-select input-group input-group-flat col" id="industryType" name="industryType">
+                                <option selected value="不限">不限</option>
+                                <option value="互联网 / 游戏 / 软件">互联网 / 游戏 / 软件</option>
+                                <option value="电子 / 通信 / 硬件">电子 / 通信 / 硬件</option>
+                                <option value="房地产 / 建筑 / 物业 ">房地产 / 建筑 / 物业 </option>
+                                <option value="经济">经济</option>
+                                <option value="消费品">消费品</option>
+                                <option value="汽车 / 机械 / 制造">汽车 / 机械 / 制造</option>
+                                <option value="广告 / 传媒 / 教育 / 文化">广告 / 传媒 / 教育 / 文化</option>
+                                <option value="交通 / 贸易 / 物流">交通 / 贸易 / 物流</option>
+                                <option value="制药 / 医用器械">制药 / 医用器械</option>
+                                <option value="能源 / 化工 / 环保">能源 / 化工 / 环保</option>
+                                <option value="政府 / 农林牧渔">政府 / 农林牧渔</option>
+                              </select>
 
-                              </div>  
                             </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="mb-3 row">
                               <label class="form-label required col-3" style="font-weight: bold;">公司性质</label>
-                              <div class="input-group input-group-flat col">
-                                <select class="form-select" id="customerNature" name="customerNature">
+                              <select class="form-select input-group input-group-flat col" id="customerNature" name="customerNature">
                                 
-                                  <option value="0">国企</option>
-                                  <option value="1" selected>民营企业</option>
-                                  <option value="2">合资</option>
-                                  <option value="3">外资（欧美）</option>
-                                  <option value="4">外资（非欧美）</option>
-                                  <option value="5">外企代表处</option>
-                                  <option value="6">政府机关</option>
-                                  <option value="6">事业单位</option>
-                                  <option value="6">非营利组织</option>
-                                </select>
-                              </div>
+                                <option value="0">国企</option>
+                                <option value="1" selected>民营企业</option>
+                                <option value="2">合资</option>
+                                <option value="3">外资（欧美）</option>
+                                <option value="4">外资（非欧美）</option>
+                                <option value="5">外企代表处</option>
+                                <option value="6">政府机关</option>
+                                <option value="6">事业单位</option>
+                                <option value="6">非营利组织</option>
+                              </select>
                             </div>
                           </div>
                           <div class="col-md-6">
                             <div class="mb-3 row">
                               <label class="form-label col-3" style="font-weight: bold;">公司规模</label>
-                              <div class="input-group input-group-flat col">
-                                <select class="form-select" id="customerSize" name="customerSize">
-                                  <option selected value="0">0-15人</option>
-                                  <option value="1">15-50人</option>
-                                  <option value="2">50-100人</option>
-                                  <option value="3">100-500人</option>
-                                  <option value="4">500-1000人</option>
-                                  <option value="5">1000-10000人</option>
-                                  <option value="6">10000人以上</option>
-                                </select>
-                              </div>
+                              <select class="form-select input-group input-group-flat col" id="customerSize" name="customerSize">
+                                <option selected value="0">0-15人</option>
+                                <option value="1">15-50人</option>
+                                <option value="2">50-100人</option>
+                                <option value="3">100-500人</option>
+                                <option value="4">500-1000人</option>
+                                <option value="5">1000-10000人</option>
+                                <option value="6">10000人以上</option>
+                              </select>
                             </div>
                           </div>
                     
                           <div class="col-md-6">
                             <div class="mb-3 row">
                               <div class="form-label required col-3" style="font-weight: bold">客户来源</div>
-                              <div class="col">
-                                <select class="form-select" id="sourceType" name="sourceType">
-                                  <option value="1">广告呼入</option>
-                                  <option value="2" selected>主动BD</option>
-                                  <option value="3">电销开发</option>
-                                  <option value="0">公共池</option>
-                                </select>
-                              </div>
+                              <select class="form-select  input-group input-group-flat col" id="sourceType" name="sourceType">
+                                <option value="1">广告呼入</option>
+                                <option value="2" selected>主动BD</option>
+                                <option value="3">电销开发</option>
+                                <option value="0">公共池</option>
+                              </select>
                             </div>
                           </div>
                           <div class="col-md-6">
@@ -509,7 +501,7 @@
                           <div class="col-auto ms-auto d-print-none">
                             <div class="d-flex">
                               <div class="me-3">
-                                <a href="#" class="btn btn-info">
+                                <a  onclick="clearContacter()" class="btn btn-info">
                                   <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                                   清空
                                 </a>
@@ -524,21 +516,22 @@
                         <div class="card-body">
                           <div class="row row-cards" id="contacter">
                             <div class="mb-3">
-                              <dt class="col-3"  style="font-weight: bold;">联系人:</dt>
-                              <dd class="col-9">
-                                <div id="teamlist">
-
-                                  
-                                </div>
-                            
-                              </dd>  
-                              <small class="form-hint">点击姓名查看联系人详情</small>
+                              <dl class="row">
+                                <dt class="col-2"  style="font-weight: bold;">联系人:</dt>
+                                <dd class="col-8"  id="teamlist">
+                              
+                              
+                                </dd>  
+                                <small class="form-hint">点击姓名查看联系人详情</small>
+                              </dl>
+                 
                             </div>
                           
                             <div class="mb-3 col-lg-4 row">
                               <label class="form-label col-3 required" style="font-weight: bold;">姓名</label>
                               <div class="col">
-                                <input type="text" class="form-control"  name="contacterName" >
+                                <input type="text" class="form-control"  name="contacterName" autocomplete="off">
+                                <div class="invalid-feedback">不能为空</div>
                               </div>
                             </div>
                             <div class="mb-3 col-lg-4 row">
@@ -556,7 +549,8 @@
                             <div class="mb-3 col-lg-4 row">
                               <label class="form-label col-3 required" style="font-weight: bold;">手机</label>
                               <div class="col">
-                                <input type="text" class="form-control" name="contacterPhone">
+                                <input type="text" class="form-control" name="contacterPhone" autocomplete="off">
+                                <div class="invalid-feedback">不能为空</div>
                               </div>
                             </div>
                  
@@ -754,6 +748,85 @@
             
 
             
+          </div>
+        </div>
+
+        <div class="modal modal-blur fade" id="contactermodal" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">客户联系人</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+                <div class="row">
+                  <div class="mb-3 col-lg-4 row">
+                    <label class="form-label col-3 required" style="font-weight: bold;">姓名</label>
+                    <div class="col">
+                      <input type="text" class="form-control"  name="contacterName" >
+                      <div class="invalid-feedback">不能为空</div>
+                    </div>
+                  </div>
+                  <div class="mb-3 col-lg-4 row">
+                    <label class="form-label col-3 " style="font-weight: bold;">职位</label>
+                    <div class="col">
+                      <input type="text" class="form-control" name="contacterJob">
+                    </div>
+                  </div>
+                  <div class="mb-3 col-lg-4 row">
+                    <label class="form-label col-3 " style="font-weight: bold;">座机</label>
+                    <div class="col">
+                      <input type="text" class="form-control" name="contacterLandline">
+                    </div>
+                  </div>
+                  <div class="mb-3 col-lg-4 row">
+                    <label class="form-label col-3 required" style="font-weight: bold;">手机</label>
+                    <div class="col">
+                      <input type="text" class="form-control" name="contacterPhone">
+                      <div class="invalid-feedback">不能为空</div>
+                    </div>
+                  </div>
+       
+                  <div class="mb-3 col-lg-4 row">
+                    <label class="form-label col-3 " style="font-weight: bold;">邮箱</label>
+                    <div class="col">
+                      <input type="text" class="form-control" name="contacterEmail">
+                    </div>
+                  </div>
+                  <div class="mb-3 col-lg-4 row">
+                    <label class="form-label col-3 " style="font-weight: bold;">性别</label>
+                    <div class="col">
+                      <label class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="contacterGender" value="1" >
+                        <span class="form-check-label">男</span>
+                      </label>
+                      <label class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="contacterGender" value="2" >
+                        <span class="form-check-label">女</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="mb-3 col-lg-12 row">
+                    <label class="form-label col-1 " style="font-weight: bold;">备注</label>
+                    <div class="col col-7 ">
+                      <textarea class="form-control" rows="2" name="contacterRemark" ></textarea>
+                    </div>
+                  </div>
+
+                </div>
+
+                <input type="hidden" id="editKey" value="">
+                  
+                
+
+              </div>  
+              <div class="modal-footer">
+                <a class="btn btn-primary" onclick="contacterEdit()" >
+                  确认修改    
+                </a>
+              </div>
+            </div>
           </div>
         </div>
         
