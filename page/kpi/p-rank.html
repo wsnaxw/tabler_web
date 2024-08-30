@@ -23,7 +23,7 @@
     <link type="text/css" rel="stylesheet" href="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/skin/jedate.css">
     <script type="text/javascript" src="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/src/jedate.js"></script>
     <script src="../../static/js/watermark.js"></script>
-    <script src="../../static/js/pg/kpi/pb-rank.js"></script>
+    <script src="../../static/js/pg/kpi/p-rank.js"></script>
     <script>
       function dark(){
         let body = document.getElementById('webBody')
@@ -283,21 +283,42 @@
                     
      
                        
-                        <div class="col-xl-3" id="dateInput">
+                        <div class="col-xl-2" >
                           <div class="mb=3">
-                              <label class="form-label"  style="font-weight: bold;">开始时间：</label>
+                              <label class="form-label"  style="font-weight: bold;">offer时间-开始：</label>
                               <div class="col-md-6 col-xl-12"  >
-                                  <div class="jeinpbox"><input type="text" class="form-control" name="startTime" id="ymd01" placeholder="YYYY-MM-DD"></div>
+                                  <div class="jeinpbox"><input type="text" class="form-control" name="offerDate1" id="ymd01" placeholder="YYYY-MM-DD"></div>
                               </div>
                               <small class="form-hint">注：默认查询为本年度的数据</small>
                           </div>
                      
                         </div>
-                        <div class="col-xl-3" id="dateInput">
+                        <div class="col-xl-2" >
                           <div class="mb=3">
-                            <label class="form-label"  style="font-weight: bold;">结束时间：</label>
+                            <label class="form-label"  style="font-weight: bold;">结束：</label>
                             <div class="col-md-6 col-xl-12" >
-                                <div class="jeinpbox"><input type="text" class="form-control" name="endTime" id="ymd02" placeholder="YYYY-MM-DD"></div>
+                                <div class="jeinpbox"><input type="text" class="form-control" name="offerDate12" id="ymd02" placeholder="YYYY-MM-DD"></div>
+                            </div>
+                          </div>
+                     
+                        </div>
+
+                              
+                        <div class="col-xl-2" >
+                          <div class="mb=3">
+                              <label class="form-label"  style="font-weight: bold;">入职时间-开始：</label>
+                              <div class="col-md-6 col-xl-12"  >
+                                  <div class="jeinpbox"><input type="text" class="form-control" name="startTime" id="ymd03" placeholder="YYYY-MM-DD"></div>
+                              </div>
+                              <small class="form-hint">注：默认查询为本年度的数据</small>
+                          </div>
+                     
+                        </div>
+                        <div class="col-xl-2" >
+                          <div class="mb=3">
+                            <label class="form-label"  style="font-weight: bold;">结束：</label>
+                            <div class="col-md-6 col-xl-12" >
+                                <div class="jeinpbox"><input type="text" class="form-control" name="endTime" id="ymd04" placeholder="YYYY-MM-DD"></div>
                             </div>
                           </div>
                      
@@ -365,12 +386,14 @@
                         <thead>
                           									
                           <tr>
+                            <th>状态</th>
                             <th>归属公司</th>
-                            <th>顾问名称</th>
-                            <th >回款金额</th>
-                            <th class="w-1">客户名称</th>
-                
-                            <th>回款时间</th>
+                            <th>推荐人</th>
+                            <th>人选名称</th>
+                            <th>人选岗位</th>
+                            <th>人选年薪</th>
+                            <th>offer时间</th>
+                            <th>入职时间</th>
                           </tr>
                         </thead>
                         <tbody class="table-tbody" id="data">

@@ -1,12 +1,20 @@
 $(function(){
     // var customerId = getParameterByName('customerId');
-    jeDate("#ymd01",{
+  jeDate("#ymd01",{
       theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
       format: "YYYY-MM-DD"
   });
   jeDate("#ymd02",{
     theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
     format: "YYYY-MM-DD"
+});
+jeDate("#ymd03",{
+  theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+  format: "YYYY-MM-DD"
+});
+jeDate("#ymd04",{
+theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+format: "YYYY-MM-DD"
 });
 
   
@@ -82,13 +90,13 @@ function getPage(pageNo){
         },
         dataType:'json',
         type:'post',
-        url:baseUri+'/kpi/feeRank',
+        url:baseUri+'/kpi/recommendRank',
         data:JSON.stringify(data),
         success:function(obj){
 
             var str="";
             if(obj.data.list.length===0){
-              $('.table-sort tbody').append("<tr class='text-c'><td colspan='4'>没有数据 !</td></tr>");
+              $('.table-sort tbody').append("<tr class='text-c'><td colspan='8'>没有数据 !</td></tr>");
               $('#pageSelect').html('');
               $('#totalPageNum').html(0);
               $('#totalPageNum1').html(0);
@@ -104,13 +112,16 @@ function getPage(pageNo){
                     str+=
                     `
                     <tr>
+                        <td style='color:red'>${o.stateName}</td>
                         <td >${o.comName}</td>
                         <td >${o.userName}</td>
-                           <td style='color:red'>${o.fee}</td>
-                        <td style='color:blue'><a onclick='checkcusd("${o.customerId}")'>${o.customerName}</a></td>
 
-                     
-                        <td>${o.time}</td>
+                        <td style='color:blue'><a onclick='checktl("${o.talentId}")'>${o.talentName}</a></td>
+                        <td style='color:blue'><a onclick='checkpro("${o.projectId}")'>${o.job}</a></td>
+                        <td style='color:red'>${o.salary}万</td>
+                        <td >${o.offerDate}</td>
+                        <td >${o.createTime}</td>
+       
                         
                       </tr>
                     `

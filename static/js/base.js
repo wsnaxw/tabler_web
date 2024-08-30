@@ -65,12 +65,13 @@ $(function(){
                     var code = response.data;
 
                     if (code == '1'){
+                        loginOut()
                         window.location.href = '/tabler_web/sign_in.html'
                     }
 
                 } else {
                     console.error('请求未成功或数据格式不正确:', response);
-                    window.location.href = '/tabler_web/sign_in.html'
+                    loginOut()
                 }
 
             },
@@ -79,11 +80,10 @@ $(function(){
             }
         });
     }
-    let user = JSON.parse(sessionStorage.getItem('user'));
+    let user = JSON.parse(localStorage.getItem('user'));
     console.log(user)
     if(user == null){
-        deleteCookie('isLogin')
-        window.location.href = '/tabler_web/sign_in.html'
+        loginOut()
     }
 
     $('#userName').html(user.flowerName)
@@ -127,7 +127,7 @@ $(function(){
 });
 
 function menuStart() {
-    let menuStr = sessionStorage.getItem("menuStr")
+    let menuStr = localStorage.getItem("menuStr")
     if (menuStr===null ||menuStr ==='' || menuStr.length<100){
         getMenuInfo();
     }else{  
@@ -205,7 +205,7 @@ function getMenuInfo(){
                     }
                 }
                 console.log(document.getElementById('menu').outerHTML)
-                sessionStorage.setItem("menuStr",document.getElementById('menu').outerHTML)
+                localStorage.setItem("menuStr",document.getElementById('menu').outerHTML)
             }
 
         },

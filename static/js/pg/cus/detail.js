@@ -446,8 +446,8 @@ function job(pageNo){
                     </td>
                
                     <td >
-                      <a class="btn btn-info" onclick="checkProject(${o.projecId})">
-                        人选详情
+                      <a class="btn btn-info" onclick="checkProject(${toStr(o.projectId)})">
+                        查看项目
                       </a>
                  
                     </td>
@@ -1787,4 +1787,20 @@ function newcc(){
         });
 
 
+}
+
+function checkProject(id){
+        //跳转页面并且携带参数
+
+        let bigNumber = BigInt(id);
+        let pid = bigNumber.toString(); // 转换为字符串
+    
+    
+    // 创建一个新的URL，携带参数
+    var url = '../project/prod.html?workId=' + encodeURIComponent(pid)+'' ;
+    
+    // 使用jQuery来跳转到新页面
+    // window.location.href = url;
+    
+    window.open(url, '_blank');
 }

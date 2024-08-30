@@ -3,6 +3,17 @@
 
 $(function(){
 
+
+
+    $('input[type="radio"][name="isChangeManage"]').click(function() {
+        // 根据value触发不同的事件
+        if ($(this).val() == '1') {
+            tllock()
+        } else if ($(this).val() == '2') {
+            tlunlock()
+        }
+      });
+
 })
 
 
@@ -13,6 +24,17 @@ let contacterList = {}
 
 let teamMemberList = {}
 
+
+function tllock(){
+
+    teamLeader.disable()
+}
+
+
+function tlunlock(){
+   
+    teamLeader.enable()
+}
 
 
 var teamLeader;
@@ -65,6 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         },
     });
+    teamLeader.disable()
 });
 
 
@@ -142,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(response => response.json())
                 .then(json => {
                   var item = json.data.list;
-        
+                    console.log(item)
                     callback(item);
                 }).catch((error)=>{
                     callback();
@@ -170,23 +193,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function checkMember(){
-
-
     normalMember.getValue()
-
-
     let nm = normalMember.getValue();
     let mm = manageMember.getValue();
+    console.log(normalMember.getOption(normalMember.getValue()))
+    console.log(normalMember.options[normalMember.getValue()]) //该方法获取完整数据
 
-    console.log("normalMember",normalMember.getValue());
-
-    console.log("manageMember",manageMember.getValue());
-
-    let hasCommonValue = nm.some(value => mm.includes(value));
-
-
-    console.log('isSame',hasCommonValue)
-
+    nm.forEach(value=>{if(mm.includes(value))normalMember.removeItem(value)})
 }
 
 
@@ -393,11 +406,70 @@ function contacterEdit(){
 
 
 function baseInfoCheck(){
-    $('#baseinfo  select, #baseinfo input[type="text"]').each(function() {
-        // 将这些元素的值设置为空
-        $(this).val('');
+    checkMember()
+    let inputValue = {};
+    $('#baseinfo input,#baseinfo select').each(function() {
+        var $input = $(this);
+        inputValue[$input.attr('name')] = $input.val();
+        
+      });
+      // 获取div元素
+      var divElement = document.getElementById('baseinfo');
+      // 获取div内所有非disabled的input元素
+      var inputElements = divElement.querySelectorAll('input:not([disabled])');
+      var isCheck = true;
+      // 遍历input元素，检查值是否为空，并进行提示
+      inputElements.forEach(function(input) {
 
-    });
+          if(input.name=='customerName'||input.name=='outName'){
+              input.classList.remove('is-valid', 'is-invalid','is-valid-lite','is-invalid-lite');
+          
+              // 根据输入内容添加相应的类
+              if (inputValue[input.name]!=undefined&&inputValue[input.name].trim() != '') {
+                input.classList.add('is-valid');
+                input.classList.add('is-valid-lite');
+                if(input.name=='customerName'){
+
+                    let name = inputValue[input.name];
+                    console.log(name.endsWith('有限公司'))
+                    if(name.endsWith('有限公司')||name.endsWith('有限责任公司')){
+                        input.classList.add('is-valid');
+                        input.classList.add('is-valid-lite');
+                    }else{
+                        input.classList.add('is-invalid');
+                        input.classList.add('is-invalid-lite');
+                        isCheck=false;
+                        }
+
+
+
+                }
+
+
+
+              } else {
+              input.classList.add('is-invalid');
+              input.classList.add('is-invalid-lite');
+              isCheck=false;
+              }
+
+            
+
+
+
+
+
+
+
+          }
+          
+  
+      
+      });
+  
+  
+  
+      if(!isCheck)return;
 
 }
 

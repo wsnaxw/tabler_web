@@ -313,7 +313,7 @@ function yjph(){
     $('#rankHead').html("<tr><th>归属公司</th><th>顾问名称</th><th>职级</th><th>业绩</th></tr>")
 
 
-
+    $('#checkmore').attr("href",'./page/kpi/commission-rank.html')
 
     // console.log('yjph')
 
@@ -369,7 +369,7 @@ function hkph(){
 
     $('#rankHead').html("<tr><th>归属公司</th><th>顾问名称</th><th>职级</th><th>金额</th></tr>")
 
-
+    $('#checkmore').attr("href",'./page/kpi/pay-rank.html')
 
 
 
@@ -424,7 +424,7 @@ function qyph(){
     $('#rankHead').html("<tr><th>归属公司</th><th>顾问名称</th><th>职级</th><th>签约数</th></tr>")
 
 
-
+    $('#checkmore').attr("href",'./page/kpi/sign-rank.html')
 
 
 

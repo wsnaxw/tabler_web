@@ -8,7 +8,7 @@ $(document).ready(function() {
     // 检查token
 
 
-    const isLogin = sessionStorage.getItem('isLogin');
+    const isLogin = localStorage.getItem('isLogin');
 
 
 
@@ -238,13 +238,13 @@ function login(){
 
                 var myJSONString = JSON.stringify(response.data);
 
-                sessionStorage.setItem('user',myJSONString);
+                localStorage.setItem('user',myJSONString);
 
                 deleteCookie('isLogin');
 
                 setCookieForMidnight('isLogin','yes');
 
-                sessionStorage.setItem('isLogin','yes');
+                localStorage.setItem('isLogin','yes');
 
 
 
@@ -256,7 +256,7 @@ function login(){
 
                 window.location.href =urltoHref+ '/index.html'
             } else {
-                $('#tip').html('账号密码错误！')
+                $('#tip').html(response.message)
                 // 处理无效数据的情况
                 console.error('请求未成功或数据格式不正确:', response);
             }
