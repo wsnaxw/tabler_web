@@ -165,7 +165,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then(response => response.json())
                 .then(json => {
                   var item = json.data.list;
-                    console.log(item)
                     callback(item);
                 }).catch((error)=>{
                     callback();
@@ -202,7 +201,7 @@ function checkMember(){
     let mm = manageMember.getValue();
     // console.log(normalMember.options[normalMember.getValue()]) //该方法获取完整数据
 
-    console.log(nm)
+
 
     //   nm.forEach 直接进行remove会导致循环提前跳出，nm数据被串改;
 
@@ -220,29 +219,21 @@ function checkMember(){
 
 
     let lm = teamLeader.getValue();
-
+    // console.log("lm",lm,teamLeader)
     if(lm){
-        lm.forEach(value=>{
-            let obj = teamLeader.options[value]
-            obj.type = '0';
-            teamMemberList.push(obj)
-        })
+        let obj = teamLeader.options[lm]
+        obj.type = '0';
+        teamMemberList.push(obj)
+   
     }
 
     if(mm){
         mm.forEach(value=>{
             let obj = manageMember.options[value]
-    
-            console.log(obj)
-    
             obj.type = '1';
             teamMemberList.push(obj)
-    
-    
-    
         })
     }
-
     if(lm){
         nm.forEach(value=>{
             let obj = normalMember.options[value]
@@ -253,20 +244,6 @@ function checkMember(){
     
         })
     }
-
-
-
-    console.log(teamMemberList)
-
-
-
-
-
-
-
-
-
-
 }
 
 
@@ -563,15 +540,14 @@ function baseInfoCheck(){
 
 
   
-      if(isCheck){
+    if(isCheck){
         inputValue.contacterList = contacterList;
         inputValue.teamMemberList = teamMemberList;
 
 
-        console.log("baseinfo",inputValue);
+        // console.log("baseinfo",inputValue);
 
-        showMessage(0,'提交成功')
-        // addCustomer(inputValue)
+        addCustomer(inputValue)
 
 
 
@@ -609,7 +585,10 @@ function addCustomer(data){
                 
         showMessage(0,'变更成功')
 
+        window.open("my-list.html", '_blank');
 
+            }else{
+                showMessage(1,"创建失败")
             }
 
 

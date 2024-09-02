@@ -177,7 +177,7 @@ function getPage(pageNo){
                     }else{
                       cteams='无'
                     }
-                    if (jobBeansNum==='0' )jobBeansNum='不限';
+                    if (jobBeansNum==='0' )jobBeansNum='暂无';
                     // if (com===undefined || com==='')com='暂无数据';
 
 

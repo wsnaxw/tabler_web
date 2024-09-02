@@ -12,7 +12,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>职位列表</title>
+    <title>人才库</title>
     <!-- CSS files -->
     <script src="../../static/js/tabler.min.js"></script>
     <link rel="stylesheet" href="../../static/css/tabler.min.css">
@@ -27,7 +27,7 @@
        
     <script src="../../static/js/pg/pro/Position.js"></script>
     <script src="../../static/js/pg/pro/Industry.js"></script>
-    <script src="../../static/js/pg/pro/list.js"></script>
+    <script src="../../static/js/pg/tl/list.js"></script>
     <script>
       function dark(){
         let body = document.getElementById('webBody')
@@ -42,7 +42,8 @@
       
 
     </script>
-      <style>
+    <style>
+
        .cascader-level {
   list-style: none;
   padding: 0;
@@ -68,6 +69,14 @@
 .cascader-level .children.open {
   display: block;
 }
+
+      .hidden-row {
+            display: none;
+          }
+    
+          .hidden-row.show {
+            display: table-row; /* 适用于<tr> */
+          }
     </style>
 
   </head>
@@ -569,19 +578,65 @@
                         <thead>
                           									
                           <tr>
-                            <th class="w-1">紧急程度</th>
-                            <th class="w-1">客户名称</th>
-                            <th class="w-1">职位名称</th>
-                            <th>工作地点</th>
-                            <th>招聘人数</th>
-                            <th >状态</th>
-                            <th>发布日期</th>
-                            <th>推荐人数</th>
+                            <th></th>
+                            <th>姓名</th>
+                            <th>年龄</th>
+                            <th>学历</th>
+                            <th>工作经验</th>
+                            <th>所在地</th>
+                            <th class="w-1">公司</th>
+                            <th>职位</th>
+                            <th>录入人</th>
+                            <th>更新时间</th>
                             <th>操作</th>
                           </tr>
                         </thead>
-                        <tbody id="data">
-                          
+                        <tbody id="data1">
+
+                          <tr id="1" onclick="clickable(this)" > 
+                            <td name="firsticon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-big-down-lines"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 12h3.586a1 1 0 0 1 .707 1.707l-6.586 6.586a1 1 0 0 1 -1.414 0l-6.586 -6.586a1 1 0 0 1 .707 -1.707h3.586v-3h6v3z"></path><path d="M15 3h-6"></path><path d="M15 6h-6"></path></svg></td>
+                            <td>test</td>
+                            <td>24岁</td>    
+                            <td>本科</td>
+                            <td>七年</td>    
+                            <td>北京</td>
+                            <td>北京市通用科技技术有限责任公司</td>    
+                            <td>java程序员</td>
+                            <td>张三</td>    
+                            <td>2021-03-05</td>
+                            <td>加入项目，查看</td>    
+                            
+                          </tr>
+                          <tr name="1" class="hidden-row">
+                            <td colspan="11">
+                              <!-- <div class="card">
+                                <div class="card-body"> -->
+                                  <div class="row">
+                                    <div class="col-lg-1">
+
+                                    </div>
+                                    <div class="col-lg-4">
+                                      <address>
+                                        2004.09- 2008.06 |南开大学 |化学 |硕士
+                                        <br><br>
+                                        2004.09- 2008.06 |南开大学 |化学 |硕士
+                                        <br><br>
+                                        2004.09- 2008.06 |南开大学 |化学 |硕士
+                                      </address>
+                                    </div>
+                                    <div class="col-lg-4">
+                                      <address>
+                                        2021.10 - 2024.05|某医疗器械公司|CFO首席财务官
+                                        <br><br>
+                                        2008.09 - 2021.09|毕马威|合伙人
+                                      </address>
+                                    </div>
+                                  </div>
+                                <!-- </div>
+                              </div> -->
+                            </td>
+                           
+                          </tr>
                     
                         </tbody>
                       </table>
