@@ -60,7 +60,6 @@ $(function(){
             },
             dataType: 'json', // 预期服务器返回的数据类型
             success: function(response) {
-                console.log(response)
                 if (response && response.code === 0 ) {
                     var code = response.data;
 
@@ -81,7 +80,6 @@ $(function(){
         });
     }
     let user = JSON.parse(localStorage.getItem('user'));
-    console.log(user)
     if(user == null){
         loginOut()
     }

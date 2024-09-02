@@ -20,9 +20,9 @@ $(function(){
 
 let csid ;
 
-let contacterList = {}
+let contacterList = [];
 
-let teamMemberList = {}
+let teamMemberList = [];
 
 
 function tllock(){
@@ -193,13 +193,80 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function checkMember(){
+
+    teamMemberList = [];
+
+
     normalMember.getValue()
     let nm = normalMember.getValue();
     let mm = manageMember.getValue();
-    console.log(normalMember.getOption(normalMember.getValue()))
-    console.log(normalMember.options[normalMember.getValue()]) //该方法获取完整数据
+    // console.log(normalMember.options[normalMember.getValue()]) //该方法获取完整数据
 
-    nm.forEach(value=>{if(mm.includes(value))normalMember.removeItem(value)})
+    console.log(nm)
+
+    //   nm.forEach 直接进行remove会导致循环提前跳出，nm数据被串改;
+
+    let includeData = [];
+
+
+    nm.forEach(o=>{
+
+        if(mm.includes(o)){
+            includeData.push(o)}
+    })
+
+
+    includeData.forEach(o=>normalMember.removeItem(o))
+
+
+    let lm = teamLeader.getValue();
+
+    if(lm){
+        lm.forEach(value=>{
+            let obj = teamLeader.options[value]
+            obj.type = '0';
+            teamMemberList.push(obj)
+        })
+    }
+
+    if(mm){
+        mm.forEach(value=>{
+            let obj = manageMember.options[value]
+    
+            console.log(obj)
+    
+            obj.type = '1';
+            teamMemberList.push(obj)
+    
+    
+    
+        })
+    }
+
+    if(lm){
+        nm.forEach(value=>{
+            let obj = normalMember.options[value]
+            obj.type = '2';
+            teamMemberList.push(obj)
+    
+    
+    
+        })
+    }
+
+
+
+    console.log(teamMemberList)
+
+
+
+
+
+
+
+
+
+
 }
 
 
@@ -239,7 +306,7 @@ let contacters={};
 function addContacter(){
     let inputValue = {};
 
-    $('#contacter input').each(function() {
+    $('#contacter input,#contacter textarea').each(function() {
       var $input = $(this);
 
    
@@ -294,7 +361,7 @@ function addContacter(){
 
 
 
-    if(!isCheck)return;
+    if(!isCheck)return false;
 
     const uniqueID = Date.now() + Math.random();
 
@@ -303,7 +370,9 @@ function addContacter(){
     
     $("#teamlist").append($(str))
 
-    contacters[uniqueID]=inputValue
+    contacters[uniqueID]=inputValue;
+    clearContacter();
+    return true;
 
 }
 
@@ -315,7 +384,7 @@ function checkContacter(name){
     $("#editKey").val(name)
 
 
-    $('#contactermodal input[type="text"]').each(function() {
+    $('#contactermodal input[type="text"],#contactermodal textarea').each(function() {
         // 获取当前input的name属性
         var inputName = $(this).attr('name');
 
@@ -369,7 +438,7 @@ function contacterEdit(){
     console.log(key)
     let inputValue = {};
 
-    $('#contactermodal input').each(function() {
+    $('#contactermodal input,#contactermodal textarea').each(function() {
       var $input = $(this);
 
    
@@ -405,10 +474,18 @@ function contacterEdit(){
 
 
 
+
+
+
 function baseInfoCheck(){
-    checkMember()
+    checkMember();
+
+
+
     let inputValue = {};
-    $('#baseinfo input,#baseinfo select').each(function() {
+    var isCheck = true;
+
+    $('#baseinfo input,#baseinfo select,#baseinfo textarea').each(function() {
         var $input = $(this);
         inputValue[$input.attr('name')] = $input.val();
         
@@ -417,7 +494,7 @@ function baseInfoCheck(){
       var divElement = document.getElementById('baseinfo');
       // 获取div内所有非disabled的input元素
       var inputElements = divElement.querySelectorAll('input:not([disabled])');
-      var isCheck = true;
+ 
       // 遍历input元素，检查值是否为空，并进行提示
       inputElements.forEach(function(input) {
 
@@ -431,7 +508,6 @@ function baseInfoCheck(){
                 if(input.name=='customerName'){
 
                     let name = inputValue[input.name];
-                    console.log(name.endsWith('有限公司'))
                     if(name.endsWith('有限公司')||name.endsWith('有限责任公司')){
                         input.classList.add('is-valid');
                         input.classList.add('is-valid-lite');
@@ -453,30 +529,139 @@ function baseInfoCheck(){
               isCheck=false;
               }
 
-            
-
-
-
-
-
-
-
-          }
+            }
           
   
       
       });
   
+
+    //   isCheck= isCheck==addContacter()?isCheck:false;
+    contacterList =[]
+
+    if(addContacter()){
+        isCheck = isCheck==true?isCheck:false;
+        
+        for (let key in contacters){
+            contacterList.push(contacters[key])
+        }   
+
+    }else{
+
+        for (let key in contacters){
+            contacterList.push(contacters[key])
+        }   
+
+        if(contacterList.length>0){
+            isCheck = isCheck==true?isCheck:false;
+        }else{
+            isCheck = false;
+        }
+        
+    }
+
+
+
   
-  
-      if(!isCheck)return;
+      if(isCheck){
+        inputValue.contacterList = contacterList;
+        inputValue.teamMemberList = teamMemberList;
+
+
+        console.log("baseinfo",inputValue);
+
+        showMessage(0,'提交成功')
+        // addCustomer(inputValue)
+
+
+
+
+      }else{
+        return;
+      };
 
 }
 
 function baseInfoClear(){
-    $('#baseinfo  select, #baseinfo input[type="text"]').each(function() {
+    $('#baseinfo  select, #baseinfo input[type="text"],#baseinfo textarea').each(function() {
         // 将这些元素的值设置为空
         $(this).val('');
 
       });
+}
+
+function addCustomer(data){
+    const options = {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'token':localStorage.getItem('token')
+        },
+        body: JSON.stringify(data),
+        };
+
+        var url = baseUri+'/customer/addCustomerNew';
+    fetch(url,options)
+        .then(response => response.json())
+        .then(json => {
+            // console.log(json)
+            if(json.code==0){
+                
+        showMessage(0,'变更成功')
+
+
+            }
+
+
+
+        }).catch((error)=>{
+            callback();
+        });
+
+
+}
+
+
+function showMessage(type,text) {
+
+    const messageElement = document.createElement('div');
+    if(type==0||type==='success'){
+        messageElement.className = 'message visible alert alert-success';
+        if(text==null)text='成功！！！';
+
+        messageElement.textContent = text;
+    }else if(type==1||type==='fail'){
+        messageElement.className = 'message visible alert alert-warning';
+        if(text==null)text='失败！！！';
+
+        messageElement.textContent = text;
+    }else if(type==2||type==='error'){
+        messageElement.className = 'message visible alert alert-warning';
+        if(text==null)text='异常！！！';
+
+        messageElement.textContent = text;
+    }else{
+        messageElement.className = 'message visible alert alert-info';
+        if(text==null)text='已操作！！！';
+
+        messageElement.textContent = text;
+    }
+
+
+  
+    // Create the message element
+
+
+
+    // Append the message to the container
+    const messageContainer = document.getElementById('messageContainer');
+    messageContainer.appendChild(messageElement);
+
+    // Remove the message after a while
+    setTimeout(() => {
+        messageElement.classList.remove('visible');
+        setTimeout(() => {
+            messageContainer.removeChild(messageElement);
+        }, 300); // Remove from DOM after the opacity transition ends
+    }, 3000); // Display the message for 3 seconds
 }
