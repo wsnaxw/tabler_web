@@ -230,11 +230,13 @@ function chooseThis(o){
 
 
 
+let male_icon= `<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#41c1d2"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-gender-male"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 14m-5 0a5 5 0 1 0 10 0a5 5 0 1 0 -10 0" /><path d="M19 5l-5.4 5.4" /><path d="M19 5h-5" /><path d="M19 5v5" /></svg>`
 
 
+let female_icon =`<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#eb2f96"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-gender-female"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 9m-5 0a5 5 0 1 0 10 0a5 5 0 1 0 -10 0" /><path d="M12 14v7" /><path d="M9 18h6" /></svg>`
 
 
-
+let plugins_icon = `<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#2e76ea"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-settings"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" /><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /></svg>`
 
 
 
@@ -264,7 +266,7 @@ function getPage(pageNo){
         },
         dataType:'json',
         type:'post',
-        url:baseUri+'/project/selectPList',
+        url:baseUri+'/talent/selectTalentList',
         data:JSON.stringify(queryData),
         success:function(obj){
 
@@ -280,65 +282,159 @@ function getPage(pageNo){
 
                     var o = obj.data.list[i];
                   
-                    let cityCode = '';
+                    let gender = '';
 
-                    if(o.cityCode!=null&&o.cityCode.length>4){
-                        let cityarray = splitOrGet(o.cityCode)
-                        if(cityarray!=null&&cityarray.length>0){
-                            cityarray.forEach(element => {
-                                cityCode += cn.info(element.trim()).name + ' '
-                            });
-                        }
-                        // console.log(cityCode)
-                    }else if(!isNumeric(o.cityCode)){
-                        cityCode = o.cityCode;
-                    }else{
-                        cityCode = '不限';
+                    if(o.gender==1){
+                      gender = male_icon;
+                    }else if (o.gender==2){
+                      gender = female_icon;
+                    }
+
+                    let exEdu =``;
+
+                    
+                    
+
+                    if(o.experienceEdus){
+                      o.experienceEdus.forEach(value=>{
+                        exEdu+= `${toStr(value.startTime)} - ${toStr(value.endTime)} | ${value.name} | ${value.classes} | ${value.education} <br>`
+                      })
                     }
 
 
-                    let level=''
+                    let exCom = ``;
 
-                    switch (o.level) {
-                      case "1":
-                        level=flame+flame+flame;
+                    if(o.experienceCompanies){
+                      o.experienceCompanies.forEach(value=>{
+                        let endTime = value.endTime;
+
+                        if(value.isNow == 1 && endTime==null){
+                          endTime = '至今'
+                        }
+
+
+                        exCom +=  `${toStr(value.startTime)} - ${toStr(endTime)} | ${value.name} | ${checkAndCutString(value.job)} <br>`
+                      })
+                    }
+
+
+                    let plugins = ``;
+
+                    if(o.source != 0 ){
+                      plugins = plugins_icon;
+                    }
+
+
+
+                    var edu = '';
+                    switch (o.education) {
+                        case "0":
+                          edu='';
                           break;
-                      case "2":
-                        level=flame+flame;
-                          break;
-     
-                      default:
-                        level=flame+flame+flame ;
-                  }
+                        case "1":
+                          edu='初中';
+                            break;
+                        case "2":
+                          edu='中专';
+                            break;
+                        case "3":
+                          edu='高中';
+                            break;
+                        case "4":
+                          edu='大专';
+                            break;
+                        case "5":
+                          edu='本科';
+                            break;
+                        case "6":
+                          edu='硕士';
+                                break;
+                        case "7":
+                          edu='博士';
+                            break;
+                        default:
+                          edu=o.education;
+                    }
 
 
-                  var numbers = '<div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">'+o.recommendNumber+'</div>'
-                  var rnum = o.recruitNum;
-
-                  if(rnum==0){
-                    rnum = '若干'
-                  }
 
 
 
+// style="font-weight: bold;
 
-                    str+= `<tr>
-                    <td>${level}</td>
-                    <td>${o.customerName}</td>
-                    <td><span style='font-weight: bold;' class ='bg-primary-lt'><a onclick='checkDetail("${o.projectId}")'>${o.name}</a></span></td>
-                    <td>${cityCode}</td>
-                      <td>${rnum}</td>
-                    <td>${o.stateData}</td>
+                    str+=
+                    `
+                    <tr  id=${i} onclick="clickable(this)"   "> 
+                        <td name='firsticon'>${icon_right}</td>
+                        <td > ${gender}${o.name}</td>
+                        <td >${toStr(o.age)}岁</td>    
+                        <td >${toStr(edu)}</td>
+                        <td >${toStr(o.experience)}</td>    
+                        <td >${toStr(o.location)}</td>
+                        <td >${toStr(o.lastCompany)}</td>
+                        <td >${checkAndCutString(o.job)}</td>      
+                        <td >${toStr(o.userName)}  ${plugins}</td>
+                        <td >${toStr(o.updateTime)}</td>    
+                        <td >查看，加入项目</td>
+                        
+                      </tr>
+                      <tr name="${i}" class="hidden-row">
+                            <td colspan="11">
+                              <div class="row">
+                                <div class="col-lg-1">
 
-                    <td>${o.createTime}</td>
-                    <td>${numbers}</td>
+                                </div>
+                                <div class="col-lg-4">
+                                  <address>
+                                    ${exEdu}
+                                  </address>
+                                </div>
+                                <div class="col-lg-4">
+                                  <address>
+                                     ${exCom}
+                                  </address>
+                                </div>
+                              </div>
+                            </td>
+                           
+                          </tr>
+                    `
+    
+
+
+
                     
-                    <td><a herf="#" onclick="checkDetail('${o.projectId}')" class="btn">查看</a><a herf="#" class="btn" onclick="move('${o.projectId}')">转移</a></td></tr>`
-          
+
+
+
+
+
+
+
+
 
 
 
                 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 $('#data').html(str);
 
 
@@ -454,6 +550,16 @@ function getPage(pageNo){
 
 
 }
+
+
+function checkAndCutString(str) {
+  if (str.length > 10) {
+    return str.substring(0, 10);
+  } else {
+    return str;
+  }
+}
+
 
 
 function formCheck(){
