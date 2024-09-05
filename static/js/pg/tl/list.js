@@ -380,16 +380,16 @@ function getPage(pageNo){
                       </tr>
                       <tr name="${i}" class="hidden-row">
                             <td colspan="11">
-                              <div class="row">
-                                <div class="col-lg-1">
-
-                                </div>
-                                <div class="col-lg-4">
+                              <div class="row ">
+                    
+                                <div class="col-lg-5 text-truncate">
                                   <address>
                                     ${exEdu}
                                   </address>
                                 </div>
-                                <div class="col-lg-4">
+                  
+                             
+                                <div class="col-lg-5">
                                   <address>
                                      ${exCom}
                                   </address>
