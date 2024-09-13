@@ -102,15 +102,20 @@ $(function(){
     });
 
 
-    $('#rxxxdiv').hide()
-    $('#movediv').hide()
-    $('#filediv').hide()
-    $('#jobdjv').hide()
+    // $('#rxxxdiv').hide()
+    // $('#movediv').hide()
+    // $('#filediv').hide()
+    // $('#jobdjv').hide()
+    // $('#kzxxdiv').show()
+
+
+
+    $('#rxxxdiv').show()
+    $('#movediv').show()
+    $('#filediv').show()
+    $('#jobdjv').show()
     $('#kzxxdiv').show()
 
-
-
-    
 
 
 

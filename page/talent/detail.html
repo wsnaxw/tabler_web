@@ -42,6 +42,30 @@
 
       
 
+      window.addEventListener('scroll', function() {
+  var divs = document.querySelectorAll('#baseinfomation, #gzjldv, #xmjldv,#jyjldv');
+  divs.forEach(function(div) {
+    var divTop = div.getBoundingClientRect().top;
+    var screenHeight = window.innerHeight;
+    var triggerPoint = screenHeight * 0.4;
+    var navbarLinks = document.querySelectorAll('#mulu a');
+    if (divTop <= triggerPoint) {
+      console.log(div.id);
+      navbarLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+      let a=document.getElementsByName(div.id);
+      a[0].classList.add('active');
+
+
+
+    }
+  });
+});
+            
+       
+
+
     </script>
 <style>
 
@@ -51,6 +75,12 @@ i::after {
   margin-right: 5px; /* 根据需要调整间距 */
 }
 
+.sticky-div {
+    position: -webkit-sticky; /* 为了兼容Safari */
+    position: sticky;
+    top: 60px; /* 滚动到距离页面顶部20px的位置时固定 */
+    padding: 10px;
+  }
 </style>
   </head>
   <body  id="webBody" class="layout-fluid">
@@ -306,16 +336,16 @@ i::after {
 
 
         <!-- Page body -->
-        <div class="page-body container-xl">
+        <div class="page-body container-xl" >
 
 
 
 
 
-          <div class="container-xl" >
+          <div class="container-xl"  id="baseinfomation">
 
 
-            <div class="row row-deck row-cards">
+            <div class="row row-deck row-cards" >
 
 
 
@@ -539,319 +569,269 @@ i::after {
 
 
 
-              <div class="col-lg-12">
+              <div class="col-lg-8" id="gzjldv">
                 <div class="card">
-                  <div class="card-body align-items-center">
-                      <button class="btn btn-outline-primary active" onclick="kzxx()" >扩展信息</button>
-                      <button class="btn btn-outline-primary " onclick="rxxx()">人选信息<span class="badge bg-yellow-lt ms-2" id="rxxxnum">0</span></button>
-                      <button class="btn btn-outline-primary " onclick="job()">职位<span class="badge bg-yellow-lt ms-2" id="zwnum">0</span></button>
-                      <button class="btn btn-outline-primary " onclick="filedivshow()">文件<span class="badge bg-yellow-lt ms-2" id="fileCount">0</span></button>
-                      <button class="btn btn-outline-primary " onclick="move()">转移<span class="badge bg-yellow-lt ms-2" id="zycs">0</span></button>
-                  </div>
-                </div>
-              </div>
+                  <div class="card card-body-scrollable">
 
-
-
-              <div id="exploredtable">
-                
-                <div class="row row-cards" id="kzxxdiv" style="display: none;">
-                  <div class="col-lg-12">
-                    <div class="card card-body-scrollable">
-
-                      <div class="card-header">
-                        客户联系人
+                    <div class="card-header">
+                      <h3 class="card-title">工作经历</h3>
                         <div class="card-actions">
                           <a href="#" class="btn btn-ghost-primary">
                             新增
                           </a>
                         </div>
-                      </div>
+                    </div>
 
-                      <div class="card-body align-items-center">
-
-
-        
-                        <table class="table card-table table-vcenter text-nowrap datatable ">
-                          <thead>
-                            						
-                            <tr>
-                              <th >联系人</th>
-                              <th >手机</th>
-                              <th>微信</th>
-                              <th>职务</th>
-                              <th>邮箱地址</th>
-                              <th>备注</th>
-                              <th>操作</th>
-                            </tr>
-                          </thead>
-                          <tbody id="khlxrdata">
-                            <tr>
-                              <td colspan="8" style="font-weight: bold;text-align: center;">暂无数据 </td>
-                            </tr>
+                    <div class="card-body align-items-center">
+                      <table class="table card-table table-vcenter text-nowrap datatable ">
+                        <thead>
+                                      
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                 
                             
-                           
-                            
-                      
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-    
-                  <div class="col-6">
-                    <div class="card">
-                      <div class="card card-body-scrollable">
-
-                        <div class="card-header">
-                          <h3 class="card-title">子公司</h3>
-                            <div class="card-actions">
-                              <a href="#" class="btn btn-ghost-primary">
-                                新增
-                              </a>
-                            </div>
-                        </div>
-  
-                        <div class="card-body align-items-center">
-                          <table class="table card-table table-vcenter text-nowrap datatable ">
-                            <thead>
-                                          
-                              <tr>
-                                <th >公司名称</th>
-                                <th >添加日期</th>
-                     
-                                
-                              </tr>
-                            </thead>
-                            <tbody id="childdata">
-                              <tr>
-                                <td colspan="2" style="font-weight: bold;text-align: center;">暂无数据 </td>
-                              </tr>
-                              
-                              
-                        
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-6">
-                    <div class="card">
-                      <div class="card card-body-scrollable">
-
-                        <div class="card-header">
-                          <h3 class="card-title">关联公司</h3>
-                            <div class="card-actions">
-                              <a href="#" class="btn btn-ghost-primary">
-                                新增
-                              </a>
-                            </div>
-                        </div>
-  
-                        <div class="card-body align-items-center">
-                          <table class="table card-table table-vcenter text-nowrap datatable ">
-                            <thead>
-                                          
-                              <tr>
-                                <th>公司名称</th>
-                                <th>添加日期</th>
-                                
-                                
-                              </tr>
-                            </thead>
-                            <tbody id="gldata">
-                              <tr>
-                                <td colspan="2" style="font-weight: bold;text-align: center;">暂无数据 </td>
-                              </tr>
-                              
-                              
-                        
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
+                          </tr>
+                        </thead>
+                        <tbody id="childdata">
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          
+                    
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
-
-                <!-- -->
-
-                <div class="row row-cards" id="rxxxdiv" >
-                  <div class="col-lg-12">
-                    <div class="card card-body-scrollable">
-                      <div class="card-header">
-                        <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
-                          <li class="nav-item" role="presentation">
-                            <a id="yjph" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab" onclick="rxxx()">全部</a>
-                          </li>
-                          <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx('0')">加项目</a>
-                          </li>
-                          <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(1)">给客户</a>
-                          </li>
-                          <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(5)">约面试</a>
-                          </li>
-                          <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1"onclick="rxxx(6)">客户面试</a>
-                          </li>
-                          <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(8)">确认offer</a>
-                          </li>
-                          <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(9)">已入职</a>
-                          </li>
-                          <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(10)">人选离职</a>
-                          </li>
-                      
-                          <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(4)">放弃人选</a>
-                          </li>
-                        </ul>
-                      </div>
-
-                      <div class="card-body align-items-center">
-                        <table class="table card-table table-vcenter text-nowrap datatable ">
-                          <thead>
-
-                            <tr>
-                              <th>项目名称</th>
-                              <th>推荐人</th>
-                              <th>人选姓名</th>
-                              <th>当前公司</th> 
-                              <th>当前职位</th>                        
-                              <th>推荐时间</th>
-   
-                              <th>操作</th>
-                            </tr>
-                          </thead>
-                          <tbody id="rxxxdata">
-                            <tr>
-                              <td colspan="6" style="font-weight: bold;text-align: center;">暂无数据 </td>
-                            </tr>
-                            
-                            
-                      
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-    
-                </div>
-
-                <!-- -->
-
-                <div class="row row-cards" id="jobdjv" >
-                  <div class="col-lg-12">
-                    <div class="card card-body-scrollable">
-                      <div class="card-header">
-                        <h3>职位信息</h3>
-                      </div>
-
-                      <div class="card-body align-items-center">
-                        <table class="table card-table table-vcenter text-nowrap datatable ">
-                          <thead>
-                            						
-                            <tr>
-                              <th>状态</th>
-                              <th>职位名称</th>
-                              <th>职位年薪</th>
-                              <th>客户</th>
-                              <th>地点</th>
-                              <th>更新时间</th>
-                              <th>操作</th>
-                            </tr>
-                          </thead>
-                          <tbody id="jobdata">
-                           
-                      
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-    
-                </div>
-  
-
-                <!--X-->
-
-                <!-- -->
-
-                <div class="row row-cards" id="filediv" >
-                  <div class="col-lg-12">
-                    <div class="card card-body-scrollable">
-                      <div class="card-header">
-                        <h3>文件信息</h3>
-                      </div>
-
-                      <div class="card-body align-items-center">
-                        <table class="table card-table table-vcenter text-nowrap datatable ">
-                          <thead>
-                            						
-                            <tr>
-                              <th>文件名</th>
-                              <th>操作</th>
-                            </tr>
-                          </thead>
-                          <tbody id="filedata">
-                            <tr>
-                              <td colspan="2" style="font-weight: bold;text-align: center;">暂无数据 </td>
-                            </tr>
-                      
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-    
-                </div>
-  
-
-                <!--X-->
-
-
-                <!-- -->
-
-                <div class="row row-cards" id="movediv" >
-                  <div class="col-lg-12">
-                    <div class="card card-body-scrollable">
-                      <div class="card-header">
-                        <h3>转移信息</h3>
-                      </div>
-
-                      <div class="card-body align-items-center">
-                        <table class="table card-table table-vcenter text-nowrap datatable ">
-                          <thead>
-                            						
-                            <tr>
-                              <th>转出人员</th>
-                              <th>接收人员</th>
-                              <th>转移时间</th>
-                              <th>备注</th>
-                            </tr>
-                          </thead>
-                          <tbody id="movedata">
-                           
-                      
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-    
-                </div>
-  
-
-                <!--X-->
-
-
               </div>
 
+              
+       
+
+              <div id="mulu" class="row flex-row-reverse col-lg-2 sticky-div" style="padding-top: 100px;height: 200px;">
+                <li><a href="#baseinfomation" class="btn btn-outline-primary active" name="baseinfomation" >基本信息</a></li>
+                <li> <a href="#gzjldv"  class="btn btn-outline-primary " name="gzjldv" >工作经历</a></li>
+                <li> <a href="#xmjldv" class="btn btn-outline-primary " name="xmjldv">项目经历</a></li>
+                <li> <a href="#jyjldv" class="btn btn-outline-primary " name="jyjldv" >教育经历</a></li>
+              </div>
+
+
+
+
+
+
+              <div class="col-lg-8" id="xmjldv">
+                <div class="card">
+                  <div class="card card-body-scrollable">
+
+                    <div class="card-header">
+                      <h3 class="card-title">项目经历</h3>
+                        <div class="card-actions">
+                          <a href="#" class="btn btn-ghost-primary">
+                            新增
+                          </a>
+                        </div>
+                    </div>
+
+                    <div class="card-body align-items-center">
+                      <table class="table card-table table-vcenter text-nowrap datatable ">
+                        <thead>
+                                      
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                 
+                            
+                          </tr>
+                        </thead>
+                        <tbody id="childdata">
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          
+                    
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              
+              <div class="col-lg-8" id="jyjldv">
+                <div class="card">
+                  <div class="card card-body-scrollable">
+
+                    <div class="card-header">
+                      <h3 class="card-title">教育经历</h3>
+                        <div class="card-actions">
+                          <a href="#" class="btn btn-ghost-primary">
+                            新增
+                          </a>
+                        </div>
+                    </div>
+
+                    <div class="card-body align-items-center">
+                      <table class="table card-table table-vcenter text-nowrap datatable ">
+                        <thead>
+                                      
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                 
+                            
+                          </tr>
+                        </thead>
+                        <tbody id="childdata">
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          <tr>
+                            <th >公司名称</th>
+                            <th >添加日期</th>
+                          </tr>
+                          
+                          
+                    
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              
 
 
 
