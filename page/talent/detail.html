@@ -40,6 +40,8 @@
         body.setAttribute("data-bs-theme","")
       }
 
+
+
       
 
       window.addEventListener('scroll', function() {
@@ -75,12 +77,24 @@ i::after {
   margin-right: 5px; /* 根据需要调整间距 */
 }
 
+ii::after {
+  content: '·';
+  margin-left: 5px; /* 根据需要调整间距 */
+  margin-right: 5px; /* 根据需要调整间距 */
+}
+
 .sticky-div {
     position: -webkit-sticky; /* 为了兼容Safari */
     position: sticky;
     top: 60px; /* 滚动到距离页面顶部20px的位置时固定 */
     padding: 10px;
   }
+
+
+  div .trcard:hover {
+  background-color: #f5f5f5; /* 你可以使用你喜欢的颜色 */
+  cursor: pointer; /* 可选：显示鼠标悬停时的指针 */
+}
 </style>
   </head>
   <body  id="webBody" class="layout-fluid">
@@ -583,69 +597,133 @@ i::after {
                     </div>
 
                     <div class="card-body align-items-center">
-                      <table class="table card-table table-vcenter text-nowrap datatable ">
-                        <thead>
-                                      
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                 
+
+                      <div class="row row-cards">
+
+
+                        <div class="card trcard">
+
+                          <div class="card-body border-bottom py-3">
+                            <div class="d-flex" style="font-weight: bold;">
+                              <div class="" style="color: rgb(3, 169, 244)">
+                                2013.03 至 至今
+                              </div>
+                              <ii></ii>  飞利浦（中国）投资有限公司<ii></ii> 西南大区经理 <ii></ii>
+                              <div class="ms-auto text-secondary">
+                                
+                                <div class="ms-2 d-inline-block">
+                                  <a href="#" class="btn btn-info btn-sm">修改</a>
+                                  <a href="#" class="btn btn-danger btn-sm">删除</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <dt class="col-2">工作职责：</dt>
+                            <dl class="col-10"></dl>
+                            <dt class="col-1"></dt>
+                            <dl class="col-10">
+                              1、正确传达区域销售总监提出的营销组织工作方案，并贯彻执行。<br>
+                              2、深度挖掘川渝云贵四省区域内的一级、二级分销商（渠道商）资源，最终实现飞利浦产品的落地销售。<br>
+                              3、负责公司所有影像产品的销售运作，包括计划、组织、进度控制。<br>
+                              4、协助销售总监制定销售计划、销售政策。<br>
+                              5、围绕公司下达的销售目标拟写营销方针和策略计划。<br>
+                              6、与市场部及其他部门合作，执行销售计划。<br>
+                              汇报对象：西区销售总监<br>
+                              业绩描述：在飞利浦公司任职期间，实际达成销售其中部分医院如下：
+                              川大华西医院及其分院超高端 256 层科研 CT 一台、3.0T 核磁各一台；<br>
+                              四川省人民医院超高端 256 层科研 CT 一台；<br>
+                              重医附一院超高端256 层科研 CT 和 3.0T 核磁各一台；<br>
+                              重庆市肿瘤医院 1.5T 和 3.0T 核磁各一台；<br>
+                              三博脑科（重庆）长安医院&江陵医院 1.5T 核磁两台、128 层 CT 两台、大型 DSA 一台；<br>
+                              重庆东华医院：1.5T 核磁和 128 层 CT 各一台；<br>
+                              梁平县人民医院：128 层 CT 和 1.5T 核磁各一台；<br>
+                              云阳县中医院：1.5T 核磁一台；涪陵区中医院：1.5T 核磁一台；丰都县人民医院：128 层 CT 一台；贵黔国际总院 128 层 CT 一台；贵州百灵医院 16 排 CT 两台；贵阳荟康医院 128 层 CT&1.5T 核磁各一台；昆医附一院大型 DSA 两台、超高端 256 层科研 CT 一台；昆医附二院 3.0T和超高端 256 层科研 CT 一台、大型 DSA 两台；昆医附二院石林天奇医院 128 层 CT 和 1.5T 核磁各一台、大型 DSA 一台等等······
+                            </dl>
                             
-                          </tr>
-                        </thead>
-                        <tbody id="childdata">
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
+                          </div>
                           
-                    
-                        </tbody>
-                      </table>
+                        </div>
+  
+                        
+  
+                        <div class="card trcard">
+  
+                          <div class="card-body border-bottom py-3">
+                            <div class="d-flex">
+                              <div class="" style="color: rgb(3, 169, 244)">
+                                2013.03 至 至今·
+                              </div>
+                              飞利浦（中国）投资有限公司· 西南大区经理 ·
+                              <div class="ms-auto text-secondary">
+                                
+                                <div class="ms-2 d-inline-block">
+                                  <a href="#" class="btn btn-info btn-sm">修改</a>
+                                  <a href="#" class="btn btn-danger btn-sm">删除</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <dt class="col-2">工作职责：</dt>
+                            <dl class="col-10"></dl>
+                            <dt class="col-1"></dt>
+                            <dl class="col-10">
+                              1、正确传达区域销售总监提出的营销组织工作方案，并贯彻执行。<br>
+                              2、深度挖掘川渝云贵四省区域内的一级、二级分销商（渠道商）资源，最终实现飞利浦产品的落地销售。<br>
+                              3、负责公司所有影像产品的销售运作，包括计划、组织、进度控制。<br>
+                              4、协助销售总监制定销售计划、销售政策。<br>
+                              5、围绕公司下达的销售目标拟写营销方针和策略计划。<br>
+                              6、与市场部及其他部门合作，执行销售计划。<br>
+                              汇报对象：西区销售总监<br>
+                              业绩描述：在飞利浦公司任职期间，实际达成销售其中部分医院如下：
+                              川大华西医院及其分院超高端 256 层科研 CT 一台、3.0T 核磁各一台；<br>
+                              四川省人民医院超高端 256 层科研 CT 一台；<br>
+                              重医附一院超高端256 层科研 CT 和 3.0T 核磁各一台；<br>
+                              重庆市肿瘤医院 1.5T 和 3.0T 核磁各一台；<br>
+                              三博脑科（重庆）长安医院&江陵医院 1.5T 核磁两台、128 层 CT 两台、大型 DSA 一台；<br>
+                              重庆东华医院：1.5T 核磁和 128 层 CT 各一台；<br>
+                              梁平县人民医院：128 层 CT 和 1.5T 核磁各一台；<br>
+                              云阳县中医院：1.5T 核磁一台；涪陵区中医院：1.5T 核磁一台；丰都县人民医院：128 层 CT 一台；贵黔国际总院 128 层 CT 一台；贵州百灵医院 16 排 CT 两台；贵阳荟康医院 128 层 CT&1.5T 核磁各一台；昆医附一院大型 DSA 两台、超高端 256 层科研 CT 一台；昆医附二院 3.0T和超高端 256 层科研 CT 一台、大型 DSA 两台；昆医附二院石林天奇医院 128 层 CT 和 1.5T 核磁各一台、大型 DSA 一台等等······
+                            </dl>
+                            
+                          </div>
+                          
+                        </div>
+
+
+
+                      </div>
+                     
+                      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     </div>
                   </div>
                 </div>
@@ -680,54 +758,131 @@ i::after {
                     </div>
 
                     <div class="card-body align-items-center">
-                      <table class="table card-table table-vcenter text-nowrap datatable ">
-                        <thead>
-                                      
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                 
+                      
+
+
+                      <div class="row row-cards">
+
+
+                        <div class="card trcard">
+
+                          <div class="card-body border-bottom py-3">
+                            <div class="d-flex" style="font-weight: bold;">
+                              <div class="" style="color: rgb(3, 169, 244)">
+                                2013.03 至 至今·
+                              </div>
+                              飞利浦（中国）投资有限公司· 西南大区经理 ·
+                              <div class="ms-auto text-secondary">
+                                
+                                <div class="ms-2 d-inline-block">
+                                  <a href="#" class="btn btn-info btn-sm">修改</a>
+                                  <a href="#" class="btn btn-danger btn-sm">删除</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <dt class="col-2">工作职责：</dt>
+                            <dl class="col-10"></dl>
+                            <dt class="col-1"></dt>
+                            <dl class="col-10">
+                              1、正确传达区域销售总监提出的营销组织工作方案，并贯彻执行。<br>
+                              2、深度挖掘川渝云贵四省区域内的一级、二级分销商（渠道商）资源，最终实现飞利浦产品的落地销售。<br>
+                              3、负责公司所有影像产品的销售运作，包括计划、组织、进度控制。<br>
+                              4、协助销售总监制定销售计划、销售政策。<br>
+                              5、围绕公司下达的销售目标拟写营销方针和策略计划。<br>
+                              6、与市场部及其他部门合作，执行销售计划。<br>
+                              汇报对象：西区销售总监<br>
+                              业绩描述：在飞利浦公司任职期间，实际达成销售其中部分医院如下：
+                              川大华西医院及其分院超高端 256 层科研 CT 一台、3.0T 核磁各一台；<br>
+                              四川省人民医院超高端 256 层科研 CT 一台；<br>
+                              重医附一院超高端256 层科研 CT 和 3.0T 核磁各一台；<br>
+                              重庆市肿瘤医院 1.5T 和 3.0T 核磁各一台；<br>
+                              三博脑科（重庆）长安医院&江陵医院 1.5T 核磁两台、128 层 CT 两台、大型 DSA 一台；<br>
+                              重庆东华医院：1.5T 核磁和 128 层 CT 各一台；<br>
+                              梁平县人民医院：128 层 CT 和 1.5T 核磁各一台；<br>
+                              云阳县中医院：1.5T 核磁一台；涪陵区中医院：1.5T 核磁一台；丰都县人民医院：128 层 CT 一台；贵黔国际总院 128 层 CT 一台；贵州百灵医院 16 排 CT 两台；贵阳荟康医院 128 层 CT&1.5T 核磁各一台；昆医附一院大型 DSA 两台、超高端 256 层科研 CT 一台；昆医附二院 3.0T和超高端 256 层科研 CT 一台、大型 DSA 两台；昆医附二院石林天奇医院 128 层 CT 和 1.5T 核磁各一台、大型 DSA 一台等等······
+                            </dl>
                             
-                          </tr>
-                        </thead>
-                        <tbody id="childdata">
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
+                          </div>
                           
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
+                        </div>
+  
+                        
+  
+                        <div class="card trcard">
+  
+                          <div class="card-body border-bottom py-3">
+                            <div class="d-flex">
+                              <div class="" style="color: rgb(3, 169, 244)">
+                                2013.03 至 至今·
+                              </div>
+                              飞利浦（中国）投资有限公司· 西南大区经理 ·
+                              <div class="ms-auto text-secondary">
+                                
+                                <div class="ms-2 d-inline-block">
+                                  <a href="#" class="btn btn-info btn-sm">修改</a>
+                                  <a href="#" class="btn btn-danger btn-sm">删除</a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <dt class="col-2">工作职责：</dt>
+                            <dl class="col-10"></dl>
+                            <dt class="col-1"></dt>
+                            <dl class="col-10">
+                              1、正确传达区域销售总监提出的营销组织工作方案，并贯彻执行。<br>
+                              2、深度挖掘川渝云贵四省区域内的一级、二级分销商（渠道商）资源，最终实现飞利浦产品的落地销售。<br>
+                              3、负责公司所有影像产品的销售运作，包括计划、组织、进度控制。<br>
+                              4、协助销售总监制定销售计划、销售政策。<br>
+                              5、围绕公司下达的销售目标拟写营销方针和策略计划。<br>
+                              6、与市场部及其他部门合作，执行销售计划。<br>
+                              汇报对象：西区销售总监<br>
+                              业绩描述：在飞利浦公司任职期间，实际达成销售其中部分医院如下：
+                              川大华西医院及其分院超高端 256 层科研 CT 一台、3.0T 核磁各一台；<br>
+                              四川省人民医院超高端 256 层科研 CT 一台；<br>
+                              重医附一院超高端256 层科研 CT 和 3.0T 核磁各一台；<br>
+                              重庆市肿瘤医院 1.5T 和 3.0T 核磁各一台；<br>
+                              三博脑科（重庆）长安医院&江陵医院 1.5T 核磁两台、128 层 CT 两台、大型 DSA 一台；<br>
+                              重庆东华医院：1.5T 核磁和 128 层 CT 各一台；<br>
+                              梁平县人民医院：128 层 CT 和 1.5T 核磁各一台；<br>
+                              云阳县中医院：1.5T 核磁一台；涪陵区中医院：1.5T 核磁一台；丰都县人民医院：128 层 CT 一台；贵黔国际总院 128 层 CT 一台；贵州百灵医院 16 排 CT 两台；贵阳荟康医院 128 层 CT&1.5T 核磁各一台；昆医附一院大型 DSA 两台、超高端 256 层科研 CT 一台；昆医附二院 3.0T和超高端 256 层科研 CT 一台、大型 DSA 两台；昆医附二院石林天奇医院 128 层 CT 和 1.5T 核磁各一台、大型 DSA 一台等等······
+                            </dl>
+                            
+                          </div>
                           
-                    
-                        </tbody>
-                      </table>
+                        </div>
+
+
+
+                      </div>
+                     
+                      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     </div>
                   </div>
                 </div>
@@ -739,7 +894,7 @@ i::after {
                   <div class="card card-body-scrollable">
 
                     <div class="card-header">
-                      <h3 class="card-title">教育经历</h3>
+                      <h3 class="card-title" style="font-weight: bold;">教育经历</h3>
                         <div class="card-actions">
                           <a href="#" class="btn btn-ghost-primary">
                             新增
@@ -748,58 +903,160 @@ i::after {
                     </div>
 
                     <div class="card-body align-items-center">
-                      <table class="table card-table table-vcenter text-nowrap datatable ">
-                        <thead>
-                                      
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                 
+                      <div class="list-group card-list-group">
+                        <div class="list-group-item">
+                          <div class="row g-2 align-items-center">
+                        
+                           
+                            <div class="col">
+                             <span style="color:  rgb(3, 169, 244);"> 2007.09 至 2011.07</span><ii></ii>福建中医药大学 <ii></ii>药物制剂 <ii></ii><span style="font-weight: bold;">本科</span>
+                              <div class="text-secondary">
+                                <a href="#" class="badge badge-outline fw-normal badge-pill text-green" >统招</a>
+                                <a href="#" class="badge badge-outline  fw-normal badge-pill text-green" >985</a>
+                              </div>
+                              
+                              <div class="text-secondary">
+                                学校经历：大二担当学生会主席
+                              </div>
+                            </div>
+                            <div class="col-auto text-secondary">
+                              <a href="#" class="btn btn-info btn-sm">修改</a>
+                              <a href="#" class="btn btn-danger btn-sm">删除</a>
+                            </div>
+                        
                             
-                          </tr>
-                        </thead>
-                        <tbody id="childdata">
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          <tr>
-                            <th >公司名称</th>
-                            <th >添加日期</th>
-                          </tr>
-                          
-                          
-                    
-                        </tbody>
-                      </table>
+                          </div>
+                        </div>
+
+
+                        <div class="list-group-item">
+                          <div class="row g-2 align-items-center">
+                        
+                           
+                            <div class="col">
+                             <span style="color:  rgb(3, 169, 244);"> 2007.09 至 2011.07</span><ii></ii>福建中医药大学 <ii></ii>药物制剂 <ii></ii><span style="font-weight: bold;">本科</span>
+                              <div class="text-secondary">
+                                <a href="#" class="badge badge-outline fw-normal badge-pill text-green" >统招</a>
+                                <a href="#" class="badge badge-outline  fw-normal badge-pill text-green" >985</a>
+                              </div>
+                              
+                              <div class="text-secondary">
+                                学校经历：大二担当学生会主席
+                              </div>
+                            </div>
+                            <div class="col-auto text-secondary">
+                              <a href="#" class="btn btn-info btn-sm">修改</a>
+                              <a href="#" class="btn btn-danger btn-sm">删除</a>
+                            </div>
+                        
+                            
+                          </div>
+                        </div>
+                        <div class="list-group-item">
+                          <div class="row g-2 align-items-center">
+                        
+                           
+                            <div class="col">
+                             <span style="color:  rgb(3, 169, 244);"> 2007.09 至 2011.07</span><ii></ii>福建中医药大学 <ii></ii>药物制剂 <ii></ii><span style="font-weight: bold;">本科</span>
+                              <div class="text-secondary">
+                                <a href="#" class="badge badge-outline fw-normal badge-pill text-green" >统招</a>
+                                <a href="#" class="badge badge-outline  fw-normal badge-pill text-green" >985</a>
+                              </div>
+                              
+                              <div class="text-secondary">
+                                学校经历：大二担当学生会主席
+                              </div>
+                            </div>
+                            <div class="col-auto text-secondary">
+                              <a href="#" class="btn btn-info btn-sm">修改</a>
+                              <a href="#" class="btn btn-danger btn-sm">删除</a>
+                            </div>
+                        
+                            
+                          </div>
+                        </div>
+                        <div class="list-group-item">
+                          <div class="row g-2 align-items-center">
+                        
+                           
+                            <div class="col">
+                             <span style="color:  rgb(3, 169, 244);"> 2007.09 至 2011.07</span><ii></ii>福建中医药大学 <ii></ii>药物制剂 <ii></ii><span style="font-weight: bold;">本科</span>
+                              <div class="text-secondary">
+                                <a href="#" class="badge badge-outline fw-normal badge-pill text-green" >统招</a>
+                                <a href="#" class="badge badge-outline  fw-normal badge-pill text-green" >985</a>
+                              </div>
+                              
+                              <div class="text-secondary">
+                                学校经历：大二担当学生会主席
+                              </div>
+                            </div>
+                            <div class="col-auto text-secondary">
+                              <a href="#" class="btn btn-info btn-sm">修改</a>
+                              <a href="#" class="btn btn-danger btn-sm">删除</a>
+                            </div>
+                        
+                            
+                          </div>
+                        </div>
+                        <div class="list-group-item">
+                          <div class="row g-2 align-items-center">
+                        
+                           
+                            <div class="col">
+                             <span style="color:  rgb(3, 169, 244);"> 2007.09 至 2011.07</span><ii></ii>福建中医药大学 <ii></ii>药物制剂 <ii></ii><span style="font-weight: bold;">本科</span>
+                              <div class="text-secondary">
+                                <a href="#" class="badge badge-outline fw-normal badge-pill text-green" >统招</a>
+                                <a href="#" class="badge badge-outline  fw-normal badge-pill text-green" >985</a>
+                              </div>
+                              
+                              <div class="text-secondary">
+                                学校经历：大二担当学生会主席
+                              </div>
+                            </div>
+                            <div class="col-auto text-secondary">
+                              <a href="#" class="btn btn-info btn-sm">修改</a>
+                              <a href="#" class="btn btn-danger btn-sm">删除</a>
+                            </div>
+                        
+                            
+                          </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        
+
+
+
+                        
+                        
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1269,10 +1526,40 @@ i::after {
                             <input class="form-check-input" type="radio" name="state" value="3">
                             <span class="form-check-label">请款沟通</span>
                           </label>
+
+
                         </div>
+                        <div>
+                          
+                          <label class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="state" value="3">
+                            <span class="form-check-label">流程-预约面试</span>
+                          </label>
+
+                          <label class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="state" value="3">
+                            <span class="form-check-label">流程-确认入职</span>
+                          </label>
+                          <label class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="state" value="3">
+                            <span class="form-check-label">确认入职</span>
+                          </label>
+
+                          <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="state" value="3">
+                          <span class="form-check-label">放弃人选</span>
+                          </label>
+
+                        </div>
+                        <small class="form-hint">北京上汽集团公司 <i></i> 销售经理</small>
+                     
                       </div>
                     </div>
-                   
+                    <div class="col-lg-12 mb-3" style="display: none;" id="porjectflow">
+                      <label class="form-label" style="font-weight: bold;">沟通内容</label>
+                      <textarea rows="5" class="form-control" placeholder="Here can be your description" name="content"></textarea>
+                    </div>
+
                     
                     <div class="col-lg-12 mb-3">
                       <label class="form-label" style="font-weight: bold;">沟通内容</label>
