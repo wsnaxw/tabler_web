@@ -64,25 +64,12 @@ $(function(){
         // myDropzone.createThumbnailFromUrl(...);  
     });  
       
-    // let test1 = document.getElementById("test")
-
-
-    // test1.addEventListener('mouseenter',function(event){
-
-    //     test()
-
-    // })
-
-
 
     var customerId = getParameterByName('customerId');
 
     csid = customerId;
 
-    // console.log('customerId:'+BigInt(customerId))
-    //默认进行分页数据查询
 
-    
     const buttons = document.querySelectorAll('.card-body .btn');
 
     // 为每个按钮添加点击事件监听器
@@ -102,11 +89,20 @@ $(function(){
     });
 
 
-    $('#rxxxdiv').hide()
-    $('#movediv').hide()
-    $('#filediv').hide()
-    $('#jobdjv').hide()
-    $('#kzxxdiv').show()
+    // $('#rxxxdiv').hide()
+    // $('#movediv').hide()
+    // $('#filediv').hide()
+    // $('#jobdjv').hide()
+    // $('#kzxxdiv').show()
+
+
+    // $('#movediv').addClass("d-none");
+    // $('#filediv').addClass("d-none");
+    // $('#jobdjv').addClass("d-none");
+    // $('#kzxxdiv').removeClass("d-none");
+    // $('#rxxxdiv').addClass("d-none");
+
+
 
 
     // customer/getCustomerNumber 数据填充
@@ -125,7 +121,6 @@ $(function(){
 
 
     
-
 
 
 
@@ -180,27 +175,27 @@ function getParameterByName(name) {
 function kzxx(){
 
 
-    
-
-    $('#rxxxdiv').hide()
-    
-    $('#movediv').hide()
-    
-    $('#filediv').hide()
-    
-    $('#jobdjv').hide()
+    $('#movediv').addClass("d-none");
+    $('#filediv').addClass("d-none");
+    $('#jobdjv').addClass("d-none");
+    $('#kzxxdiv').removeClass("d-none");
+    $('#rxxxdiv').addClass("d-none");
 
 
-    $('#kzxxdiv').show()
+
+
+    // $('#rxxxdiv').hide()
+    // $('#movediv').hide()
+    // $('#filediv').hide()
+    // $('#jobdjv').hide()
+    // $('#kzxxdiv').show()
 
     custcom(csid)
     contactList(csid)
 
 
 
-
-
-
+   
 
 
 
@@ -218,13 +213,22 @@ function kzxx(){
 function rxxx(state){    
 
 
+    $('#movediv').addClass("d-none");
+    $('#filediv').addClass("d-none");
+    $('#jobdjv').addClass("d-none");
+    $('#kzxxdiv').addClass("d-none");
+    $('#rxxxdiv').removeClass("d-none");
 
 
-    $('#movediv').hide()
-    $('#filediv').hide()
-    $('#jobdjv').hide()
-    $('#kzxxdiv').hide()
-    $('#rxxxdiv').show()
+
+
+
+
+    // $('#movediv').hide()
+    // $('#filediv').hide()
+    // $('#jobdjv').hide()
+    // $('#kzxxdiv').hide()
+    // $('#rxxxdiv').show()
     var data={};
 
     if(state==null||state==undefined){
@@ -278,9 +282,6 @@ function rxxx(state){
         });
 
 
-        refreshFsLightbox();
-
-
 
 }
 
@@ -288,16 +289,24 @@ function filedivshow(){
 
 
 
-    $('#rxxxdiv').hide()
+    // $('#rxxxdiv').hide()
     
-    $('#movediv').hide()
+    // $('#movediv').hide()
     
     
-    $('#jobdjv').hide()
+    // $('#jobdjv').hide()
 
 
-    $('#kzxxdiv').hide()
-    $('#filediv').show()
+    // $('#kzxxdiv').hide()
+    // $('#filediv').show()
+
+
+
+    $('#movediv').addClass("d-none");
+    $('#filediv').removeClass("d-none");
+    $('#jobdjv').addClass("d-none");
+    $('#kzxxdiv').addClass("d-none");
+    $('#rxxxdiv').addClass("d-none");
 
 
 
@@ -359,9 +368,7 @@ function filedivshow(){
 
 
 
-
-
-
+   
 
 
 
@@ -370,11 +377,21 @@ function filedivshow(){
 }
 
 function job(pageNo){
-    $('#rxxxdiv').hide()
-    $('#movediv').hide()
-    $('#filediv').hide()
-    $('#kzxxdiv').hide()
-    $('#jobdjv').show()
+
+
+    
+    $('#movediv').addClass("d-none");
+    $('#filediv').addClass("d-none");
+    $('#jobdjv').removeClass("d-none");
+    $('#kzxxdiv').addClass("d-none");
+    $('#rxxxdiv').addClass("d-none");
+
+
+    // $('#rxxxdiv').hide()
+    // $('#movediv').hide()
+    // $('#filediv').hide()
+    // $('#kzxxdiv').hide()
+    // $('#jobdjv').show()
     pageNo=1;
     var data={'pageNo':1,'customerId':csid};
 
@@ -470,6 +487,7 @@ function job(pageNo){
         });
 
 
+     
 
 
 }
@@ -489,21 +507,29 @@ function splitOrGet(str) {
 function move(){
 
 
-    $('#rxxxdiv').hide()
+    // $('#rxxxdiv').hide()
     
     
-    $('#filediv').hide()
+    // $('#filediv').hide()
     
 
 
-    $('#kzxxdiv').hide()
+    // $('#kzxxdiv').hide()
     
-    $('#jobdjv').hide()
+    // $('#jobdjv').hide()
 
-    $('#movediv').show()
+    // $('#movediv').show()
 
+
+
+    $('#movediv').removeClass("d-none");
+    $('#filediv').addClass("d-none");
+    $('#jobdjv').addClass("d-none");
+    $('#kzxxdiv').addClass("d-none");
+    $('#rxxxdiv').addClass("d-none");
 
     
+
 
     var data={'customerId':csid};
 
@@ -885,15 +911,6 @@ function deletemember(uid){
         console.log("删除操作被取消");
     }
 
-
-
-}
-
-function test(){
-    
-    console.log(1)
-
-    $('#modal-danger').modal('show')
 
 
 }
