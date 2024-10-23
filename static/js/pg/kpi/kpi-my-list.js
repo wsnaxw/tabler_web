@@ -283,6 +283,7 @@ function kpiPop1(type,appUserId,date,pageNo,number){
               <th>回款金额</th>
               <th>业绩比例</th>
               <th>业绩金额</th>
+              <th>提成金额</th>
               <th>回款用户</th>
               </tr>`
       break;
@@ -355,6 +356,7 @@ function kpiPop1(type,appUserId,date,pageNo,number){
                       <td >${toStr(o.serviceFee)}</td>
                       <td >${toStr(o.rate)}</td>
                       <td >${toStr(o.kpiFee)}</td>    
+                      <td >${toStr(o.commissionFee)}</td>   
                       <td >${toStr(o.userName)}</td>
                     </tr>`
                 }else{
@@ -528,6 +530,7 @@ function teamList(){
 }
 
 function checkteammember(element){
+  comMember.clear();
   var nextElement = $(element).next();
   nextElement.prop("disabled",false)
   

@@ -6,7 +6,7 @@ $(function(){
     baseinfo(workId)
     // 团队成员
     teamlist(workId)
-    rxxx('')
+    rxxx('',1)
     // $('#rxxqdiv').hide();
 
 
@@ -46,13 +46,29 @@ function getParameterByName(name) {
 }
 
 
-function rxxx(state){    
-    var data={};
-    if(state==null||state==undefined){
-        data ={'projectId':workId}
-    }else{
-        data ={ 'state': state,'projectId':workId}
+function rxxx(state,pageNo){
+    let state1 = '999';    
+    let isForward = true;
+
+    if(state==null||state==undefined||state=='')isForward = false;
+
+
+    if(state == state1 ){
+        state = null;
+    }else if(state !='' ){
+        state1 =state;
     }
+
+    console.log(isForward)
+    var data={};
+    if(state==null||state==undefined||state==''){
+        data ={'projectId':workId ,'pageNo':pageNo}
+    }else{
+        data ={ 'state': state,'projectId':workId,'pageNo':pageNo}
+    }
+
+    console.log(isForward)
+
     const options = {
         method: 'POST',
         headers: {
@@ -69,9 +85,11 @@ function rxxx(state){
             if(json.data.list!=null&&json.data.list.length>0){
 
                 let str =''
+               
+           
                 json.data.list.forEach(o=>{
 
-
+                  
                     let operate = ``;
                     let tpState ;
 
@@ -175,18 +193,134 @@ function rxxx(state){
 
                 })
 
-                $("#rxxxdata").html(str)                
+
+                $("#rxxxdata").html(str)  
+                
+                if(state == null)state='';
+                console.log('state',state);
+                var pageCount = json.data.count
+                
+
+                $('#totalPageNum').html('');
+                $('#totalPageNum').html(pageCount);
+
+                var totalPage = json.data.totalPage;
+                arrowTotalPage = totalPage;
+           
+                $('#totalPageNum1').html('');
+                $('#totalPageNum1').html(totalPage);
+                //上一页页数
+                var forward = pageNo-1;
+                var forward1 = '';
+                if(pageNo==1){
+                    forward=1;
+                    forward1 = '<li class="page-item disabled">'
+                    +'<a class="page-link" href="#"  tabindex="1" aria-disabled="true">'
+                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 6l-6 6l6 6"></path></svg>'
+                      +'prev'
+                    +'</a>'
+                  +'</li>'
+                }else {
+                    forward1 = '<li class="page-item" >'
+                    +'<a class="page-link" href="#" onclick="rxxx('+state1+','+forward+');">'
+                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 6l-6 6l6 6"></path></svg>'
+                      +'prev'
+                    +'</a>'
+                  +'</li>'
+                }
+                //下一页页数
+                var backwards = pageNo+1;
+                var backwards1 = '';
+                if(pageNo===json.data.totalPage){
+                    backwards=pageNo;
+
+                    backwards1 = '<li class="page-item disabled">'
+                    +'<a class="page-link" href="#"  tabindex="1" aria-disabled="true">'
+                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg>'
+                      +'next'
+                    +'</a>'
+                  +'</li>'
+                }else{
+                    backwards1 = '<li class="page-item">'
+                    +'<a class="page-link" href="#"  onclick="rxxx('+state1+','+backwards+');" >'
+                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg>'
+                      +'next'
+                    +'</a>'
+                  +'</li>'
+                }
+
+                str='';
+                str+=forward1;
+
+            
+                //添加首页/上一页按钮功能
+                var count = 0;//记录第一次循环页数按钮, 用来控制显示的按钮数不得超过5个
+                var index = 0;//第二次循环页数
+                var pages= pageNo;
+                for(var i=1;i<=totalPage;i++){
+                    if(pageNo>1){
+                        i=pageNo++;
+                        index = count++;
+                        if(index>4){
+                            break;
+                        }
+                        if(i==pages){
+                            str+= '<li class="page-item active" ><a class="page-link" href="#"  onclick="rxxx('+state1+','+i+');" >'+i+'</a></li>'
+                        }else{
+                            str+= '<li class="page-item" ><a class="page-link" href="#"  onclick="rxxx('+state1+','+i+');" >'+i+'</a></li>'
+                        }
+                    }else{
+                        count++;
+                        if(count>5){
+                            count=0;
+                            break;
+                        }else{
+                            if(i===pageNo){
+                                str+= '<li class="page-item active" ><a class="page-link" href="#"  onclick="rxxx('+state1+','+i+');" >'+i+'</a></li>'
+                            }else{
+                                str+= '<li class="page-item" ><a class="page-link" href="#"  onclick="rxxx('+state1+','+i+');" >'+i+'</a></li>'
+                            }
+                        }
+                    }
+                }
+
+                str+=backwards1;
+
+
+               
+                $('#pageSelect').html('');
+                $('#pageSelect').html(str);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             }else{
                 $("#rxxxdata").html(` <tr>
                 <td colspan="6" style="font-weight: bold;text-align: center;">暂无数据 </td>
               </tr>`) 
             }
 
+            console.log(isForward)
+
+            if(isForward )document.getElementById('rxxxdata').scrollIntoView({ behavior: 'smooth' });
         }).catch((error)=>{
-            callback();
+            console.log(error)
         });
 
 }
+
+
 
 
 

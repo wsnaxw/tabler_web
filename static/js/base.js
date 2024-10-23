@@ -467,8 +467,13 @@ function toStr(value) {
     if (value === null || value === undefined) {
         return '';
     }
+
     return value.toString();
 }
+
+function isNumber(value) {
+    return typeof value === 'number' && !Number.isNaN(value) && Number.isFinite(value);
+  }
 function getParameterByName(name) {
     url = window.location.href;
    name = name.replace(/[\[\]]/g, "\\$&");

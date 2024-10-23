@@ -497,3 +497,7 @@ function leftpage(){
     }
   
   }
+
+  function isNumber(value) {
+    return typeof value === 'number' && !Number.isNaN(value) && Number.isFinite(value);
+  }
