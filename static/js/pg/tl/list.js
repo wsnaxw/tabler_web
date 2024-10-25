@@ -313,7 +313,7 @@ function getPage(pageNo){
                         }
 
 
-                        exCom +=  `${toStr(value.startTime)} - ${toStr(endTime)} | ${value.name} | ${checkAndCutString(value.job)} <br>`
+                        exCom +=  `${toStr(value.startTime)} - ${toStr(endTime)} | <span>${value.name}</span> | ${checkAndCutString(value.job)} <br>`
                       })
                     }
 
@@ -383,7 +383,7 @@ function getPage(pageNo){
                               <div class="row ">
                     
                                 <div class="col-lg-5 text-truncate">
-                                  <address>
+                                  <address >
                                     ${exEdu}
                                   </address>
                                 </div>
