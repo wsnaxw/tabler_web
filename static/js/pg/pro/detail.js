@@ -468,7 +468,7 @@ function baseinfo(workId){
                           <div class="card-header">
                             <h2 class="card-title" style="font-weight: bold;">${toStr(data.name)}</h2>&nbsp;&nbsp;<span  style="color: red;font-weight: bold;">${toStr(data.salary)}万</span>&nbsp;&nbsp;${toStr(level)}
                             <div class="card-actions">
-                              <a href="#" class="btn btn-ghost-primary" onclick="showMessage(1)">
+                              <a href="p-creation.html" target='_blank' class="btn btn-ghost-primary" >
                                 新增职位 
                               </a>
                               <a href="#" class="btn btn-ghost-info"  data-bs-toggle='modal' data-bs-target='#modal-edit' onclick="initEdit()">
