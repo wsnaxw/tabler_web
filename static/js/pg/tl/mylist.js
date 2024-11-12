@@ -127,8 +127,19 @@ function getPage(pageNo){
 
 
 
+
     arrowPageNo=pageNo;
     let queryData = formCheck()
+
+    let exturl = 'myTalentList';
+
+    if(queryData.mystate!=null&&queryData.mystate==1){
+      exturl = 'myTalentUpdateList'
+    }
+
+
+
+
     queryData.pageNo = pageNo;
     queryData.pageSize = 10;
 
@@ -146,7 +157,7 @@ function getPage(pageNo){
         },
         dataType:'json',
         type:'post',
-        url:baseUri+'/talent/selectTalentList',
+        url:baseUri+'/talent/'+exturl,
         data:JSON.stringify(queryData),
         success:function(obj){
 

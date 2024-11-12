@@ -4,8 +4,10 @@
 $(function(){
     talentId = getParameterByName('workId');
     initBaseInfo();
-    initTPList();
-    initTCList()
+    initTCList();
+
+   
+
 })
 
 
@@ -195,7 +197,7 @@ function initBaseInfo(){
            `
            $("#baseinfo").html('');
            $("#baseinfo").html(str)
-
+           console.log(str)
            $('#phonepopover').popover({
             // title: '是否使用额度购买？',
             content: `<p class='mb-0'>是否使用额度购买？<a href='#' class='btn btn-teal btn-sm' id='popover1'>是</a>
@@ -373,7 +375,7 @@ function initBaseInfo(){
 
 
 
-
+        initTPList()
 
 
 
@@ -384,7 +386,7 @@ function initBaseInfo(){
 
 
 
-
+      
 
 
 }
@@ -409,8 +411,9 @@ function initTPList(){
 
            let list = json.data;
 
+           console.log(list)
            if(list != null && list.length > 0){
-
+            console.log('xxxxx')
             let str='';
             list.forEach(o=>{
 
@@ -421,7 +424,7 @@ function initTPList(){
 
 
             })
-
+            console.log(str)
 
             $('#tplist').html('')
 
