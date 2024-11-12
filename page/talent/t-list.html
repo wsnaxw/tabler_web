@@ -22,11 +22,8 @@
     <script src="../../static/js/jquery.min.js"></script>
     <script src="../../static/js/base.js?1"></script>
     <script src="../../static/js/watermark.js"></script>
-    <script src="../../static/js/citycode.js" ></script>
 
        
-    <script src="../../static/js/pg/pro/Position.js"></script>
-    <script src="../../static/js/pg/pro/Industry.js"></script>
     <script src="../../static/js/pg/tl/list.js"></script>
     <script>
       function dark(){
@@ -331,100 +328,73 @@ font-size: large;
                     <div class="row mb-3"> 
                     
                       <div class="col-lg-3 row">
-                        <label class="form-label col-3" style="font-weight: bold;">客户名</label>
+                        <label class="form-label col-3" style="font-weight: bold;">关键词</label>
                         <div class="col">
-                          <input type="text" class="form-control" name="customerName">
+                          <input type="text" class="form-control" name="keyword">
                         </div>
                       </div>
                       <div class="col-lg-3 row">
-                        <label class="form-label col-3" style="font-weight: bold;">职位名称</label>
+                        <label class="form-label col-3" style="font-weight: bold;">简历编码</label>
+                        <div class="col">
+                          <input type="text" class="form-control" name="talentId"  >
+                        </div>
+                      </div>
+                      <div class="col-lg-3 row">
+                        <label class="form-label col-3" style="font-weight: bold;">姓名</label>
+                        <div class="col">
+                          <input type="text" class="form-control" name="name"  >
+                        </div>
+                      </div>
+                      <div class="col-lg-3 row">
+                        <label class="form-label col-3" style="font-weight: bold;">电话</label>
+                        <div class="col">
+                          <input type="text" class="form-control" name="phone"  >
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="row mb-3"> 
+                    
+                      <div class="col-lg-3 row">
+                        <label class="form-label col-3" style="font-weight: bold;">当前公司</label>
+                        <div class="col">
+                          <input type="text" class="form-control" name="company">
+                        </div>
+                      </div>
+                      <div class="col-lg-3 row">
+                        <label class="form-label col-3" style="font-weight: bold;">当前职位</label>
+                        <div class="col">
+                          <input type="text" class="form-control" name="job"  >
+                        </div>
+                      </div>
+                      <div class="col-lg-3 row">
+                        <label class="form-label col-3" style="font-weight: bold;">当前地点</label>
                         <div class="col">
                           <input type="text" class="form-control" name="name"  >
                         </div>
                       </div>
 
-
                       <div class="col-lg-3 row">
-                        <label class="form-label col-3" style="font-weight: bold;">城市</label>
-                        <div class="nav-item dropdown col" >
-                          <input type="text" class="form-select dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="true" readonly id="cityinputshow">
-                          <input type="hidden" id="cityinputvalue" name="cityCode">
-                          <div class="dropdown-menu " id="citymenu"data-bs-popper="static" >
-                            <div class="dropdown-menu-columns">
-                              <div class="dropdown-menu-column" id="citydiv">
-
-
-
-                             
-                               
-
-
-                              </div>
-                            
-                            
-                           
-                          
-                          </div>
-                          </div>
+                        <label class="form-label col-3" style="font-weight: bold;">学历</label>
+                        <div class="col">
+                          <select class="form-select " id="state" name="education">
+                            <option selected value="">不限</option>
+                            <option value="2">中专</option>
+                            <option value="3">大专</option>
+                            <option value="4">大学</option>
+                            <option value="5">研究生</option>
+                            <option value="6">博士</option>
+                            <option value="7">博士后</option>
+                          </select>
                         </div>
                       </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                      <div class="col-lg-3 row">
-                        <label class="form-label col-3" style="font-weight: bold;">职位类别</label>
-                        <div class="nav-item dropdown col" >
-                          <input type="text" class="form-select dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="true" readonly name="job" id="jobinput">
-                          <div class="dropdown-menu " id="jobmenu" data-bs-popper="static" >
-                            <div class="dropdown-menu-columns">
-                              <div class="dropdown-menu-column" id="jobdiv">
-
-
-
-                             
-                               
-
-
-                              </div>
-                            
-                            
-                           
-                          
-                          </div>
-                          </div>
-                        </div>
-                      </div>
-
+                     
 
                     </div>
+
+
+
                     <div class="row mb-3"> 
 
 
@@ -433,14 +403,15 @@ font-size: large;
                       <div class="col-lg-3 row">
                         <label class="form-label col-3" style="font-weight: bold;">年龄</label>
                         <div class="col">
-                          <input type="number" class="form-control col" name="requireAgeS" placeholder="最小年龄" >
+                          <input type="number" class="form-control col" name="ageStart" placeholder="最小年龄" >
                         </div>
                         <div class="col">
-                          <input type="number" class="form-control col" name="requireAgeE" placeholder="最大年龄">
+                          <input type="number" class="form-control col" name="ageEnd" placeholder="最大年龄">
                         </div>
 
 
                       </div>
+
                       <div class="col-lg-3 row">
                         <label class="form-label col-3" style="font-weight: bold;">性别</label>
                         <div class="col">
@@ -459,20 +430,7 @@ font-size: large;
                         </div>
                       </div>
 
-                      <div class="col-lg-3 row">
-                        <label class="form-label col-3" style="font-weight: bold;">学历</label>
-                        <div class="col">
-                          <select class="form-select " id="state" name="requireEdu">
-                            <option selected value="">不限</option>
-                            <option value="2">中专</option>
-                            <option value="3">大专</option>
-                            <option value="4">大学</option>
-                            <option value="5">研究生</option>
-                            <option value="6">博士</option>
-                            <option value="7">博士后</option>
-                          </select>
-                        </div>
-                      </div>
+                      
                       <div class="col-lg-3 row">
                         <label class="form-label col-3" style="font-weight: bold;">是否统招</label>
                         <div class="col">
@@ -486,49 +444,10 @@ font-size: large;
                           </label>
                           <label class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="requireAllTime"  value="0" checked>
-                            <span class="form-check-label">不限制</span>
+                            <span class="form-check-label">不限</span>
                           </label>
                         </div>
                       </div>
-
-                    </div>
-                    <div class="row mb-3"> 
-
-
-
-                      <div class="col-lg-3 row">
-                        <label class="form-label col-3" style="font-weight: bold;">年薪</label>
-                        <div class="col">
-                          <input type="text" class="form-control " name="salary" >
-
-                        </div>
-                      </div>
-
-
-                      <div class="col-lg-3 row">
-                        <div class="form-label col-3" style="font-weight: bold">保用期</div>
-                        <div class="col">
-                          <div class="input-group input-group-flat">
-                            <input type="number" class="form-control" name="quotTime"  placeholder="请输入保用期月限">
-                            <span class="input-group-text">
-                              <kbd>月</kbd>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-lg-3 row">
-                        <div class="form-label col-3" style="font-weight: bold">紧急程度</div>
-                        <div class="col">
-                          <select class="form-select"  name="level">
-                            <option selected value="">默认</option></optgroup>
-                            <option value="0">一般</option>
-                           
-                            <option value="1">紧急</option>
-                            <option value="2">特急</option>
-                          </select>
-                        </div>
-                      </div>
-       
                       <div class="col-lg-3" >
                         <div class="col">
                          <a  onclick="clearForm()" class="btn btn-link ms-auto ">清空 </a>
@@ -537,7 +456,9 @@ font-size: large;
                         </div>
                   
                       </div>
+
                     </div>
+
   
 
 
@@ -600,47 +521,8 @@ font-size: large;
                         </thead>
                         <tbody id="data">
 
-                          <tr id="1" onclick="clickable(this)" > 
-                            <td name="firsticon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-big-down-lines"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 12h3.586a1 1 0 0 1 .707 1.707l-6.586 6.586a1 1 0 0 1 -1.414 0l-6.586 -6.586a1 1 0 0 1 .707 -1.707h3.586v-3h6v3z"></path><path d="M15 3h-6"></path><path d="M15 6h-6"></path></svg></td>
-                            <td>test</td>
-                            <td>24岁</td>    
-                            <td>本科</td>
-                            <td>七年</td>    
-                            <td>北京</td>
-                            <td>北京市通用科技技术有限责任公司</td>    
-                            <td>java程序员</td>
-                            <td>张三</td>    
-                            <td>2021-03-05</td>
-                            <td>加入项目，查看</td>    
-                            
-                          </tr>
-                          <tr name="1" class="hidden-row">
-                            <td colspan="11">
-                              <div class="row">
-                                <div class="col-lg-1">
-
-                                </div>
-                                <div class="col-lg-4">
-                                  <address style="font-size: large;">
-                                    2004.09- 2008.06 | 南开大学 | 化学 | 硕士
-                                    <br>
-                                    2004.09- 2008.06 |南开大学 |化学 |硕士
-                                    <br style="margin: 10px;">
-                                    2004.09- 2008.06 |南开大学 |化学 |硕士
-                                    <br>
-                                  </address>
-                                </div>
-                                <div class="col-lg-4">
-                                  <address>
-                                    2021.10 - 2024.05|某医疗器械公司|CFO首席财务官
-                                    <br style="margin-top: 50px;margin-bottom: 50px;">
-                                    2008.09 - 2021.09|毕马威|合伙人
-                                  </address>
-                                </div>
-                              </div>
-                            </td>
-                           
-                          </tr>
+                          
+                         
                     
                         </tbody>
                       </table>
@@ -673,7 +555,43 @@ font-size: large;
 
 
 
-
+            <div class="modal modal-blur fade" id="joinmodal" tabindex="-1" role="dialog" aria-hidden="true" >
+              <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+           
+                  <div class="modal-body">
+    
+                   
+                   
+    
+    
+                    <div class="mb-3">
+                      <label class="form-label">选择项目</label>
+                      <select type="text" class="form-select" placeholder="请输入查询岗位" id="addProject">
+                      </select>
+                    </div>
+                   
+        
+    
+                   
+    
+    
+                  </div>
+        
+                  
+                  <div class="modal-footer">
+                    <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                      Cancel
+                    </a>
+                    <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal" onclick="addProject()">
+                      <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+                      加入项目
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
 

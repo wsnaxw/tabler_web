@@ -13,131 +13,11 @@ $(function(){
     getPage(1);
 
 
-    const provinces = cn.getProvinces()
-
-    console.log(cn.getPrefectures('100000'))
-
-
-    const citydiv = document.getElementById("citydiv");  
-    citydiv.innerHTML = '';  
-
-
-    provinces.forEach(province=>{
-      const citys = cn.getPrefectures(province.code)
-
-
-      if(citys.length>0){
-        var dd = document.createElement('div');  
-        dd.classList.add('dropend');  
-        const link = document.createElement('a');  
-        link.classList.add('dropdown-item', 'dropdown-toggle');  
-        link.setAttribute('data-bs-toggle', 'dropdown');  
-        link.setAttribute('data-bs-auto-close', 'outside');  
-        link.setAttribute('role', 'button');  
-        link.setAttribute('aria-expanded', 'false');  
-        link.textContent = province.name;  
-        dd.appendChild(link);  
-        citydiv.appendChild(dd); 
-        var dd22 = document.createElement('div');  
-        dd22.classList.add('dropdown-menu');  
-
-        
-
-        citys.forEach(city=>{  
-           const link = document.createElement('a');  
-            link.classList.add('dropdown-item');  
-            link.setAttribute('onClick', 'chooseThisCity(this)');  
-            link.setAttribute('value', city.code);  
-            link.textContent = city.name;         
-            dd22.appendChild(link); 
-          })
-
-          dd.appendChild(dd22)
-
-
-
-      }else{
-        const link = document.createElement('a');  
-        link.classList.add('dropdown-item');  
-        link.setAttribute('onClick', 'chooseThisCity(this)');  
-        link.setAttribute('value', province.code);  
-        link.textContent = province.name;  
-        citydiv.appendChild(link); 
-
-
-      }
-
-
-
-
-
-
-
-    })
-
-
-
-
-
-
-
-
-
-    const ct = document.getElementById("jobdiv");  
-    ct.innerHTML = '';  
-
-
-
-    positionList.forEach(item => {  
-      if (item.children) {  
-        // 创建顶级下拉菜单  
-        var dropdownDiv = document.createElement('div');  
-        dropdownDiv.classList.add('dropend');  
-      
-        // 创建触发元素  
-        var link = document.createElement('a');  
-        link.classList.add('dropdown-item', 'dropdown-toggle');  
-        link.setAttribute('data-bs-toggle', 'dropdown');  
-        link.setAttribute('data-bs-auto-close', 'outside');  
-        link.setAttribute('role', 'button');  
-        link.setAttribute('value', item.value);  
-        link.setAttribute('aria-expanded', 'false');  
-        link.textContent = item.label;  
-      
-        // 创建顶级下拉菜单的内容容器  
-        var dropdownMenu = document.createElement('div');  
-        dropdownMenu.classList.add('dropdown-menu');  
-      
-        // 递归地构建子菜单  
-        buildDropdownMenu(item.children, dropdownMenu);  
-      
-        // 将触发元素和内容容器添加到顶级下拉菜单  
-        dropdownDiv.appendChild(link);  
-        dropdownDiv.appendChild(dropdownMenu);  
-      
-        // 将顶级下拉菜单添加到某个容器（例如ct）  
-        ct.appendChild(dropdownDiv);  
-      } else {  
-        // 创建非嵌套的下拉菜单项  
-        var link = document.createElement('a');  
-        link.classList.add('dropdown-item');  
-        link.setAttribute('onClick', 'chooseThis(this)');  
-        link.setAttribute('value', item.value);  
-        link.textContent = item.label;  
-        ct.appendChild(link);  
-      }  
-    });  
-
-
-
-
-
 
 
 
 })
 
-let flame = `<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#ff3d3d"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-flame"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.773 4.741 -3 6c-1.226 1.26 -2 3.24 -2 5a6 6 0 1 0 12 0c0 -1.532 -1.056 -3.94 -2 -5c-1.786 3 -2.791 3 -4 2z" /></svg>`
 
 // 递归函数来构建子菜单  
 function buildDropdownMenu(items, parent) {  
@@ -247,7 +127,7 @@ function getPage(pageNo){
 
 
 
-  arrowPageNo=pageNo;
+    arrowPageNo=pageNo;
     let queryData = formCheck()
     queryData.pageNo = pageNo;
     queryData.pageSize = 10;
@@ -595,8 +475,6 @@ function formCheck(){
 
   });
 
-console.log(values)
-
 
 
 
@@ -706,3 +584,73 @@ function clickable(obj){
   }
 }
 
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  new TomSelect('#addProject',{
+      valueField: 'projectId',
+      labelField: 'name',
+      searchField: 'name',
+      // fetch remote data
+      load: function(query, callback) {
+
+          const options = {
+              method: 'POST',
+              headers: {
+              'Content-Type': 'application/json',
+              'token':localStorage.getItem('token')
+              },
+              body: JSON.stringify({ 'name': query }),
+              };
+
+              var url = baseUri+'/project/myJobList';
+              fetch(url,options)
+              .then(response => response.json())
+              .then(json => {
+                var item = json.data.list;
+      
+                  callback(item);
+              }).catch((error)=>{
+                  callback();
+              });
+
+      },
+      
+      // custom rendering functions for options and items
+      render: {
+          option: function(item, escape) {
+      return `<div><span class="dropdown-item-indicator"  >
+      </span>${ escape(item.name) } - ${item.customerName}</div>`;
+  
+              
+          },
+          item: function(item, escape) {
+      return `<div><span class="dropdown-item-indicator"  >
+      </span>${ escape(item.name) } - ${item.customerName}</div>`;
+  
+          }
+      },
+  });
+});
+
+
+
+function addProject(){
+
+
+}
+
+
+let currentId;
+
+function join(talentId){
+
+  currentId = talentId;
+
+  $("#joinmodal").modal('show')
+
+
+
+}
