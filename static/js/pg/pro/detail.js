@@ -184,7 +184,7 @@ function rxxx(state,pageNo){
                     </td>
                
                     <td >
-                      <a class="btn btn-info btn-sm" onclick="checkTalent('${o.talentId}','${o.id}')">
+                      <a class="btn btn-info btn-sm" onclick="checkDetail('${o.talentId}','${o.id}')">
                         沟通记录查询
                       </a>
                       ${operate}
@@ -730,11 +730,6 @@ function addTeamList(){
 
 }
 
-
-function successalert(str){
-    $('#modalshowstr').html(str)
-    $('#modal-danger').modal('show')
-}
 
 
 function signCustomer(){
@@ -1355,5 +1350,12 @@ function toTextbr(text){
     return text.replace(/\n/g, '<br>');
 
 
+
+}
+
+
+function operateTgkh(){
+
+    $("#operate-modal").modal('show')
 
 }

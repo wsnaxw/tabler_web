@@ -81,6 +81,14 @@ function getPage(pageNo){
 
 
 
+                    let isNeedAlternate = '否';
+                    let alternate = '无'
+                    if(o.isNeedAlternate==1){
+                      alternate = `<a onclick="checkDetail(1,'${o.alternateTalentId}')">${toStr(o.alternateTalentName)}</a>`;
+                      isNeedAlternate = '是';
+                    }
+                    
+
                     let state = '';
                     switch (o.state) {
                       case 0:
@@ -203,17 +211,17 @@ function getPage(pageNo){
 
 
                     str+= `<tr>
-                    <td><a onclick="checkDetails(1,'${talentId}')">${talentName}</a></td>
-                    <td>${o.customerName}</td>
-                    <td><span style='font-weight: bold;' class ='bg-primary-lt'><a onclick='checkDetail("${o.projectId}")'>${o.name}</a></span></td>
-                    <td>${cityCode}</td>
-                      <td>${rnum}</td>
-                    <td>${o.stateData}</td>
+                    <td><span style='font-weight: bold;' class ='bg-primary-lt'><a onclick="checkDetail(1,'${o.talentId}')">${o.talentName}</a></span></td>
+                    <td>${o.comName}</td>
+                    <td><span style='font-weight: bold;' class ='bg-primary-lt'><a onclick='checkDetail(2,"${o.customerId}")'>${o.customerName}</a></span></td>
+                    <td><span style='font-weight: bold;' class ='bg-primary-lt'><a onclick='checkDetail(3,"${o.projectId}")'>${o.projectName}</a></span></td>
+                    <td>${state}</td>
+                    <td>${alternate}</td>
+                    <td>${isNeedAlternate}</td>
 
                     <td>${o.createTime}</td>
-                    <td>${numbers}</td>
+                    <td>${operate}</td>`
                     
-                    <td><a herf="#" onclick="checkDetail('${o.projectId}')" class="btn">查看</a><a herf="#" class="btn" onclick="move('${o.projectId}')">转移</a></td></tr>`
           
 
 
@@ -432,20 +440,39 @@ function searchList(){
 }
 
 
-function checkDetail(id){
+function checkDetail(type,id){
     //跳转页面并且携带参数
 
     let bigNumber = BigInt(id);
     let workId = bigNumber.toString(); // 转换为字符串
 
+    let url ;
+    if(type==1){
+       url = 'detail.html?workId=' + encodeURIComponent(workId)+'' ;
+              
+        window.open(url, '_blank');
+    }else if (type==2){
+      url = '../customer/cusd.html?customerId=' + encodeURIComponent(workId)+'' ;
+
+            
+      window.open(url, '_blank');
+    } else if (type==3){
+      url = '../project/prod.html?workId=' + encodeURIComponent(workId)+'' ;
+
+      window.open(url, '_blank');
+      
+    }
+
+
+
+
 
 // 创建一个新的URL，携带参数
-var url = 'prod.html?workId=' + encodeURIComponent(workId)+'' ;
+// var url = 'prod.html?workId=' + encodeURIComponent(workId)+'' ;
 
 // 使用jQuery来跳转到新页面
 // window.location.href = url;
 
-window.open(url, '_blank');
 
 }
 
