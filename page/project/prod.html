@@ -728,19 +728,69 @@
         </div>
         
 
-        <div class="modal modal-blur fade" id="operate-simple" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal modal-blur fade" id="operate-modal" tabindex="-1" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
+            <div class="modal-content"  id="operatediv">
               <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title">预约面试</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci animi beatae delectus deleniti dolorem eveniet facere fuga iste nemo nesciunt nihil odio perspiciatis, quia quis reprehenderit sit tempora totam unde.
+
+
+                <div class="card-body">
+
+                  <div class="row mb-3">
+                    <dt  class="col-3">面试类型</dt>
+                    <dl class="col-9">
+                      <select class="form-select"  name="way">
+                        <option selected value="1">线上面试</option>
+                        <option  value="0">线下面试</option>
+                      </select>
+                    </dl>
+
+                  
+                  </div>
+
+                  <div class="row mb-3">
+                    <dt  class="col-3">面试时间</dt>
+                    <dl class="col-3">
+                      <select class="form-select"  name="type">
+                        <option selected value="0">初试</option>
+                        <option  value="1">复试</option>
+                        <option  value="2">终试</option>
+                      </select>
+                    </dl>
+                    <dl class="col-6">
+                      <input type="text" class="form-control" name="time" id="mst埃索达ime">
+                    </dl>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <dt  class="col-3">面试地点</dt>
+                  <dl class="col-9">
+                    <input type="text" class="form-control" name="address">
+                  </dl>
+
+                </div>
+
+                <div class="row mb-3">
+                  <dt  class="col-3">面试地点</dt>
+                  <dl class="col-9">
+                    <textarea rows="5" class="form-control" placeholder="Here can be your description" name="remark"></textarea>
+                  </dl>
+
+                </div>
+
+                <input type="hidden" name="id" value="">
+                <input type="hidden" name="projectId" value="">
+                 
+               
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                <button type="button" class="btn me-auto" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="yyms()" >确定</button>
               </div>
             </div>
           </div>
@@ -1052,77 +1102,7 @@
 
 
 
-        <div class="modal modal-blur fade" id="modal-newc" tabindex="-1" role="dialog" aria-hidden="true">
-          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title">新增沟通记录</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                <div class="card-body">
-
-                  <!-- 0 其他 1  2  3  -->
-                  <div class="row mb-3">
-                    <div class="col-lg-12">
-                      <div class="mb-3">
-                        <div class="form-label">类型</div>
-                        <div>
-                          <label class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="state" value="0" checked="">
-                            <span class="form-check-label">其他</span>
-                          </label>
-                          <label class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="state" value="1" >
-                            <span class="form-check-label">面试沟通</span>
-                          </label>
-                          <label class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="state" value="2">
-                            <span class="form-check-label">合同沟通</span>
-                          </label>
-                          <label class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="state" value="3">
-                            <span class="form-check-label">请款沟通</span>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                   
-                    
-                    <div class="col-lg-12 mb-3">
-                      <label class="form-label" style="font-weight: bold;">沟通内容</label>
-                      <textarea rows="5" class="form-control" placeholder="Here can be your description" name="content"></textarea>
-                    </div>
-
-
-
-
-
-
-
-                  </div>
-
-
-                  
-
-                 
-                 
-
-                </div>
-                
-
-              </div>  
-              <div class="modal-footer">
-                <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
-                  取消
-                </a>
-                <a href="#" class="btn btn-primary" onclick="newcc()" >
-                  新增                 
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+       
 
 
 
@@ -1131,20 +1111,6 @@
 
 
 
-        <div class="modal modal-blur fade" id="modal-pic" tabindex="-1" role="dialog" aria-hidden="true">
-          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-body">
-                <img id="picshow" alt="">
-
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
-                
-              </div>
-            </div>
-          </div>
-        </div>
 
 
 

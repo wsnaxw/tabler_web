@@ -1354,8 +1354,251 @@ function toTextbr(text){
 }
 
 
-function operateTgkh(){
+function operateTgkh(talentId,id){
+
+
+
+
+    $("#operatediv").html(`              <div class="modal-header">
+                <h5 class="modal-title">推给客户</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+                <label class="form-label"  style="font-weight: bold;">备注信息</label>
+
+                <div class="input-group input-group-flat">
+                  <textarea rows="3" class="form-control" name="remark"></textarea>
+
+                </div>  
+                <input type="hidden" name="id" value="${id}">
+                <input type="hidden" name="projectId" value="${workId}">
+                 
+               
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn me-auto" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="tgkh()" >确定</button>
+              </div>`)
+
+
+
 
     $("#operate-modal").modal('show')
+}
 
+function tgkh(){
+    var data = {};
+
+      // 获取operatediv元素内部所有input和textarea元素
+      $('#operatediv input, #operatediv textarea').each(function () {
+        var name = $(this).attr('name');
+        var value = $(this).val();
+        if (name) {  // 只收集有name属性的input和textarea
+            data[name] = value;
+        }
+      });
+      console.log(JSON.stringify(data));
+      $("#operate-modal").modal('hide')
+      const options = {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'token':localStorage.getItem('token')
+        },
+        body: JSON.stringify(data),
+        };
+        var url = baseUri+'/project/recommendTalent';
+    fetch(url,options)
+        .then(response => response.json())
+        .then(json => {
+            showMessage(json.code)
+            basedatanumber(workId);
+            rxxx('',1)
+        }).catch((error)=>{            
+        });
+}
+
+
+function operateYyms(talentId,id){
+
+
+
+    $("#operatediv").html(`<div class="modal-header">
+                <h5 class="modal-title">预约面试</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+
+                <div class="card-body">
+
+                  <div class="row mb-3">
+                    <dt  class="col-3">面试类型</dt>
+                    <dl class="col-9">
+                      <select class="form-select"  name="way">
+                        <option selected value="1">线上面试</option>
+                        <option  value="0">线下面试</option>
+                      </select>
+                    </dl>
+
+                  
+                  </div>
+
+                  <div class="row mb-3">
+                    <dt  class="col-3">面试时间</dt>
+                    <dl class="col-3">
+                      <select class="form-select"  name="type">
+                        <option selected value="0">初试</option>
+                        <option  value="1">复试</option>
+                        <option  value="2">终试</option>
+                      </select>
+                    </dl>
+                    <dl class="col-6 input-icon">
+                      <input type="text" class="form-control dateinput dateicon je-mr25" name="time" id="mstime">
+                    <span class='input-icon-addon'><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-month"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg></span>
+
+                    </dl>
+                  </div>
+                </div>
+
+                <div class="row mb-3">
+                  <dt  class="col-3">面试地点</dt>
+                  <dl class="col-9">
+                    <input type="text" class="form-control" name="address">
+                  </dl>
+
+                </div>
+
+                <div class="row mb-3">
+                  <dt  class="col-3">备注信息</dt>
+                  <dl class="col-9">
+                    <textarea rows="5" class="form-control"  name="remark"></textarea>
+                  </dl>
+
+                </div>
+
+               <input type="hidden" name="id" value="${id}">
+                <input type="hidden" name="projectId" value="${workId}">
+                 
+               
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn me-auto" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="yyms()" >确定</button>
+              </div>`)
+
+
+
+
+    jeDate("#mstime",{
+        theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+        format: "YYYY-MM-DD hh:mm:ss"
+    });
+    
+    $("#operate-modal").modal('show')
+}
+
+function yyms(){
+
+
+      var data = {};
+
+      // 获取operatediv元素内部所有input和textarea元素
+      $('#operatediv input, #operatediv textarea,#operatediv select').each(function () {
+        var name = $(this).attr('name');
+        var value = $(this).val();
+        if (name) {  // 只收集有name属性的input和textarea
+            data[name] = value;
+ 
+        }
+      });
+      console.log(JSON.stringify(data));
+      $("#operate-modal").modal('hide')
+      const options = {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'token':localStorage.getItem('token')
+        },
+        body: JSON.stringify(data),
+        };
+        var url = baseUri+'/project/interview';
+    fetch(url,options)
+        .then(response => response.json())
+        .then(json => {
+            showMessage(json.code)
+            basedatanumber(workId);
+            rxxx('',1)
+        }).catch((error)=>{            
+        });
+
+}
+
+
+
+
+function operateKhms(talentId,id){
+
+
+
+
+    $("#operatediv").html(`              <div class="modal-header">
+                <h5 class="modal-title">客户面试</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+                <label class="form-label"  style="font-weight: bold;">备注信息</label>
+
+                <div class="input-group input-group-flat">
+                  <textarea rows="3" class="form-control" name="remark"></textarea>
+
+                </div>  
+                <input type="hidden" name="id" value="${id}">
+                <input type="hidden" name="projectId" value="${workId}">
+                 
+               
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn me-auto" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="khms()" >确定</button>
+              </div>`)
+
+
+
+
+    $("#operate-modal").modal('show')
+}
+
+function khms(){
+    var data = {};
+
+      // 获取operatediv元素内部所有input和textarea元素
+      $('#operatediv input, #operatediv textarea').each(function () {
+        var name = $(this).attr('name');
+        var value = $(this).val();
+        if (name) {  // 只收集有name属性的input和textarea
+            data[name] = value;
+        }
+      });
+      console.log(JSON.stringify(data));
+      $("#operate-modal").modal('hide')
+      const options = {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'token':localStorage.getItem('token')
+        },
+        body: JSON.stringify(data),
+        };
+        var url = baseUri+'/project/customerInterview';
+    fetch(url,options)
+        .then(response => response.json())
+        .then(json => {
+            showMessage(json.code)
+            basedatanumber(workId);
+            rxxx('',1)
+        }).catch((error)=>{            
+        });
 }
