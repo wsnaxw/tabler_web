@@ -307,159 +307,24 @@
 
         <!-- Page body -->
         <div class="page-body container-xl">
-
-
-
-
-
           <div class="container-xl" >
-
-
             <div class="row row-deck row-cards">
-
-
-
               <div class="col-lg-12">
 
-
-                
-
-
-
-
-
                 <div class="card">
-                
                   <div class="card-body" id="formdata">
-
                     <div class="row row-cards"> 
-                    
-
-                      <div class="col-lg-12">
-                        <div class="card">
-                          <div class="card-status-start bg-primary"> 
-
-                          </div>
-                          <div class="card-header">
-                            <h2 class="card-title" id="jobName" style="font-weight: bold;">市场总监</h2>&nbsp;&nbsp;<span  style="color: red;font-weight: bold;" id="jboSalary">20万</span>&nbsp;&nbsp;<x id="levelIcon"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#ff3d3d"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-flame"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12c2 -2.96 0 -7 -1 -8c0 3.038 -1.773 4.741 -3 6c-1.226 1.26 -2 3.24 -2 5a6 6 0 1 0 12 0c0 -1.532 -1.056 -3.94 -2 -5c-1.786 3 -2.791 3 -4 2z" /></svg>    
-                            </x>
-                            <div class="card-actions">
-                              <a href="#" class="btn btn-ghost-primary" onclick="showMessage(1)">
-                                新增职位 
-                              </a>
-                              
-                              <!-- <a href="#" class="btn btn-ghost-success"  id="isvip">
-                                申请认证
-                              </a> -->
-                              <a href="#" class="btn btn-ghost-info"  data-bs-toggle='modal' data-bs-target='#modal-edit' onclick="initEdit()">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path><path d="M16 5l3 3"></path></svg>
-                              </a>
-                            </div>
-                          </div>
+                      <div class="col-12"> 
+                        <div class="card placeholder-glow">
+                          <div class="ratio ratio-21x9 card-img-top placeholder"></div>
                           <div class="card-body">
-
-
-                            <div class="row mb-3">
-                              
-                              <div class="col-lg-3 row">
-                                <h3 class="col" id="customerName">成都巨像有限测试公司
-                                </h3>
-                                <small class="form-hint" id="jobCode">岗位编码：706344925460959232</small>
-                        
-                              </div>
-                              <div class="col-3">
-                                  
-                                <span id="jobAge">18 - 24 岁</span>
-                                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#000000"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-minus-vertical"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5v14" /></svg>
-                                <span id="jobEdu">本科</span>
-                                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#000000"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-minus-vertical"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5v14" /></svg>
-                                <span id="jobGender">性别不限</span>
-
-                              </div>
-
-              
-                              <div class="col-lg-6">
-                                发布时间：<span id="jobCreateTime"> 2020-01-01</span>
-                              </div>
-
-
-
-                            </div>
-
-                            <dl class="row mb-3">
-                              <dt class="col-1">职位类别:</dt>
-                              <dd class="col-2" id="jobType">销售岗位</dd>
-                              <dt class="col-1">招聘人数:</dt>
-                              <dd class="col-2" id="zprs">无</dd>
-                              <dt class="col-1">归属部门:</dt>
-                              <dd class="col-2" id="gsbm">无</dd>
-                              <dd class="col-2">${data.stateData}&nbsp;${state}</dd>
-                              
-
-
-                              <dt class="col-1">工作地点:</dt>
-                              <dd class="col-2" id="jobAddress">成都</dd>
-                            
-                              <dt class="col-1">状态:</dt>
-                              <dd class="col-2" id="jobState"><span>运行中</span>&nbsp;<a class="btn btn-outline-info btn-sm" onclick="signCustomer()">暂停</a></dd>
-                              <dt class="col-1">执行团队:</dt>
-                              <dd class="col-6">
-                                <div id="teamlist">
-                                
-                                  <span class="badge bg-green-lt" data-bs-toggle="modal" data-bs-target="#membermodal" onclick="newTeamList()">新增<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg> </span>
-
-                              </div>
-                             
-                              <dt class="col-2"></dt>
-                              <dt class="col-1">职位描述:</dt>
-                              <dd class="col-6">
-                      
-                              </dd>
-                            
-                             
-                            </dl>
-
-                           
-
+                            <div class="placeholder placeholder-xs col-10"></div>
+                            <div class="placeholder placeholder-xs col-11"></div>
                           </div>
                         </div>
                       </div>
-
-
-                      
-
-
-                     
-
-
-
                     </div>
-  
-                    
-
-
-
-                  </div>
-      
-      
-      
-      
-                 
-
-
-
-
-
-
-
-
-
-
-
-
-
-                  
-      
+                  </div>    
                 </div>
               </div>
 
@@ -468,43 +333,39 @@
 
 
               <div id="exploredtable">
-                
-              
-
                 <!-- -->
-
                 <div class="row row-cards" id="rxxxdiv" >
                   <div class="col-lg-12">
                     <div class="card card-body-scrollable">
                       <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs nav-fill" data-bs-toggle="tabs" role="tablist">
                           <li class="nav-item" role="presentation">
-                            <a id="yjph" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab" onclick="rxxx('999',1)">全部<span class="badge bg-yellow-lt ms-2" id="all">0</span></a>
+                            <a class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab" onclick="rxxx('999',1)">全部<span class="badge bg-yellow-lt ms-2" id="all">0</span></a>
                           </li>
                           <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx('0',1)">加项目<span class="badge bg-yellow-lt ms-2" id="jxm">0</span></a>
+                            <a  class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx('0',1)">加项目<span class="badge bg-yellow-lt ms-2" id="jxm">0</span></a>
                           </li>
                           <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(1,1)">给客户<span class="badge bg-yellow-lt ms-2" id="gkh">0</span></a>
+                            <a class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(1,1)">给客户<span class="badge bg-yellow-lt ms-2" id="gkh">0</span></a>
                           </li>
                           <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(5,1)">约面试<span class="badge bg-yellow-lt ms-2" id="yms">0</span></a>
+                            <a  class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(5,1)">约面试<span class="badge bg-yellow-lt ms-2" id="yms">0</span></a>
                           </li>
                           <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1"onclick="rxxx(6,1)">客户面试<span class="badge bg-yellow-lt ms-2" id="khms">0</span></a>
+                            <a  class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1"onclick="rxxx(6,1)">客户面试<span class="badge bg-yellow-lt ms-2" id="khms">0</span></a>
                           </li>
                           <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(8,1)">确认offer<span class="badge bg-yellow-lt ms-2" id="offer">0</span></a>
+                            <a  class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(8,1)">确认offer<span class="badge bg-yellow-lt ms-2" id="offer">0</span></a>
                           </li>
                           <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(9,1)">已入职<span class="badge bg-yellow-lt ms-2" id="yrz">0</span></a>
+                            <a  class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(9,1)">已入职<span class="badge bg-yellow-lt ms-2" id="yrz">0</span></a>
                           </li>
                           <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(10,1)">人选离职<span class="badge bg-yellow-lt ms-2" id="rxlz">0</span></a>
+                            <a  class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(10,1)">人选离职<span class="badge bg-yellow-lt ms-2" id="rxlz">0</span></a>
                           </li>
                       
                           <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(4,1)">放弃人选<span class="badge bg-yellow-lt ms-2" id="fqrx">0</span></a>
+                            <a  class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(4,1)">放弃人选<span class="badge bg-yellow-lt ms-2" id="fqrx">0</span></a>
                           </li>
                         </ul>
                       </div>
@@ -520,16 +381,13 @@
                               <th>当前公司</th> 
                               <th>当前职位</th>                        
                               <th>推荐时间</th>
-   
                               <th>操作</th>
                             </tr>
                           </thead>
                           <tbody id="rxxxdata">
                             <tr>
                               <td colspan="7" style="font-weight: bold;text-align: center;">暂无数据 </td>
-                            </tr>
-                            
-                      
+                            </tr>                   
                           </tbody>
                         </table>
                       </div>
@@ -544,10 +402,6 @@
     
                 </div>
 
-                <!-- -->
-
-                
-
                 <!--X-->
 
 
@@ -557,9 +411,6 @@
               
 
               <div id="rxxqdiv" style="display: none;">
-                
-              
-
                 <!-- -->
 
                 <div class="row row-cards"  >
@@ -576,50 +427,11 @@
 
                       <div class="card-body" >
                         
-
-
-
                         <div class="row row-cards"> 
-                    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                          
 
                           <div class="col-lg-6">
                             <div class="card">
-                              
-                     
                               <div class="card-body" id="talentDetailDiv">
-    
-    
-                                
     
                               </div>
                             </div>
@@ -631,7 +443,7 @@
                               <div class="card-body">
                                 <h3 class="card-title"> 
                                   <span style="font-weight: bold;">当前流程</span>
-                                  <small class="form-hint">点击内容以编辑</small></h3>
+                                  <small class="form-hint">双击当前内容以编辑</small></h3>
                                
                                 <ul class="steps steps-vertical" id="tpFlowDiv">
                                   
@@ -732,7 +544,7 @@
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content"  id="operatediv">
               <div class="modal-header">
-                <h5 class="modal-title">预约面试</h5>
+                <h5 class="modal-title">确认offer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
@@ -740,48 +552,122 @@
 
                 <div class="card-body">
 
+                 
+
                   <div class="row mb-3">
-                    <dt  class="col-3">面试类型</dt>
-                    <dl class="col-9">
-                      <select class="form-select"  name="way">
-                        <option selected value="1">线上面试</option>
-                        <option  value="0">线下面试</option>
-                      </select>
-                    </dl>
+                    <div class="col-6">
+                      <label class="form-label" style="font-weight: bolder;">offer时间</label>
+                      <div class="input-icon">
+                        <input type="text" class="form-control dateinput dateicon je-mr25" name="time" id="mstime" autocomplete="off">
+                        <span class='input-icon-addon'><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-month"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg></span>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <label class="form-label" style="font-weight: bolder;">入职时间</label>
+                      <div class="input-icon">
+                        <input type="text" class="form-control dateinput dateicon je-mr25" name="time" id="mstime" autocomplete="off">
+                        <span class='input-icon-addon'><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-month"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg></span>
+                      </div>
+                    </div>
+                  </div>
 
                   
+                  <div class="row mb-3" >
+                    <div class="col-4">
+                      <label class="form-label" style="font-weight: bolder;">年薪</label>
+                      <div class="input-group input-group-flat">
+                        <input type="text" class="form-control" autocomplete="off">
+                        <span class="input-group-text">
+                          <kbd>万</kbd>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <label class="form-label" style="font-weight: bolder;">预售服务费</label>
+                      <div class="input-group input-group-flat">
+                        <input type="text" class="form-control" autocomplete="off">
+                        <span class="input-group-text">
+                          <kbd>元</kbd>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <label class="form-label" style="font-weight: bolder;">保用期</label>
+                      <div class="input-group input-group-flat">
+                        <input type="number" class="form-control" autocomplete="off">
+                        <span class="input-group-text">
+                          <kbd>月</kbd>
+                        </span>
+                      </div>
+                    </div>
                   </div>
 
-                  <div class="row mb-3">
-                    <dt  class="col-3">面试时间</dt>
-                    <dl class="col-3">
+
+                  <div class="mb-3">
+                    <div class="form-label" style="font-weight: bolder;">收费方式</div>
+                    <div>
+                      <label class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="radios-inline" checked="">
+                        <span class="form-check-label">按固定比例收费</span>
+                      </label>
+                      <label class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="radios-inline">
+                        <span class="form-check-label">按固定金额收费</span>
+                      </label>
+                      
+                    </div>
+                  </div>
+         
+           
+                  
+                  <div class="row ">
+                    <dt  class="col-3">税率</dt>
+                    <dl class="col-9">
                       <select class="form-select"  name="type">
-                        <option selected value="0">初试</option>
-                        <option  value="1">复试</option>
-                        <option  value="2">终试</option>
+                        <option  value="0">0%</option>
+                        <option  value="1">1%</option>
+                        <option selected  value="2">3%</option>
+                        <option  value="2">6%</option>
                       </select>
                     </dl>
-                    <dl class="col-6">
-                      <input type="text" class="form-control" name="time" id="mst埃索达ime">
-                    </dl>
                   </div>
-                </div>
 
-                <div class="row mb-3">
-                  <dt  class="col-3">面试地点</dt>
-                  <dl class="col-9">
-                    <input type="text" class="form-control" name="address">
-                  </dl>
+                  <div class="row mb-3" >
+                    <div class="col-6" >
+                      <label class="form-label" style="font-weight: bolder;">固定比例</label>
+                      <div class="input-group" >
+                        <input type="text" class="form-control" autocomplete="off"  >
+                        <span class="input-group-text" >
+                          %
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <label class="form-label" style="font-weight: bolder;">固定金额</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control" autocomplete="off" disabled>
+                        <span class="input-group-text">
+                          元
+                        </span>
+                      </div>
+                    </div>
+                    
+                  </div>
 
-                </div>
 
-                <div class="row mb-3">
-                  <dt  class="col-3">面试地点</dt>
-                  <dl class="col-9">
+                  <div class="row mb-3">
+                   
+                    <label class="form-label" style="font-weight: bolder;">备注</label>
                     <textarea rows="5" class="form-control" placeholder="Here can be your description" name="remark"></textarea>
-                  </dl>
 
-                </div>
+                  
+                 
+                  </div>
+    
+
+
+
+
 
                 <input type="hidden" name="id" value="">
                 <input type="hidden" name="projectId" value="">
@@ -790,7 +676,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn me-auto" data-bs-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" onclick="yyms()" >确定</button>
+                <button type="button" class="btn btn-primary" onclick="offer()" >确定</button>
               </div>
             </div>
           </div>
@@ -799,8 +685,7 @@
    
 
 
-
-        <div class="modal modal-blur fade" id="membermodal" tabindex="-1" role="dialog" aria-hidden="true" >
+        <div class="modal modal-blur fade" id="membermodal" tabindex="-1" aria-hidden="true" >
           <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -809,22 +694,7 @@
               </div>
               <div class="modal-body">
 
-                
-                <div class="mb-3">
-                  <label class="form-label">职位管理权限</label>
-                  <div>
-                    <label class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="jobManage" value="1" checked>
-                      <span class="form-check-label">有职位管理权限</span>
-                    </label>
-                    <label class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="jobManage" value="2" >
-                      <span class="form-check-label">无职位管理权限</span>
-                    </label>
-                  </div>
-                  <small class="form-hint">默认不选择则都统一为有职位管理权限</small>
-                </div>
-               
+         
 
 
                 <div class="mb-3">

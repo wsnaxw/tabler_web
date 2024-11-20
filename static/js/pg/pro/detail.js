@@ -2,10 +2,10 @@ $(function(){
     workId = getParameterByName('workId');
     //  数据填充
     basedatanumber(workId)
-    // 基本信息
+  
+     // 基本信息
     baseinfo(workId)
-    // 团队成员
-    teamlist(workId)
+
     rxxx('',1)
     // $('#rxxqdiv').hide();
 
@@ -59,7 +59,6 @@ function rxxx(state,pageNo){
         state1 =state;
     }
 
-    console.log(isForward)
     var data={};
     if(state==null||state==undefined||state==''){
         data ={'projectId':workId ,'pageNo':pageNo}
@@ -67,7 +66,6 @@ function rxxx(state,pageNo){
         data ={ 'state': state,'projectId':workId,'pageNo':pageNo}
     }
 
-    console.log(isForward)
 
     const options = {
         method: 'POST',
@@ -197,7 +195,7 @@ function rxxx(state,pageNo){
                 $("#rxxxdata").html(str)  
                 
                 if(state == null)state='';
-                console.log('state',state);
+          
                 var pageCount = json.data.count
                 
 
@@ -311,7 +309,6 @@ function rxxx(state,pageNo){
               </tr>`) 
             }
 
-            console.log(isForward)
 
             if(isForward )document.getElementById('rxxxdata').scrollIntoView({ behavior: 'smooth' });
         }).catch((error)=>{
@@ -356,6 +353,7 @@ function basedatanumber(pid){
         console.error('获取数据失败:', error);
     });
 
+ 
 
 
 }
@@ -495,7 +493,7 @@ function baseinfo(workId){
                             </div>
                             <dl class="row mb-3">
                               <dt class="col-1">职位类别:</dt>
-                              <dd class="col-2" id="jobType">${toStr(data.requireAgeS)}</dd>
+                              <dd class="col-2" >${toStr(data.requireAgeS)}</dd>
                               <dt class="col-1">招聘人数:</dt>
                               <dd class="col-2" >${data.recruitNum}</dd>
                               <dt class="col-1">归属部门:</dt>
@@ -522,6 +520,8 @@ function baseinfo(workId){
                     </div>`
             $('#formdata').html(str)
                
+
+            teamlist(workId)
         } catch (error) {
             
         }
@@ -530,6 +530,9 @@ function baseinfo(workId){
         // 处理错误
         console.error('获取数据失败:', error);
     });
+
+      // 团队成员
+ 
 
 }
 
@@ -546,10 +549,9 @@ function teamlist(customerId){
             let str =''
 
             let newteammember=     
-            ' <span class="badge bg-green-lt" data-bs-toggle="modal" data-bs-target="#membermodal" onclick="newTeamList()">新增'
+            ' <span class="badge bg-green-lt" onclick="newTeamList()">新增'
             +'<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg> </span>'  
        
-            console.log(data)
             if(data.list!=null||data.list.length>0){
                 
                
@@ -588,6 +590,11 @@ function teamlist(customerId){
 
 
 function newTeamList(){
+
+    $("#membermodal").modal('show')
+    
+    $("#operate-modal").modal('show')
+
 
 }
 
@@ -761,7 +768,6 @@ inputElements.forEach(function(input) {
 
 
 }
-
 function showMessage(type,text) {
     const messageElement = document.createElement('div');
     if(type==0||type==='success'){
@@ -777,6 +783,11 @@ function showMessage(type,text) {
     }else if(type==2||type==='error'){
         messageElement.className = 'message visible alert alert-warning';
         if(text==null)text='异常！！！';
+
+        messageElement.textContent = text;
+    }else if(type==9||type==='error'){
+        messageElement.className = 'message visible alert alert-warning';
+        if(text==null)text='请规范操作！！！';
 
         messageElement.textContent = text;
     }else{
@@ -1304,7 +1315,7 @@ function checkDetail(tanlentId,pid){
 
                     let str=``
                     if(i==0){
-                        str =`<li class="step-item ">
+                        str =`<li class="step-item" ondblclick='edittpflow("${o.id}","${pid}")'>
                                     <div class="h4 m-0" style="color: red;">${state1}</div>
                                     <div class="text-secondary">${o.createTime}</div>
                                     <div style="border:black">
@@ -1312,7 +1323,7 @@ function checkDetail(tanlentId,pid){
                                     </div>
                                   </li>`;
                     }else{
-                         str =`<li class="step-item ">
+                         str =`<li class="step-item" ondblclick='edittpflow("${o.id}","${pid}")'>
                                     <div class="h4 m-0">${state1}</div>
                                     <div class="text-secondary">${o.createTime}</div>
                                     <div style="border:black">
@@ -1320,7 +1331,7 @@ function checkDetail(tanlentId,pid){
                                     </div>
                                   </li>`;
                     }
-                 
+                    sessionStorage.setItem(o.id,o.remark);
                               
                     datastr+=str;
 
@@ -1343,6 +1354,71 @@ function checkDetail(tanlentId,pid){
 }
 
 
+function edittpflow(id,pid){
+
+    let str =    sessionStorage.getItem(id);
+
+    $("#operatediv").html(`              <div class="modal-header">
+        <h5 class="modal-title">编辑备注信息</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <label class="form-label"  style="font-weight: bold;">备注信息</label>
+
+        <div class="input-group input-group-flat">
+          <textarea rows="3" class="form-control" name="remark">${str}</textarea>
+
+        </div>  
+        <input type="hidden" name="id" value="${id}">
+         <input type="hidden" name="projectId" value="${workId}">
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn me-auto" data-bs-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" onclick="edittf(${pid})" >确定</button>
+      </div>`)
+
+
+
+
+$("#operate-modal").modal('show')
+                              
+}
+
+
+function edittf(pid){
+    var data = {};
+
+    // 获取operatediv元素内部所有input和textarea元素
+    $('#operatediv input, #operatediv textarea').each(function () {
+      var name = $(this).attr('name');
+      var value = $(this).val();
+      if (name) {  // 只收集有name属性的input和textarea
+          data[name] = value;
+      }
+    });
+
+    $("#operate-modal").modal('hide')
+    const options = {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      'token':localStorage.getItem('token')
+      },
+      body: JSON.stringify(data),
+      };
+      var url = baseUri+'/project/updateTPFlow';
+  fetch(url,options)
+      .then(response => response.json())
+      .then(json => {
+          showMessage(json.code);
+         
+          checkDetail(pid,pid);
+      }).catch((error)=>{       
+        console.log(error);     
+      });
+}
 
 function toTextbr(text){
     if(text==null)return '';
@@ -1601,4 +1677,10 @@ function khms(){
             rxxx('',1)
         }).catch((error)=>{            
         });
+}
+
+
+function operateOffer(){
+    
+    $("#operate-modal").modal('show')
 }
