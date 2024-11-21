@@ -49,9 +49,7 @@
       
 
     </script>
-<style>
 
-</style>
   </head>
   <body  id="webBody" class="layout-fluid">
     <div class="page">
@@ -432,256 +430,34 @@
                           <div class="col-lg-6">
                             <div class="card">
                               <div class="card-body" id="talentDetailDiv">
-    
                               </div>
                             </div>
                           </div>
-
-
                           <div class="col-lg-6">
                             <div class="card">
                               <div class="card-body">
                                 <h3 class="card-title"> 
                                   <span style="font-weight: bold;">当前流程</span>
                                   <small class="form-hint">双击当前内容以编辑</small></h3>
-                               
                                 <ul class="steps steps-vertical" id="tpFlowDiv">
-                                  
                                 </ul>
-                              </div>
-                     
-                              
+                              </div>            
                             </div>
                           </div>
-
-                          
-    
-    
-                         
-    
-    
-    
                         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                       </div>
                     </div>
                   </div>
-    
                 </div>
-
-                <!-- -->
-
-                
-
                 <!--X-->
-
-
               </div>
-
-
-
-
-
-
-
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-            
-
-
-
-            
-
             
           </div>
         </div>
         
 
-        <div class="modal modal-blur fade" id="operate-modal" tabindex="-1" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content"  id="operatediv">
-              <div class="modal-header">
-                <h5 class="modal-title">确认offer</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-
-
-                <div class="card-body">
-
-                 
-
-                  <div class="row mb-3">
-                    <div class="col-6">
-                      <label class="form-label" style="font-weight: bolder;">offer时间</label>
-                      <div class="input-icon">
-                        <input type="text" class="form-control dateinput dateicon je-mr25" name="time" id="mstime" autocomplete="off">
-                        <span class='input-icon-addon'><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-month"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg></span>
-                      </div>
-                    </div>
-                    <div class="col-6">
-                      <label class="form-label" style="font-weight: bolder;">入职时间</label>
-                      <div class="input-icon">
-                        <input type="text" class="form-control dateinput dateicon je-mr25" name="time" id="mstime" autocomplete="off">
-                        <span class='input-icon-addon'><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-month"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg></span>
-                      </div>
-                    </div>
-                  </div>
-
-                  
-                  <div class="row mb-3" >
-                    <div class="col-4">
-                      <label class="form-label" style="font-weight: bolder;">年薪</label>
-                      <div class="input-group input-group-flat">
-                        <input type="text" class="form-control" autocomplete="off">
-                        <span class="input-group-text">
-                          <kbd>万</kbd>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <label class="form-label" style="font-weight: bolder;">预售服务费</label>
-                      <div class="input-group input-group-flat">
-                        <input type="text" class="form-control" autocomplete="off">
-                        <span class="input-group-text">
-                          <kbd>元</kbd>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <label class="form-label" style="font-weight: bolder;">保用期</label>
-                      <div class="input-group input-group-flat">
-                        <input type="number" class="form-control" autocomplete="off">
-                        <span class="input-group-text">
-                          <kbd>月</kbd>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <div class="mb-3">
-                    <div class="form-label" style="font-weight: bolder;">收费方式</div>
-                    <div>
-                      <label class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="radios-inline" checked="">
-                        <span class="form-check-label">按固定比例收费</span>
-                      </label>
-                      <label class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="radios-inline">
-                        <span class="form-check-label">按固定金额收费</span>
-                      </label>
-                      
-                    </div>
-                  </div>
-         
-           
-                  
-                  <div class="row ">
-                    <dt  class="col-3">税率</dt>
-                    <dl class="col-9">
-                      <select class="form-select"  name="type">
-                        <option  value="0">0%</option>
-                        <option  value="1">1%</option>
-                        <option selected  value="2">3%</option>
-                        <option  value="2">6%</option>
-                      </select>
-                    </dl>
-                  </div>
-
-                  <div class="row mb-3" >
-                    <div class="col-6" >
-                      <label class="form-label" style="font-weight: bolder;">固定比例</label>
-                      <div class="input-group" >
-                        <input type="text" class="form-control" autocomplete="off"  >
-                        <span class="input-group-text" >
-                          %
-                        </span>
-                      </div>
-                    </div>
-                    <div class="col-6">
-                      <label class="form-label" style="font-weight: bolder;">固定金额</label>
-                      <div class="input-group">
-                        <input type="text" class="form-control" autocomplete="off" disabled>
-                        <span class="input-group-text">
-                          元
-                        </span>
-                      </div>
-                    </div>
-                    
-                  </div>
-
-
-                  <div class="row mb-3">
-                   
-                    <label class="form-label" style="font-weight: bolder;">备注</label>
-                    <textarea rows="5" class="form-control" placeholder="Here can be your description" name="remark"></textarea>
-
-                  
-                 
-                  </div>
-    
-
-
-
-
-
-                <input type="hidden" name="id" value="">
-                <input type="hidden" name="projectId" value="">
-                 
-               
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn me-auto" data-bs-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" onclick="offer()" >确定</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
+        
    
 
 
@@ -726,127 +502,138 @@
         </div>
 
 
-        <div class="modal modal-blur fade" id="modal-sign" tabindex="-1" role="dialog" aria-hidden="true">
-          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
+
+
+
+        <div class="modal modal-blur fade" id="operate-modal" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content"  id="operatediv">
               <div class="modal-header">
-                <h5 class="modal-title">申请签约</h5>
+                <h5 class="modal-title">确认offer</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <div class="row mb-3">
-                  <div class="col-lg-6">
-                    <label class="form-label">签约比例</label>
 
-                    <div class="input-group input-group-flat">
-                      <input type="number" class="form-control" name="signPercent"  placeholder="请输入签约比例">
-                      <span class="input-group-text">
-                        <kbd>%</kbd>
-                      </span>
-                      <div class="invalid-feedback">不能为空</div>
 
-                    </div>  
-                  </div>
-                  <div class="col-lg-6">
-                    <label class="form-label">保用期</label>
-                    <div class="input-group input-group-flat">
-                      <input type="number" class="form-control" name="quotTime"  placeholder="请输入保用期月限">
-                      <span class="input-group-text">
-                        <kbd>月</kbd>
-                      </span>
-                      <div class="invalid-feedback">不能为空</div>
-                    </div>
-                   
+                <div class="card-body">
 
-                  </div>
                  
-                </div>
-        
-                <label class="form-label">是否支付首付款</label>
-                <div class="form-selectgroup-boxes row mb-3">
-                  <div class="col-lg-6">
-                    <label class="form-selectgroup-item">
-                      <input type="radio" name="isDownPayment" value="0" onclick="check1()" class="form-selectgroup-input" >
-                      <span class="form-selectgroup-label d-flex align-items-center p-3">
-                        <span class="me-3">
-                          <span class="form-selectgroup-check"></span>
-                        </span>
-                        <span class="form-selectgroup-label-content">
-                          <span class="form-selectgroup-title strong mb-1">否</span>
-                          <span class="d-block text-secondary">无需填写</span>
-                        </span>
-                      </span>
-                    </label>
+
+                  <div class="row mb-3">
+                    <div class="col-6">
+                      <label class="form-label" style="font-weight: bolder;">offer时间</label>
+                      <div class="input-icon">
+                        <input type="text" class="form-control dateinput dateicon je-mr25" name="offerDate" id="offertime" autocomplete="off">
+                        <span class='input-icon-addon'><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-month"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg></span>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <label class="form-label" style="font-weight: bolder;">入职时间</label>
+                      <div class="input-icon">
+                        <input type="text" class="form-control dateinput dateicon je-mr25" name="workDate" id="rztime" autocomplete="off">
+                        <span class='input-icon-addon'><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-month"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg></span>
+                      </div>
+                    </div>
                   </div>
-                  <div class="col-lg-6">
-                    <label class="form-selectgroup-item">
-                      <input type="radio" name="isDownPayment" value="1"  onclick="check2()"class="form-selectgroup-input" checked>
-                      <span class="form-selectgroup-label d-flex align-items-center p-3">
-                        <span class="me-3">
-                          <span class="form-selectgroup-check"></span>
-                        </span>
-                        <span class="form-selectgroup-label-content">
-                          <span class="form-selectgroup-title strong mb-1">是</span>
-                          <span class="d-block text-secondary">需要填写首付款金额</span>
-                        </span>
-                      </span>
-                    </label>
-                  </div>
-                </div>
-                <div class="row">
+
                   
-                  <div class="col-lg-6">
-                    <div class="mb-3">
-                      <label class="form-label">首付款</label>
+                  <div class="row mb-3" >
+                    <div class="col-4">
+                      <label class="form-label" style="font-weight: bolder;">年薪</label>
                       <div class="input-group input-group-flat">
-                        <input type="number" class="form-control" name="downPayment"  autocomplete="off" placeholder="首付款">
-                        
+                        <input type="text" class="form-control" name="salary" autocomplete="off">
+                        <span class="input-group-text">
+                          <kbd>万</kbd>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <label class="form-label" style="font-weight: bolder;">预收服务费</label>
+                      <div class="input-group input-group-flat">
+                        <input type="text" class="form-control" name="needPayment" autocomplete="off">
                         <span class="input-group-text">
                           <kbd>元</kbd>
                         </span>
-                        <div class="invalid-feedback">不能为空</div>
-
-                      </div>  
-                     
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <label class="form-label" style="font-weight: bolder;">保用期</label>
+                      <div class="input-group input-group-flat">
+                        <input type="number" class="form-control" name="quot" autocomplete="off">
+                        <span class="input-group-text">
+                          <kbd>月</kbd>
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-6 mb-3">
-                   
-                    <label class="form-label">合同期限</label>
-                    <div class="input-group input-group-flat">
-                      <input type="text" class="jeinpbox form-control" name="dayRange"id="ymd033" placeholder="YYYY-MM-DD ~ YYYY-MM-DD">  
-                      <div class="invalid-feedback">不能为空</div>
-                    </div> 
-                   
-                     
+
+
+                  <div class="mb-3">
+                    <div class="form-label" style="font-weight: bolder;">收费方式</div>
+                    <div>
+                      <label class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="chargeWay" checked="" value="0">
+                        <span class="form-check-label">按固定比例收费</span>
+                      </label>
+                      <label class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="chargeWay" value="1">
+                        <span class="form-check-label">按固定金额收费</span>
+                      </label>
+                      
+                    </div>
                   </div>
-                 
-                </div>
+         
+           
+                  
+                  <div class="row ">
+                    <dt  class="col-3">税率</dt>
+                    <dl class="col-9">
+                      <select class="form-select"  name="feeRate">
+                        <option  value="0%">0%</option>
+                        <option  value="1%">1%</option>
+                        <option selected  value="3%">3%</option>
+                        <option  value="6%">6%</option>
+                      </select>
+                    </dl>
+                  </div>
 
-                <div class="row">
-                  <h3 class="card-title">文件上传  <span id="fileerror" style="color: red;display: none;">&nbsp;&nbsp; 文件不能为空！</span></h3>
-                    <form class="dropzone" id="dropzone-multiple"  autocomplete="off" novalidate>
-                   
-                    </form>
-                </div>
+                  <div class="row mb-3" >
+                    <div class="col-6" >
+                      <label class="form-label" style="font-weight: bolder;">固定比例</label>
+                      <div class="input-group" >
+                        <input type="text" class="form-control" name="rate" autocomplete="off"  >
+                        <span class="input-group-text" >
+                          %
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <label class="form-label" style="font-weight: bolder;">固定金额</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control" name="ration" autocomplete="off" disabled>
+                        <span class="input-group-text">
+                          元
+                        </span>
+                      </div>
+                    </div>
+                    
+                  </div>
 
-              </div>  
+
+                  <div class="row mb-3">
+                    <label class="form-label" style="font-weight: bolder;">备注</label>
+                    <textarea rows="5" class="form-control" placeholder="Here can be your description" name="remark"></textarea>
+                  </div>
+                <input type="hidden" name="id" value="">
+                <input type="hidden" name="projectId" value="">
+              </div>
               <div class="modal-footer">
-                <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
-                  取消
-                </a>
-                <a href="#" class="btn btn-primary" onclick="signC()" >
-                  确认签约                  
-                </a>
+                <button type="button" class="btn me-auto" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="offer()" >确定</button>
               </div>
             </div>
           </div>
         </div>
-
-
-
 
         <div class="modal modal-blur fade" id="modal-edit" tabindex="-1" role="dialog" aria-hidden="true">
           <div class="modal-dialog modal-lg modal-dialog-centered" role="document">

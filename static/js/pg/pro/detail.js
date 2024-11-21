@@ -441,19 +441,19 @@ function baseinfo(workId){
                 requireEduStr = '不限';
           }
    
-
+        //   0 草稿 1 运作、2结束、3暂停、4关闭
           let state=''
           if(data.state==0){
 
-           state =`<a class="btn btn-outline-info btn-sm" onclick="signCustomer()">直接发布</a>`;
+           state =`<a class="btn btn-outline-info btn-sm" onclick="changeCState(1)">直接发布</a>`;
 
 
         }else if(data.state==1){
-            state =`<a class="btn btn-outline-secondary btn-sm" onclick="changeCState(2)">暂停</a><a class="btn btn-outline-danger btn-sm" onclick="changeCState(3)">结束</a>`;
+            state =`<a class="btn btn-outline-secondary btn-sm" onclick="changeCState(3)">暂停</a><a class="btn btn-outline-danger btn-sm" onclick="changeCState(4)">关闭</a>`;
 
 
         }else if(data.state==3){
-            state =`<a class="btn btn-outline-success btn-sm" onclick="changeCState(1)">恢复</a><a class="btn btn-outline-danger btn-sm" onclick="changeCState(3)">终止</a>`;
+            state =`<a class="btn btn-outline-success btn-sm" onclick="changeCState(1)">恢复</a><a class="btn btn-outline-danger btn-sm" onclick="changeCState(2)">结束</a>`;
 
 
         
@@ -593,7 +593,7 @@ function newTeamList(){
 
     $("#membermodal").modal('show')
     
-    $("#operate-modal").modal('show')
+    // $("#operate-modal").modal('show')
 
 
 }
@@ -613,16 +613,16 @@ function deletemember(uid){
             'Content-Type': 'application/json',
             'token':localStorage.getItem('token')
             },
-            body: JSON.stringify({ 'appUserId': uid,'customerId':csid }),
+            body: JSON.stringify({ 'appUserId': uid,'projectId':workId }),
             };
 
-            var url = baseUri+'/customer/delTeamPerson';
+            var url = baseUri+'/project/delTeamPerson';
         fetch(url,options)
             .then(response => response.json())
             .then(json => {
     
                 showMessage(json.code)
-                teamlist(csid)
+                teamlist(workId)
             }).catch((error)=>{
                 
             });
@@ -645,8 +645,10 @@ function toStr(value) {
 }
 
 
+let tomselectmember;
+
 document.addEventListener("DOMContentLoaded", function () {
-    new TomSelect('#addTeamMember',{
+    tomselectmember= new TomSelect('#addTeamMember',{
         valueField: 'userId',
         labelField: 'name',
         searchField: 'name',
@@ -705,6 +707,13 @@ function addTeamList(){
             break; 
         }
     }
+    //获取tomselect得某项json值
+
+// console.log(tomselectmember.options[selectElement.value].name);
+
+// console.log(tomselectmember);
+
+
 
     const options = {
         method: 'POST',
@@ -712,24 +721,24 @@ function addTeamList(){
         'Content-Type': 'application/json',
         'token':localStorage.getItem('token')
         },
-        body: JSON.stringify({ 'appUserId': selectElement.value,'customerId':csid,"jobManage":jobManage }),
+        body: JSON.stringify({ 'appUserId': selectElement.value,'appUserName':tomselectmember.options[selectElement.value].name,"projectId":workId }),
         };
 
-        var url = baseUri+'/customer/addTeamPerson';
+        var url = baseUri+'/project/addTeamPerson';
     fetch(url,options)
         .then(response => response.json())
         .then(json => {
             // console.log(json)
             if(json.code==0){
                 
-        teamlist(csid)
+        teamlist(workId)
         showMessage(0,'添加成功！！')
             }
 
 
 
         }).catch((error)=>{
-            callback();
+            console.log(error)
         });
 
 
@@ -902,6 +911,27 @@ function check2(){
 
 function changeCState(state){
 
+    let url1 ;
+    switch (state) {
+        case 1:
+            url1 = 'runProject';
+          break;
+        case 3:
+            url1 = 'pauseProject';
+          break;
+        case 4:
+            url1 = 'closeProject';
+          break;
+        case 2:
+            url1 = 'finishProject';
+          break;
+        
+      }
+
+    //   0 草稿 1 运作、2结束、3暂停、4关闭
+    
+
+
     
     var isConfirmed = confirm("是否变更状态？");
 
@@ -912,17 +942,17 @@ function changeCState(state){
             'Content-Type': 'application/json',
             'token':localStorage.getItem('token')
             },
-            body: JSON.stringify({ 'state': state,'customerId':csid }),
+            body: JSON.stringify({ 'projectId':workId }),
             };
     
-            var url = baseUri2+'/customer/changeCustomerState';
+            var url = baseUri+'/project/'+url1;
         fetch(url,options)
             .then(response => response.json())
             .then(json => {
                 // console.log(json)
                 if(json.code==0){
                     
-            baseinfo(csid)
+            baseinfo(workId)
             showMessage(0,'变更成功')
                 }
     
@@ -1680,7 +1710,202 @@ function khms(){
 }
 
 
-function operateOffer(){
+function operateOffer(talentId,id){
+
+    $("#operatediv").html(` 
+              <div class="modal-header">
+                <h5 class="modal-title">确认offer</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+
+                <div class="card-body">
+
+                 
+
+                  <div class="row mb-3">
+                    <div class="col-6">
+                      <label class="form-label" style="font-weight: bolder;">offer时间</label>
+                      <div class="input-icon">
+                        <input type="text" class="form-control dateinput dateicon je-mr25" name="offerDate" id="offertime" autocomplete="off">
+                        <span class='input-icon-addon'><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-month"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg></span>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <label class="form-label" style="font-weight: bolder;">入职时间</label>
+                      <div class="input-icon">
+                        <input type="text" class="form-control dateinput dateicon je-mr25" name="workDate" id="rztime" autocomplete="off">
+                        <span class='input-icon-addon'><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-calendar-month"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z" /><path d="M16 3v4" /><path d="M8 3v4" /><path d="M4 11h16" /><path d="M7 14h.013" /><path d="M10.01 14h.005" /><path d="M13.01 14h.005" /><path d="M16.015 14h.005" /><path d="M13.015 17h.005" /><path d="M7.01 17h.005" /><path d="M10.01 17h.005" /></svg></span>
+                      </div>
+                    </div>
+                  </div>
+
+                  
+                  <div class="row mb-3" >
+                    <div class="col-4">
+                      <label class="form-label" style="font-weight: bolder;">年薪</label>
+                      <div class="input-group input-group-flat">
+                        <input type="text" class="form-control" name="salary" autocomplete="off">
+                        <span class="input-group-text">
+                          <kbd>万</kbd>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <label class="form-label" style="font-weight: bolder;">预收服务费</label>
+                      <div class="input-group input-group-flat">
+                        <input type="text" class="form-control" name="needPayment" autocomplete="off">
+                        <span class="input-group-text">
+                          <kbd>元</kbd>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <label class="form-label" style="font-weight: bolder;">保用期</label>
+                      <div class="input-group input-group-flat">
+                        <input type="number" class="form-control" name="quot" value='6' autocomplete="off">
+                        <span class="input-group-text">
+                          <kbd>月</kbd>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <div class="mb-3">
+                    <div class="form-label" style="font-weight: bolder;">收费方式</div>
+                    <div>
+                      <label class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="chargeWay" checked="" value="0">
+                        <span class="form-check-label">按固定比例收费</span>
+                      </label>
+                      <label class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="chargeWay" value="1">
+                        <span class="form-check-label">按固定金额收费</span>
+                      </label>
+                      
+                    </div>
+                  </div>
+         
+           
+                  
+                  <div class="row ">
+                    <dt  class="col-3">税率</dt>
+                    <dl class="col-9">
+                      <select class="form-select"  name="feeRate">
+                        <option  value="0%">0%</option>
+                        <option  value="1%">1%</option>
+                        <option selected  value="3%">3%</option>
+                        <option  value="6%">6%</option>
+                      </select>
+                    </dl>
+                  </div>
+
+                  <div class="row mb-3" >
+                    <div class="col-6" >
+                      <label class="form-label" style="font-weight: bolder;">固定比例</label>
+                      <div class="input-group" >
+                        <input type="text" class="form-control" name="rate" value='20' autocomplete="off"  >
+                        <span class="input-group-text" >
+                          %
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <label class="form-label" style="font-weight: bolder;">固定金额</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control" name="ration" autocomplete="off" disabled>
+                        <span class="input-group-text">
+                          元
+                        </span>
+                      </div>
+                    </div>
+                    
+                  </div>
+
+
+                  <div class="row mb-3">
+                    <label class="form-label" style="font-weight: bolder;">备注</label>
+                    <textarea rows="5" class="form-control" placeholder="Here can be your description" name="remark"></textarea>
+                  </div>
+                <input type="hidden" name="id" value="${id}">
+                <input type="hidden" name="projectId" value="${workId}">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn me-auto" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="offer()" >确定</button>
+              </div>
+            `)
+
+
+
+
+
+
+    jeDate("#offertime",{
+        theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+        format: "YYYY-MM-DD"
+    });
+
+    
+    jeDate("#rztime",{
+        theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+        format: "YYYY-MM-DD"
+    });
     
     $("#operate-modal").modal('show')
+}
+
+
+function offer(){
+
+    if(offerformcheck()){
+        console.log('成功')
+    }
+
+
+
+
+}
+
+function offerformcheck(){
+
+
+    let check =true;
+    
+    const divElement = document.getElementById("operatediv");
+
+
+    // 使用querySelectorAll选择div内的所有input元素
+    const elements = divElement.querySelectorAll('select, input,textarea');
+    // 存储获取到的值的对象
+    const values = {};
+  
+    elements.forEach((element) => {
+      // 获取元素的name属性作为键
+      const name = element.name || element.id || element.tagName.toLowerCase();
+      // 获取元素的值
+      const value = element.value;
+      // 将值存储到values对象中
+     
+  
+      if(element.type=='checkbox'||element.type=='radio'){
+        if(element.checked){
+          values[name] = value;
+        }
+        
+      }else{
+        values[name] = value;
+      }
+      
+  
+    });
+
+
+    console.log(values)
+
+
+
+    return check;
 }
