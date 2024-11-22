@@ -11,7 +11,20 @@ $(function(){
     // console.log('customerId:'+customerId)
     //默认进行分页数据查询
     getPage(1);
+   
 
+        
+    document.querySelectorAll('input[name="mystate"]').forEach(radio => {
+      radio.addEventListener('change', function() {
+        getPage(1);
+      });
+    });
+
+    document.querySelectorAll('input[name="gender"]').forEach(radio => {
+      radio.addEventListener('change', function() {
+        getPage(1);
+      });
+    });
 
 
 

@@ -6,6 +6,11 @@ $(function(){
     getPage(1);
 
 
+    document.querySelectorAll('input[name="state"]').forEach(radio => {
+      radio.addEventListener('change', function() {
+        getPage(1);
+      });
+    });
 
 
 })
@@ -79,7 +84,6 @@ function getPage(pageNo){
 
                     var o = obj.data.list[i];
 
-                    console.log(o)
 
                     let isNeedAlternate = '否';
                     let alternate = '无'
@@ -377,7 +381,7 @@ function formCheck(){
 
   });
 
-console.log(values)
+
 
 
 
@@ -534,7 +538,6 @@ function tgkh(){
           data[name] = value;
       }
     });
-    console.log(JSON.stringify(data));
     $("#operate-modal").modal('hide')
     const options = {
       method: 'POST',
@@ -648,7 +651,6 @@ function yyms(){
 
       }
     });
-    console.log(JSON.stringify(data));
     $("#operate-modal").modal('hide')
     const options = {
       method: 'POST',
@@ -716,7 +718,7 @@ function khms(){
           data[name] = value;
       }
     });
-    console.log(JSON.stringify(data));
+    // console.log(JSON.stringify(data));
     $("#operate-modal").modal('hide')
     const options = {
       method: 'POST',
@@ -996,7 +998,7 @@ function offerformcheck(){
 
 
   var inputElements = divElement.querySelectorAll('input:not([disabled])');
-  console.log(inputElements)
+  // console.log(inputElements)
   inputElements.forEach(function(input) {
       input.classList.remove('is-valid', 'is-invalid','is-valid-lite','is-invalid-lite');
       if(input.name == 'offerDate'||input.name =='workDate'||input.name =='salary'||input.name =='quot'){
@@ -1094,7 +1096,6 @@ function qrrz(){
 
       
     });
-    console.log(JSON.stringify(data));
     $("#operate-modal").modal('hide')
     const options = {
       method: 'POST',
@@ -1178,7 +1179,6 @@ function leave(){
           data[name] = value;
       }
     });
-    console.log(JSON.stringify(data));
     $("#operate-modal").modal('hide')
     const options = {
       method: 'POST',
@@ -1248,7 +1248,6 @@ function abandon(){
           data[name] = value;
       }
     });
-    console.log(JSON.stringify(data));
     $("#operate-modal").modal('hide')
     const options = {
       method: 'POST',
