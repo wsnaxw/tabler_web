@@ -509,9 +509,9 @@ function news(){
 
 
                 let jsonStr = JSON.stringify(o);
-                localStorage.removeItem(o.id)
+                sessionStorage.removeItem(o.id)
                 // 将JSON字符串存储到localStorage中
-                localStorage.setItem(o.id, jsonStr);
+                sessionStorage.setItem(o.id, jsonStr);
 
 
             });
@@ -535,7 +535,7 @@ function newspaper(key){
 
 
     // 从localStorage中获取JSON字符串
-let jsonStr = localStorage.getItem(key);
+let jsonStr = sessionStorage.getItem(key);
 
 // 将JSON字符串转换回对象
 let obj = JSON.parse(jsonStr);
