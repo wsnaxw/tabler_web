@@ -1,0 +1,870 @@
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta19
+* @link https://tabler.io
+* Copyright 2018-2023 The Tabler Authors
+* Copyright 2018-2023 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>新增人选</title>
+    <!-- CSS files -->
+    <script src="../../static/js/tabler.min.js"></script>
+    <link rel="stylesheet" href="../../static/css/tabler.min.css">
+    <link rel="stylesheet" href="../../static/css/base.css">
+    <link rel="stylesheet" href="../../static/css/tabler-vendors.min.css">
+    <link rel="icon" href="../../static/img/favicon.ico" type="image/x-icon" />
+    <script src="../../static/js/jquery.min.js"></script>
+    <script src="../../static/js/base.js?9527"></script>
+    <script src="../../static/js/watermark.js"></script>
+    <script src="../../static/js/pg/tl/add.js"></script>
+    <script>
+      function dark(){
+        let body = document.getElementById('webBody')
+        body.setAttribute("data-bs-theme","dark")
+      }
+
+      function light(){
+        let body = document.getElementById('webBody')
+        body.setAttribute("data-bs-theme","")
+      }
+
+    </script>
+
+  </head>
+  <body  id="webBody" class="layout-fluid">
+    <div class="page">
+
+
+      <!--      &lt;!&ndash; Sidebar &ndash;&gt;-->
+      
+      
+      <aside class="navbar navbar-vertical navbar-expand-lg"    >
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <h1 class="navbar-brand navbar-brand-autodark">
+            <a href="#" >
+              <img src="http://admin.fsfhr.com/banner.svg" width="110" height="32" alt="faithful" class="navbar-brand-image">
+            </a>
+          </h1>
+
+          <div class="collapse navbar-collapse"   id="sidebar-menu">
+            <ul class="navbar-nav pt-lg-3" id="menu">
+
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- navbar navbar-expand-md d-print-none d-none d-lg-flex -->
+      <!-- navbar navbar-expand-md d-print-none -->
+      <header class="navbar navbar-expand-md d-print-none d-none d-lg-flex fixed-top">
+        <div class="container-xl">
+
+
+
+          <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal p-0 pe-md-6">
+          </h1>
+          <div class="navbar-nav flex-row order-md-last">
+            <div class="nav-item d-none d-md-flex me-3">
+              <div class="btn-list">
+                <div class="input-icon">
+                    <span class="input-icon-addon">
+                      <!-- Download SVG icon from http://tabler-icons.io/i/search -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path d="M21 21l-6 -6"></path></svg>
+                    </span>
+                  <input type="text" value="" class="form-control" id="indexsearch" placeholder="客户名/人选名/项目名" aria-label="Search in website" data-listener-added_8ff64168="true">
+                </div>
+                <a onclick="indexSearch()" class="btn btn-blue" target="_blank" rel="noreferrer">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/brand-github -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"></path></svg>
+                  查询
+                </a>
+              </div>
+            </div>
+            <div class="d-none d-md-flex">
+              <a   onclick="dark()" class="nav-link px-0 hide-theme-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="Enable dark mode" data-bs-original-title="Enable dark mode">
+                <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path></svg>
+              </a>
+              <a onclick="light()" class="nav-link px-0 hide-theme-light" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="Enable light mode" data-bs-original-title="Enable light mode">
+                <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"></path></svg>
+              </a>
+              <div class="nav-item dropdown d-none d-md-flex me-3">
+                <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1" aria-label="Show notifications" onclick="usermessage()" data-bs-auto-close="outside">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/bell -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path><path d="M9 17v1a3 3 0 0 0 6 0v-1"></path></svg>
+                  <span class="badge bg-red"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
+                  <div class="card">
+                    <div class="card-header">
+                      <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                          <a href="#" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab" onclick="usermessage()">信箱</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <a href="#" class="nav-link" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab" onclick="usertrip()">行程</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="list-group list-group-flush list-group-hoverable">
+                      <div id="messagediv">
+                        <div class="list-group-item divide-y"  id="msgstr"  >
+                          <h3></h3>
+                        </div>
+                      </div>                      
+                      <div id="tripdiv">
+                        <div class="list-group-item divide-y" id="tripstr">
+                          <h3></h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="nav-item dropdown">
+              <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
+                <div class="d-none d-xl-block ps-2">
+                  <div id="userName">无</div>
+                  <div class="mt-1 small text-muted" id="userLevel">无</div>
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <a href="#" class="dropdown-item">个人中心</a>
+                <a href="#" class="dropdown-item">修改密码</a>
+                <div class="dropdown-divider"></div>
+                <a id="logOut" class="dropdown-item">退出</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+
+
+      <div class="page-wrapper">
+
+
+
+        <!-- Page header -->
+        <div class="page-header d-print-none">
+        </div>
+
+
+
+
+        <!-- Page body -->
+        <div class="page-body container-xl">
+
+
+
+
+
+          <div class="container-xl" >
+
+
+            <div class="row row-deck row-cards">
+
+
+
+
+              <div class="col-lg-12">
+                <div class="row row-cards">
+                  <div class="col-6">
+                    <form class="card">
+                      <div class="card-header">
+                        <div class="col">
+                          
+                        <h3 class="card-title">基本信息</h3>
+                        </div>
+
+                        <div class="col-auto ms-auto d-print-none">
+                          <div class="d-flex">
+                            <div class="me-3">
+                              <a href="#" class="btn btn-info">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                                清空
+                              </a>
+                            </div>
+                            <a href="#" onclick="baseInfoCheck()" class="btn btn-success">
+                              <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg>
+                              新增
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card-body" id="baseinfo">
+                        
+                        <div class="row row-cards">
+                          <div class="col-md-10">
+                            <div class="mb-3 row">
+                              <label class="col-3 form-label required" style="font-weight: bold;">客户名称</label>
+                              <div class="col">
+                                <input type="text" class="form-control " placeholder="客户名称" name="customerName" >
+                                <div class="invalid-feedback">名称不正确或不能为空！</div>
+                              </div>
+                              <small class="form-hint">客户名称必须以“有限公司、与限责任公司”结尾，如某集团有限公司、某有限责任公司</small>
+                            </div>
+                          </div>
+                          <div class="col-md-10">
+                            <div class="mb-3 row">
+                              <label class="col-3 form-label required" style="font-weight: bold;">对外展示名称</label>
+                              <div class="col">
+                                <input type="text" class="form-control" placeholder="对外展示名称" name="outName" >
+                                <div class="invalid-feedback">不能为空！</div>
+                              </div>
+                              
+                              <small class="form-hint">例：某能源发展公司、中某集团</small>
+                            </div>
+                          </div>
+               
+                          <div class="col-md-10">
+                            <div class="mb-3 row">
+                              <label class="form-label col-3 " style="font-weight: bold;">公司简介</label>
+                              <div class="col">
+                                <textarea rows="3" class="form-control" placeholder="company description" name="introduce"></textarea>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="mb-3 row">
+                              <label class="col-3 form-label required"  style="font-weight: bold;">所属行业</label>
+
+                              <select class="form-select input-group input-group-flat col" id="industryType" name="industryType">
+                                <option selected value="不限">不限</option>
+                                <option value="互联网 / 游戏 / 软件">互联网 / 游戏 / 软件</option>
+                                <option value="电子 / 通信 / 硬件">电子 / 通信 / 硬件</option>
+                                <option value="房地产 / 建筑 / 物业 ">房地产 / 建筑 / 物业 </option>
+                                <option value="经济">经济</option>
+                                <option value="消费品">消费品</option>
+                                <option value="汽车 / 机械 / 制造">汽车 / 机械 / 制造</option>
+                                <option value="广告 / 传媒 / 教育 / 文化">广告 / 传媒 / 教育 / 文化</option>
+                                <option value="交通 / 贸易 / 物流">交通 / 贸易 / 物流</option>
+                                <option value="制药 / 医用器械">制药 / 医用器械</option>
+                                <option value="能源 / 化工 / 环保">能源 / 化工 / 环保</option>
+                                <option value="政府 / 农林牧渔">政府 / 农林牧渔</option>
+                              </select>
+
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="mb-3 row">
+                              <label class="form-label required col-3" style="font-weight: bold;">公司性质</label>
+                              <select class="form-select input-group input-group-flat col" id="customerNature" name="customerNature">
+                                
+                                <option value="0">国企</option>
+                                <option value="1" selected>民营企业</option>
+                                <option value="2">合资</option>
+                                <option value="3">外资（欧美）</option>
+                                <option value="4">外资（非欧美）</option>
+                                <option value="5">外企代表处</option>
+                                <option value="6">政府机关</option>
+                                <option value="6">事业单位</option>
+                                <option value="6">非营利组织</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="mb-3 row">
+                              <label class="form-label col-3" style="font-weight: bold;">公司规模</label>
+                              <select class="form-select input-group input-group-flat col" id="customerSize" name="customerSize">
+                                <option selected value="0">0-15人</option>
+                                <option value="1">15-50人</option>
+                                <option value="2">50-100人</option>
+                                <option value="3">100-500人</option>
+                                <option value="4">500-1000人</option>
+                                <option value="5">1000-10000人</option>
+                                <option value="6">10000人以上</option>
+                              </select>
+                            </div>
+                          </div>
+                    
+                          <div class="col-md-6">
+                            <div class="mb-3 row">
+                              <div class="form-label required col-3" style="font-weight: bold">客户来源</div>
+                              <select class="form-select  input-group input-group-flat col" id="sourceType" name="sourceType">
+                                <option value="1">广告呼入</option>
+                                <option value="2" selected>主动BD</option>
+                                <option value="3">电销开发</option>
+                                <option value="0">公共池</option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="mb-3 row">
+                              <label class="form-label col-3 " style="font-weight: bold;">公司地址</label>
+                              <div class="col">
+                                <input type="test" class="form-control" name="registeredAddress" placeholder="城市 or 详细地址">
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-6">
+                            <div class="mb-3 row">
+                              <label class="form-label col-3" style="font-weight: bold">客户状态</label>
+                              <div class="col">
+                                <label class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="state" value="0" checked="">
+                                  <span class="form-check-label">潜在客户</span>
+                                </label>
+                                
+                              </div>
+                            </div>
+                          </div>
+                        
+                        </div>
+                      </div>
+                      <div class="card-footer text-end">
+                        <button type="submit" class="btn btn-primary">提交</button>
+                      </div>
+                    </form>
+                  </div>
+
+
+
+
+
+
+                  <div class="col-6 ">
+
+
+                    <div class="row row-cards">
+
+
+                      <div class="card">
+                        <div class="card-header">
+                          <h3 class="card-title">添加团队成员</h3>
+                        </div>
+                        <div class="card-body">
+                          <div class="row row-cards">
+                            <div class="mb-3 col-lg-6 row">
+                              <label class="form-label col-3"  style="font-weight: bold;">变更管理员</label>
+                              <div class="col">
+                                <label class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="isChangeManage" value="1" checked>
+                                  <span class="form-check-label">否</span>
+                                </label>
+                                <label class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="isChangeManage" value="2" >
+                                  <span class="form-check-label">是</span>
+                                </label>
+                              </div>
+                              <small class="form-hint">默认为当前客户创建者</small>
+                            </div>
+                          
+                            <div class="mb-3 col-lg-6 row">
+                              
+                              <div class="col">
+                                <select type="text" class="form-select" placeholder="输入名称查询选择新管理员" id="teamLeader">
+                                </select>
+                              </div>
+                            </div>
+    
+                            <div class="mb-3 row">
+                              
+                              <label class="form-label col-3" style="font-weight: bold;">有职位管理</label>
+                              <div class="col">
+                                <select type="text" class="form-select" placeholder="输入名称查询选择新管理员" id="manageMember" multiple >
+                                </select>
+                              </div>
+                                <small class="form-hint">可为当前客户创建新职位。</small>
+                            </div>
+                            <div class="mb-3 row">
+                              
+                              <label class="form-label col-3" style="font-weight: bold;">无职位管理</label>
+                              <div class="col">
+                                <select type="text" class="form-select" placeholder="输入名称查询选择新管理员" id="normalMember" multiple >
+                                </select>
+                              </div>
+                                <small class="form-hint">无法为当前客户创建新职位。</small>
+                            </div>                
+             
+                          </div>
+                        </div>
+                 
+                      </div>
+
+
+
+
+
+                      <div class="card">
+                        <div class="card-header">
+                          <h3 class="card-title">添加联系人</h3>
+                          <div class="col-auto ms-auto d-print-none">
+                            <div class="d-flex">
+                              <div class="me-3">
+                                <a  onclick="clearContacter()" class="btn btn-info">
+                                  <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                                  清空
+                                </a>
+                              </div>
+                              <a onclick="addContacter()" class="btn btn-success">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                                添加
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card-body">
+                          <div class="row row-cards" id="contacter">
+                            <div class="mb-3">
+                              <dl class="row">
+                                <dt class="col-2"  style="font-weight: bold;">联系人:</dt>
+                                <dd class="col-8"  id="teamlist">
+                              
+                              
+                                </dd>  
+                                <small class="form-hint">点击姓名查看联系人详情</small>
+                              </dl>
+                 
+                            </div>
+                          
+                            <div class="mb-3 col-lg-4 row">
+                              <label class="form-label col-3 required" style="font-weight: bold;">姓名</label>
+                              <div class="col">
+                                <input type="text" class="form-control"  name="contacterName" autocomplete="off">
+                                <div class="invalid-feedback">不能为空</div>
+                              </div>
+                            </div>
+                            <div class="mb-3 col-lg-4 row">
+                              <label class="form-label col-3 " style="font-weight: bold;">职位</label>
+                              <div class="col">
+                                <input type="text" class="form-control" name="contacterJob">
+                              </div>
+                            </div>
+                            <div class="mb-3 col-lg-4 row">
+                              <label class="form-label col-3 " style="font-weight: bold;">座机</label>
+                              <div class="col">
+                                <input type="text" class="form-control" name="contacterLandline">
+                              </div>
+                            </div>
+                            <div class="mb-3 col-lg-4 row">
+                              <label class="form-label col-3 required" style="font-weight: bold;">手机</label>
+                              <div class="col">
+                                <input type="text" class="form-control" name="contacterPhone" autocomplete="off">
+                                <div class="invalid-feedback">不能为空</div>
+                              </div>
+                            </div>
+                 
+                            <div class="mb-3 col-lg-4 row">
+                              <label class="form-label col-3 " style="font-weight: bold;">邮箱</label>
+                              <div class="col">
+                                <input type="text" class="form-control" name="contacterEmail">
+                              </div>
+                            </div>
+                            <div class="mb-3 col-lg-4 row">
+                              <label class="form-label col-3 " style="font-weight: bold;">性别</label>
+                              <div class="col">
+                                <label class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="contacterGender" value="1" >
+                                  <span class="form-check-label">男</span>
+                                </label>
+                                <label class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="contacterGender" value="2" >
+                                  <span class="form-check-label">女</span>
+                                </label>
+                              </div>
+                            </div>
+                            <div class="mb-3 col-lg-12 row">
+                              <label class="form-label col-1 " style="font-weight: bold;">备注</label>
+                              <div class="col col-7 ">
+                                <textarea class="form-control" rows="2" name="contacterRemark" ></textarea>
+                              </div>
+                            </div>
+    
+                            
+                                    
+             
+                          </div>
+                        </div>
+                 
+                      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+
+
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    
+                  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+              </div>
+
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+            <div id="messageContainer" class="message-container">
+              <!-- Messages will be added here dynamically -->
+            </div>
+      
+
+
+
+
+
+
+
+
+            
+            
+
+
+
+            
+
+            
+          </div>
+        </div>
+
+        <div class="modal modal-blur fade" id="contactermodal" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">客户联系人</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+                <div class="row">
+                  <div class="mb-3 col-lg-4 row">
+                    <label class="form-label col-3 required" style="font-weight: bold;">姓名</label>
+                    <div class="col">
+                      <input type="text" class="form-control"  name="contacterName" >
+                      <div class="invalid-feedback">不能为空</div>
+                    </div>
+                  </div>
+                  <div class="mb-3 col-lg-4 row">
+                    <label class="form-label col-3 " style="font-weight: bold;">职位</label>
+                    <div class="col">
+                      <input type="text" class="form-control" name="contacterJob">
+                    </div>
+                  </div>
+                  <div class="mb-3 col-lg-4 row">
+                    <label class="form-label col-3 " style="font-weight: bold;">座机</label>
+                    <div class="col">
+                      <input type="text" class="form-control" name="contacterLandline">
+                    </div>
+                  </div>
+                  <div class="mb-3 col-lg-4 row">
+                    <label class="form-label col-3 required" style="font-weight: bold;">手机</label>
+                    <div class="col">
+                      <input type="text" class="form-control" name="contacterPhone">
+                      <div class="invalid-feedback">不能为空</div>
+                    </div>
+                  </div>
+       
+                  <div class="mb-3 col-lg-4 row">
+                    <label class="form-label col-3 " style="font-weight: bold;">邮箱</label>
+                    <div class="col">
+                      <input type="text" class="form-control" name="contacterEmail">
+                    </div>
+                  </div>
+                  <div class="mb-3 col-lg-4 row">
+                    <label class="form-label col-3 " style="font-weight: bold;">性别</label>
+                    <div class="col">
+                      <label class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="contacterGender" value="1" >
+                        <span class="form-check-label">男</span>
+                      </label>
+                      <label class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="contacterGender" value="2" >
+                        <span class="form-check-label">女</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="mb-3 col-lg-12 row">
+                    <label class="form-label col-1 " style="font-weight: bold;">备注</label>
+                    <div class="col col-7 ">
+                      <textarea class="form-control" rows="2" name="contacterRemark" ></textarea>
+                    </div>
+                  </div>
+
+                </div>
+
+                <input type="hidden" id="editKey" value="">
+                  
+                
+
+              </div>  
+              <div class="modal-footer">
+                <a class="btn btn-primary" onclick="contacterEdit()" >
+                  确认修改    
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+      
+
+
+        
+
+        <script src="../../static/js/tom-select.base.min.js" ></script>
+
+       
+        <footer class="footer footer-transparent d-print-none">
+          <div class="container-xl">
+            <div class="row text-center align-items-center flex-row-reverse">
+              <div class="col-12">
+              <!-- <div class="col-12 col-lg-auto mt-3 mt-lg-0 text-center "> -->
+                <ul class="list-inline list-inline-dots mb-0">
+                  <li class="list-inline-item">
+                    Copyright &copy; 2021  
+
+                    <a href="#" class="link-secondary"> 费思福(成都)人力资源咨询有限公司 </a>
+                  
+                  </li>
+                  <li class="list-inline-item">
+                    蜀ICP备2021005893号-2
+             
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    
+  </body>
+</html>
