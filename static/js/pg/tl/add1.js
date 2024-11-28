@@ -4,11 +4,234 @@
 $(function(){
     talentId = getParameterByName('workId');
     // initBaseInfo();
+    
     // initTCList();
 
+    let str1="MGIwYzI0Yjc1ZGEyNDA1ZDgxMGIyMWJhMTc0MzVjZmE=";
+
+    var encoder = new TextEncoder();
+    var encodedText = btoa(String.fromCharCode.apply(null, encoder.encode(str1)));
+    console.log(atob(str1))
+
+    const ct = document.getElementById("jobdiv");  
+    ct.innerHTML = '';  
+
+
+    document.getElementById('fileInput').addEventListener('change', function(event) {
+      const file = event.target.files;
+      if (file) {
+          const reader = new FileReader();
+          
+          // 读取文件内容为ArrayBuffer
+          reader.readAsArrayBuffer(file[0]);
+          
+          reader.onload = function() {
+              const arrayBuffer = reader.result;
+              const binaryString = new Uint8Array(arrayBuffer).reduce((data, byte) => data + String.fromCharCode(byte), '');
+              
+              // 对binaryString进行Base64编码
+              const base64Encoded = btoa(binaryString);
+              document.getElementById('introduce1').textContent = base64Encoded;
+
+
+              testupload(file[0].name,base64Encoded)
+
+
+          };
+
+          // 处理读取文件错误
+          reader.onerror = function() {
+              console.error('Error reading file:', reader.error);
+          };
+      }
+  });
+
+
+    positionList.forEach(item => {  
+      if (item.children) {  
+        // 创建顶级下拉菜单  
+        var dropdownDiv = document.createElement('div');  
+        dropdownDiv.classList.add('dropend');  
+      
+        // 创建触发元素  
+        var link = document.createElement('a');  
+        link.classList.add('dropdown-item', 'dropdown-toggle');  
+        link.setAttribute('data-bs-toggle', 'dropdown');  
+        link.setAttribute('data-bs-auto-close', 'outside');  
+        link.setAttribute('role', 'button');  
+        link.setAttribute('value', item.value);  
+        link.setAttribute('aria-expanded', 'false');  
+        link.textContent = item.label;  
+      
+        // 创建顶级下拉菜单的内容容器  
+        var dropdownMenu = document.createElement('div');  
+        dropdownMenu.classList.add('dropdown-menu');  
+      
+        // 递归地构建子菜单  
+        buildDropdownMenu(item.children, dropdownMenu);  
+      
+        // 将触发元素和内容容器添加到顶级下拉菜单  
+        dropdownDiv.appendChild(link);  
+        dropdownDiv.appendChild(dropdownMenu);  
+      
+        // 将顶级下拉菜单添加到某个容器（例如ct）  
+        ct.appendChild(dropdownDiv);  
+      } else {  
+        // 创建非嵌套的下拉菜单项  
+        var link = document.createElement('a');  
+        link.classList.add('dropdown-item');  
+        link.setAttribute('onClick', 'chooseThis(this)');  
+        link.setAttribute('value', item.value);  
+        link.textContent = item.label;  
+        ct.appendChild(link);  
+      }  
+    });  
    
 
 })
+
+
+
+
+
+function testupload(name,code){
+
+
+  kk=getuploadpermission()
+
+  const options = {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    'authorization': 'APPCODE '+kk,
+    },
+    body: JSON.stringify({"file_name":name,"resume_base":code}),
+};
+
+    var url ='http://xiaoxi.market.alicloudapi.com/v1/parser/parse_base?avatar=1&handle_image=1&rawtext=1&parse_mode=fast';
+fetch(url,options)
+    .then(response => response.json())
+    .then(json => {
+
+       console.log(json)
+
+
+    }).catch((error)=>{
+        console.log(error)
+      
+    });
+
+}
+
+function getuploadpermission(){
+  let key;
+  const options = {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    'token':localStorage.getItem('token')
+    },
+    body: JSON.stringify(data),
+};
+
+    var url = baseUri+'/talent/upFilePermission';
+fetch(url,options)
+    .then(response => response.json())
+    .then(json => {
+
+       key= json.data;
+
+
+
+
+    }).catch((error)=>{
+        console.log(error)
+      
+    });
+
+    return atob(key);
+
+}
+
+
+// 递归函数来构建子菜单  
+function buildDropdownMenu(items, parent) {  
+  items.forEach(item => {  
+    var dropdownDiv = document.createElement('div');  
+    
+  
+    var link = document.createElement('a');  
+
+  
+    var dropdownMenu = document.createElement('div');  
+    dropdownMenu.classList.add('dropdown-menu');  
+  
+    if (item.children) {  
+
+      dropdownDiv.classList.add('dropend');  
+
+      link.classList.add('dropdown-item', 'dropdown-toggle');  
+      link.setAttribute('data-bs-toggle', 'dropdown');  
+      link.setAttribute('data-bs-auto-close', 'outside');  
+      link.setAttribute('role', 'button');  
+      link.setAttribute('value', item.value);  
+      link.setAttribute('aria-expanded', 'false');  
+      link.textContent = item.label;  
+      
+      buildDropdownMenu(item.children, dropdownMenu);  
+      
+    } else {  
+      // 创建非嵌套的下拉菜单项  
+      link.classList.add('dropdown-item');  
+      link.setAttribute('onClick', 'chooseThis(this)');  
+      link.setAttribute('value', item.value);  
+      link.textContent = item.label;  
+      dropdownMenu.appendChild(link);  
+    }  
+  
+    dropdownDiv.appendChild(link); 
+    dropdownDiv.appendChild(dropdownMenu);  
+    parent.appendChild(dropdownDiv);  
+  });  
+}
+
+
+
+
+
+function chooseThis(o){
+
+
+  
+
+
+  let str = '';
+
+  var showLinks = $('a.show');
+
+
+  if(showLinks.length>1){
+
+    showLinks.each(function() {
+  
+      str +=   $(this).attr('value') + ' / '
+  
+  
+    });
+  
+    str+=$(o).attr('value');
+    $('#jobinput').val(str)
+  }else{
+    $('#jobinput').val(str)
+  }
+
+  $('#jobmenu.show').removeClass('show');
+
+
+}
+
+
+
 
 
 

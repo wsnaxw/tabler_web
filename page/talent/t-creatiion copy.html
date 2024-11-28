@@ -27,6 +27,7 @@
     <script type="text/javascript" src="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/src/jedate.js"></script>
     <script type="text/javascript" src="https://gosspublic.alicdn.com/aliyun-oss-sdk-6.18.0.min.js"></script>
     <script src="../../static/js/watermark.js"></script>
+    <script src="../../static/js/pg/pro/Position.js"></script>
     <script src="../../static/js/pg/tl/add1.js"></script>
     <script>
       function dark(){
@@ -94,6 +95,8 @@ ii::after {
   background-color: #f5f5f5; /* 你可以使用你喜欢的颜色 */
   cursor: pointer; /* 可选：显示鼠标悬停时的指针 */
 }
+
+
 </style>
   </head>
   <body  id="webBody" class="layout-fluid">
@@ -371,6 +374,7 @@ ii::after {
                       <div class="col-auto ms-auto d-print-none">
                         <div class="d-flex">
                           <div class="me-3">
+                            <input type="file" id="fileInput" />
                             <a href="#" class="btn btn-info">
                               <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                               清空
@@ -390,7 +394,7 @@ ii::after {
 
                         <div class="col-md-4">
                           <div class="  row">
-                            <label class="col-3 form-label required" style="font-weight: bold;">手机号码</label>
+                            <label class="col-3 form-label required wordbold" >手机号码</label>
                             <div  class="col-auto">
                               <input type="text" class="form-control " placeholder="手机号码" name="phone" >
                               <div class="invalid-feedback">不能为空！</div>
@@ -399,7 +403,7 @@ ii::after {
                         </div>
                         <div class="col-md-4">
                           <div class="  row">
-                            <label class="col-3 form-label required" style="font-weight: bold;">邮箱地址</label>
+                            <label class="col-3 form-label required wordbold">邮箱地址</label>
                             <div  class="col-auto">
                               <input type="text" class="form-control" placeholder="邮箱地址" name="email" >
                               <div class="invalid-feedback">不能为空！</div>
@@ -409,7 +413,7 @@ ii::after {
                         </div>
                         <div class="col-md-4">
                           <div class="  row">
-                            <label class="col-3 form-label required" style="font-weight: bold;">人选姓名</label>
+                            <label class="col-3 form-label required wordbold">人选姓名</label>
                             <div  class="col-auto">
                               <input type="text" class="form-control " placeholder="人选姓名" name="name" >
                               <div class="invalid-feedback">不能为空！</div>
@@ -418,7 +422,7 @@ ii::after {
                         </div>
                         <div class="col-md-4">
                           <div class="  row">
-                            <label class="col-3 form-label required" style="font-weight: bold;">人选年龄</label>
+                            <label class="col-3 form-label required wordbold">人选年龄</label>
                             <div  class="col-auto">
                               <input type="number" class="form-control" placeholder="人选年龄" name="age" >
                               <div class="invalid-feedback">不能为空！</div>
@@ -430,7 +434,7 @@ ii::after {
 
                         <div class="col-md-8">
                           <div class="  row">
-                            <label class="form-label col-md-2" style="font-weight: bold">最高学历</label>
+                            <label class="form-label col-md-2 wordbold">最高学历</label>
                             <div  class="col-auto">
                               <label class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="education" value="0" >
@@ -461,7 +465,7 @@ ii::after {
                         <hr>
                         <div class="col-md-4">
                           <div class="  row">
-                            <label class="col-3 form-label "  style="font-weight: bold;">工作经验</label>
+                            <label class="col-3 form-label  wordbold">工作经验</label>
 
                             <select class="form-select input-group input-group-flat col" id="industryType" name="industryType">
                               <option selected value="不限">不限</option>
@@ -477,7 +481,7 @@ ii::after {
 
                         <div class="col-md-4">
                           <div class="  row">
-                            <label class="form-label col-3" style="font-weight: bold">性别</label>
+                            <label class="form-label col-3 wordbold">性别</label>
                             <div  class="col-auto">
               
               
@@ -502,7 +506,7 @@ ii::after {
 
                         <div class="col-md-4">
                           <div class="  row">
-                            <label class="col-3 form-label " style="font-weight: bold;">出生日期</label>
+                            <label class="col-3 form-label  wordbold">出生日期</label>
                             <div  class="col-auto">
                               <input type="text" class="form-control " placeholder="人选姓名" name="name" >
                             </div>
@@ -510,7 +514,7 @@ ii::after {
                         </div>
                         <div class="col-md-4">
                           <div class="  row">
-                            <label class="col-3 form-label required" style="font-weight: bold;">当前年薪</label>
+                            <label class="col-3 form-label required wordbold">当前年薪</label>
                             <div  class="col-auto">
                               <input type="number" class="form-control" placeholder="人选年龄" name="age" >
                             </div>
@@ -520,7 +524,7 @@ ii::after {
 
                         <div class="col-md-4">
                           <div class="  row">
-                            <label class="col-3 form-label " style="font-weight: bold;">户籍地址</label>
+                            <label class="col-3 form-label  wordbold">户籍地址</label>
                             <div  class="col-auto">
                               <input type="text" class="form-control " placeholder="户籍地址" name="name" >
                             </div>
@@ -528,7 +532,7 @@ ii::after {
                         </div>
                         <div class="col-md-4">
                           <div class="  row">
-                            <label class="col-3 form-label required" style="font-weight: bold;">当前地址</label>
+                            <label class="col-3 form-label required wordbold">当前地址</label>
                             <div  class="col-auto">
                               <input type="number" class="form-control" placeholder="当前地址" name="age" >
                             </div>
@@ -539,7 +543,7 @@ ii::after {
 
                         <div class="col-md-4">
                           <div class="  row">
-                            <label class="form-label col-3" style="font-weight: bold">工作状态</label>
+                            <label class="form-label col-3 wordbold">工作状态</label>
                             <div  class="col-auto">
               
               
@@ -567,7 +571,7 @@ ii::after {
                   
                         <div class="col-md-4">
                           <div class="  row">
-                            <div class="form-label required col-3" style="font-weight: bold">人选来源</div>
+                            <div class="form-label required col-3 wordbold">人选来源</div>
                             <div class="col-auto">
                               <select class="form-select  input-group input-group-flat col" id="sourceType" name="sourceType">
                                 <option value="1">广告呼入</option>
@@ -585,9 +589,9 @@ ii::after {
 
                         <div class="col-md-4">
                           <div class="  row">
-                            <label class="col-3 form-label "  style="font-weight: bold;">期望行业</label>
+                            <label class="col-3 form-label  wordbold">期望行业</label>
                             <div class="col-auto">
-                              <select class="form-select input-group input-group-flat " id="industryType" name="industryType">
+                              <select class="form-select input-group input-group-flat" name="industryType">
                                 <option selected value="">不限</option>
                                 <option value="互联网 / 游戏 / 软件">互联网 / 游戏 / 软件</option>
                                 <option value="电子 / 通信 / 硬件">电子 / 通信 / 硬件</option>
@@ -605,35 +609,35 @@ ii::after {
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                           <div class="  row">
-                            <label class="col-3 form-label "  style="font-weight: bold;">期望岗位</label>
-
-                            <div class="col-auto">
-                              <select class="form-select input-group input-group-flat " id="industryType" name="industryType">
-                                <option selected value="">不限</option>
-                                <option value="互联网 / 游戏 / 软件">互联网 / 游戏 / 软件</option>
-                                <option value="电子 / 通信 / 硬件">电子 / 通信 / 硬件</option>
-                                <option value="房地产 / 建筑 / 物业 ">房地产 / 建筑 / 物业 </option>
-                                <option value="经济">经济</option>
-                                <option value="消费品">消费品</option>
-                                <option value="汽车 / 机械 / 制造">汽车 / 机械 / 制造</option>
-                                <option value="广告 / 传媒 / 教育 / 文化">广告 / 传媒 / 教育 / 文化</option>
-                                <option value="交通 / 贸易 / 物流">交通 / 贸易 / 物流</option>
-                                <option value="制药 / 医用器械">制药 / 医用器械</option>
-                                <option value="能源 / 化工 / 环保">能源 / 化工 / 环保</option>
-                                <option value="政府 / 农林牧渔">政府 / 农林牧渔</option>
-  
-                              </select>
-                         
-                             </div>
-
+                            <label class="form-label col-2" style="font-weight: bold;">期望职位</label>
+                            <div class="nav-item dropdown col" >
+                              <input type="text" class="form-select dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="true" readonly name="job" id="jobinput">
+                              <div class="dropdown-menu " id="jobmenu" data-bs-popper="static" >
+                                <div class="dropdown-menu-columns">
+                                  <div class="dropdown-menu-column" id="jobdiv">
+    
+    
+    
+                                 
+                                   
+    
+    
+                                  </div>
+                                
+                                
+                               
+                              
+                              </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
 
                         <div class="col-md-4">
                           <div class="  row">
-                            <label class="col-3 form-label " style="font-weight: bold;">期望薪资</label>
+                            <label class="col-3 form-label  wordbold">期望薪资</label>
                             <div  class="col-auto">
                               <input type="text" class="form-control " placeholder="人选姓名" name="name" >
                               <div class="invalid-feedback">不能为空！</div>
@@ -642,7 +646,7 @@ ii::after {
                         </div>
                         <div class="col-md-4">
                           <div class="  row">
-                            <label class="col-3 form-label required" style="font-weight: bold;">期望地点</label>
+                            <label class="col-3 form-label required wordbold">期望地点</label>
                             <div class="col-auto">
                               <input type="number" class="form-control" placeholder="人选年龄" name="age" >
                               <div class="invalid-feedback">不能为空！</div>
@@ -657,11 +661,11 @@ ii::after {
 
 
                         
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                           <div class="  row">
-                            <label class="form-label col-3 " style="font-weight: bold;">个人简介</label>
-                            <div class="col">
-                              <textarea rows="3" class="form-control" placeholder="company description" name="introduce"></textarea>
+                            <label class="form-label col-lg-1  wordbold">个人简介</label>
+                            <div class="col-8">
+                              <textarea rows="3" class="form-control"  name="introduce" id="introduce1"></textarea>
                             </div>
                           </div>
                         </div>
@@ -715,6 +719,8 @@ ii::after {
                             <div class="col-auto ms-auto d-print-none">
                                 
                               <div class="ms-2 d-inline-block">
+                                
+                                <a href="#" class="btn btn-info btn-sm" onclick='deletegzjl("gz01")'>清空</a>
                                 <a href="#" class="btn btn-danger btn-sm" onclick='deletegzjl("gz01")'>删除</a>
                               </div>
                             </div>
@@ -722,13 +728,13 @@ ii::after {
                           <div class="row row-cards card-body">
                             <div class="col-md-12">
                               <div class=" row">
-                                <label class="col-2 form-label required" style="font-weight: bold;">工作时间</label>
+                                <label class="col-2 form-label required wordbold">工作时间</label>
                                 <div class="col-auto">
-                                  <input type="text" class="form-control " placeholder="开始日期" name="phone" autocomplete="off">
+                                  <input type="text" class="form-control " placeholder="开始日期" name="startDate" autocomplete="off">
                                   <div class="invalid-feedback">不能为空！</div>
                                 </div>
                                 <div class="col-auto">
-                                  <input type="text" class="form-control " placeholder="结束日期" name="phone" autocomplete="off">
+                                  <input type="text" class="form-control " placeholder="结束日期" name="endDate" autocomplete="off">
                                   <div class="invalid-feedback">不能为空！</div>
                                 </div>
                                 <label class="form-check form-check-inline col-auto">
@@ -739,7 +745,7 @@ ii::after {
                             </div>
                             <div class="col-md-6">
                               <div class=" row">
-                                <label class="col-4 form-label required" style="font-weight: bold;">所在公司</label>
+                                <label class="col-4 form-label required wordbold">所在公司</label>
                                 <div class="col-auto">
                                   <input type="text" class="form-control " placeholder="开始日期" name="phone" autocomplete="off">
                                   <div class="invalid-feedback">不能为空！</div>
@@ -752,9 +758,9 @@ ii::after {
                             
                             <div class="col-md-6">
                               <div class=" row">
-                                <label class="col-4 form-label required" style="font-weight: bold;">所属行业</label>
+                                <label class="col-4 form-label required wordbold">所属行业</label>
                                 <div class="col-auto">
-                                  <select class="form-select" id="industryType" name="industryType">
+                                  <select class="form-select" name="industryType">
                                     <option selected value="">不限</option>
                                     <option value="互联网 / 游戏 / 软件">互联网 / 游戏 / 软件</option>
                                     <option value="电子 / 通信 / 硬件">电子 / 通信 / 硬件</option>
@@ -776,7 +782,7 @@ ii::after {
                             </div>
                             <div class="col-md-6">
                               <div class=" row">
-                                <label class="col-4 form-label required" style="font-weight: bold;">工作职责</label>
+                                <label class="col-4 form-label required wordbold">工作职责</label>
                                 <div class="col-auto">
                                   <input type="text" class="form-control " placeholder="开始日期" name="phone" autocomplete="off">
                                   <div class="invalid-feedback">不能为空！</div>
@@ -786,9 +792,9 @@ ii::after {
                             </div>
                             <div class="col-md-12">
                               <div class="row">
-                                <label class="col-2 form-label required" style="font-weight: bold;">工作职责</label>
+                                <label class="col-2 form-label required wordbold">工作职责</label>
                                 <div class="col-8">
-                                  <textarea rows="3" class="form-control" placeholder="company description" name="introduce"></textarea>
+                                  <textarea rows="3" class="form-control" name="introduce"></textarea>
                                 </div>
                                 
                               </div>
@@ -866,116 +872,69 @@ ii::after {
                       <div class="row row-cards" id="xmjlinfo">
 
 
-                        <div class="card trcard">
+                        <div class="card trcard" id="gz01">
 
-                          <div class="card-body border-bottom py-3">
-                            <div class="d-flex" style="font-weight: bold;">
-                              <div class="" style="color: rgb(3, 169, 244)">
-                                2013.03 至 至今 <ii></ii>  飞利浦（中国）投资有限公司<ii></ii> 西南大区经理 
-                              </div>
-                              <div class="ms-auto text-secondary">
+                          <div class="card-header border-bottom py-3">
+                            <div class="col-auto ms-auto d-print-none">
                                 
-                                <div class="ms-2 d-inline-block">
-                                  <a href="#" class="btn btn-info btn-sm">修改</a>
-                                  <a href="#" class="btn btn-danger btn-sm">删除</a>
-                                </div>
+                              <div class="ms-2 d-inline-block">
+                                
+                                <a href="#" class="btn btn-info btn-sm" onclick='deletegzjl("gz01")'>清空</a>
+                                <a href="#" class="btn btn-danger btn-sm" onclick='deletegzjl("gz01")'>删除</a>
                               </div>
                             </div>
                           </div>
-                          <div class="row">
-                            <dt class="col-2">工作职责：</dt>
-                            <dl class="col-10"></dl>
-                            <dt class="col-1"></dt>
-                            <dl class="col-10">
-                              1、正确传达区域销售总监提出的营销组织工作方案，并贯彻执行。<br>
-                              2、深度挖掘川渝云贵四省区域内的一级、二级分销商（渠道商）资源，最终实现飞利浦产品的落地销售。<br>
-                              3、负责公司所有影像产品的销售运作，包括计划、组织、进度控制。<br>
-                              4、协助销售总监制定销售计划、销售政策。<br>
-                              5、围绕公司下达的销售目标拟写营销方针和策略计划。<br>
-                              6、与市场部及其他部门合作，执行销售计划。<br>
-                              汇报对象：西区销售总监<br>
-                              业绩描述：在飞利浦公司任职期间，实际达成销售其中部分医院如下：
-                              川大华西医院及其分院超高端 256 层科研 CT 一台、3.0T 核磁各一台；<br>
-                              四川省人民医院超高端 256 层科研 CT 一台；<br>
-                              重医附一院超高端256 层科研 CT 和 3.0T 核磁各一台；<br>
-                              重庆市肿瘤医院 1.5T 和 3.0T 核磁各一台；<br>
-                              三博脑科（重庆）长安医院&江陵医院 1.5T 核磁两台、128 层 CT 两台、大型 DSA 一台；<br>
-                              重庆东华医院：1.5T 核磁和 128 层 CT 各一台；<br>
-                              梁平县人民医院：128 层 CT 和 1.5T 核磁各一台；<br>
-                              云阳县中医院：1.5T 核磁一台；涪陵区中医院：1.5T 核磁一台；丰都县人民医院：128 层 CT 一台；贵黔国际总院 128 层 CT 一台；贵州百灵医院 16 排 CT 两台；贵阳荟康医院 128 层 CT&1.5T 核磁各一台；昆医附一院大型 DSA 两台、超高端 256 层科研 CT 一台；昆医附二院 3.0T和超高端 256 层科研 CT 一台、大型 DSA 两台；昆医附二院石林天奇医院 128 层 CT 和 1.5T 核磁各一台、大型 DSA 一台等等······
-                            </dl>
-                            
-                          </div>
-                          <div class="row">
-                            <dt class="col-2">工作职责：</dt>
-                            <dl class="col-10"></dl>
-                            <dt class="col-1"></dt>
-                            <dl class="col-10">
-                              1、正确传达区域销售总监提出的营销组织工作方案，并贯彻执行。<br>
-                              2、深度挖掘川渝云贵四省区域内的一级、二级分销商（渠道商）资源，最终实现飞利浦产品的落地销售。<br>
-                              3、负责公司所有影像产品的销售运作，包括计划、组织、进度控制。<br>
-                              4、协助销售总监制定销售计划、销售政策。<br>
-                              5、围绕公司下达的销售目标拟写营销方针和策略计划。<br>
-                              6、与市场部及其他部门合作，执行销售计划。<br>
-                              汇报对象：西区销售总监<br>
-                              业绩描述：在飞利浦公司任职期间，实际达成销售其中部分医院如下：
-                              川大华西医院及其分院超高端 256 层科研 CT 一台、3.0T 核磁各一台；<br>
-                              四川省人民医院超高端 256 层科研 CT 一台；<br>
-                              重医附一院超高端256 层科研 CT 和 3.0T 核磁各一台；<br>
-                              重庆市肿瘤医院 1.5T 和 3.0T 核磁各一台；<br>
-                              三博脑科（重庆）长安医院&江陵医院 1.5T 核磁两台、128 层 CT 两台、大型 DSA 一台；<br>
-                              重庆东华医院：1.5T 核磁和 128 层 CT 各一台；<br>
-                              梁平县人民医院：128 层 CT 和 1.5T 核磁各一台；<br>
-                              云阳县中医院：1.5T 核磁一台；涪陵区中医院：1.5T 核磁一台；丰都县人民医院：128 层 CT 一台；贵黔国际总院 128 层 CT 一台；贵州百灵医院 16 排 CT 两台；贵阳荟康医院 128 层 CT&1.5T 核磁各一台；昆医附一院大型 DSA 两台、超高端 256 层科研 CT 一台；昆医附二院 3.0T和超高端 256 层科研 CT 一台、大型 DSA 两台；昆医附二院石林天奇医院 128 层 CT 和 1.5T 核磁各一台、大型 DSA 一台等等······
-                            </dl>
-                            
-                          </div>
-                          <div class="row">
-                            <dt class="col-2">工作职责：</dt>
-                            <dl class="col-10"></dl>
-                            <dt class="col-1"></dt>
-                            <dl class="col-10">
-                              1、正确传达区域销售总监提出的营销组织工作方案，并贯彻执行。<br>
-                              2、深度挖掘川渝云贵四省区域内的一级、二级分销商（渠道商）资源，最终实现飞利浦产品的落地销售。<br>
-                              3、负责公司所有影像产品的销售运作，包括计划、组织、进度控制。<br>
-                              4、协助销售总监制定销售计划、销售政策。<br>
-                              5、围绕公司下达的销售目标拟写营销方针和策略计划。<br>
-                              6、与市场部及其他部门合作，执行销售计划。<br>
-                              汇报对象：西区销售总监<br>
-                              业绩描述：在飞利浦公司任职期间，实际达成销售其中部分医院如下：
-                              川大华西医院及其分院超高端 256 层科研 CT 一台、3.0T 核磁各一台；<br>
-                              四川省人民医院超高端 256 层科研 CT 一台；<br>
-                              重医附一院超高端256 层科研 CT 和 3.0T 核磁各一台；<br>
-                              重庆市肿瘤医院 1.5T 和 3.0T 核磁各一台；<br>
-                              三博脑科（重庆）长安医院&江陵医院 1.5T 核磁两台、128 层 CT 两台、大型 DSA 一台；<br>
-                              重庆东华医院：1.5T 核磁和 128 层 CT 各一台；<br>
-                              梁平县人民医院：128 层 CT 和 1.5T 核磁各一台；<br>
-                              云阳县中医院：1.5T 核磁一台；涪陵区中医院：1.5T 核磁一台；丰都县人民医院：128 层 CT 一台；贵黔国际总院 128 层 CT 一台；贵州百灵医院 16 排 CT 两台；贵阳荟康医院 128 层 CT&1.5T 核磁各一台；昆医附一院大型 DSA 两台、超高端 256 层科研 CT 一台；昆医附二院 3.0T和超高端 256 层科研 CT 一台、大型 DSA 两台；昆医附二院石林天奇医院 128 层 CT 和 1.5T 核磁各一台、大型 DSA 一台等等······
-                            </dl>
-                            
-                          </div>
-                          <div class="row">
-                            <dt class="col-2">工作职责：</dt>
-                            <dl class="col-10"></dl>
-                            <dt class="col-1"></dt>
-                            <dl class="col-10">
-                              1、正确传达区域销售总监提出的营销组织工作方案，并贯彻执行。<br>
-                              2、深度挖掘川渝云贵四省区域内的一级、二级分销商（渠道商）资源，最终实现飞利浦产品的落地销售。<br>
-                              3、负责公司所有影像产品的销售运作，包括计划、组织、进度控制。<br>
-                              4、协助销售总监制定销售计划、销售政策。<br>
-                              5、围绕公司下达的销售目标拟写营销方针和策略计划。<br>
-                              6、与市场部及其他部门合作，执行销售计划。<br>
-                              汇报对象：西区销售总监<br>
-                              业绩描述：在飞利浦公司任职期间，实际达成销售其中部分医院如下：
-                              川大华西医院及其分院超高端 256 层科研 CT 一台、3.0T 核磁各一台；<br>
-                              四川省人民医院超高端 256 层科研 CT 一台；<br>
-                              重医附一院超高端256 层科研 CT 和 3.0T 核磁各一台；<br>
-                              重庆市肿瘤医院 1.5T 和 3.0T 核磁各一台；<br>
-                              三博脑科（重庆）长安医院&江陵医院 1.5T 核磁两台、128 层 CT 两台、大型 DSA 一台；<br>
-                              重庆东华医院：1.5T 核磁和 128 层 CT 各一台；<br>
-                              梁平县人民医院：128 层 CT 和 1.5T 核磁各一台；<br>
-                              云阳县中医院：1.5T 核磁一台；涪陵区中医院：1.5T 核磁一台；丰都县人民医院：128 层 CT 一台；贵黔国际总院 128 层 CT 一台；贵州百灵医院 16 排 CT 两台；贵阳荟康医院 128 层 CT&1.5T 核磁各一台；昆医附一院大型 DSA 两台、超高端 256 层科研 CT 一台；昆医附二院 3.0T和超高端 256 层科研 CT 一台、大型 DSA 两台；昆医附二院石林天奇医院 128 层 CT 和 1.5T 核磁各一台、大型 DSA 一台等等······
-                            </dl>
+                          <div class="row row-cards card-body">
+                            <div class="col-md-12">
+                              <div class=" row">
+                                <label class="col-2 form-label required wordbold">项目时间</label>
+                                <div class="col-auto">
+                                  <input type="text" class="form-control " placeholder="开始日期" name="phone" autocomplete="off">
+                                  <div class="invalid-feedback">不能为空！</div>
+                                </div>
+                                <div class="col-auto">
+                                  <input type="text" class="form-control " placeholder="结束日期" name="phone" autocomplete="off">
+                                  <div class="invalid-feedback">不能为空！</div>
+                                </div>
+                                <label class="form-check form-check-inline col-auto">
+                                  <input class="form-check-input" type="checkbox">
+                                  <span class="form-check-label">至今</span>
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class=" row">
+                                <label class="col-4 form-label required wordbold">项目名称</label>
+                                <div class="col-auto">
+                                  <input type="text" class="form-control" name="phone" autocomplete="off">
+                                  <div class="invalid-feedback">不能为空！</div>
+                                </div>
+                                
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-6">
+                              <div class=" row">
+                                <label class="col-4 form-label required wordbold">项目职位</label>
+                                <div class="col-auto">
+                                  <input type="text" class="form-control" name="phone" autocomplete="off">
+                                  <div class="invalid-feedback">不能为空！</div>
+                                </div>
+                                
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-12">
+                              <div class="row">
+                                <label class="col-2 form-label required wordbold">项目职责</label>
+                                <div class="col-8">
+                                  <textarea rows="3" class="form-control" name="introduce" autocomplete="off"></textarea>
+                                </div>
+                                
+                              </div>
+                            </div>
                             
                           </div>
                           
@@ -1024,7 +983,7 @@ ii::after {
                   <div class="card card-body-scrollable">
 
                     <div class="card-header">
-                      <h3 class="card-title" style="font-weight: bold;">教育经历</h3>
+                      <h3 class="card-title wordbold">教育经历</h3>
                         <div class="card-actions">
                           <a href="#" class="btn btn-ghost-primary">
                             新增
@@ -1033,69 +992,142 @@ ii::after {
                     </div>
 
                     <div class="card-body align-items-center">
-                      <div class="list-group card-list-group" id="jyjlinfo">
-                        <div class="list-group-item">
-                          <div class="row g-2 align-items-center">
-                        
-                           
-                            <div class="col">
-                             <span style="color:  rgb(3, 169, 244);"> 2007.09 至 2011.07</span><ii></ii>福建中医药大学 <ii></ii>药物制剂 <ii></ii><span style="font-weight: bold;">本科</span>
-                              <div class="text-secondary">
-                                <a href="#" class="badge badge-outline fw-normal badge-pill text-green" >统招</a>
-                                <a href="#" class="badge badge-outline  fw-normal badge-pill text-green" >985</a>
-                              </div>
-                              
-                              <div class="text-secondary">
-                                学校经历：大二担当学生会主席
+                      <div class="row row-cards" id="jyjlinfo">
+
+
+                        <div class="card trcard" id="edu01">
+
+                          <div class="card-header border-bottom py-3">
+                            <div class="col-auto ms-auto d-print-none">
+                                
+                              <div class="ms-2 d-inline-block">
+                                <a href="#" class="btn btn-info btn-sm" onclick='deletegzjl("gz01")'>清空</a>
+                                <a href="#" class="btn btn-danger btn-sm" onclick='deletegzjl("gz01")'>删除</a>
                               </div>
                             </div>
-                            <div class="col-auto text-secondary">
-                              <a href="#" class="btn btn-info btn-sm">修改</a>
-                              <a href="#" class="btn btn-danger btn-sm">删除</a>
+                          </div>
+                          <div class="row row-cards card-body">
+                            <div class="col-md-12">
+                              <div class=" row">
+                                <label class="col-2 form-label required wordbold">教育日期</label>
+                                <div class="col-auto">
+                                  <input type="text" class="form-control " placeholder="开始日期" name="phone" autocomplete="off">
+                                  <div class="invalid-feedback">不能为空！</div>
+                                </div>
+                                <div class="col-auto">
+                                  <input type="text" class="form-control " placeholder="结束日期" name="phone" autocomplete="off">
+                                  <div class="invalid-feedback">不能为空！</div>
+                                </div>
+                                <label class="form-check form-check-inline col-auto">
+                                  <input class="form-check-input" type="checkbox">
+                                  <span class="form-check-label">至今</span>
+                                </label>
+                              </div>
                             </div>
-                        
+                            <div class="col-md-6">
+                              <div class=" row">
+                                <label class="col-4 form-label required wordbold">毕业院校</label>
+                                <div class="col-auto">
+                                  <input type="text" class="form-control" name="phone" autocomplete="off">
+                                  <div class="invalid-feedback">不能为空！</div>
+                                </div>
+                                
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-6">
+                              <div class=" row">
+                                <label class="col-4 form-label required wordbold">所读专业</label>
+                                <div class="col-auto">
+                                  <input type="text" class="form-control" name="phone" autocomplete="off">
+                                  <div class="invalid-feedback">不能为空！</div>
+                                </div>
+                                
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-12">
+                              <div class="row">
+                                <label class="form-label col-md-2 wordbold" >学历</label>
+                                <div  class="col-auto">
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="education" value="0" >
+                                    <span class="form-check-label">小学</span>
+                                  </label>
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="education" value="0" >
+                                    <span class="form-check-label">初中</span>
+                                  </label>
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="education" value="0" >
+                                    <span class="form-check-label">高中</span>
+                                  </label>
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="education" value="0" >
+                                    <span class="form-check-label">中专</span>
+                                  </label>
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="education" value="0">
+                                    <span class="form-check-label">大专</span>
+                                  </label>
+                                  
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="education" value="0" checked>
+                                    <span class="form-check-label">本科</span>
+                                  </label>
+                                  
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="education" value="0">
+                                    <span class="form-check-label">硕士</span>
+                                  </label>
+                                  
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="education" value="0">
+                                    <span class="form-check-label">博士</span>
+                                  </label>
+                                  
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="row">
+                                <label class="form-label col-md-4 wordbold" >是否统招</label>
+                                <div  class="col-auto">
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="isAllday" value="0" checked>
+                                    <span class="form-check-label">是</span>
+                                  </label>
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="isAllday" value="0" >
+                                    <span class="form-check-label">否</span>
+                                  </label>
+                               
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-12">
+                              <div class="row">
+                                <label class="col-2 form-label required wordbold">学校经历</label>
+                                <div class="col-8">
+                                  <textarea rows="3" class="form-control" placeholder="奖学金、考试证书、比赛获奖等" name="introduce" autocomplete="off"  ></textarea>
+                                </div>
+                                
+                              </div>
+                            </div>
                             
                           </div>
+                          
                         </div>
-
-
-                       
-                       
-                    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
                         
+  
 
 
 
-                        
-                        
                       </div>
                     </div>
                   </div>
@@ -1400,7 +1432,7 @@ ii::after {
 
                   <div class="row  ">
                     <div class="col-lg-6">
-                      <label class="form-label"  style="font-weight: bold;">所属行业</label>
+                      <label class="form-label wordbold">所属行业</label>
 
                       <div class="input-group input-group-flat">
                         <select class="form-select" id="industryType" name="industryType">
@@ -1421,7 +1453,7 @@ ii::after {
                       </div>  
                     </div>
                     <div class="col-lg-6">
-                      <label class="form-label" style="font-weight: bold;">公司性质</label>
+                      <label class="form-label wordbold">公司性质</label>
                       <div class="input-group input-group-flat">
                         <select class="form-select" id="customerNature" name="customerNature">
                         
@@ -1440,7 +1472,7 @@ ii::after {
                   </div>
                   <div class="row  ">
                     <div class="col-lg-6">
-                      <label class="form-label" style="font-weight: bold;">公司规模</label>
+                      <label class="form-label wordbold">公司规模</label>
                       <div class="input-group input-group-flat">
                         <select class="form-select" id="customerSize" name="customerSize">
                           <option selected value="0">0-15人</option>
@@ -1455,7 +1487,7 @@ ii::after {
                     </div>
 
                     <div class="col-lg-6">
-                      <label class="form-label" style="font-weight: bold;">对外名称</label>
+                      <label class="form-label wordbold">对外名称</label>
                       <div class="input-group input-group-flat">
                         <input type="text" class="form-control" name="outName">
                       </div>
@@ -1465,7 +1497,7 @@ ii::after {
                   </div>
                   <div class="row  ">
                     <div class="col-lg-6">
-                      <label class="form-label" style="font-weight: bold;">公司地址</label>
+                      <label class="form-label wordbold">公司地址</label>
                       <div class="input-group input-group-flat">
                         <input type="text" class="form-control" name="registeredAddress">
                       </div>
@@ -1473,7 +1505,7 @@ ii::after {
 
                     
                     <div class="col-lg-6">
-                      <label class="form-label" style="font-weight: bold;">公司网站</label>
+                      <label class="form-label wordbold">公司网站</label>
                       <div class="input-group input-group-flat">
                         <input type="text" class="form-control" name="webSite">
                       </div>
