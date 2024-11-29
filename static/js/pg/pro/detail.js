@@ -1154,7 +1154,20 @@ function objectsAreEqual(obj1, obj2) {
 
 
 function checkDetail(tanlentId,pid){
-    $('#rxxqdiv').show()
+    $('#rxxqdiv').show();
+    $('#checktalent').on('click',function(){
+      let bigNumber = BigInt(tanlentId);
+      let workId = bigNumber.toString(); // 转换为字符串
+  
+  
+  // 创建一个新的URL，携带参数
+  var url = '../talent/detail.html?workId=' + encodeURIComponent(workId)+'' ;
+  
+  // 使用jQuery来跳转到新页面
+  // window.location.href = url;
+  
+  window.open(url, '_blank');
+    })
     const options = {
         method: 'POST',
         headers: {

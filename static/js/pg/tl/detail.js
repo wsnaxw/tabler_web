@@ -588,97 +588,12 @@ function getParameterByName(name) {
 
 
 
-function filedivshow(){
-
-
-
-    $('#rxxxdiv').hide()
-    
-    $('#movediv').hide()
-    
-    
-    $('#jobdjv').hide()
-
-
-    $('#kzxxdiv').hide()
-    $('#filediv').show()
-
-
-
-    var data={'customerId':csid};
-
-    const options = {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json',
-        'token':localStorage.getItem('token')
-        },
-        body: JSON.stringify(data),
-    };
-
-        var url = baseUri+'/customer/contractsQuery';
-    fetch(url,options)
-        .then(response => response.json())
-        .then(json => {
-
-           
-            if(json.data.list!=null&&json.data.list.length>0){
-
-                let str =''
-                json.data.list.forEach(o=>{
-
-                    const encodedComponent = o.url.replace(/ /g, '%20')
-                    const fullEncodedUri = "http://faithful.oss-cn-shanghai.aliyuncs.com" + encodedComponent;
-
-                    str +=
-
-                    `<tr>
-                    <td>${toStr(o.name)}</td>
-                    
-               
-                    <td >
-                    
-                      <a   class='btn btn-info' onclick=openimg("${fullEncodedUri}") >
-                      查看
-                    </a>
-                 
-                    </td>
-                  </tr>`
-
-                })
-
-                $("#filedata").html(str)                
-            }else{
-                $("#filedata").html(` <tr>
-                <td colspan="2" style="font-weight: bold;text-align: center;">暂无数据 </td>
-              </tr>`) 
-            }
-
-
-
-        }).catch((error)=>{
-            console.log(error)
-          
-        });
-
-
-
-
-
-
-
-
-
-
-
-}
-
 
 
 
 
 function cclfq(){
-    getData({'customerId': csid},'/customer/cclfq').then(data => {
+    getData({'talentId': talentId},'/talent/selectTCList').then(data => {
         // 这里处理从getData返回的数据
 
         try {

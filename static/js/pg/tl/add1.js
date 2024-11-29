@@ -2,21 +2,10 @@
 
 
 $(function(){
-    talentId = getParameterByName('workId');
-    // initBaseInfo();
-    
-    // initTCList();
 
-    let str1="MGIwYzI0Yjc1ZGEyNDA1ZDgxMGIyMWJhMTc0MzVjZmE=";
-
-    var encoder = new TextEncoder();
-    var encodedText = btoa(String.fromCharCode.apply(null, encoder.encode(str1)));
-    console.log(atob(str1))
 
     const ct = document.getElementById("jobdiv");  
     ct.innerHTML = '';  
-
-
     document.getElementById('fileInput').addEventListener('change', function(event) {
       const file = event.target.files;
       if (file) {
@@ -122,34 +111,40 @@ fetch(url,options)
     });
 
 }
-
+let permissionkey;
 function getuploadpermission(){
-  let key;
+
+
+  let permissionkey = sessionStorage.getItem("permissionkey");
+  if(permissionkey!=null&&permissionkey!=undefined&&permissionkey!=''){
+    return   atob(permissionkey);
+
+  }
+
+
+
+
   const options = {
     method: 'POST',
     headers: {
     'Content-Type': 'application/json',
     'token':localStorage.getItem('token')
     },
-    body: JSON.stringify(data),
-};
+    };
 
     var url = baseUri+'/talent/upFilePermission';
 fetch(url,options)
     .then(response => response.json())
     .then(json => {
 
-       key= json.data;
 
-
-
-
+      sessionStorage.setItem("permissionkey",json.data)
     }).catch((error)=>{
         console.log(error)
       
     });
-
-    return atob(key);
+    
+    return atob(sessionStorage.getItem("permissionkey"));
 
 }
 
@@ -237,7 +232,6 @@ function chooseThis(o){
 
 
 function initBaseInfo(){
-    console.log(talentId)
     var data={'talentId':talentId};
 
     const options = {
@@ -420,7 +414,6 @@ function initBaseInfo(){
            `
            $("#baseinfo").html('');
            $("#baseinfo").html(str)
-           console.log(str)
            $('#phonepopover').popover({
             // title: '是否使用额度购买？',
             content: `<p class='mb-0'>是否使用额度购买？<a href='#' class='btn btn-teal btn-sm' id='popover1'>是</a>
@@ -634,9 +627,7 @@ function initTPList(){
 
            let list = json.data;
 
-           console.log(list)
            if(list != null && list.length > 0){
-            console.log('xxxxx')
             let str='';
             list.forEach(o=>{
 
@@ -647,7 +638,6 @@ function initTPList(){
 
 
             })
-            console.log(str)
 
             $('#tplist').html('')
 
@@ -966,7 +956,6 @@ function cclfq(){
 
 function test(){
     
-    console.log(1)
 
     $('#modal-danger').modal('show')
 
@@ -1092,43 +1081,6 @@ function objectsAreEqual(obj1, obj2) {
 
 
 
-function newcc(){
-
-    var state = $('input[name="state"]:checked').val();
-
-    var content = $('textarea[name="content"]').val()
-    console.log(state,content)
-
-    var data={'customerId':csid,'state':toStr(state),'content':content,'customerName':'默认'};
-
-    const options = {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json',
-        'token':localStorage.getItem('token')
-        },
-        body: JSON.stringify(data),
-    };
-
-        var url = baseUri+'/customer/addcc';
-    fetch(url,options)
-        .then(response => response.json())
-        .then(json => {
-
-            showMessage(json.code)
-            baseinfo(csid)
-
-
-            $('#modal-newc').modal('hide')
-
-
-        }).catch((error)=>{
-            console.log(error)
-          
-        });
-
-
-}
 
 function checkProject(id){
         //跳转页面并且携带参数
@@ -1154,3 +1106,170 @@ function toTextbr(text){
 
 
 }
+
+
+let gzjl=2;
+let xmjl=2;
+let jyjl=2;
+function newgzjl(){
+  gzjl++;
+
+  $('#gzjsinfo').append(`
+    <div class="card trcard" id="gz${gzjl}">
+
+                          <div class="card-header border-bottom py-3">
+                            <div class="col-auto ms-auto d-print-none">
+                                
+                              <div class="ms-2 d-inline-block">
+                                
+                                <a  class="btn btn-info btn-sm" onclick='clearformdiv("gz${gzjl}")'>清空</a>
+                                <a  class="btn btn-danger btn-sm" onclick='deleteformdiv("gzjsinfo","gz${gzjl}")'>删除</a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row row-cards card-body">
+                            <div class="col-md-12">
+                              <div class=" row">
+                                <label class="col-2 form-label required wordbold">工作时间</label>
+                                <div class="col-auto">
+                                  <input type="text" class="form-control " placeholder="开始日期" name="startTime" id="startgz${gzjl}" autocomplete="off">
+                                  <div class="invalid-feedback">不能为空！</div>
+                                </div>
+                                <div class="col-auto">
+                                  <input type="text" class="form-control " placeholder="结束日期" name="endTime" id="endgz${gzjl}" autocomplete="off">
+                                  <div class="invalid-feedback">不能为空！</div>
+                                </div>
+                                <label class="form-check form-check-inline col-auto">
+                                  <input class="form-check-input" type="checkbox">
+                                  <span class="form-check-label">至今</span>
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class=" row">
+                                <label class="col-4 form-label required wordbold">所在公司</label>
+                                <div class="col-auto">
+                                  <input type="text" class="form-control " placeholder="所在公司" name="name" autocomplete="off">
+                                  <div class="invalid-feedback">不能为空！</div>
+                                </div>
+                                
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                            </div>
+                            
+                            <div class="col-md-6">
+                              <div class=" row">
+                                <label class="col-4 form-label required wordbold">所属行业</label>
+                                <div class="col-auto">
+                                  <select class="form-select" name="industry">
+                                    <option selected value="">不限</option>
+                                    <option value="互联网 / 游戏 / 软件">互联网 / 游戏 / 软件</option>
+                                    <option value="电子 / 通信 / 硬件">电子 / 通信 / 硬件</option>
+                                    <option value="房地产 / 建筑 / 物业 ">房地产 / 建筑 / 物业 </option>
+                                    <option value="经济">经济</option>
+                                    <option value="消费品">消费品</option>
+                                    <option value="汽车 / 机械 / 制造">汽车 / 机械 / 制造</option>
+                                    <option value="广告 / 传媒 / 教育 / 文化">广告 / 传媒 / 教育 / 文化</option>
+                                    <option value="交通 / 贸易 / 物流">交通 / 贸易 / 物流</option>
+                                    <option value="制药 / 医用器械">制药 / 医用器械</option>
+                                    <option value="能源 / 化工 / 环保">能源 / 化工 / 环保</option>
+                                    <option value="政府 / 农林牧渔">政府 / 农林牧渔</option>
+                                  </select>
+                                </div>
+                              </div>
+                              
+                            </div>
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-6">
+                              <div class=" row">
+                                <label class="col-4 form-label required wordbold">工作岗位</label>
+                                <div class="col-auto">
+                                  <input type="text" class="form-control " placeholder="工作岗位" name="job" autocomplete="off">
+                                  <div class="invalid-feedback">不能为空！</div>
+                                </div>
+                                
+                              </div>
+                            </div>
+                            <div class="col-md-12">
+                              <div class="row">
+                                <label class="col-2 form-label required wordbold">工作职责</label>
+                                <div class="col-8">
+                                  <textarea rows="3" class="form-control" name="duty"></textarea>
+                                </div>
+                                
+                              </div>
+                            </div>
+                            
+                          </div>
+                          
+                        </div>
+    
+    `)
+
+
+    jeDate("#endgz"+gzjl,{
+      theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+      format: "YYYY-MM-DD"
+  });
+  jeDate("#startgz"+gzjl,{
+    theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+    format: "YYYY-MM-DD"
+});
+
+
+
+collectInputsAndMakeJsonJq() 
+
+}
+
+function clearformdiv(id){
+  $('#'+id+' input[type="checkbox"], #'+id+' select, #'+id+' input[type="text"]').each(function() {
+    // 将这些元素的值设置为空
+    $(this).val('');
+    // 对于checkbox，还需要取消选中状态
+    if ($(this).is('input[type="checkbox"]')) {
+      $(this).prop('checked', false);
+    }
+  });
+
+  $('#gzjlinfo #01').remove();
+}
+
+function deleteformdiv(superid,id){
+  $('#'+superid+' #'+id+'').remove();
+}
+
+
+function collectInputsAndMakeJsonJq() {
+  var jsonArray = [];
+  // console.log( $('#gzjsinfo.trcard'));
+  var subDivs = document.getElementById('gzjsinfo').querySelectorAll('.trcard');
+  console.log( subDivs);
+  subDivs.forEach(function (subDiv) {
+    console.log( 111);
+    var inputObj = {};
+    var inputs = subDiv.querySelectorAll('input');
+    console.log( subDiv);
+    inputs.forEach(function (input) {
+        if (input.type === 'text' || input.type === 'number') {
+            inputObj[input.name] = input.value;
+        } else if (input.type === 'checkbox') {
+          if(input.checked){
+            inputObj[input.name] = input.value;
+          }
+            
+        }
+    });
+    var textareas = subDiv.querySelectorAll('textarea');
+    textareas.forEach(function (textarea) {
+      inputObj[textarea.name] = textarea.value;
+  });
+
+    jsonArray.push(inputObj);
+});
+  console.log(jsonArray);
+  return jsonArray;
+}
+
