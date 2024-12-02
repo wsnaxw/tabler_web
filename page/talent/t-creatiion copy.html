@@ -97,6 +97,8 @@ ii::after {
 }
 
 
+
+
 </style>
   </head>
   <body  id="webBody" class="layout-fluid">
@@ -338,8 +340,12 @@ ii::after {
         <!-- Messages will be added here dynamically -->
       </div>
 
+      <div id="preview">
+        <h2 class="text-2xl font-bold p-2">预览视窗</h2>
+        <div id="previewContent"></div>
+    </div>
 
-      <div class="page-wrapper">
+      <div class="page-wrapper" id="content">
 
 
 
@@ -1001,7 +1007,7 @@ ii::after {
                     <div class="card-header">
                       <h3 class="card-title wordbold">教育经历</h3>
                         <div class="card-actions">
-                          <a href="#" class="btn btn-ghost-primary">
+                          <a  class="btn btn-ghost-primary" onclick="newjyjl()">
                             新增
                           </a>
                         </div>
@@ -1069,38 +1075,38 @@ ii::after {
                                 <label class="form-label col-md-2 wordbold" >学历</label>
                                 <div  class="col-auto">
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="education" value="0" >
+                                    <input class="form-check-input" type="radio" name="edu01" value="0" >
                                     <span class="form-check-label">小学</span>
                                   </label>
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="education" value="0" >
+                                    <input class="form-check-input" type="radio" name="edu01" value="0" >
                                     <span class="form-check-label">初中</span>
                                   </label>
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="education" value="0" >
+                                    <input class="form-check-input" type="radio" name="edu01" value="0" >
                                     <span class="form-check-label">高中</span>
                                   </label>
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="education" value="0" >
+                                    <input class="form-check-input" type="radio" name="edu01" value="0" >
                                     <span class="form-check-label">中专</span>
                                   </label>
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="education" value="0">
+                                    <input class="form-check-input" type="radio" name="edu01" value="0">
                                     <span class="form-check-label">大专</span>
                                   </label>
                                   
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="education" value="0" checked>
+                                    <input class="form-check-input" type="radio" name="edu01" value="0" checked>
                                     <span class="form-check-label">本科</span>
                                   </label>
                                   
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="education" value="0">
+                                    <input class="form-check-input" type="radio" name="edu01" value="0">
                                     <span class="form-check-label">硕士</span>
                                   </label>
                                   
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="education" value="0">
+                                    <input class="form-check-input" type="radio" name="edu01" value="0">
                                     <span class="form-check-label">博士</span>
                                   </label>
                                   
@@ -1112,11 +1118,11 @@ ii::after {
                                 <label class="form-label col-md-4 wordbold" >是否统招</label>
                                 <div  class="col-auto">
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="isAllday" value="0" checked>
+                                    <input class="form-check-input" type="radio" name="isAlldayedu01" value="0" checked>
                                     <span class="form-check-label">是</span>
                                   </label>
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="isAllday" value="0" >
+                                    <input class="form-check-input" type="radio" name="isAlldayedu01" value="0" >
                                     <span class="form-check-label">否</span>
                                   </label>
                                
@@ -1352,7 +1358,6 @@ ii::after {
       
 
         <script src="../../static/js/tabler.min.js" defer></script>
-
 
 
 

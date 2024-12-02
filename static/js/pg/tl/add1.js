@@ -1273,3 +1273,240 @@ function collectInputsAndMakeJsonJq() {
   return jsonArray;
 }
 
+
+function newxmjl(){
+  xmjl++;
+
+  $('#xmjlinfo').append(`
+    <div class="card trcard" id="xm${xmjl}">
+
+                          <div class="card-header border-bottom py-3">
+                            <div class="col-auto ms-auto d-print-none">
+                                
+                              <div class="ms-2 d-inline-block">
+                                
+                                <a href="#" class="btn btn-info btn-sm" onclick='clearformdiv("xm${xmjl}")'>清空</a>
+                                <a href="#" class="btn btn-danger btn-sm" onclick='deleteformdiv("gz${xmjl}")'>删除</a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row row-cards card-body">
+                            <div class="col-md-12">
+                              <div class=" row">
+                                <label class="col-2 form-label required wordbold">项目时间</label>
+                                <div class="col-auto">
+                                  <input type="text" class="form-control " placeholder="开始日期" name="startTime" id="startxm${xmjl}" autocomplete="off">
+                                  <div class="invalid-feedback">不能为空！</div>
+                                </div>
+                                <div class="col-auto">
+                                  <input type="text" class="form-control " placeholder="结束日期" name="endTime" id="endxm${xmjl}" autocomplete="off">
+                                  <div class="invalid-feedback">不能为空！</div>
+                                </div>
+                                <label class="form-check form-check-inline col-auto">
+                                  <input class="form-check-input" type="checkbox">
+                                  <span class="form-check-label">至今</span>
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class=" row">
+                                <label class="col-4 form-label required wordbold">项目名称</label>
+                                <div class="col-auto">
+                                  <input type="text" class="form-control" name="phone" autocomplete="off">
+                                  <div class="invalid-feedback">不能为空！</div>
+                                </div>
+                                
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-6">
+                              <div class=" row">
+                                <label class="col-4 form-label required wordbold">项目职位</label>
+                                <div class="col-auto">
+                                  <input type="text" class="form-control" name="phone" autocomplete="off">
+                                  <div class="invalid-feedback">不能为空！</div>
+                                </div>
+                                
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-12">
+                              <div class="row">
+                                <label class="col-2 form-label required wordbold">项目职责</label>
+                                <div class="col-8">
+                                  <textarea rows="3" class="form-control" name="introduce" autocomplete="off"></textarea>
+                                </div>
+                                
+                              </div>
+                            </div>
+                            
+                          </div>
+                          
+                        </div>
+    
+    `)
+
+
+    jeDate("#endxm"+xmjl,{
+      theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+      format: "YYYY-MM-DD"
+  });
+  jeDate("#startxm"+xmjl,{
+    theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+    format: "YYYY-MM-DD"
+});
+
+
+}
+
+
+
+
+function newjyjl(){
+  jyjl++;
+
+  $('#jyjlinfo').append(`
+    <div class="card trcard" id="edu${jyjl}">
+
+                          <div class="card-header border-bottom py-3">
+                            <div class="col-auto ms-auto d-print-none">
+                                
+                              <div class="ms-2 d-inline-block">
+                                <a  class="btn btn-info btn-sm" onclick='clearformdiv("gz${jyjl}")'>清空</a>
+                                <a  class="btn btn-danger btn-sm" onclick='deleteformdiv("gz${jyjl}")'>删除</a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row row-cards card-body">
+                            <div class="col-md-12">
+                              <div class=" row">
+                                <label class="col-2 form-label required wordbold">教育日期</label>
+                                <div class="col-auto">
+                                  <input type="text" class="form-control " placeholder="开始日期" name="startTime" id="startjy${jyjl}" autocomplete="off">
+                                  <div class="invalid-feedback">不能为空！</div>
+                                </div>
+                                <div class="col-auto">
+                                  <input type="text" class="form-control " placeholder="结束日期" name="endTime" id="endjy${jyjl}" autocomplete="off">
+                                  <div class="invalid-feedback">不能为空！</div>
+                                </div>
+                                <label class="form-check form-check-inline col-auto">
+                                  <input class="form-check-input" type="checkbox">
+                                  <span class="form-check-label">至今</span>
+                                </label>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class=" row">
+                                <label class="col-4 form-label required wordbold">毕业院校</label>
+                                <div class="col-auto">
+                                  <input type="text" class="form-control" name="phone" autocomplete="off">
+                                  <div class="invalid-feedback">不能为空！</div>
+                                </div>
+                                
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-6">
+                              <div class=" row">
+                                <label class="col-4 form-label required wordbold">所读专业</label>
+                                <div class="col-auto">
+                                  <input type="text" class="form-control" name="phone" autocomplete="off">
+                                  <div class="invalid-feedback">不能为空！</div>
+                                </div>
+                                
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-12">
+                              <div class="row">
+                                <label class="form-label col-md-2 wordbold" >学历</label>
+                                <div  class="col-auto">
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="edu${jyjl}" value="0" >
+                                    <span class="form-check-label">小学</span>
+                                  </label>
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="edu${jyjl}" value="0" >
+                                    <span class="form-check-label">初中</span>
+                                  </label>
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="edu${jyjl}" value="0" >
+                                    <span class="form-check-label">高中</span>
+                                  </label>
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="edu${jyjl}" value="0" >
+                                    <span class="form-check-label">中专</span>
+                                  </label>
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="edu${jyjl}" value="0">
+                                    <span class="form-check-label">大专</span>
+                                  </label>
+                                  
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="edu${jyjl}" value="0" checked>
+                                    <span class="form-check-label">本科</span>
+                                  </label>
+                                  
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="edu${jyjl}" value="0">
+                                    <span class="form-check-label">硕士</span>
+                                  </label>
+                                  
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="edu${jyjl}" value="0">
+                                    <span class="form-check-label">博士</span>
+                                  </label>
+                                  
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="row">
+                                <label class="form-label col-md-4 wordbold" >是否统招</label>
+                                <div  class="col-auto">
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="isAlldayedu${jyjl}" value="0" checked>
+                                    <span class="form-check-label">是</span>
+                                  </label>
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="isAlldayedu${jyjl}" value="0" >
+                                    <span class="form-check-label">否</span>
+                                  </label>
+                               
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-12">
+                              <div class="row">
+                                <label class="col-2 form-label required wordbold">学校经历</label>
+                                <div class="col-8">
+                                  <textarea rows="3" class="form-control" placeholder="奖学金、考试证书、比赛获奖等" name="introduce" autocomplete="off"  ></textarea>
+                                </div>
+                                
+                              </div>
+                            </div>
+                            
+                          </div>
+                          
+                        </div>
+    
+    `)
+
+
+    jeDate("#endjy"+jyjl,{
+      theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+      format: "YYYY-MM-DD"
+  });
+  jeDate("#startjy"+jyjl,{
+    theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+    format: "YYYY-MM-DD"
+});
+
+
+}
