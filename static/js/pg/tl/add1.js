@@ -3,7 +3,6 @@
 
 $(function(){
 
-
     const ct = document.getElementById("jobdiv");  
     ct.innerHTML = '';  
     document.getElementById('fileInput').addEventListener('change', function(event) {
@@ -77,6 +76,10 @@ $(function(){
     });  
    
 
+
+
+
+    
 })
 
 

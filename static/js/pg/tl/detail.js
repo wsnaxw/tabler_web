@@ -1,7 +1,7 @@
 
 
+$(document).ready(function () {
 
-$(function(){
     talentId = getParameterByName('workId');
     initBaseInfo();
     initTCList();
