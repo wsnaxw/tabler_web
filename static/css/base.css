@@ -49,3 +49,39 @@
 .wordbold {
   font-weight: bold;
 }
+
+/* 加载动画元素样式 */
+.page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  /* background-color: rgba(255, 255, 255, 0.8); 半透明的白色背景，可根据需要调整 */
+  z-index: 9999; /* 确保加载动画在最上层显示 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 加载动画样式 */
+.page-loader::before {
+  content: "loading";
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 5px solid #ccc;
+  border-top-color: #333;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+      transform: rotate(0deg);
+  }
+
+  100% {
+      transform: rotate(360deg);
+  }
+}
