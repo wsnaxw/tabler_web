@@ -405,7 +405,7 @@ function kpiPop1(type,appUserId,date,pageNo,number){
                   +'</li>'
                 }else {
                     forward1 = '<li class="page-item" >'
-                    +'<a class="page-link" href="#" onclick="kpiPop1('+appUserId+","+date+","+forward+');">'
+                    +'<a class="page-link" href="#" onclick="kpiPop1('+type+","+appUserId+","+date+","+forward+');">'
                       +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 6l-6 6l6 6"></path></svg>'
                       +'prev'
                     +'</a>'
@@ -425,7 +425,7 @@ function kpiPop1(type,appUserId,date,pageNo,number){
                   +'</li>'
                 }else{
                     backwards1 = '<li class="page-item">'
-                    +'<a class="page-link" href="#"  onclick="kpiPop1('+appUserId+","+date+","+backwards+');" >'
+                    +'<a class="page-link" href="#"  onclick="kpiPop1('+type+","+appUserId+","+date+","+forward+');">'
                       +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg>'
                       +'next'
                     +'</a>'
@@ -447,9 +447,9 @@ function kpiPop1(type,appUserId,date,pageNo,number){
                             break;
                         }
                         if(i==pages){
-                            str+= '<li class="page-item active" ><a class="page-link" href="#"  onclick="kpiPop1('+appUserId+","+date+","+i+');" >'+i+'</a></li>'
+                            str+= '<li class="page-item active" ><a class="page-link" href="#"  onclick="kpiPop1('+type+","+appUserId+","+date+","+i+');" >'+i+'</a></li>'
                         }else{
-                            str+= '<li class="page-item" ><a class="page-link" href="#"  onclick="kpiPop1('+appUserId+","+date+","+i+');" >'+i+'</a></li>'
+                            str+= '<li class="page-item" ><a class="page-link" href="#"  onclick="kpiPop1('+type+","+appUserId+","+date+","+i+');" >'+i+'</a></li>'
                         }
                     }else{
                         count++;
@@ -458,9 +458,9 @@ function kpiPop1(type,appUserId,date,pageNo,number){
                             break;
                         }else{
                             if(i===pageNo){
-                                str+= '<li class="page-item active" ><a class="page-link" href="#"  onclick="kpiPop1('+appUserId+","+date+","+i+');" >'+i+'</a></li>'
+                                str+= '<li class="page-item active" ><a class="page-link" href="#"  onclick="kpiPop1('+type+","+appUserId+","+date+","+i+');" >'+i+'</a></li>'
                             }else{
-                                str+= '<li class="page-item" ><a class="page-link" href="#"  onclick="kpiPop1('+appUserId+","+date+","+i+');" >'+i+'</a></li>'
+                                str+= '<li class="page-item" ><a class="page-link" href="#"  onclick="kpiPop1('+type+","+appUserId+","+date+","+i+');" >'+i+'</a></li>'
                             }
                         }
                     }
@@ -484,7 +484,20 @@ function kpiPop1(type,appUserId,date,pageNo,number){
 
 
 function checktalentdetail(talentId){
-  alert(talentId)
+
+      //跳转页面并且携带参数
+
+      let bigNumber = BigInt(talentId);
+      let workId = bigNumber.toString(); // 转换为字符串
+  
+  
+  // 创建一个新的URL，携带参数
+  var url = '../talent/detail.html?workId=' + encodeURIComponent(workId)+'' ;
+  
+  // 使用jQuery来跳转到新页面
+  // window.location.href = url;
+  
+  window.open(url, '_blank');
 }
 
 
