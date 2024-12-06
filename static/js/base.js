@@ -272,10 +272,269 @@ async function getData(data,uri) {
 
 function indexSearch(){
 
+    let checkname = $("#indexsearch").val()
+
+    console.log(checkname);
+
+    getCUSpage(checkname)
+
+    $("#indexsearchmodal").modal('show')
+
 
 
     
 }
+
+
+
+
+
+
+
+function getCUSpage(checkname){
+
+
+
+
+  
+      // console.log(queryData)
+  
+  
+      $('#data').html('');
+  
+  
+      $.ajax({
+          headers:{
+              'token':localStorage.getItem("token"),
+              Accept:'application/json',
+              'Content-Type':'application/json;charset=UTF-8'
+          },
+          dataType:'json',
+          type:'post',
+          url:baseUri+'/customer/cstList',
+          data:JSON.stringify({'name':checkname}),
+          success:function(obj){
+  
+              var str="";
+              if(obj.data.list.length===0){
+                $('#khcxdiv').html('暂无数据');
+                  
+              }else{
+                  // $("#countsss").css("display","");
+
+                    
+
+                  for(var i =0;i<obj.data.list.length;i++){
+  
+                      var o = obj.data.list[i];
+                    
+                      
+  
+  
+  
+  
+                      var name = o.name+'';
+  
+  
+  
+  
+                      var jobBeansNum = o.jobBeansNum+'';
+  
+                     
+                      
+  
+                      var customerCommunicateBeansNum= o.customerCommunicateBeansNum+''
+  
+                      var numbers = '<div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">'+customerCommunicateBeansNum+'</div>'
+  
+          
+
+                      str += `
+                      <div class="card">
+                              <div class="card-body">
+                                <div class="card-header border-0">
+                                  <div class="card-title">客户查询 (<a href="./page/customer/list.html?name='${checkname}'">更多</a>)</div>
+                                </div>
+                                <div class="card-table table-responsive">
+                                  <table class="table table-vcenter">
+                                    <thead>		
+                                      <tr>
+                                        <th>客户名称</th>
+                                        <th>岗位数量</th>
+                                        <th>记录</th>
+                                        <th>操作</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody id="khcx">
+                                      <tr>
+                                        <td class="text-nowrap text-secondary"><span style="font-weight: bold;" class="bg-primary-lt"><a onclick="checkDetail(767968558662553600)">宁德市初心商贸有限公司</a></span></td>
+                                        <td class="text-secondary text-nowrap">2</td>
+                                        <td class="text-nowrap"><div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">1</div></td>
+                                        <td class="text-secondary text-nowrap"><a herf="#" onclick="checkDetail(${customerId})" class="btn btn-sm">查看</a></td>
+                                      </tr>
+                                      <tr>
+                                        <td class="text-nowrap text-secondary"><span style="font-weight: bold;" class="bg-primary-lt"><a onclick="checkDetail(767968558662553600)">宁德市初心商贸有限公司</a></span></td>
+                                        <td class="text-secondary text-nowrap">3</td>
+                                        <td class="text-nowrap"><div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">1</div></td>
+                                        <td class="text-secondary text-nowrap"><a herf="#" onclick="checkDetail(767968558662553600)" class="btn btn-sm">查看</a></td>
+                                      </tr>
+                                      <tr>
+                                        <td class="text-nowrap text-secondary"><span style="font-weight: bold;" class="bg-primary-lt"><a onclick="checkDetail(767968558662553600)">宁德市初心商贸有限公司</a></span></td>
+                                        <td class="text-secondary text-nowrap">4</td>
+                                        <td class="text-nowrap" ><div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">1</div></td>
+                                        <td class="text-secondary text-nowrap"><a herf="#" onclick="checkDetail(767968558662553600)" class="btn btn-sm">查看</a></td>
+                                      </tr>
+                                      <tr>
+                                        <td class="text-nowrap text-secondary"><span style="font-weight: bold;" class="bg-primary-lt"><a onclick="checkDetail(767968558662553600)">宁德市初心商贸有限公司</a></span></td>
+                                        <td class="text-secondary text-nowrap">5</td>
+                                        <td class="text-nowrap" ><div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">1</div></td>
+                                        <td class="text-secondary text-nowrap"><a herf="#" onclick="checkDetail(767968558662553600)" class="btn btn-sm">查看</a></td>
+                                      </tr>
+                                      <tr>
+                                        <td class="text-nowrap text-secondary"><span style="font-weight: bold;" class="bg-primary-lt"><a onclick="checkDetail(767968558662553600)">宁德市初心商贸有限公司</a></span></td>
+                                        <td class="text-secondary text-nowrap">6</td>
+                                        <td class="text-nowrap" ><div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">1</div></td>
+                                        <td class="text-secondary text-nowrap"><a herf="#" onclick="checkDetail(767968558662553600)" class="btn btn-sm">查看</a></td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+            
+                              </div>
+                            </div>
+                      `;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+                      str+="<tr><td>"
+                          +sourceType1+"</td><td>"
+                          +vip1+level1+"<span style='font-weight: bold;' class ='bg-primary-lt'><a onclick='checkDetail("+o.customerId+")'>"+name+"</a></span></td><td>"
+                          // +certification1+"</td><td >"
+                          +jobBeansNum+"</td><td >"
+                          
+                          +cteams+"</td><td>"
+                          +comName+"</td>" +
+                          "<td>"+state1+"</td>" +
+                          "<td>"+updateTime+"</td>" +
+                          "<td>"+numbers+"</td>" +
+                          "<td><a herf='#' onclick='checkDetail("+o.customerId+")' class ='btn'>查看</a><a herf='#' class='btn' onclick='move("+o.customerId+")'>转移</a></td>" +
+                          "</tr>";
+                  }
+                  $('#khcx').html(str);
+  
+  
+  
+  
+  
+  
+              }
+  
+  
+          }
+      });
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function usermessage(){
 
@@ -503,3 +762,5 @@ function leftpage(){
     }
   
   }
+
+
