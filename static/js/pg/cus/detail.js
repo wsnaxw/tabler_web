@@ -263,7 +263,7 @@ function rxxx(state){
                     <td>${o.company}</td>
                     <td>${o.job}</td>
                     <td>${o.createTime}</td>
-                    <td ><a class="btn btn-info" onclick="checkTalent(${o.talentId})">人选详情</a></td>
+                    <td ><a class="btn btn-info" target="_black" href='../talent/detail.html?workId=${o.talentId}'>人选详情</a></td>
                   </tr>`
 
                 })
@@ -1820,4 +1820,62 @@ function checkProject(id){
     // window.location.href = url;
     
     window.open(url, '_blank');
+}
+
+function addContacter(){
+    csid;
+
+
+
+    
+    // 获取 modal-edit 容器
+    var modalEditContainer = document.getElementById('contacter-modal');
+
+
+        
+    let check =true;
+    
+
+
+    // 使用querySelectorAll选择div内的所有input元素
+    const elements = modalEditContainer.querySelectorAll('input,textarea');
+    // 存储获取到的值的对象
+    const values = {};
+
+    elements.forEach((element) => {
+        // 获取元素的name属性作为键
+        const name = element.name || element.id || element.tagName.toLowerCase();
+        // 获取元素的值
+        const value = element.value;
+        // 将值存储到values对象中
+    
+
+        
+
+    });
+
+    values.customerId=csid;
+
+
+
+    // 遍历 modal-edit 容器内的所有 select 和 input 元素
+    var inputs = modalEditContainer.querySelectorAll('select, input');
+    inputs.forEach(function(input) {
+
+        input.classList.remove('is-valid', 'is-invalid','is-valid-lite','is-invalid-lite');
+        if(input.name == 'name'||input.name =='phone'||input.name =='salary'||input.name =='quot'){
+            input.classList.remove('is-valid', 'is-invalid','is-valid-lite','is-invalid-lite');
+            if (values[input.name]==undefined||values[input.name].trim() == '') {
+                input.classList.add('is-invalid');
+                input.classList.add('is-invalid-lite');
+                check=false;
+  
+              }
+        }
+
+    });
+
+
+    console.log(values)
+
 }

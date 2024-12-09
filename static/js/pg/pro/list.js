@@ -244,12 +244,24 @@ function getPage(pageNo){
 
 
 
-
+  obj2 = getUrlParams();
   arrowPageNo=pageNo;
+
     let queryData = formCheck()
     queryData.pageNo = pageNo;
     queryData.pageSize = 10;
 
+    // console.log(queryData)
+
+
+    const mergedObj = {};
+     for (const key in obj2) {
+        mergedObj[key] = obj2[key];
+    }
+
+    for (const key in queryData) {
+      mergedObj[key] = queryData[key];
+    }
     // console.log(queryData)
 
 
@@ -265,7 +277,7 @@ function getPage(pageNo){
         dataType:'json',
         type:'post',
         url:baseUri+'/project/selectPList',
-        data:JSON.stringify(queryData),
+        data:JSON.stringify(mergedObj),
         success:function(obj){
 
             var str="";

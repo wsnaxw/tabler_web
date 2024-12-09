@@ -43,6 +43,16 @@ const dashijian = '  <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  heigh
 const dayuanbao = '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#ffeb00"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-coin"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1" /><path d="M12 7v10" /></svg>'
 
 
+
+let male_icon= `<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#41c1d2"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-gender-male"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 14m-5 0a5 5 0 1 0 10 0a5 5 0 1 0 -10 0" /><path d="M19 5l-5.4 5.4" /><path d="M19 5h-5" /><path d="M19 5v5" /></svg>`
+
+
+let female_icon =`<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#eb2f96"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-gender-female"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 9m-5 0a5 5 0 1 0 10 0a5 5 0 1 0 -10 0" /><path d="M12 14v7" /><path d="M9 18h6" /></svg>`
+
+
+
+
+
 $(document).ready(function () {
     $('.page-loader').show();
     var x = localStorage.getItem("token");
@@ -123,6 +133,107 @@ $(document).ready(function () {
           console.log(inputValue);
       }
   });
+
+
+  $("#webBody").append(`
+    <div class="modal modal-blur fade" id="indexsearchmodal" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog modal-full-width modal-xl modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-body">
+                    <div class="row row-cards">
+                      <div class="card-header">
+                        <h3 class="wordbold">查询结果</h3>
+                      </div>
+                      <div class="card-body">
+                        <div class="row row-deck">
+                          <div class="col-3">
+                            <div class="card">
+                              <div class="card-body">
+                                <div class="card-header border-0">
+                                  <div class="card-title">客户查询 (<a id="cusatag" target="_blank" href="./page/customer/list.html">更多</a>)</div>
+                                </div>
+                                <div class="card-table table-responsive">
+                                  <table class="table table-vcenter">
+                                    <thead>		
+                                      <tr>
+                                        <th>客户名称</th>
+                                        <th>岗位数量</th>
+                                        <th>记录</th>
+                                        <th>操作</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody id="khcx">
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-4">
+                            <div class="card">
+                              <div class="card-body">
+                                <div class="card-header border-0">
+                                  <div class="card-title">职位查询 (<a id="proatag" target="_blank" href="./page/project/p-list.html">更多</a>)</div>
+                                </div>
+                                <div class="card-table table-responsive">
+                                  <table class="table table-vcenter">
+                                    <thead>		
+                                      <tr>
+                                        <th>客户名称</th>
+                                        <th>职位名称</th>
+                                        <th>状态</th>
+                                        <th>推荐人数</th>
+                                        <th>操作</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody id="zwcx">    
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-5">
+                            <div class="card">
+                              <div class="card-body">
+                                <div class="card-header border-0">
+                                  <div class="card-title">人选查询 (<a id="tlatag" target="_blank" href="./page/talent/t-list.html">更多</a>)</div>
+                                </div>
+                                <div class="card-table table-responsive">
+                                  <table class="table table-vcenter">
+                                    <thead>		
+                                      <tr>
+                                        <th>人选名称</th>
+                                        <th>学历</th>
+                                        <th>公司</th>
+                                        <th>职位</th>
+                                        <th>操作</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody id="rxcx">
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-link link-secondary me-auto" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">确认</button>
+                  </div>
+                </div>
+              </div>
+            </div>`)
+
+
+
+
+
+
 });
 
 function menuStart() {
@@ -274,12 +385,15 @@ function indexSearch(){
 
     let checkname = $("#indexsearch").val()
 
-    console.log(checkname);
+    
 
     getCUSpage(checkname)
 
+    getPropage(checkname)
+    
+    getTlpage(checkname)
+    
     $("#indexsearchmodal").modal('show')
-
 
 
     
@@ -292,173 +406,193 @@ function indexSearch(){
 
 
 function getCUSpage(checkname){
+    var domain = window.location.protocol + "//" + window.location.host;
+    $.ajax({
+        headers:{
+            'token':localStorage.getItem("token"),
+            Accept:'application/json',
+            'Content-Type':'application/json;charset=UTF-8'
+        },
+        dataType:'json',
+        type:'post',
+        url:baseUri+'/customer/cstList',
+        data:JSON.stringify({'name':checkname}),
+        success:function(obj){
+            var str="";
+            if(obj.data.list.length===0){
+                $('#indexsearchmodal').find('#khcx').html(`<tr class='text-c'><td colspan='4'>没有数据 !</td></tr>`);          
+            }else{
+                $('#indexsearchmodal').find("#cusatag").attr('href',domain+'/tabler_web/page/customer/list.html?name='+checkname);
+                for(var i =0;i<obj.data.list.length;i++){
+                    var o = obj.data.list[i];
+                    var jobBeansNum = o.jobBeansNum+'';
+                    var customerCommunicateBeansNum= o.customerCommunicateBeansNum+''
+                    var numbers = '<div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">'+customerCommunicateBeansNum+'</div>'
+                    str += `
+                                    <tr>
+                                      <td class="text-nowrap text-secondary"><span style="font-weight: bold;" class="bg-primary-lt"><a target='_blank' href='./customer/cusd.html?customerId=encodeURIComponent(${o.customerId})'>${o.name}</a></span></td>
+                                      <td class="text-secondary text-nowrap">${jobBeansNum}</td>
+                                      <td class="text-nowrap">${numbers}</td>
+                                      <td class="text-secondary text-nowrap"><a target='_blank' href='./page/customer/cusd.html?customerId=${o.customerId}' class="btn btn-sm">查看</a></td>
+                                    </tr>                                
+                    `;
+                }
+                $('#indexsearchmodal').find('#khcx').html(str);
+            }
+        }
+    });  
+}
 
 
 
 
-  
-      // console.log(queryData)
-  
-  
-      $('#data').html('');
-  
-  
-      $.ajax({
-          headers:{
-              'token':localStorage.getItem("token"),
-              Accept:'application/json',
-              'Content-Type':'application/json;charset=UTF-8'
-          },
-          dataType:'json',
-          type:'post',
-          url:baseUri+'/customer/cstList',
-          data:JSON.stringify({'name':checkname}),
-          success:function(obj){
-  
-              var str="";
-              if(obj.data.list.length===0){
-                $('#khcxdiv').html('暂无数据');
+
+function getPropage(checkname){
+    var domain = window.location.protocol + "//" + window.location.host;
+    $.ajax({
+        headers:{
+            'token':localStorage.getItem("token"),
+            Accept:'application/json',
+            'Content-Type':'application/json;charset=UTF-8'
+        },
+        dataType:'json',
+        type:'post',
+        url:baseUri+'/project/selectPList',
+        data:JSON.stringify({'name':checkname}),
+        success:function(obj){
+            var str="";
+            if(obj.data.list.length===0){
+                $('#indexsearchmodal').find('#zwcx').html(`<tr class='text-c'><td colspan='5'>没有数据 !</td></tr>`);           
+            }else{
+                $('#indexsearchmodal').find("#proatag").attr('href',domain+'/tabler_web/page/project/p-list.html?name='+checkname);
+                for(var i =0;i<obj.data.list.length;i++){
+
+
+                    var o = obj.data.list[i];
+                  var numbers = '<div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">'+o.recommendNumber+'</div>'
+
+                    str+=`
+                                        <tr>
+                                        <td class="text-nowrap text-secondary">${o.customerName}</td>
+                                        <td class="text-secondary text-nowrap"><span style="font-weight: bold;" class="bg-primary-lt"><a target='_blank' href='./page/project/prod.html?workId=${o.projectId}'>${o.name}</a></span></td>
+                                        <td class="text-secondary text-nowrap">${o.stateData}</td>
+                                        <td class="text-nowrap" >${numbers}</td>
+                                        <td class="text-secondary text-nowrap"><a target='_blank' href='./page/project/prod.html?workId=${o.projectId}' class='btn btn-sm'>查看</a></td>
+                                      </tr>
+                    `
+
+
+
+                }
+                $('#indexsearchmodal').find('#zwcx').html(str);
+            }
+        }
+    });  
+}
+
+
+
+
+
+
+
+
+function getTlpage(checkname){
+    var domain = window.location.protocol + "//" + window.location.host;
+    $.ajax({
+        headers:{
+            'token':localStorage.getItem("token"),
+            Accept:'application/json',
+            'Content-Type':'application/json;charset=UTF-8'
+        },
+        dataType:'json',
+        type:'post',
+        url:baseUri+'/talent/selectTalentList',
+        data:JSON.stringify({'name':checkname}),
+        success:function(obj){
+            var str="";
+            if(obj.data.list.length===0){
+                $('#indexsearchmodal').find('#rxcx').html(`<tr class='text-c'><td colspan='5'>没有数据 !</td></tr>`);           
+            }else{
+                $('#indexsearchmodal').find("#tlatag").attr('href',domain+'/tabler_web/page/talent/t-list.html?name='+checkname);
+                for(var i =0;i<obj.data.list.length;i++){
+
+
+                    var o = obj.data.list[i];
                   
-              }else{
-                  // $("#countsss").css("display","");
+                    let gender = '';
 
-                    
+                    if(o.gender==1){
+                      gender = male_icon;
+                    }else if (o.gender==2){
+                      gender = female_icon;
+                    }
 
-                  for(var i =0;i<obj.data.list.length;i++){
-  
-                      var o = obj.data.list[i];
-                    
-                      
-  
-  
-  
-  
-                      var name = o.name+'';
-  
-  
-  
-  
-                      var jobBeansNum = o.jobBeansNum+'';
-  
-                     
-                      
-  
-                      var customerCommunicateBeansNum= o.customerCommunicateBeansNum+''
-  
-                      var numbers = '<div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">'+customerCommunicateBeansNum+'</div>'
-  
-          
+                   
 
-                      str += `
-                      <div class="card">
-                              <div class="card-body">
-                                <div class="card-header border-0">
-                                  <div class="card-title">客户查询 (<a href="./page/customer/list.html?name='${checkname}'">更多</a>)</div>
-                                </div>
-                                <div class="card-table table-responsive">
-                                  <table class="table table-vcenter">
-                                    <thead>		
-                                      <tr>
-                                        <th>客户名称</th>
-                                        <th>岗位数量</th>
-                                        <th>记录</th>
-                                        <th>操作</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody id="khcx">
-                                      <tr>
-                                        <td class="text-nowrap text-secondary"><span style="font-weight: bold;" class="bg-primary-lt"><a onclick="checkDetail(767968558662553600)">宁德市初心商贸有限公司</a></span></td>
-                                        <td class="text-secondary text-nowrap">2</td>
-                                        <td class="text-nowrap"><div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">1</div></td>
-                                        <td class="text-secondary text-nowrap"><a herf="#" onclick="checkDetail(${customerId})" class="btn btn-sm">查看</a></td>
-                                      </tr>
-                                      <tr>
-                                        <td class="text-nowrap text-secondary"><span style="font-weight: bold;" class="bg-primary-lt"><a onclick="checkDetail(767968558662553600)">宁德市初心商贸有限公司</a></span></td>
-                                        <td class="text-secondary text-nowrap">3</td>
-                                        <td class="text-nowrap"><div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">1</div></td>
-                                        <td class="text-secondary text-nowrap"><a herf="#" onclick="checkDetail(767968558662553600)" class="btn btn-sm">查看</a></td>
-                                      </tr>
-                                      <tr>
-                                        <td class="text-nowrap text-secondary"><span style="font-weight: bold;" class="bg-primary-lt"><a onclick="checkDetail(767968558662553600)">宁德市初心商贸有限公司</a></span></td>
-                                        <td class="text-secondary text-nowrap">4</td>
-                                        <td class="text-nowrap" ><div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">1</div></td>
-                                        <td class="text-secondary text-nowrap"><a herf="#" onclick="checkDetail(767968558662553600)" class="btn btn-sm">查看</a></td>
-                                      </tr>
-                                      <tr>
-                                        <td class="text-nowrap text-secondary"><span style="font-weight: bold;" class="bg-primary-lt"><a onclick="checkDetail(767968558662553600)">宁德市初心商贸有限公司</a></span></td>
-                                        <td class="text-secondary text-nowrap">5</td>
-                                        <td class="text-nowrap" ><div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">1</div></td>
-                                        <td class="text-secondary text-nowrap"><a herf="#" onclick="checkDetail(767968558662553600)" class="btn btn-sm">查看</a></td>
-                                      </tr>
-                                      <tr>
-                                        <td class="text-nowrap text-secondary"><span style="font-weight: bold;" class="bg-primary-lt"><a onclick="checkDetail(767968558662553600)">宁德市初心商贸有限公司</a></span></td>
-                                        <td class="text-secondary text-nowrap">6</td>
-                                        <td class="text-nowrap" ><div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">1</div></td>
-                                        <td class="text-secondary text-nowrap"><a herf="#" onclick="checkDetail(767968558662553600)" class="btn btn-sm">查看</a></td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                </div>
-            
-                              </div>
-                            </div>
-                      `;
+
+
+                    var edu = '';
+                    switch (o.education) {
+                        case "0":
+                          edu='';
+                          break;
+                        case "1":
+                          edu='初中';
+                            break;
+                        case "2":
+                          edu='中专';
+                            break;
+                        case "3":
+                          edu='高中';
+                            break;
+                        case "4":
+                          edu='大专';
+                            break;
+                        case "5":
+                          edu='本科';
+                            break;
+                        case "6":
+                          edu='硕士';
+                                break;
+                        case "7":
+                          edu='博士';
+                            break;
+                        default:
+                          edu=o.education;
+                    }
+
+
+                    str+=
+                    `
+                    <tr > 
+                        <td > ${gender}${o.name}</td>
+                        <td >${toStr(edu)}</td>
+                        <td >${toStr(o.lastCompany)}</td>
+                        <td >${checkAndCutString(o.job)}</td>      
+                         <td class="text-secondary text-nowrap"><a target='_blank' href='./page/talent/detail.html?workId=${o.talentId}' class='btn btn-sm'>查看</a></td>
+                      </tr>
+                    `
+
+                }
+                $('#indexsearchmodal').find('#rxcx').html(str);
+            }
+        }
+    });  
+}
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-  
-                      str+="<tr><td>"
-                          +sourceType1+"</td><td>"
-                          +vip1+level1+"<span style='font-weight: bold;' class ='bg-primary-lt'><a onclick='checkDetail("+o.customerId+")'>"+name+"</a></span></td><td>"
-                          // +certification1+"</td><td >"
-                          +jobBeansNum+"</td><td >"
-                          
-                          +cteams+"</td><td>"
-                          +comName+"</td>" +
-                          "<td>"+state1+"</td>" +
-                          "<td>"+updateTime+"</td>" +
-                          "<td>"+numbers+"</td>" +
-                          "<td><a herf='#' onclick='checkDetail("+o.customerId+")' class ='btn'>查看</a><a herf='#' class='btn' onclick='move("+o.customerId+")'>转移</a></td>" +
-                          "</tr>";
-                  }
-                  $('#khcx').html(str);
-  
-  
-  
-  
-  
-  
-              }
-  
-  
-          }
-      });
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+function checkAndCutString(str) {
+    if(str == null) return "";
+    if (str.length > 10) {
+      return str.substring(0, 10);
+    } else {
+      return str;
+    }
   }
 
 
@@ -469,30 +603,18 @@ function getCUSpage(checkname){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  function getUrlParams() {
+    var search = window.location.search;
+    var params = {};
+    if (search.length > 1) {
+        search = search.substring(1).split('&');
+        for (var i = 0; i < search.length; i++) {
+            var pair = search[i].split('=');
+            params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || "");
+        }
+    }
+    return params;
+}
 
 
 

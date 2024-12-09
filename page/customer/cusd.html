@@ -337,7 +337,7 @@
                           <div class="card-header">
                             <h3 class="card-title" id="basecname" style="font-weight: bold;">基本信息</h3><span class="form-check-description" style="color: rgb(77, 150, 193);" id="bmxx" onclick="copyTextToClipboard('bmxx')"></span>
                             <div class="card-actions">
-                              <a href="#" class="btn btn-ghost-primary" onclick="showMessage(1)">
+                              <a href="./add.html" target="_blank" class="btn btn-ghost-primary">
                                 新增职位 
                               </a>
                               
@@ -595,7 +595,7 @@
                       <div class="card-header">
                         客户联系人
                         <div class="card-actions">
-                          <a href="#" class="btn btn-ghost-primary">
+                          <a class="btn btn-ghost-primary" data-bs-toggle="modal" data-bs-target="#contacter-modal">
                             新增
                           </a>
                         </div>
@@ -947,25 +947,100 @@
 
 
 
-        <div class="modal modal-blur fade" id="modal-danger" tabindex="-1" aria-hidden="true" >
-          <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal modal-blur fade" id="contacter-modal" tabindex="-1" aria-hidden="true" >
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
            
-            <div class="modal-content modal-body">
-              
-              <div class="alert alert-success" role="alert">
-                <div class="d-flex">
-                  <div>
-                    <!-- Download SVG icon from http://tabler-icons.io/i/check -->
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon alert-icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M5 12l5 5l10 -10"></path></svg>
-                  </div>
-                  <div>
-                    <h4 class="alert-title">成功</h4>
-                    <div class="text-secondary" id="modalshowstr"></div>
-                  </div>
-                </div>
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title wordbold">新增客户联系人</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-          
+              <div class="modal-body">
+
+                
+                <div class="row row-cards card-body">
+                  <div class="col-md-12">
+                    <div class=" row">
+                      <label class="col-2 form-label required wordbold">姓名</label>
+                      <div class="col-auto">
+                        <input type="text" class="form-control " placeholder="联系人姓名" name="name" autocomplete="off">
+                        <div class="invalid-feedback">不能为空！</div>
+                      </div>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class=" row">
+                      <label class="col-4 form-label required wordbold">电话</label>
+                      <div class="col-auto">
+                        <input type="text" class="form-control " placeholder="联系人姓名" name="phone" autocomplete="off">
+                        <div class="invalid-feedback">不能为空！</div>
+                      </div>
+                      
+                    </div>
+                  </div>
+           
+               
+                  <div class="col-md-6">
+                  </div>
+                  <div class="col-md-6">
+                    <div class=" row">
+                      <label class="col-4 form-label  wordbold">职务</label>
+                      <div class="col-auto">
+                        <input type="text" class="form-control " placeholder="联系人职务" name="job" autocomplete="off">
+                      </div>
+                      
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                  </div>
+                  <div class="col-md-6">
+                    <div class=" row">
+                      <label class="col-4 form-label  wordbold">微信</label>
+                      <div class="col-auto">
+                        <input type="text" class="form-control " placeholder="微信号" name="wechatId" autocomplete="off">
+                      </div>
+                      
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class=" row">
+                      <label class="col-3 form-label  wordbold">邮箱</label>
+                      <div class="col-auto">
+                        <input type="text" class="form-control " placeholder="邮箱test@abc.com" name="email" autocomplete="off">
+                      </div>
+                      
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="row">
+                      <label class="col-2 form-label  wordbold">备注</label>
+                      <div class="col-8">
+                        <textarea rows="3" class="form-control" name="remark"></textarea>
+                      </div>
+                      
+                    </div>
+                  </div>
+                  
+                </div>
+    
+
+               
+
+
+              </div>
+    
               
+              <div class="modal-footer">
+                <a  class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                  关闭
+                </a>
+                <a  class="btn btn-primary ms-auto"  onclick="addContacter()">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+                  新增
+                </a>
+              </div>
             </div>
           </div>
         </div>

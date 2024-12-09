@@ -30,7 +30,7 @@ const customerIcon =
 function getPage(pageNo){
 
 
-
+  obj2 = getUrlParams();
   arrowPageNo=pageNo;
 
     let queryData = formCheck()
@@ -40,6 +40,15 @@ function getPage(pageNo){
     // console.log(queryData)
 
 
+    const mergedObj = {};
+   
+    for (const key in obj2) {
+        mergedObj[key] = obj2[key];
+    }
+
+    for (const key in queryData) {
+      mergedObj[key] = queryData[key];
+    }
     $('#data').html('');
 
 
@@ -52,7 +61,7 @@ function getPage(pageNo){
         dataType:'json',
         type:'post',
         url:baseUri+'/customer/cstList',
-        data:JSON.stringify(queryData),
+        data:JSON.stringify(mergedObj),
         success:function(obj){
 
             var str="";

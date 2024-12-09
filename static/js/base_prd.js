@@ -42,8 +42,9 @@ const dazuanshi = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24
 const dashijian = '  <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#fd7275"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-news"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1 -4 0v-13a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1v12a3 3 0 0 0 3 3h11" /><path d="M8 8l4 0" /><path d="M8 12l4 0" /><path d="M8 16l4 0" /></svg>'
 const dayuanbao = '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#ffeb00"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-coin"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M14.8 9a2 2 0 0 0 -1.8 -1h-2a2 2 0 1 0 0 4h2a2 2 0 1 1 0 4h-2a2 2 0 0 1 -1.8 -1" /><path d="M12 7v10" /></svg>'
 
-$(function(){
 
+$(document).ready(function () {
+    $('.page-loader').show();
     var x = localStorage.getItem("token");
     if (x==null||x.length<10){
         //x 为null 需要重新请求 并且跳转网页
@@ -271,10 +272,310 @@ async function getData(data,uri) {
 
 function indexSearch(){
 
+    let checkname = $("#indexsearch").val()
+
+    
+
+    getCUSpage(checkname)
+
+    getPropage(checkname)
+    
+    getTlpage(checkname)
+    
+    $("#indexsearchmodal").modal('show')
 
 
     
 }
+
+
+
+
+
+
+
+function getCUSpage(checkname){
+    var domain = window.location.protocol + "//" + window.location.host;
+    $.ajax({
+        headers:{
+            'token':localStorage.getItem("token"),
+            Accept:'application/json',
+            'Content-Type':'application/json;charset=UTF-8'
+        },
+        dataType:'json',
+        type:'post',
+        url:baseUri+'/customer/cstList',
+        data:JSON.stringify({'name':checkname}),
+        success:function(obj){
+            var str="";
+            if(obj.data.list.length===0){
+                $('#indexsearchmodal').find('#khcx').html(`<tr class='text-c'><td colspan='4'>没有数据 !</td></tr>`);          
+            }else{
+                $('#indexsearchmodal').find("#cusatag").attr('href',domain+'/page/customer/list.html?name='+checkname);
+                for(var i =0;i<obj.data.list.length;i++){
+                    var o = obj.data.list[i];
+                    var jobBeansNum = o.jobBeansNum+'';
+                    var customerCommunicateBeansNum= o.customerCommunicateBeansNum+''
+                    var numbers = '<div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">'+customerCommunicateBeansNum+'</div>'
+                    str += `
+                                    <tr>
+                                      <td class="text-nowrap text-secondary"><span style="font-weight: bold;" class="bg-primary-lt"><a target='_blank' href='./customer/cusd.html?customerId=encodeURIComponent(${o.customerId})'>${o.name}</a></span></td>
+                                      <td class="text-secondary text-nowrap">${jobBeansNum}</td>
+                                      <td class="text-nowrap">${numbers}</td>
+                                      <td class="text-secondary text-nowrap"><a target='_blank' href='./page/customer/cusd.html?customerId=${o.customerId}' class="btn btn-sm">查看</a></td>
+                                    </tr>                                
+                    `;
+                }
+                $('#indexsearchmodal').find('#khcx').html(str);
+            }
+        }
+    });  
+}
+
+
+
+
+
+function getPropage(checkname){
+    var domain = window.location.protocol + "//" + window.location.host;
+    $.ajax({
+        headers:{
+            'token':localStorage.getItem("token"),
+            Accept:'application/json',
+            'Content-Type':'application/json;charset=UTF-8'
+        },
+        dataType:'json',
+        type:'post',
+        url:baseUri+'/project/selectPList',
+        data:JSON.stringify({'name':checkname}),
+        success:function(obj){
+            var str="";
+            if(obj.data.list.length===0){
+                $('#indexsearchmodal').find('#zwcx').html(`<tr class='text-c'><td colspan='5'>没有数据 !</td></tr>`);           
+            }else{
+                $('#indexsearchmodal').find("#proatag").attr('href',domain+'/page/project/p-list.html?name='+checkname);
+                for(var i =0;i<obj.data.list.length;i++){
+
+
+                    var o = obj.data.list[i];
+                  var numbers = '<div style="width: 28px; height: 28px; line-height: 28px; border-radius: 50%; text-align: center; background-color: rgb(27, 188, 155); color: rgb(255, 255, 255);">'+o.recommendNumber+'</div>'
+
+                    str+=`
+                                        <tr>
+                                        <td class="text-nowrap text-secondary">${o.customerName}</td>
+                                        <td class="text-secondary text-nowrap"><span style="font-weight: bold;" class="bg-primary-lt"><a target='_blank' href='./page/project/prod.html?workId=${o.projectId}'>${o.name}</a></span></td>
+                                        <td class="text-secondary text-nowrap">${o.stateData}</td>
+                                        <td class="text-nowrap" >${numbers}</td>
+                                        <td class="text-secondary text-nowrap"><a target='_blank' href='./page/project/prod.html?workId=${o.projectId}' class='btn btn-sm'>查看</a></td>
+                                      </tr>
+                    `
+
+
+
+                }
+                $('#indexsearchmodal').find('#zwcx').html(str);
+            }
+        }
+    });  
+}
+
+
+
+
+
+
+
+
+function getTlpage(checkname){
+    var domain = window.location.protocol + "//" + window.location.host;
+    $.ajax({
+        headers:{
+            'token':localStorage.getItem("token"),
+            Accept:'application/json',
+            'Content-Type':'application/json;charset=UTF-8'
+        },
+        dataType:'json',
+        type:'post',
+        url:baseUri+'/talent/selectTalentList',
+        data:JSON.stringify({'name':checkname}),
+        success:function(obj){
+            var str="";
+            if(obj.data.list.length===0){
+                $('#indexsearchmodal').find('#rxcx').html(`<tr class='text-c'><td colspan='5'>没有数据 !</td></tr>`);           
+            }else{
+                $('#indexsearchmodal').find("#tlatag").attr('href',domain+'/page/talent/t-list.html?name='+checkname);
+                for(var i =0;i<obj.data.list.length;i++){
+
+
+                    var o = obj.data.list[i];
+                  
+                    let gender = '';
+
+                    if(o.gender==1){
+                      gender = male_icon;
+                    }else if (o.gender==2){
+                      gender = female_icon;
+                    }
+
+                   
+
+
+
+                    var edu = '';
+                    switch (o.education) {
+                        case "0":
+                          edu='';
+                          break;
+                        case "1":
+                          edu='初中';
+                            break;
+                        case "2":
+                          edu='中专';
+                            break;
+                        case "3":
+                          edu='高中';
+                            break;
+                        case "4":
+                          edu='大专';
+                            break;
+                        case "5":
+                          edu='本科';
+                            break;
+                        case "6":
+                          edu='硕士';
+                                break;
+                        case "7":
+                          edu='博士';
+                            break;
+                        default:
+                          edu=o.education;
+                    }
+
+
+                    str+=
+                    `
+                    <tr > 
+                        <td > ${gender}${o.name}</td>
+                        <td >${toStr(edu)}</td>
+                        <td >${toStr(o.lastCompany)}</td>
+                        <td >${checkAndCutString(o.job)}</td>      
+                         <td class="text-secondary text-nowrap"><a target='_blank' href='./page/talent/detail.html?workId=${o.talentId}' class='btn btn-sm'>查看</a></td>
+                      </tr>
+                    `
+
+                }
+                $('#indexsearchmodal').find('#rxcx').html(str);
+            }
+        }
+    });  
+}
+
+
+
+
+
+
+function checkAndCutString(str) {
+    if(str == null) return "";
+    if (str.length > 10) {
+      return str.substring(0, 10);
+    } else {
+      return str;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function getUrlParams() {
+    var search = window.location.search;
+    var params = {};
+    if (search.length > 1) {
+        search = search.substring(1).split('&');
+        for (var i = 0; i < search.length; i++) {
+            var pair = search[i].split('=');
+            params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1] || "");
+        }
+    }
+    return params;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function usermessage(){
 
@@ -467,8 +768,13 @@ function toStr(value) {
     if (value === null || value === undefined) {
         return '';
     }
+
     return value.toString();
 }
+
+function isNumber(value) {
+    return typeof value === 'number' && !Number.isNaN(value) && Number.isFinite(value);
+  }
 function getParameterByName(name) {
     url = window.location.href;
    name = name.replace(/[\[\]]/g, "\\$&");
@@ -498,6 +804,4 @@ function leftpage(){
   
   }
 
-  function isNumber(value) {
-    return typeof value === 'number' && !Number.isNaN(value) && Number.isFinite(value);
-  }
+
