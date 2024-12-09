@@ -1848,7 +1848,7 @@ function addContacter(){
         // 获取元素的值
         const value = element.value;
         // 将值存储到values对象中
-    
+        values[name] = value;
 
         
 
@@ -1876,6 +1876,40 @@ function addContacter(){
     });
 
 
-    console.log(values)
+
+
+
+    if(check){
+        const options = {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            'token':localStorage.getItem('token')
+            },
+            body: JSON.stringify(values),
+            };
+    
+            var url = baseUri+'/customer/addContact';
+        fetch(url,options)
+            .then(response => response.json())
+            .then(json => {
+                // console.log(json)
+                if(json.code==0){
+                    
+                    contactList(csid);
+            showMessage(0,'添加成功！！')
+                }
+    
+    
+    
+            }).catch((error)=>{
+                callback();
+            });
+
+            $('#contacter-modal').modal('hide')
+
+
+    }
+
 
 }
