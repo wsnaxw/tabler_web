@@ -23,7 +23,7 @@
     <script src="../../static/js/base.js?9527"></script>
     <script src="../../static/js/watermark.js"></script>
     <script src="../../static/js/citycode.js" ></script>
-    <script src="../../static/js/pg/pro/add1.js"></script>
+    <script src="../../static/js/pg/pro/add.js"></script>
     <script>
       function dark(){
         let body = document.getElementById('webBody')
@@ -288,12 +288,12 @@
                         <div class="col-auto ms-auto d-print-none">
                           <div class="d-flex">
                             <div class="me-3">
-                              <a href="#" class="btn btn-info">
+                              <a  class="btn btn-info" onclick="test()">
                                 <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                                 清空
                               </a>
                             </div>
-                            <a href="#" class="btn btn-success">
+                            <a  class="btn btn-success">
                               <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                               <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg>
                               新增
@@ -349,6 +349,11 @@
                               </div>
                             </div>
                           </div>
+                          <div class="mb-3 col-lg-12 row">
+          
+                            <select id="city-select" class="tom-select" multiple></select>
+                          </div>
+                    
                           <div class="col-md-6">
                             <div class="mb-3 row">
                               <label class="col-3 form-label required"  style="font-weight: bold;">所属行业</label>
@@ -601,7 +606,7 @@
                                 <textarea class="form-control" rows="2" name="contacterRemark" ></textarea>
                               </div>
                             </div>
-    
+                      
                             
                                     
              
@@ -773,34 +778,87 @@
           </div>
         </div>
         
-
+   
       
-        <select id="city-select" class="form-control"></select>
 
         <script>
-            // 等待DOM内容加载完毕
-            document.addEventListener("DOMContentLoaded", function () {
-                // 从citycode.js中获取城市数据
-                var cityData = cn.data; // 假设CityCode.data是包含所有城市数据的数组
-    
-                // 将城市数据转换为TomSelect可以理解的格式
-                var options = cityData.map(function (city) {
-                    return {
-                        value: city.code, // 城市代码作为值
-                        label: city.name, // 城市名称作为标签
-                        // 你可以根据需要添加其他字段，比如城市的全拼、首字母等
-                    };
+          let citys;
+      document.addEventListener('DOMContentLoaded', function() {
+            var citySelect = document.getElementById('city-select');
+
+            // 确保 citycode.js 已经加载并且 cn 对象存在
+            if (typeof cn !== 'undefined') {
+                var options = [];
+                var optgroup = [];
+
+
+                var directCities = cn.getProvinces().filter(function(province) {
+            // 假设直辖市的 province.type 属性为 'city' 或者根据其他条件判断
+                return province.type === 'city'; // 这个判断条件需要根据 citycode.js 的实际数据结构调整
                 });
-    
-                // 初始化TomSelect
-                var citySelect = new TomSelect('#city-select', {
-                    items: options, // 设置选项数据
-                    multi: true, // 启用多选
-                    placeholder: '请选择城市...',
-                    searchField: 'label', // 设置搜索字段为城市名称
-                    // 其他配置选项...
+                directCities.forEach(function(city) {
+                    options.push({
+                      class: '直辖市',
+                        value: city.code,
+                        text: city.name,
+                        group: '直辖市' // 为直辖市创建一个虚拟的省份组
+                    });
                 });
-            });
+                console.log(directCities)
+
+                var provinces = cn.getProvinces();
+                provinces.forEach(function(province) {
+                    var cities = cn.getPrefectures(province.code);
+                    cities.forEach(function(city) {
+                        options.push({
+                            class:province.name,
+                            value:city.name,
+                            text: city.name,
+                            group: province.name
+                        });
+                    
+                        
+                    });
+                    options.push({
+                            class:province.name,
+                            value:province.name,
+                            text: province.name,
+                            group: province.name
+                        });
+                    optgroup.push({
+                            label:province.name,
+                            value:province.name,
+                            label_scientific:province.alias
+                      });
+                });
+
+
+
+                console.log(optgroup)
+                citys = new TomSelect(citySelect, {
+                  options: options,
+                    placeholder: '选择城市...',
+                    multiple: true,
+                    optgroupField: 'class',
+                    optgroups:optgroup,
+                    maxOptions:null,
+                    allowEmptyOption: true,
+                    duplicates: true,
+                    labelField: 'text',
+                    valueField: 'value',
+                    searchField: ['text'],
+                    render: {
+                    optgroup_header: function(data, escape) {
+                      return '<div class="optgroup-header">' + escape(data.label) + ' <span class="scientific">' + escape(data.label_scientific) + '</span></div>';
+                    }
+                  }
+                    // 其他配置...
+                });
+            } else {
+                console.error('citycode.js is not loaded correctly!');
+            }
+        });
+
         </script>
 
         
