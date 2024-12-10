@@ -22,7 +22,8 @@
     <script src="../../static/js/jquery.min.js"></script>
     <script src="../../static/js/base.js?9527"></script>
     <script src="../../static/js/watermark.js"></script>
-    <script src="../../static/js/pg/cus/add.js"></script>
+    <script src="../../static/js/citycode.js" ></script>
+    <script src="../../static/js/pg/pro/add1.js"></script>
     <script>
       function dark(){
         let body = document.getElementById('webBody')
@@ -307,7 +308,7 @@
                             <div class="mb-3 row">
                               <label class="col-3 form-label required" style="font-weight: bold;">客户名称</label>
                               <div class="col">
-                                <input type="text" class="form-control " placeholder="客户名称" name="customerName" >
+                                <input type="text" class="form-control " placeholder="客户名称" name="customerName" id="" >
                                 <div class="invalid-feedback">不能为空！</div>
                               </div>
                             </div>
@@ -325,7 +326,7 @@
                
                           <div class="col-md-10">
                             <div class="mb-3 row">
-                              <label class="form-label col-3 " style="font-weight: bold;">公司简介</label>
+                              <label class="form-label col-3 " style="font-weight: bold;">职位类别</label>
                               <div class="nav-item dropdown col" >
                                 <input type="text" class="form-select dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="true" readonly name="job" id="jobinput">
                                 <div class="dropdown-menu " data-bs-popper="static" >
@@ -774,7 +775,33 @@
         
 
       
+        <select id="city-select" class="form-control"></select>
 
+        <script>
+            // 等待DOM内容加载完毕
+            document.addEventListener("DOMContentLoaded", function () {
+                // 从citycode.js中获取城市数据
+                var cityData = cn.data; // 假设CityCode.data是包含所有城市数据的数组
+    
+                // 将城市数据转换为TomSelect可以理解的格式
+                var options = cityData.map(function (city) {
+                    return {
+                        value: city.code, // 城市代码作为值
+                        label: city.name, // 城市名称作为标签
+                        // 你可以根据需要添加其他字段，比如城市的全拼、首字母等
+                    };
+                });
+    
+                // 初始化TomSelect
+                var citySelect = new TomSelect('#city-select', {
+                    items: options, // 设置选项数据
+                    multi: true, // 启用多选
+                    placeholder: '请选择城市...',
+                    searchField: 'label', // 设置搜索字段为城市名称
+                    // 其他配置选项...
+                });
+            });
+        </script>
 
         
 

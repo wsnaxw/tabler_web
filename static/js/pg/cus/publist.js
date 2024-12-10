@@ -191,7 +191,7 @@ function getPage(pageNo){
                         "<td>"+state1+"</td>" +
                         "<td>"+updateTime+"</td>" +
                         "<td>"+numbers+"</td>" +
-                        "<td><a herf='#' onclick='checkDetail("+o.customerId+")' class ='btn'>查看</a><a herf='#' class='btn' onclick='move("+o.customerId+")'>转为我的</a></td>" +
+                        "<td><a herf='#' onclick='checkDetail("+o.customerId+")' class ='btn'>查看</a><a herf='#' class='btn' onclick='move("+o.customerId+")'>转移</a></td>" +
                         "</tr>";
                 }
                 $('#data').html(str);
@@ -479,3 +479,84 @@ function getParameterByName(name) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
+
+
+function move(csid){
+  let bigNumber = BigInt(csid);
+  let customerId = bigNumber.toString(); // 转换为字符串
+  $("#hidencsid").val(customerId)
+  $("#movemember").modal('show')
+}
+let addMoveMember;
+document.addEventListener("DOMContentLoaded", function () {
+  addMoveMember=  new TomSelect('#addMoveMember',{
+      //设置可选最大值
+      maxItems: 1,
+      valueField: 'userId',
+      labelField: 'name',
+      searchField: 'name',
+      // fetch remote data
+      load: function(query, callback) {
+
+          const options = {
+              method: 'POST',
+              headers: {
+              'Content-Type': 'application/json',
+              'token':localStorage.getItem('token')
+              },
+              body: JSON.stringify({ 'name': query }),
+              };
+
+              var url = baseUri+'/customer/ulfq';
+          fetch(url,options)
+              .then(response => response.json())
+              .then(json => {
+                var item = json.data.list;
+      
+                  callback(item);
+              }).catch((error)=>{
+                  callback();
+              });
+
+      },
+      // custom rendering functions for options and items
+      render: {
+          option: function(item, escape) {
+      return `<div><span class="dropdown-item-indicator"  >
+      </span>${ escape(item.name) }</div>`;
+  
+              
+          },
+          item: function(item, escape) {
+      return `<div><span class="dropdown-item-indicator"  >
+      </span>${ escape(item.name) }</div>`;
+  
+          }
+      },
+  });
+});
+
+function moveCustomer(){
+  if(addMoveMember.getValue()==null)return;
+  const options = {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      'token':localStorage.getItem('token')
+      },
+      body: JSON.stringify({ 'appUserId': addMoveMember.getValue(),'customerId':$("#hidencsid").val()}),
+      };
+      var url = baseUri+'/customer/shiftCustomer';
+  fetch(url,options)
+      .then(response => response.json())
+      .then(json => {
+          // console.log(json)
+          if(json.code==0){   
+      showMessage(0,'成功！！')
+          }
+      }).catch((error)=>{
+          console.log(error);
+      });
+      $('#movemember').modal('hide')
+}
+

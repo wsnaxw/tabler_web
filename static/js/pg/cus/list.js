@@ -492,3 +492,91 @@ function getParameterByName(name) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
+
+function move(csid){
+  let bigNumber = BigInt(csid);
+  let customerId = bigNumber.toString(); // 转换为字符串
+  $("#hidencsid").val(customerId)
+  $("#movemember").modal('show')
+}
+let addMoveMember;
+document.addEventListener("DOMContentLoaded", function () {
+  addMoveMember=  new TomSelect('#addMoveMember',{
+      //设置可选最大值
+      maxItems: 1,
+      valueField: 'userId',
+      labelField: 'name',
+      searchField: 'name',
+      // fetch remote data
+      load: function(query, callback) {
+
+          const options = {
+              method: 'POST',
+              headers: {
+              'Content-Type': 'application/json',
+              'token':localStorage.getItem('token')
+              },
+              body: JSON.stringify({ 'name': query }),
+              };
+
+              var url = baseUri+'/customer/ulfq';
+          fetch(url,options)
+              .then(response => response.json())
+              .then(json => {
+                var item = json.data.list;
+      
+                  callback(item);
+              }).catch((error)=>{
+                  callback();
+              });
+
+      },
+      // custom rendering functions for options and items
+      render: {
+          option: function(item, escape) {
+      return `<div><span class="dropdown-item-indicator"  >
+      </span>${ escape(item.name) }</div>`;
+  
+              
+          },
+          item: function(item, escape) {
+      return `<div><span class="dropdown-item-indicator"  >
+      </span>${ escape(item.name) }</div>`;
+  
+          }
+      },
+      // 使用 onInitialize 或 onFocus 来自动触发查询
+      onInitialize: function() {
+        this.clearOptions(); // 清空初始选项
+        this.load(''); // 传入空字符串以加载所有选项或基于默认查询
+    },
+  });
+
+
+
+});
+
+function moveCustomer(){
+  if(addMoveMember.getValue()==null)return;
+  const options = {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      'token':localStorage.getItem('token')
+      },
+      body: JSON.stringify({ 'appUserId': addMoveMember.getValue(),'customerId':$("#hidencsid").val()}),
+      };
+      var url = baseUri+'/customer/shiftCustomer';
+  fetch(url,options)
+      .then(response => response.json())
+      .then(json => {
+          // console.log(json)
+          if(json.code==0){   
+      showMessage(0,'成功！！')
+          }
+      }).catch((error)=>{
+          console.log(error);
+      });
+      $('#movemember').modal('hide')
+}
+

@@ -1451,6 +1451,7 @@ function signC(){
             .then(json => {
     
                 showMessage(json.code)
+                baseinfo(csid)
             }).catch((error)=>{
                 
             });

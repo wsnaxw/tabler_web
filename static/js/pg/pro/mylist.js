@@ -334,10 +334,10 @@ function getPage(pageNo){
                     <td>${o.createTime}</td>
                     <td>${numbers}</td>
                 
-                    <td><a herf="#" onclick="checkDetail('${o.projectId}')" class="btn">查看</a><a herf="#" class="btn" onclick="move('${o.projectId}')">转移</a></td></tr>`
+                    <td><a onclick="checkDetail('${o.projectId}')" class="btn">查看</a></td></tr>`
           
 
-
+{/* <a class="btn" onclick="move('${o.projectId}')">转移</a> */}
                 }
                 $('#data').html(str);
 

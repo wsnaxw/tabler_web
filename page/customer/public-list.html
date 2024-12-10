@@ -17,6 +17,7 @@
     <script src="../../static/js/tabler.min.js"></script>
     <link rel="stylesheet" href="../../static/css/tabler.min.css">
     <link rel="stylesheet" href="../../static/css/base.css">
+    <link rel="stylesheet" href="../../static/css/tabler-vendors.min.css">
     <link rel="icon" href="../../static/img/favicon.ico" type="image/x-icon" />
     <script src="../../static/js/jquery.min.js"></script>
     <script src="../../static/js/base.js?1"></script>
@@ -523,6 +524,49 @@
 
       
 
+        <div class="modal modal-blur fade" id="movemember" tabindex="-1" role="dialog" aria-hidden="true" >
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title wordbold">选择转移对象</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+               
+
+
+                <div class="mb-3">
+                  <label class="form-label">顾问查询</label>
+                  <input type="text" class="form-select" placeholder="输入名称查询选择需要查看的顾问" id="addMoveMember"  >
+                  
+                </div>
+               
+               
+               
+
+
+              </div>
+              <input type="hidden" id="hidencsid">
+
+              
+              <div class="modal-footer">
+                <a class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                  取消
+                </a>
+                <a class="btn btn-primary ms-auto"  onclick="moveCustomer()">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+                  新增
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <script src="../../static/js/tom-select.base.min.js" ></script>
+      
 
        
         <footer class="footer footer-transparent d-print-none">

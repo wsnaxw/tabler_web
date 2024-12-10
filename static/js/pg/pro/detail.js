@@ -365,6 +365,11 @@ let flame = `<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  
 function baseinfo(workId){
     getData({'projectId': workId},'/project/selectPById').then(data => {
         try {
+
+
+            sessionStorage.setItem('info',JSON.stringify(data))
+
+
             $('#formdata').html('')
             let cityCode = '';
             if(data.cityCode!=null&&data.cityCode.length>4){
@@ -406,7 +411,7 @@ function baseinfo(workId){
                   break;
 
               default:
-                  jobGender='不限'
+                  jobGender='性别不限'
           }
 
 
@@ -414,7 +419,7 @@ function baseinfo(workId){
           let requireEduStr = '';
           switch (data.requireEdu) {
             case 0:
-                requireEduStr = '不限';
+                requireEduStr = '学历不限';
               break;
             case 1:
                 requireEduStr = '初中以上';
@@ -438,7 +443,7 @@ function baseinfo(workId){
                 requireEduStr = '博士及以上';
               break;
             default:
-                requireEduStr = '不限';
+                requireEduStr = '学历不限';
           }
    
         //   0 草稿 1 运作、2结束、3暂停、4关闭
@@ -469,7 +474,7 @@ function baseinfo(workId){
                               <a href="p-creation.html" target='_blank' class="btn btn-ghost-primary" >
                                 新增职位 
                               </a>
-                              <a href="#" class="btn btn-ghost-info"  data-bs-toggle='modal' data-bs-target='#modal-edit' onclick="initEdit()">
+                              <a class="btn btn-ghost-info"  data-bs-toggle='modal' data-bs-target='#modal-edit' onclick="initEdit()">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path><path d="M16 5l3 3"></path></svg>
                               </a>
                             </div>
@@ -493,11 +498,11 @@ function baseinfo(workId){
                             </div>
                             <dl class="row mb-3">
                               <dt class="col-1">职位类别:</dt>
-                              <dd class="col-2" >${toStr(data.requireAgeS)}</dd>
+                              <dd class="col-2" >${toStr(data.job)}</dd>
                               <dt class="col-1">招聘人数:</dt>
                               <dd class="col-2" >${data.recruitNum}</dd>
                               <dt class="col-1">归属部门:</dt>
-                              <dd class="col-2" >无</dd>
+                              <dd class="col-2" >${toStr(data.department)}</dd>
                               <dt class="col-1">工作地点:</dt>
                               <dd class="col-2">${toStr(cityCode)}</dd>
                               <dt class="col-1">状态:</dt>
@@ -980,13 +985,8 @@ function changeCState(state){
 function initEdit(){
 
 
-
-    $('input[name="outName"]').val(editInfo.outName)
-
-
-    $('input[name="registeredAddress"]').val(editInfo.registeredAddress)
-
-    $('input[name="webSite"]').val(editInfo.webSite)
+    console.log(JSON.parse(sessionStorage.getItem('info')))
+    let o = JSON.parse(sessionStorage.getItem('info'));
 
 
 
