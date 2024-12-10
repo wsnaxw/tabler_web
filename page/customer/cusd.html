@@ -639,7 +639,7 @@
                         <div class="card-header">
                           <h3 class="card-title">子公司</h3>
                             <div class="card-actions">
-                              <a href="#" class="btn btn-ghost-primary">
+                              <a class="btn btn-ghost-primary" data-bs-toggle="modal"  data-bs-target="#company-new-modal">
                                 新增
                               </a>
                             </div>
@@ -676,7 +676,7 @@
                         <div class="card-header">
                           <h3 class="card-title">关联公司</h3>
                             <div class="card-actions">
-                              <a href="#" class="btn btn-ghost-primary">
+                              <a href="#" class="btn btn-ghost-primary" data-bs-toggle="modal" data-bs-target="#company-new-modal">
                                 新增
                               </a>
                             </div>
@@ -1047,6 +1047,37 @@
 
 
 
+        <div class="modal modal-blur fade" id="contacter-edit-modal" tabindex="-1" aria-hidden="true" >
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+           
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title wordbold">修改客户联系人</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body" id="editcinput">
+
+                
+  
+
+              </div>
+    
+              
+              <div class="modal-footer">
+                <a  class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                  取消
+                </a>
+                <a  class="btn btn-primary ms-auto"  onclick="editContacter()">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+                  确认修改
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
         <div class="modal modal-blur fade" id="membermodal" tabindex="-1" role="dialog" aria-hidden="true" >
           <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -1102,6 +1133,60 @@
           </div>
         </div>
 
+
+        <div class="modal modal-blur fade" id="company-new-modal" tabindex="-1" role="dialog" aria-hidden="true" >
+          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="formtitle">新增子/关联公司</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+
+                
+                <div class="mb-3">
+                  <label class="form-label">关联公司类型</label>
+                  <div>
+                    <label class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="type" value="0" checked>
+                      <span class="form-check-label">子公司</span>
+                    </label>
+                    <label class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="type" value="1" >
+                      <span class="form-check-label">关联公司</span>
+                    </label>
+                  </div>
+                </div>
+               
+
+
+                <div class="mb-3">
+                  <label class="form-label wordbold required">子/关联公司名称</label>
+                  <input class="form-control" type="text" name="name"  >
+                  <div class="invalid-feedback">不能为空！</div>
+                </div>
+               
+    
+
+               
+
+
+              </div>
+    
+              
+              <div class="modal-footer">
+                <a class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                  Cancel
+                </a>
+                <a  class="btn btn-primary ms-auto" onclick="addCustomerCompany()">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+                  新增
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div class="modal modal-blur fade" id="modal-sign" tabindex="-1" role="dialog" aria-hidden="true">
           <div class="modal-dialog modal-lg modal-dialog-centered" role="document">

@@ -931,7 +931,7 @@ function contactList(customerId){
      
                 data.list.forEach(o=>{
 
-                
+                    sessionStorage.setItem(o.id,JSON.stringify(o));
 
                     str+=
 
@@ -955,10 +955,10 @@ function contactList(customerId){
                     <td>${toStr(o.remark)}</td>
          
                     <td >
-                      <a class="btn btn-ghost-info" href="#" onclick="editc(${toStr(o.id)})">
+                      <a class="btn btn-ghost-info"  onclick="editc(${toStr(o.id)})">
                         修改
                       </a>
-                      <a class="btn btn-ghost-warning" href="#" onclick="deletec(${toStr(o.id)})">
+                      <a class="btn btn-ghost-warning"  onclick="deletec(${toStr(o.id)})">
                         删除
                       </a>
                     </td>
@@ -985,6 +985,96 @@ function contactList(customerId){
 
 
 }
+
+
+
+function editc(id){
+    console.log(JSON.parse(sessionStorage.getItem(id)))
+    let o = JSON.parse(sessionStorage.getItem(id));
+ 
+
+    $("#editcinput").html(`
+    <div class="row row-cards card-body">
+                  <div class="col-md-12">
+                    <div class=" row">
+                      <label class="col-2 form-label required wordbold">姓名</label>
+                      <div class="col-auto">
+                        <input type="text" class="form-control " placeholder="联系人姓名" name="name" value="${o.name}" autocomplete="off">
+                        <div class="invalid-feedback">不能为空！</div>
+                      </div>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class=" row">
+                      <label class="col-4 form-label required wordbold">电话</label>
+                      <div class="col-auto">
+                        <input type="text" class="form-control " placeholder="联系人姓名" name="phone" value="${o.phone}" autocomplete="off">
+                        <div class="invalid-feedback">不能为空！</div>
+                      </div>
+                      
+                    </div>
+                  </div>
+           
+               
+                  <div class="col-md-6">
+                  </div>
+                  <div class="col-md-6">
+                    <div class=" row">
+                      <label class="col-4 form-label  wordbold">职务</label>
+                      <div class="col-auto">
+                        <input type="text" class="form-control " placeholder="联系人职务" name="job" value="${toStr(o.job)}" autocomplete="off">
+                      </div>
+                      
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                  </div>
+                  <div class="col-md-6">
+                    <div class=" row">
+                      <label class="col-4 form-label  wordbold">微信</label>
+                      <div class="col-auto">
+                        <input type="text" class="form-control " placeholder="微信号" name="wechatId"  value="${toStr(o.wechatId)}" autocomplete="off">
+                      </div>
+                      
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class=" row">
+                      <label class="col-3 form-label  wordbold">邮箱</label>
+                      <div class="col-auto">
+                        <input type="text" class="form-control " placeholder="邮箱test@abc.com" name="email"  value="${toStr(o.email)}" autocomplete="off">
+                      </div>
+                      
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="row">
+                      <label class="col-2 form-label  wordbold">备注</label>
+                      <div class="col-8">
+                        <textarea rows="3" class="form-control" name="remark" value="${toStr(o.remark)}"></textarea>
+                      </div>
+                      
+                    </div>
+                  </div>
+                  <input type="hidden" name="id"  value="${toStr(o.id)}" >
+                  <input type="hidden" name="customerId"  value="${toStr(o.customerId)}" >
+                </div>
+    `)
+
+
+
+    $("#contacter-edit-modal").modal('show')
+
+
+
+
+
+
+
+
+}
+
 
 function toStr(value) {
     if (value === null || value === undefined) {
@@ -1823,20 +1913,9 @@ function checkProject(id){
 }
 
 function addContacter(){
-    csid;
-
-
-
-    
     // 获取 modal-edit 容器
     var modalEditContainer = document.getElementById('contacter-modal');
-
-
-        
     let check =true;
-    
-
-
     // 使用querySelectorAll选择div内的所有input元素
     const elements = modalEditContainer.querySelectorAll('input,textarea');
     // 存储获取到的值的对象
@@ -1912,4 +1991,205 @@ function addContacter(){
     }
 
 
+}
+
+
+function editContacter(){
+    // 获取 modal-edit 容器
+    var modalEditContainer = document.getElementById('contacter-edit-modal');
+    let check =true;
+    // 使用querySelectorAll选择div内的所有input元素
+    const elements = modalEditContainer.querySelectorAll('input,textarea');
+    // 存储获取到的值的对象
+    const values = {};
+
+    elements.forEach((element) => {
+        // 获取元素的name属性作为键
+        const name = element.name || element.id || element.tagName.toLowerCase();
+        // 获取元素的值
+        const value = element.value;
+        // 将值存储到values对象中
+        values[name] = value;
+
+        
+
+    });
+
+    values.customerId=csid;
+
+
+
+    // 遍历 modal-edit 容器内的所有 select 和 input 元素
+    var inputs = modalEditContainer.querySelectorAll('select, input');
+    inputs.forEach(function(input) {
+
+        input.classList.remove('is-valid', 'is-invalid','is-valid-lite','is-invalid-lite');
+        if(input.name == 'name'||input.name =='phone'||input.name =='salary'||input.name =='quot'){
+            input.classList.remove('is-valid', 'is-invalid','is-valid-lite','is-invalid-lite');
+            if (values[input.name]==undefined||values[input.name].trim() == '') {
+                input.classList.add('is-invalid');
+                input.classList.add('is-invalid-lite');
+                check=false;
+  
+              }
+        }
+
+    });
+
+
+
+
+
+    if(check){
+        const options = {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            'token':localStorage.getItem('token')
+            },
+            body: JSON.stringify(values),
+            };
+    
+            var url = baseUri+'/customer/updateContact';
+        fetch(url,options)
+            .then(response => response.json())
+            .then(json => {
+                // console.log(json)
+                if(json.code==0){
+                    
+                    contactList(csid);
+            showMessage(0,'修改成功！！')
+                }
+    
+    
+    
+            }).catch((error)=>{
+                callback();
+            });
+
+            $('#contacter-edit-modal').modal('hide')
+
+
+    }
+}
+
+function deletec(id){
+
+    var isConfirmed = confirm("您确定要删除吗？");
+
+    if (isConfirmed) {
+        const options = {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            'token':localStorage.getItem('token')
+            },
+            body: JSON.stringify({
+                "customerId": csid,
+                "id":id
+              }),
+            };
+    
+            var url = baseUri+'/customer/deleteContact';
+        fetch(url,options)
+            .then(response => response.json())
+            .then(json => {
+                // console.log(json)
+                if(json.code==0){
+                    
+                    contactList(csid);
+            showMessage(0,'删除成功！！')
+                }
+    
+    
+    
+            }).catch((error)=>{
+                callback();
+            });
+    }
+}
+
+
+function addCustomerCompany(){
+      // 获取 modal-edit 容器
+      var modalEditContainer = document.getElementById('company-new-modal');
+      let check =true;
+      // 使用querySelectorAll选择div内的所有input元素
+      const elements = modalEditContainer.querySelectorAll('input,textarea');
+      // 存储获取到的值的对象
+      const values = {};
+  
+      elements.forEach((element) => {
+          // 获取元素的name属性作为键
+          const name = element.name || element.id || element.tagName.toLowerCase();
+          // 获取元素的值
+          const value = element.value;
+          // 将值存储到values对象中
+          if(element.type=='checkbox'||element.type=='radio'){
+            if(element.checked){
+              values[name] = value;
+            }
+            
+          }else{
+            values[name] = value;
+          }
+  
+      });
+  
+      values.customerId=csid;
+  
+  
+  
+      // 遍历 modal-edit 容器内的所有 select 和 input 元素
+      var inputs = modalEditContainer.querySelectorAll('select, input');
+      inputs.forEach(function(input) {
+  
+          input.classList.remove('is-valid', 'is-invalid','is-valid-lite','is-invalid-lite');
+          if(input.name == 'name'||input.name =='phone'||input.name =='salary'||input.name =='quot'){
+              input.classList.remove('is-valid', 'is-invalid','is-valid-lite','is-invalid-lite');
+              if (values[input.name]==undefined||values[input.name].trim() == '') {
+                  input.classList.add('is-invalid');
+                  input.classList.add('is-invalid-lite');
+                  check=false;
+    
+                }
+          }
+  
+      });
+  
+  
+  
+  
+  
+      if(check){
+          const options = {
+              method: 'POST',
+              headers: {
+              'Content-Type': 'application/json',
+              'token':localStorage.getItem('token')
+              },
+              body: JSON.stringify(values),
+              };
+      
+              var url = baseUri+'/customer/addCustomerCompany';
+          fetch(url,options)
+              .then(response => response.json())
+              .then(json => {
+                  // console.log(json)
+                  if(json.code==0){
+                      
+                    custcom(csid);
+              showMessage(0,'添加成功！！')
+                  }
+      
+      
+      
+              }).catch((error)=>{
+                  callback();
+              });
+  
+              $('#company-new-modal').modal('hide')
+  
+  
+      }
 }
