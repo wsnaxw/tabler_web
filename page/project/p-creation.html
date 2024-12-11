@@ -23,6 +23,7 @@
     <script src="../../static/js/base.js?9527"></script>
     <script src="../../static/js/watermark.js"></script>
     <script src="../../static/js/citycode.js" ></script>
+    <script src="../../static/js/pg/pro/Position.js"></script>
     <script src="../../static/js/pg/pro/add.js"></script>
     <script>
       function dark(){
@@ -324,36 +325,26 @@
                             </div>
                           </div>
                
+                          
                           <div class="col-md-10">
                             <div class="mb-3 row">
-                              <label class="form-label col-3 " style="font-weight: bold;">职位类别</label>
-                              <div class="nav-item dropdown col" >
-                                <input type="text" class="form-select dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="true" readonly name="job" id="jobinput">
-                                <div class="dropdown-menu " data-bs-popper="static" >
-                                  <div class="dropdown-menu-columns">
-                                    <div class="dropdown-menu-column" id="jobdiv">
-      
-      
-      
-                                   
-                                     
-      
-      
-                                    </div>
-                                  
-                                  
-                                 
-                                
-                                </div>
-                                </div>
+                              <label class="col-3 form-label" style="font-weight: bold;">职位类别</label>
+                              <div class="col">
+                                <select id="jobtype-select" class="tom-select" ></select>
                               </div>
+                              
                             </div>
                           </div>
-                          <div class="mb-3 col-lg-12 row">
-          
-                            <select id="city-select" class="tom-select" multiple></select>
+                          <div class="col-md-10">
+                            <div class="mb-3 row">
+                              <label class="col-3 form-label" style="font-weight: bold;">工作地点</label>
+                              <div class="col">
+                                <select id="city-select" class="tom-select" multiple></select>
+                              </div>
+                              
+                            </div>
                           </div>
-                    
+                 
                           <div class="col-md-6">
                             <div class="mb-3 row">
                               <label class="col-3 form-label required"  style="font-weight: bold;">所属行业</label>
@@ -783,6 +774,7 @@
 
         <script>
           let citys;
+          let jobs;
       document.addEventListener('DOMContentLoaded', function() {
             var citySelect = document.getElementById('city-select');
 
@@ -804,7 +796,6 @@
                         group: '直辖市' // 为直辖市创建一个虚拟的省份组
                     });
                 });
-                console.log(directCities)
 
                 var provinces = cn.getProvinces();
                 provinces.forEach(function(province) {
@@ -834,7 +825,6 @@
 
 
 
-                console.log(optgroup)
                 citys = new TomSelect(citySelect, {
                   options: options,
                     placeholder: '选择城市...',
@@ -857,13 +847,106 @@
             } else {
                 console.error('citycode.js is not loaded correctly!');
             }
+
+
+
+            var jobtype = document.getElementById('jobtype-select');
+            let industry1 = [];
+            let industrychild=[];
+
+            industry1.push({
+              label:"不限",
+              value:"不限",
+              label_scientific:"不限"
+
+            })
+            industrychild.push({
+                    class:"不限",
+                    value:"不限",
+                    text: "不限",
+                    group: "不限",
+                });
+
+            positionList.forEach(function(inds){
+              if(inds.label!='不限'){
+
+              
+              var childs = inds.children;
+              console.log("childs",childs)
+              childs.forEach(function(child) {
+               
+                industrychild.push({
+                    class:inds.value,
+                    value:child.label,
+                    text: child.value,
+                    group: inds.value
+                });
+             
+
+                
+              });
+
+              industry1.push({
+                  label:inds.label,
+                  value:inds.value,
+                  label_scientific:inds.label
+              });
+            }
+
+           });
+
+           console.log("industrychild",industrychild)
+           console.log("industry1",industry1)
+
+          //  jobs= new TomSelect(jobtype, {
+          //           options: industry1,
+          //           multiple: true,
+          //           placeholder: '选择职位类别',
+          //           optgroupField: 'class',
+          //           optgroups:industrychild,
+          //           maxOptions:null,
+          //           allowEmptyOption: true,
+          //           duplicates: true,
+          //           labelField: 'text',
+          //           valueField: 'value',
+          //           searchField: ['text'],
+          //           render: {
+          //           optgroup_header: function(data, escape) {
+          //             return '<div class="optgroup-header">' + escape(data.label) + ' <span class="scientific">' + escape(data.label_scientific) + '</span></div>';
+          //           }
+          //         }
+          //       });
+
+          new TomSelect(jobtype, {
+              options: positionList,
+              labelField: 'value',
+                    valueField: 'value',
+                    searchField: ['value'],
+              plugins: ['dropdown_input'] // Optional, if you want search functionality within the dropdown
+          });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         });
 
         </script>
 
         
 
-        <script src="../../static/js/tom-select.base.min.js" ></script>
+        <script src="../../static/js/pg/pro/tom-select.complete.js" ></script>
 
        
         <footer class="footer footer-transparent d-print-none">

@@ -348,7 +348,7 @@ function getPage(pageNo){
                     <td><a  onclick="checkDetail('${o.projectId}')" class="btn">查看</a></td></tr>`
           
 
-{/* <a herf="#" class="btn" onclick="move('${o.projectId}')">转移</a> */}
+// <a herf="#" class="btn" onclick="move('${o.projectId}')">转移</a>
 
                 }
                 $('#data').html(str);
