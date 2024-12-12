@@ -526,11 +526,6 @@ function news(){
 }
 
 
-function test1(){
-    alert(1)
-    $('#sidebar-menu').hide()
-}
-
 function newspaper(key){
 
 

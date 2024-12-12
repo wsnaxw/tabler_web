@@ -46,11 +46,9 @@
       <!--      &lt;!&ndash; Sidebar &ndash;&gt;-->
       
       
-      <aside class="navbar navbar-vertical navbar-expand-lg"    >
+      <aside class="navbar navbar-vertical navbar-expand-lg"   >
         <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+     
           <h1 class="navbar-brand navbar-brand-autodark">
             <a href="#" >
               <img src="http://admin.fsfhr.com/banner.svg" width="110" height="32" alt="faithful" class="navbar-brand-image">
@@ -63,6 +61,8 @@
               </li>
             </ul>
           </div>
+
+        
         </div>
       </aside>
 
@@ -168,7 +168,8 @@
 
 
 
-          <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal p-0 pe-md-6">
+          <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal p-0 pe-md-6" >
+            
           </h1>
           <div class="navbar-nav flex-row order-md-last">
             <div class="nav-item d-none d-md-flex me-3">
@@ -294,11 +295,13 @@
                                 清空
                               </a>
                             </div>
-                            <a  class="btn btn-success">
-                              <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                              <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg>
-                              新增
-                            </a>
+                            <div class="me-3">
+                              <a  class="btn btn-success">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                                保存草稿
+                              </a>
+                             </div>
+                            <button class="btn btn-primary">发布</button>
                           </div>
                         </div>
                       </div>
@@ -307,7 +310,7 @@
                         <div class="row row-cards">
                           <div class="col-md-10">
                             <div class="mb-3 row">
-                              <label class="col-3 form-label required" style="font-weight: bold;">客户名称</label>
+                              <label class="col-3 form-label required wordbold" >客户名称</label>
                               <div class="col">
                                 <input type="text" class="form-control " placeholder="客户名称" name="customerName" id="" >
                                 <div class="invalid-feedback">不能为空！</div>
@@ -316,7 +319,7 @@
                           </div>
                           <div class="col-md-10">
                             <div class="mb-3 row">
-                              <label class="col-3 form-label required" style="font-weight: bold;">职位名称</label>
+                              <label class="col-3 form-label required wordbold" >职位名称</label>
                               <div class="col">
                                 <input type="text" class="form-control" placeholder="对外展示名称" name="outName" >
                                 <div class="invalid-feedback">不能为空！</div>
@@ -328,121 +331,96 @@
                           
                           <div class="col-md-10">
                             <div class="mb-3 row">
-                              <label class="col-3 form-label" style="font-weight: bold;">职位类别</label>
-                              <div class="col">
-                                <select id="jobtype-select" class="tom-select" ></select>
+                              <label class="form-label col-3 wordbold required" >职位类别</label>
+                              <div class="nav-item dropdown col" >
+                                <input type="text" class="form-select dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="true" readonly name="job" id="jobinput">
+                                <div class="dropdown-menu " id="jobmenu" data-bs-popper="static" >
+                                  <div class="dropdown-menu-columns">
+                                    <div class="dropdown-menu-column" id="jobdiv">
+
+
+
+                                  
+                                    
+
+
+                                    </div>
+                                  
+                                  
+                                
+                                
+                                </div>
+                                </div>
                               </div>
                               
                             </div>
                           </div>
                           <div class="col-md-10">
                             <div class="mb-3 row">
-                              <label class="col-3 form-label" style="font-weight: bold;">工作地点</label>
+                              <label class="col-3 form-label wordbold" >工作地点</label>
                               <div class="col">
                                 <select id="city-select" class="tom-select" multiple></select>
                               </div>
                               
                             </div>
                           </div>
+
+                          <div class="col-md-10">
+                            <div class="mb-3 row">
+                              <label class="col-3 form-label  wordbold" >职位年薪</label>
+                              <div class="col">
+                                <input type="text" class="form-control" placeholder="对外展示名称" name="outName" >
+                               
+                              </div>
+                              <div class="col">
+                                <input type="text" class="form-control" placeholder="对外展示名称" name="outName" >
+                               
+                              </div>
+                              
+                            </div>
+                          </div>
                  
-                          <div class="col-md-6">
+                          <div class="col-md-10">
                             <div class="mb-3 row">
-                              <label class="col-3 form-label required"  style="font-weight: bold;">所属行业</label>
-
-                              <div class="input-group input-group-flat col">
-                                <select class="form-select" id="industryType" name="industryType">
-                                  <option selected value="不限">不限</option>
-                                  <option value="互联网 / 游戏 / 软件">互联网 / 游戏 / 软件</option>
-                                  <option value="电子 / 通信 / 硬件">电子 / 通信 / 硬件</option>
-                                  <option value="房地产 / 建筑 / 物业 ">房地产 / 建筑 / 物业 </option>
-                                  <option value="经济">经济</option>
-                                  <option value="消费品">消费品</option>
-                                  <option value="汽车 / 机械 / 制造">汽车 / 机械 / 制造</option>
-                                  <option value="广告 / 传媒 / 教育 / 文化">广告 / 传媒 / 教育 / 文化</option>
-                                  <option value="交通 / 贸易 / 物流">交通 / 贸易 / 物流</option>
-                                  <option value="制药 / 医用器械">制药 / 医用器械</option>
-                                  <option value="能源 / 化工 / 环保">能源 / 化工 / 环保</option>
-                                  <option value="政府 / 农林牧渔">政府 / 农林牧渔</option>
-                                </select>
-
-                              </div>  
-                            </div>
-                          </div>
-                          <div class="col-sm-6">
-                            <div class="mb-3 row">
-                              <label class="form-label required col-3" style="font-weight: bold;">公司性质</label>
-                              <div class="input-group input-group-flat col">
-                                <select class="form-select" id="customerNature" name="customerNature">
-                                
-                                  <option value="0">国企</option>
-                                  <option value="1" selected>民营企业</option>
-                                  <option value="2">合资</option>
-                                  <option value="3">外资（欧美）</option>
-                                  <option value="4">外资（非欧美）</option>
-                                  <option value="5">外企代表处</option>
-                                  <option value="6">政府机关</option>
-                                  <option value="6">事业单位</option>
-                                  <option value="6">非营利组织</option>
-                                </select>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6">
-                            <div class="mb-3 row">
-                              <label class="form-label col-3" style="font-weight: bold;">公司规模</label>
-                              <div class="input-group input-group-flat col">
-                                <select class="form-select" id="customerSize" name="customerSize">
-                                  <option selected value="0">0-15人</option>
-                                  <option value="1">15-50人</option>
-                                  <option value="2">50-100人</option>
-                                  <option value="3">100-500人</option>
-                                  <option value="4">500-1000人</option>
-                                  <option value="5">1000-10000人</option>
-                                  <option value="6">10000人以上</option>
-                                </select>
-                              </div>
-                            </div>
-                          </div>
-                    
-                          <div class="col-md-6">
-                            <div class="mb-3 row">
-                              <div class="form-label required col-3" style="font-weight: bold">客户来源</div>
+                              <label class="col-3 form-label  wordbold" >归属部门</label>
                               <div class="col">
-                                <select class="form-select" id="sourceType" name="sourceType">
-                                  <option value="1">广告呼入</option>
-                                  <option value="2" selected>主动BD</option>
-                                  <option value="3">电销开发</option>
-                                  <option value="0">公共池</option>
-                                </select>
+                                <input type="text" class="form-control" placeholder="对外展示名称" name="outName" >
                               </div>
+                              
                             </div>
                           </div>
-                          <div class="col-md-6">
+                          <div class="col-md-10">
                             <div class="mb-3 row">
-                              <label class="form-label col-3 " style="font-weight: bold;">公司地址</label>
+                              <label class="col-3 form-label  wordbold" >招聘数量
+                              </label>
                               <div class="col">
-                                <input type="test" class="form-control" name="registeredAddress" placeholder="城市 or 详细地址">
+                                <input type="number" class="form-control" placeholder="对外展示名称" name="outName" >
+                                <small class="form-hint">0为若干</small>
                               </div>
+                              
                             </div>
                           </div>
 
-                          <div class="col-md-6">
+                          <div class="col-md-10">
                             <div class="mb-3 row">
-                              <label class="form-label col-3" style="font-weight: bold">客户状态</label>
+                              <label class="col-3 form-label  wordbold" >汇报对象</label>
                               <div class="col">
-                                <label class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="state" value="0" checked="">
-                                  <span class="form-check-label">潜在客户</span>
-                                </label>
-                                
+                                <input type="text" class="form-control" placeholder="对外展示名称" name="outName" >
                               </div>
+                              
                             </div>
                           </div>
+                          
                         
                         </div>
                       </div>
                       <div class="card-footer text-end">
-                        <button type="submit" class="btn btn-primary">提交</button>
+                          <a  class="btn btn-success">
+                            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                            保存草稿
+                          </a>
+                          <button class="btn btn-primary">发布</button>
+                      
                       </div>
                     </form>
                   </div>
@@ -456,7 +434,127 @@
 
 
                     <div class="row row-cards">
+                      <div class="card">
+                        <div class="card-header">
+                          <h1 class="card-title">职位要求</h1>
+                        </div>
+                        <div class="card-body">
+                          <div class="row row-cards">
+                            <div class="col-md-10">
+                              <div class="mb-3 row">
+                                <label class="col-3 form-label required wordbold" >学历要求</label>
+                                <div class="col">
+                                  <select class="form-select " id="state" name="requireEdu">
+                                    <option selected value="">不限</option>
+                                    <option value="3">大专</option>
+                                    <option value="4">本科</option>
+                                    <option value="5">研究生</option>
+                                    <option value="6">博士</option>
+                                    <option value="7">博士后</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div class="col-md-10">
+                              <div class="mb-3 row">
+                                <label class="col-3 form-label  wordbold" >年龄要求</label>
+                                <div class="col">
+                                  <input type="number" class="form-control" placeholder="起始年龄" name="outName" >
+                                 
+                                </div>
+                                <div class="col">
+                                  <input type="number" class="form-control" placeholder="结束年龄" name="outName" >
+                                 
+                                </div>
+                                <div class="col">
+                                  <input type="checkbox" class="form-check-input"  name="outName" >
+                                  <span>不限</span>
+                                </div>
+                                
+                                
+                              </div>
+                            </div>
+                            <div class="col-md-10">
+                              <div class="mb-3 row">
+                                <label class="col-3 form-label  wordbold" >工作年限</label>
+                                <div class="col">
+                                  <select class="form-select " id="state" name="requireEdu">
+                                    <option selected value="">不限</option>
+                                    <option value="3年以下">3年以下</option>
+                                    <option value="3-5年">3-5年</option>
+                                    <option value="5-10年">5-10年</option>
+                                    <option value="10年以上">10年以上</option>
+                                  </select>
+                                </div>
+                                
+                              </div>
+                            </div>
+                 
+                     
+           
+                            <div class="col-md-10">
+                              <div class="mb-3 row">
+                                <label class="col-3 form-label required  wordbold" >性别要求</label>
+                                <div class="col">
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="requireGender" value="1" >
+                                    <span class="form-check-label">男</span>
+                                  </label>
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="requireGender" value="2" >
+                                    <span class="form-check-label">女</span>
+                                  </label>
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="requireGender" value="0" checked>
+                                    <span class="form-check-label">不限</span>
+                                  </label>
+                                </div>
+                                
+                                
+                              </div>
+                            </div>
 
+                               
+           
+                            <div class="col-md-10">
+                              <div class="mb-3 row">
+                                <label class="col-3 form-label required  wordbold" >是否统招</label>
+                                <div class="col">
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="requireAllTime" value="1" >
+                                    <span class="form-check-label">是</span>
+                                  </label>
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="requireAllTime" value="2" >
+                                    <span class="form-check-label">否</span>
+                                  </label>
+                                  <label class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="requireAllTime"  value="0" checked>
+                                    <span class="form-check-label">不限制</span>
+                                  </label>
+                                </div>
+                                
+                              </div>
+                            </div>
+                   
+                           
+                            <div class="col-md-10">
+                              <div class="mb-3 row">
+                                <label class="col-3 form-label  wordbold" >职位描述</label>
+                                <div class="col">
+                                  <textarea rows="3" class="form-control" name="remark"></textarea>
+
+                                </div>
+                                
+                              </div>
+                            </div>
+                            
+                          
+                          </div>
+                        </div>
+                 
+                      </div>
 
                       <div class="card">
                         <div class="card-header">
@@ -464,47 +562,17 @@
                         </div>
                         <div class="card-body">
                           <div class="row row-cards">
-                            <div class="mb-3 col-lg-6 row">
-                              <label class="form-label col-3"  style="font-weight: bold;">变更管理员</label>
-                              <div class="col">
-                                <label class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="isChangeManage" value="1" checked>
-                                  <span class="form-check-label">否</span>
-                                </label>
-                                <label class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="isChangeManage" value="2" >
-                                  <span class="form-check-label">是</span>
-                                </label>
-                              </div>
-                              <small class="form-hint">默认为当前客户创建者</small>
-                            </div>
-                          
-                            <div class="mb-3 col-lg-6 row">
-                              
-                              <div class="col">
-                                <select type="text" class="form-select" placeholder="输入名称查询选择新管理员" id="teamLeader" disabled>
-                                </select>
-                              </div>
-                            </div>
-    
+                            
                             <div class="mb-3 row">
                               
-                              <label class="form-label col-3" style="font-weight: bold;">有职位管理</label>
                               <div class="col">
-                                <select type="text" class="form-select" placeholder="输入名称查询选择新管理员" id="manageMember" multiple >
+                                <select type="text" class="form-select" placeholder="输入名称添加团队成员" id="manageMember" multiple >
                                 </select>
+                                <small class="form-hint">&nbsp;不添加默认为自己</small>
                               </div>
-                                <small class="form-hint">可为当前客户创建新职位。</small>
-                            </div>
-                            <div class="mb-3 row">
                               
-                              <label class="form-label col-3" style="font-weight: bold;">无职位管理</label>
-                              <div class="col">
-                                <select type="text" class="form-select" placeholder="输入名称查询选择新管理员" id="normalMember" multiple >
-                                </select>
-                              </div>
-                                <small class="form-hint">无法为当前客户创建新职位。</small>
-                            </div>                
+                            </div>
+                                       
              
                           </div>
                         </div>
@@ -515,96 +583,7 @@
 
 
 
-                      <div class="card">
-                        <div class="card-header">
-                          <h3 class="card-title">添加联系人</h3>
-                          <div class="col-auto ms-auto d-print-none">
-                            <div class="d-flex">
-                              <div class="me-3">
-                                <a href="#" class="btn btn-info">
-                                  <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                                  清空
-                                </a>
-                              </div>
-                              <a onclick="addContacter()" class="btn btn-success">
-                                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                                添加
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="card-body">
-                          <div class="row row-cards" id="contacter">
-                            <div class="mb-3">
-                              <dt class="col-3"  style="font-weight: bold;">联系人:</dt>
-                              <dd class="col-9">
-                                <div id="teamlist">
-
-                                  
-                                </div>
-                            
-                              </dd>  
-                              <small class="form-hint">点击姓名查看联系人详情</small>
-                            </div>
-                          
-                            <div class="mb-3 col-lg-4 row">
-                              <label class="form-label col-3 required" style="font-weight: bold;">姓名</label>
-                              <div class="col">
-                                <input type="text" class="form-control"  name="contacterName" >
-                              </div>
-                            </div>
-                            <div class="mb-3 col-lg-4 row">
-                              <label class="form-label col-3 " style="font-weight: bold;">职位</label>
-                              <div class="col">
-                                <input type="text" class="form-control" name="contacterJob">
-                              </div>
-                            </div>
-                            <div class="mb-3 col-lg-4 row">
-                              <label class="form-label col-3 " style="font-weight: bold;">座机</label>
-                              <div class="col">
-                                <input type="text" class="form-control" name="contacterLandline">
-                              </div>
-                            </div>
-                            <div class="mb-3 col-lg-4 row">
-                              <label class="form-label col-3 required" style="font-weight: bold;">手机</label>
-                              <div class="col">
-                                <input type="text" class="form-control" name="contacterPhone">
-                              </div>
-                            </div>
-                 
-                            <div class="mb-3 col-lg-4 row">
-                              <label class="form-label col-3 " style="font-weight: bold;">邮箱</label>
-                              <div class="col">
-                                <input type="text" class="form-control" name="contacterEmail">
-                              </div>
-                            </div>
-                            <div class="mb-3 col-lg-4 row">
-                              <label class="form-label col-3 " style="font-weight: bold;">性别</label>
-                              <div class="col">
-                                <label class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="contacterGender" value="1" >
-                                  <span class="form-check-label">男</span>
-                                </label>
-                                <label class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="contacterGender" value="2" >
-                                  <span class="form-check-label">女</span>
-                                </label>
-                              </div>
-                            </div>
-                            <div class="mb-3 col-lg-12 row">
-                              <label class="form-label col-1 " style="font-weight: bold;">备注</label>
-                              <div class="col col-7 ">
-                                <textarea class="form-control" rows="2" name="contacterRemark" ></textarea>
-                              </div>
-                            </div>
                       
-                            
-                                    
-             
-                          </div>
-                        </div>
-                 
-                      </div>
 
 
 
@@ -775,6 +754,7 @@
         <script>
           let citys;
           let jobs;
+          let manageMember;
       document.addEventListener('DOMContentLoaded', function() {
             var citySelect = document.getElementById('city-select');
 
@@ -849,95 +829,53 @@
             }
 
 
+            manageMember= new TomSelect('#manageMember',{
+              valueField: 'userId',
+              labelField: 'name',
+              searchField: 'name',
+              // fetch remote data
+              load: function(query, callback) {
 
-            var jobtype = document.getElementById('jobtype-select');
-            let industry1 = [];
-            let industrychild=[];
+                  const options = {
+                      method: 'POST',
+                      headers: {
+                      'Content-Type': 'application/json',
+                      'token':localStorage.getItem('token')
+                      },
+                      body: JSON.stringify({ 'name': query }),
+                      };
 
-            industry1.push({
-              label:"不限",
-              value:"不限",
-              label_scientific:"不限"
-
-            })
-            industrychild.push({
-                    class:"不限",
-                    value:"不限",
-                    text: "不限",
-                    group: "不限",
-                });
-
-            positionList.forEach(function(inds){
-              if(inds.label!='不限'){
-
+                      var url = baseUri+'/customer/ulfq';
+                  fetch(url,options)
+                      .then(response => response.json())
+                      .then(json => {
+                        var item = json.data.list;
               
-              var childs = inds.children;
-              console.log("childs",childs)
-              childs.forEach(function(child) {
-               
-                industrychild.push({
-                    class:inds.value,
-                    value:child.label,
-                    text: child.value,
-                    group: inds.value
-                });
-             
+                          callback(item);
+                      }).catch((error)=>{
+                          callback();
+                      });
 
-                
-              });
-
-              industry1.push({
-                  label:inds.label,
-                  value:inds.value,
-                  label_scientific:inds.label
-              });
-            }
-
-           });
-
-           console.log("industrychild",industrychild)
-           console.log("industry1",industry1)
-
-          //  jobs= new TomSelect(jobtype, {
-          //           options: industry1,
-          //           multiple: true,
-          //           placeholder: '选择职位类别',
-          //           optgroupField: 'class',
-          //           optgroups:industrychild,
-          //           maxOptions:null,
-          //           allowEmptyOption: true,
-          //           duplicates: true,
-          //           labelField: 'text',
-          //           valueField: 'value',
-          //           searchField: ['text'],
-          //           render: {
-          //           optgroup_header: function(data, escape) {
-          //             return '<div class="optgroup-header">' + escape(data.label) + ' <span class="scientific">' + escape(data.label_scientific) + '</span></div>';
-          //           }
-          //         }
-          //       });
-
-          new TomSelect(jobtype, {
-              options: positionList,
-              labelField: 'value',
-                    valueField: 'value',
-                    searchField: ['value'],
-              plugins: ['dropdown_input'] // Optional, if you want search functionality within the dropdown
+              },
+              // custom rendering functions for options and items
+              render: {
+                  option: function(item, escape) {
+              return `<div><span class="dropdown-item-indicator"  >
+              </span>${ escape(item.name) }</div>`;
+          
+                      
+                  },
+                  item: function(item, escape) {
+              return `<div><span class="dropdown-item-indicator"  >
+              </span>${ escape(item.name) }</div>`;
+          
+                  }
+              },
+              onInitialize: function() {
+                  this.clearOptions(); // 清空初始选项
+                  this.load(''); // 传入空字符串以加载所有选项或基于默认查询
+              },
           });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         });
@@ -946,7 +884,7 @@
 
         
 
-        <script src="../../static/js/pg/pro/tom-select.complete.js" ></script>
+        <script src="../../static/js/tom-select.base.min.js" ></script>
 
        
         <footer class="footer footer-transparent d-print-none">

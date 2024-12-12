@@ -2,6 +2,54 @@
 $(document).ready(function(){
 
 
+  
+  const ct = document.getElementById("jobdiv");  
+  ct.innerHTML = '';  
+
+
+  positionList.forEach(item => {  
+    if (item.children) {  
+      // 创建顶级下拉菜单  
+      var dropdownDiv = document.createElement('div');  
+      dropdownDiv.classList.add('dropend');  
+    
+      // 创建触发元素  
+      var link = document.createElement('a');  
+      link.classList.add('dropdown-item', 'dropdown-toggle');  
+      link.setAttribute('data-bs-toggle', 'dropdown');  
+      link.setAttribute('data-bs-auto-close', 'outside');  
+      link.setAttribute('role', 'button');  
+      link.setAttribute('value', item.value);  
+      link.setAttribute('aria-expanded', 'false');  
+      link.textContent = item.label;  
+    
+      // 创建顶级下拉菜单的内容容器  
+      var dropdownMenu = document.createElement('div');  
+      dropdownMenu.classList.add('dropdown-menu');  
+    
+      // 递归地构建子菜单  
+      buildDropdownMenu(item.children, dropdownMenu);  
+    
+      // 将触发元素和内容容器添加到顶级下拉菜单  
+      dropdownDiv.appendChild(link);  
+      dropdownDiv.appendChild(dropdownMenu);  
+    
+      // 将顶级下拉菜单添加到某个容器（例如ct）  
+      ct.appendChild(dropdownDiv);  
+    } else {  
+      // 创建非嵌套的下拉菜单项  
+      var link = document.createElement('a');  
+      link.classList.add('dropdown-item');  
+      link.setAttribute('onClick', 'chooseThis(this)');  
+      link.setAttribute('value', item.value);  
+      link.textContent = item.label;  
+      ct.appendChild(link);  
+    }  
+  });  
+
+
+
+  console.log(ct)
 
 
 
@@ -51,13 +99,7 @@ function buildDropdownMenu(items, parent) {
 
 
 
-function chooseThisCity(o){
-  $('#cityinputshow').val($(o).text())
-  $('#cityinputvalue').val($(o).attr('value'))
 
-  $('#citymenu.show').removeClass('show');
-
-}
 
 
 function chooseThis(o){
@@ -83,7 +125,12 @@ function chooseThis(o){
     str+=$(o).attr('value');
     $('#jobinput').val(str)
   }else{
-    $('#jobinput').val(str)
+    if($(o).attr('value')=='不限'){
+      $('#jobinput').val('不限')
+    }else{
+      $('#jobinput').val(str)
+
+    }
   }
 
   $('#jobmenu.show').removeClass('show');
@@ -232,7 +279,7 @@ function getParameterByName(name) {
 
 function test(){
   console.log(citys.getValue())
-  const cities = ["北京市", "天津市", "石家庄市", "唐山市", "秦皇岛市", "邯郸市", "邢台市"];
+  // const cities = ["北京市", "天津市", "石家庄市", "唐山市", "秦皇岛市", "邯郸市", "邢台市"];
 
 // 使用join方法将数组元素连接成一个字符串，使用'、'作为分隔符
 const citiesStringWithSeparator = citys.getValue().join('、');
