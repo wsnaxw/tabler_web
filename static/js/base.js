@@ -256,7 +256,7 @@ $(document).ready(function () {
               });
               const currentPath = window.location.pathname;
               console.log(currentPath)
-              if(!currentPath.startsWith('/tabler_web/403.html')){
+              if(!currentPath.startsWith('/tabler_web/403.html')||!currentPath.startsWith('/tabler_web/sign_in.html')){
                 let isInMenu = false;
                 menuPaths.forEach(path => {
                   console.log(currentPath.startsWith(path))

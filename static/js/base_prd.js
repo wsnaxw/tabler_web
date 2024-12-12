@@ -255,7 +255,7 @@ $(document).ready(function () {
               });
               const currentPath = window.location.pathname;
               console.log(currentPath)
-              if(!currentPath.startsWith('/tabler_web/403.html')){
+              if(!currentPath.startsWith('/403.html')||!currentPath.startsWith('/sign_in.html')){
                 let isInMenu = false;
                 menuPaths.forEach(path => {
                   console.log(currentPath.startsWith(path))
@@ -266,7 +266,7 @@ $(document).ready(function () {
                 console.log(isInMenu)
   
                 if (!isInMenu) {
-                  window.location.href = '/tabler_web/403.html'; // 假设你的403页面路径是/403.html，根据实际情况修改
+                  window.location.href = '/403.html'; // 假设你的403页面路径是/403.html，根据实际情况修改
                 }
               }
            
