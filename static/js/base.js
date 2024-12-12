@@ -244,6 +244,39 @@ $(document).ready(function () {
 
 
 
+            let menuStr = localStorage.getItem("menuStr")
+            const menu = document.getElementById('menu');
+            if(menuStr){
+              // 用于存储所有menu链接对应的页面路径
+              const menuPaths = [];
+              const links = menu.querySelectorAll('a');
+              links.forEach(link => {
+                const href = link.getAttribute('href');
+                menuPaths.push(href);
+              });
+              const currentPath = window.location.pathname;
+              console.log(currentPath)
+              if(!currentPath.startsWith('/tabler_web/403.html')){
+                let isInMenu = false;
+                menuPaths.forEach(path => {
+                  console.log(currentPath.startsWith(path))
+                  if (currentPath.startsWith(path)) {
+                    isInMenu = true;
+                  }
+                });
+                console.log(isInMenu)
+  
+                if (!isInMenu) {
+                  window.location.href = '/tabler_web/403.html'; // 假设你的403页面路径是/403.html，根据实际情况修改
+                }
+              }
+           
+  
+  
+            }
+     
+
+
 
 
 });
@@ -298,7 +331,7 @@ function getMenuInfo(){
 
                         menuLevel2.forEach(o=>{
 
-                            dropmenu3.append("<a class=\"dropdown-item\" href='/tabler_web"+o.url+" '>\n" +
+                            dropmenu3.append("<a class=\"dropdown-item\" href='/tabler_web"+o.url+"'>\n" +
                                 "" + o.name +
                                 "                      </a>")
 
@@ -326,7 +359,7 @@ function getMenuInfo(){
                         const menuLevel2 = response.data.filter(obj => (obj.level===1 && obj.superUri === menuLevel1[i].uri ));
                     }
                 }
-                console.log(document.getElementById('menu').outerHTML)
+                // console.log(document.getElementById('menu').outerHTML)
                 localStorage.setItem("menuStr",document.getElementById('menu').outerHTML)
             }
 
