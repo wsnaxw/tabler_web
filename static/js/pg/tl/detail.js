@@ -6,7 +6,7 @@ $(document).ready(function () {
     initBaseInfo();
     initTCList();
 
-   
+ 
 
 })
 
@@ -14,7 +14,7 @@ $(document).ready(function () {
 
 
 function initBaseInfo(){
-    console.log(talentId)
+  
     var data={'talentId':talentId};
 
     const options = {
@@ -29,6 +29,9 @@ function initBaseInfo(){
     fetch(url,options)
         .then(response => response.json())
         .then(json => {
+        
+        
+
            let data = json.data;
            let companys = data.experienceCompanies;
            let projects = data.experienceProjects;
@@ -197,7 +200,7 @@ function initBaseInfo(){
            `
            $("#baseinfo").html('');
            $("#baseinfo").html(str)
-           console.log(str)
+           
            $('#phonepopover').popover({
             // title: '是否使用额度购买？',
             content: `<p class='mb-0'>是否使用额度购买？<a href='#' class='btn btn-teal btn-sm' id='popover1'>是</a>
@@ -366,8 +369,7 @@ function initBaseInfo(){
 
 
 
-
-
+     
 
 
 
@@ -411,9 +413,8 @@ function initTPList(){
 
            let list = json.data;
 
-           console.log(list)
            if(list != null && list.length > 0){
-            console.log('xxxxx')
+      
             let str='';
             list.forEach(o=>{
 
@@ -424,7 +425,7 @@ function initTPList(){
 
 
             })
-            console.log(str)
+         
 
             $('#tplist').html('')
 
@@ -658,7 +659,7 @@ function cclfq(){
 
 function test(){
     
-    console.log(1)
+   
 
     $('#modal-danger').modal('show')
 
@@ -789,7 +790,7 @@ function newcc(){
     var state = $('input[name="state"]:checked').val();
 
     var content = $('textarea[name="content"]').val()
-    console.log(state,content)
+  
 
     var data={'customerId':csid,'state':toStr(state),'content':content,'customerName':'默认'};
 

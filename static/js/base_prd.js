@@ -243,36 +243,36 @@ $(document).ready(function () {
 
             
 
-            let menuStr = localStorage.getItem("menuStr")
-            const menu = document.getElementById('menu');
-            if(menuStr){
-              // 用于存储所有menu链接对应的页面路径
-              const menuPaths = [];
-              const links = menu.querySelectorAll('a');
-              links.forEach(link => {
-                const href = link.getAttribute('href');
-                menuPaths.push(href);
-              });
-              const currentPath = window.location.pathname;
-              console.log(currentPath)
-              if(!currentPath.startsWith('/403.html')||!currentPath.startsWith('/sign_in.html')){
-                let isInMenu = false;
-                menuPaths.forEach(path => {
-                  console.log(currentPath.startsWith(path))
-                  if (currentPath.startsWith(path)) {
-                    isInMenu = true;
-                  }
-                });
-                console.log(isInMenu)
+            // let menuStr = localStorage.getItem("menuStr")
+            // const menu = document.getElementById('menu');
+            // if(menuStr){
+            //   // 用于存储所有menu链接对应的页面路径
+            //   const menuPaths = [];
+            //   const links = menu.querySelectorAll('a');
+            //   links.forEach(link => {
+            //     const href = link.getAttribute('href');
+            //     menuPaths.push(href);
+            //   });
+            //   const currentPath = window.location.pathname;
+            //   console.log(currentPath)
+            //   if(!currentPath.startsWith('/403.html')||!currentPath.startsWith('/sign_in.html')){
+            //     let isInMenu = false;
+            //     menuPaths.forEach(path => {
+            //       console.log(currentPath.startsWith(path))
+            //       if (currentPath.startsWith(path)) {
+            //         isInMenu = true;
+            //       }
+            //     });
+            //     console.log(isInMenu)
   
-                if (!isInMenu) {
-                  window.location.href = '/403.html'; // 假设你的403页面路径是/403.html，根据实际情况修改
-                }
-              }
+            //     if (!isInMenu) {
+            //       window.location.href = '/403.html'; // 假设你的403页面路径是/403.html，根据实际情况修改
+            //     }
+            //   }
            
   
   
-            }
+            // }
 
 
 
