@@ -312,7 +312,8 @@
                             <div class="mb-3 row">
                               <label class="col-3 form-label required wordbold" >客户名称</label>
                               <div class="col">
-                                <input type="text" class="form-control " placeholder="客户名称" name="customerName" id="" >
+                                <select type="text" class="form-select" placeholder="查询客户" id="customerMember"  >
+                                </select>
                                 <div class="invalid-feedback">不能为空！</div>
                               </div>
                             </div>
@@ -321,7 +322,7 @@
                             <div class="mb-3 row">
                               <label class="col-3 form-label required wordbold" >职位名称</label>
                               <div class="col">
-                                <input type="text" class="form-control" placeholder="对外展示名称" name="outName" >
+                                <input type="text" class="form-control" placeholder="请输入职位名称" name="name" >
                                 <div class="invalid-feedback">不能为空！</div>
                               </div>
                               
@@ -876,6 +877,58 @@
                   this.load(''); // 传入空字符串以加载所有选项或基于默认查询
               },
           });
+
+
+
+          let customerMember;
+          customerMember= new TomSelect('#customerMember',{
+              valueField: 'customerId',
+              labelField: 'name',
+              searchField: 'name',
+              // fetch remote data
+              load: function(query, callback) {
+
+                  const options = {
+                      method: 'POST',
+                      headers: {
+                      'Content-Type': 'application/json',
+                      'token':localStorage.getItem('token')
+                      },
+                      body: JSON.stringify({ 'name': query }),
+                      };
+
+                      var url = baseUri+'/project/selectCustomerListForProject';
+                  fetch(url,options)
+                      .then(response => response.json())
+                      .then(json => {
+                        var item = json.data.list;
+              
+                          callback(item);
+                      }).catch((error)=>{
+                          callback();
+                      });
+
+              },
+              // custom rendering functions for options and items
+              render: {
+                  option: function(item, escape) {
+              return `<div><span class="dropdown-item-indicator"  >
+              </span>${ escape(item.name) }</div>`;
+          
+                      
+                  },
+                  item: function(item, escape) {
+              return `<div><span class="dropdown-item-indicator"  >
+              </span>${ escape(item.name) }</div>`;
+          
+                  }
+              },
+              onInitialize: function() {
+                  this.clearOptions(); // 清空初始选项
+                  this.load(''); // 传入空字符串以加载所有选项或基于默认查询
+              },
+          });
+
 
 
         });
