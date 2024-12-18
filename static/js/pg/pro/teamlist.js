@@ -320,6 +320,15 @@ function getPage(pageNo){
                     rnum = '若干'
                   }
 
+                  let sd=''
+                  if(o.stateData=='运作中'){
+                    sd = `<span style="color: green;">运作中</span>`
+                  }else if(o.stateData=='已关闭'){
+                    sd = `<span style="color: red;">已关闭</span>`
+                  }else{
+                    sd = o.stateData;
+                  }
+
 
 
 
@@ -329,7 +338,7 @@ function getPage(pageNo){
                     <td><span style='font-weight: bold;' class ='bg-primary-lt'><a onclick='checkDetail("${o.projectId}")'>${o.name}</a></span></td>
                     <td>${cityCode}</td>
                       <td>${rnum}</td>
-                    <td>${o.stateData}</td>
+                    <td>${sd}</td>
 
                     <td>${o.createTime}</td>
                     <td>${numbers}</td>

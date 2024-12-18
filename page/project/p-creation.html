@@ -369,12 +369,22 @@
                           <div class="col-md-10">
                             <div class="mb-3 row">
                               <label class="col-3 form-label  wordbold" >职位年薪</label>
-                              <div class="col">
-                                <input type="text" class="form-control" placeholder="对外展示名称" name="outName" >
-                               
+                              <div class="col ">
+                                <div class="input-group input-group-flat">
+                                  <input type="text" class="form-control" name="salaryStart" >
+                                  <span class="input-group-text">
+                                    <kbd>万元</kbd>
+                                  </span>
+                                </div>
+                            
                               </div>
-                              <div class="col">
-                                <input type="text" class="form-control" placeholder="对外展示名称" name="outName" >
+                              <div class="col ">
+                                <div class="input-group input-group-flat">
+                                  <input type="text" class="form-control" name="salaryEnd" >
+                                  <span class="input-group-text">
+                                    <kbd>万元</kbd>
+                                  </span>
+                                </div>
                                
                               </div>
                               
@@ -385,7 +395,7 @@
                             <div class="mb-3 row">
                               <label class="col-3 form-label  wordbold" >归属部门</label>
                               <div class="col">
-                                <input type="text" class="form-control" placeholder="对外展示名称" name="outName" >
+                                <input type="text" class="form-control" placeholder="如销售部、研发部等" name="department" >
                               </div>
                               
                             </div>
@@ -395,7 +405,7 @@
                               <label class="col-3 form-label  wordbold" >招聘数量
                               </label>
                               <div class="col">
-                                <input type="number" class="form-control" placeholder="对外展示名称" name="outName" >
+                                <input type="number" class="form-control" placeholder="对外展示名称" name="recruitNum" >
                                 <small class="form-hint">0为若干</small>
                               </div>
                               
@@ -406,7 +416,7 @@
                             <div class="mb-3 row">
                               <label class="col-3 form-label  wordbold" >汇报对象</label>
                               <div class="col">
-                                <input type="text" class="form-control" placeholder="对外展示名称" name="outName" >
+                                <input type="text" class="form-control" name="reportName" >
                               </div>
                               
                             </div>
@@ -461,15 +471,15 @@
                               <div class="mb-3 row">
                                 <label class="col-3 form-label  wordbold" >年龄要求</label>
                                 <div class="col">
-                                  <input type="number" class="form-control" placeholder="起始年龄" name="outName" >
+                                  <input type="number" class="form-control" placeholder="起始年龄" name="requireAgeS" >
                                  
                                 </div>
                                 <div class="col">
-                                  <input type="number" class="form-control" placeholder="结束年龄" name="outName" >
+                                  <input type="number" class="form-control" placeholder="结束年龄" name="requireAgeE" >
                                  
                                 </div>
                                 <div class="col">
-                                  <input type="checkbox" class="form-check-input"  name="outName" >
+                                  <input type="checkbox" class="form-check-input"  name="requireAgeState" value="0"><!-- 如果选中不限则起始结束年龄为0 -->
                                   <span>不限</span>
                                 </div>
                                 
@@ -480,8 +490,8 @@
                               <div class="mb-3 row">
                                 <label class="col-3 form-label  wordbold" >工作年限</label>
                                 <div class="col">
-                                  <select class="form-select " id="state" name="requireEdu">
-                                    <option selected value="">不限</option>
+                                  <select class="form-select " id="state" name="experience">
+                                    <option selected value="不限">不限</option>
                                     <option value="3年以下">3年以下</option>
                                     <option value="3-5年">3-5年</option>
                                     <option value="5-10年">5-10年</option>
@@ -527,10 +537,6 @@
                                     <span class="form-check-label">是</span>
                                   </label>
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="requireAllTime" value="2" >
-                                    <span class="form-check-label">否</span>
-                                  </label>
-                                  <label class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="requireAllTime"  value="0" checked>
                                     <span class="form-check-label">不限制</span>
                                   </label>
@@ -544,7 +550,7 @@
                               <div class="mb-3 row">
                                 <label class="col-3 form-label  wordbold" >职位描述</label>
                                 <div class="col">
-                                  <textarea rows="3" class="form-control" name="remark"></textarea>
+                                  <textarea rows="3" class="form-control" name="details"></textarea>
 
                                 </div>
                                 
