@@ -234,7 +234,7 @@ function checkMember(){
             teamMemberList.push(obj)
         })
     }
-    if(lm){
+    if(nm){
         nm.forEach(value=>{
             let obj = normalMember.options[value]
             obj.type = '2';

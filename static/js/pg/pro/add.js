@@ -49,8 +49,34 @@ $(document).ready(function(){
 
 
 
-  console.log(ct)
 
+
+  const buttons = document.querySelectorAll('.btn.btn-primary');
+  // button.addEventListener('click', function() {
+  //     addProject();
+  //     // 后续逻辑
+  // });
+
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', addProject);
+  });
+
+
+  const buttons1 = document.querySelectorAll('.btn.btn-success');
+
+
+  buttons1.forEach((button) => {
+    button.addEventListener('click', saveProject);
+  });
+
+
+  const claerBtn = document.querySelectorAll('.btn.btn-info');
+
+
+  claerBtn.forEach((button) => {
+    button.addEventListener('click', clearForm);
+  });
 
 
 })
@@ -240,9 +266,6 @@ function cleanseJSON(obj) {
 
 
 
-function searchList(){
-    getPage(1)
-}
 
 
 function checkDetail(id){
@@ -289,4 +312,94 @@ const citiesString = citiesStringWithSeparator.slice(0, -1);
 
 console.log(citiesString); // 输出：北京市、天津市、石家庄市、唐山市、秦皇岛市、邯郸市、邢台市
 
+}
+
+
+function addProject(state){
+
+  const combinedElements = $('input[type="text"],input[type="number"], textarea, input[type="radio"]:checked, select, input[type="checkbox"]:checked');
+
+  let isNUll = true;
+  const data = {};
+  combinedElements.each(function () {
+      const name = $(this).attr('name');
+      if (name) {
+
+          $(this).removeClass('is-valid', 'is-invalid','is-valid-lite','is-invalid-lite')
+
+          let value;
+          if ($(this).is('input') || $(this).is('textarea') || $(this).is('select')) {
+              value = $(this).val();
+          }
+          data[name] = value;
+          if (['customerId', 'name', 'job'].includes(name) && (!value || value.trim() === '')) {
+            isNUll= false;
+            $(this).addClass('is-invalid','is-invalid-lite');
+        } else {
+            $(this).removeClass('is-invalid','is-invalid-lite');
+        }
+      }
+  });
+
+
+  let teams = [];
+
+  let nm = manageMember.getValue();
+  if(nm){
+    nm.forEach(value=>{
+        let obj = manageMember.options[value]
+        teams.push({'appUserId':obj.userId,'appUserName':obj.name})
+    })
+  }
+
+
+
+
+  let cv = customerMember.getValue();
+  if(cv){
+    data['customerName']=customerMember.options[cv].name
+   
+  }
+
+
+  let cc = citys.getValue()
+  if(cc){
+    let citystr = ''
+    cc.forEach(value=>{
+      let obj = citys.options[value]
+      citystr+=obj.value+' '
+      console.log(obj)
+    })
+    data['citycode']=citystr;
+  }
+
+  
+  data['teams']=teams;
+
+  if(data.requireAgeState==0){
+    data.requireAgeS='0';
+    data.requireAgeE='0';
+  }
+
+
+
+  if(state==0){
+    data['state']='0';
+  }else{
+    data['state']='1';
+  }
+
+  console.log(data);
+
+
+  if(isNUll){
+    console.log('success')
+  }
+
+
+}
+
+
+function saveProject(){
+  addProject(0)
 }

@@ -13,7 +13,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>新增职位</title>
-    <!-- CSS files -->
     <script src="../../static/js/tabler.min.js"></script>
     <link rel="stylesheet" href="../../static/css/tabler.min.css">
     <link rel="stylesheet" href="../../static/css/base.css">
@@ -43,7 +42,6 @@
     <div class="page">
 
 
-      <!--      &lt;!&ndash; Sidebar &ndash;&gt;-->
       
       
       <aside class="navbar navbar-vertical navbar-expand-lg"   >
@@ -161,8 +159,6 @@
 
 
 
-      <!-- navbar navbar-expand-md d-print-none d-none d-lg-flex -->
-      <!-- navbar navbar-expand-md d-print-none -->
       <header class="navbar navbar-expand-md d-print-none d-none d-lg-flex fixed-top">
         <div class="container-xl">
 
@@ -176,13 +172,11 @@
               <div class="btn-list">
                 <div class="input-icon">
                     <span class="input-icon-addon">
-                      <!-- Download SVG icon from http://tabler-icons.io/i/search -->
                       <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path d="M21 21l-6 -6"></path></svg>
                     </span>
                   <input type="text" value="" class="form-control" id="indexsearch" placeholder="客户名/人选名/项目名" aria-label="Search in website" data-listener-added_8ff64168="true">
                 </div>
                 <a onclick="indexSearch()" class="btn btn-blue" target="_blank" rel="noreferrer">
-                  <!-- Download SVG icon from http://tabler-icons.io/i/brand-github -->
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"></path></svg>
                   查询
                 </a>
@@ -190,16 +184,13 @@
             </div>
             <div class="d-none d-md-flex">
               <a   onclick="dark()" class="nav-link px-0 hide-theme-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="Enable dark mode" data-bs-original-title="Enable dark mode">
-                <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path></svg>
               </a>
               <a onclick="light()" class="nav-link px-0 hide-theme-light" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="Enable light mode" data-bs-original-title="Enable light mode">
-                <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"></path></svg>
               </a>
               <div class="nav-item dropdown d-none d-md-flex me-3">
                 <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1" aria-label="Show notifications" onclick="usermessage()" data-bs-auto-close="outside">
-                  <!-- Download SVG icon from http://tabler-icons.io/i/bell -->
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path><path d="M9 17v1a3 3 0 0 0 6 0v-1"></path></svg>
                   <span class="badge bg-red"></span>
                 </a>
@@ -291,17 +282,15 @@
                           <div class="d-flex">
                             <div class="me-3">
                               <a  class="btn btn-info" onclick="test()">
-                                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                                 清空
                               </a>
                             </div>
                             <div class="me-3">
                               <a  class="btn btn-success">
-                                <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                                 保存草稿
                               </a>
                              </div>
-                            <button class="btn btn-primary">发布</button>
+                            <a class="btn btn-primary">发布</a>
                           </div>
                         </div>
                       </div>
@@ -312,7 +301,7 @@
                             <div class="mb-3 row">
                               <label class="col-3 form-label required wordbold" >客户名称</label>
                               <div class="col">
-                                <select type="text" class="form-select" placeholder="查询客户" id="customerMember"  >
+                                <select type="text" class="form-select" placeholder="查询客户" id="customerMember"  name="customerId">
                                 </select>
                                 <div class="invalid-feedback">不能为空！</div>
                               </div>
@@ -335,6 +324,7 @@
                               <label class="form-label col-3 wordbold required" >职位类别</label>
                               <div class="nav-item dropdown col" >
                                 <input type="text" class="form-select dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="true" readonly name="job" id="jobinput">
+                                <div class="invalid-feedback">不能为空！</div>
                                 <div class="dropdown-menu " id="jobmenu" data-bs-popper="static" >
                                   <div class="dropdown-menu-columns">
                                     <div class="dropdown-menu-column" id="jobdiv">
@@ -405,7 +395,7 @@
                               <label class="col-3 form-label  wordbold" >招聘数量
                               </label>
                               <div class="col">
-                                <input type="number" class="form-control" placeholder="对外展示名称" name="recruitNum" >
+                                <input type="number" class="form-control" value="0"  name="recruitNum" >
                                 <small class="form-hint">0为若干</small>
                               </div>
                               
@@ -427,10 +417,9 @@
                       </div>
                       <div class="card-footer text-end">
                           <a  class="btn btn-success">
-                            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                             保存草稿
                           </a>
-                          <button class="btn btn-primary">发布</button>
+                          <a class="btn btn-primary">发布</a>
                       
                       </div>
                     </form>
@@ -762,6 +751,7 @@
           let citys;
           let jobs;
           let manageMember;
+          let customerMember;
       document.addEventListener('DOMContentLoaded', function() {
             var citySelect = document.getElementById('city-select');
 
@@ -886,7 +876,7 @@
 
 
 
-          let customerMember;
+         
           customerMember= new TomSelect('#customerMember',{
               valueField: 'customerId',
               labelField: 'name',
