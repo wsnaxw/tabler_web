@@ -950,3 +950,8 @@ function leftpage(){
       }
     });
   }
+
+  function checkFirstFourNotNumber(str) {
+    const firstFour = str.substring(0, 4);
+    return!firstFour.match(/^\d{4}$/);
+}

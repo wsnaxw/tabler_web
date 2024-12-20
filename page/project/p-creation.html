@@ -245,7 +245,10 @@
       <div class="page-wrapper">
 
 
-
+        <div id="messageContainer" class="message-container">
+          <!-- Messages will be added here dynamically -->
+        </div>
+  
         <!-- Page header -->
         <div class="page-header d-print-none">
         </div>
@@ -281,7 +284,7 @@
                         <div class="col-auto ms-auto d-print-none">
                           <div class="d-flex">
                             <div class="me-3">
-                              <a  class="btn btn-info" onclick="test()">
+                              <a  class="btn btn-info">
                                 清空
                               </a>
                             </div>
@@ -301,7 +304,7 @@
                             <div class="mb-3 row">
                               <label class="col-3 form-label required wordbold" >客户名称</label>
                               <div class="col">
-                                <select type="text" class="form-select" placeholder="查询客户" id="customerMember"  name="customerId">
+                                <select type="text" class="form-select" placeholder="查询客户" id="customerMember" autocomplete="off" name="customerId">
                                 </select>
                                 <div class="invalid-feedback">不能为空！</div>
                               </div>
@@ -311,7 +314,7 @@
                             <div class="mb-3 row">
                               <label class="col-3 form-label required wordbold" >职位名称</label>
                               <div class="col">
-                                <input type="text" class="form-control" placeholder="请输入职位名称" name="name" >
+                                <input type="text" class="form-control" placeholder="请输入职位名称" name="name" autocomplete="off">
                                 <div class="invalid-feedback">不能为空！</div>
                               </div>
                               
@@ -350,7 +353,7 @@
                             <div class="mb-3 row">
                               <label class="col-3 form-label wordbold" >工作地点</label>
                               <div class="col">
-                                <select id="city-select" class="tom-select" multiple></select>
+                                <select id="city-select" class="tom-select" multiple autocomplete="off"></select>
                               </div>
                               
                             </div>
@@ -361,7 +364,7 @@
                               <label class="col-3 form-label  wordbold" >职位年薪</label>
                               <div class="col ">
                                 <div class="input-group input-group-flat">
-                                  <input type="text" class="form-control" name="salaryStart" >
+                                  <input type="text" class="form-control" name="salaryStart" autocomplete="off">
                                   <span class="input-group-text">
                                     <kbd>万元</kbd>
                                   </span>
@@ -370,7 +373,7 @@
                               </div>
                               <div class="col ">
                                 <div class="input-group input-group-flat">
-                                  <input type="text" class="form-control" name="salaryEnd" >
+                                  <input type="text" class="form-control" name="salaryEnd" autocomplete="off">
                                   <span class="input-group-text">
                                     <kbd>万元</kbd>
                                   </span>
@@ -385,7 +388,7 @@
                             <div class="mb-3 row">
                               <label class="col-3 form-label  wordbold" >归属部门</label>
                               <div class="col">
-                                <input type="text" class="form-control" placeholder="如销售部、研发部等" name="department" >
+                                <input type="text" class="form-control" placeholder="如销售部、研发部等" name="department" autocomplete="off">
                               </div>
                               
                             </div>
@@ -395,7 +398,7 @@
                               <label class="col-3 form-label  wordbold" >招聘数量
                               </label>
                               <div class="col">
-                                <input type="number" class="form-control" value="0"  name="recruitNum" >
+                                <input type="number" class="form-control" value="0"  name="recruitNum" autocomplete="off">
                                 <small class="form-hint">0为若干</small>
                               </div>
                               
@@ -406,7 +409,7 @@
                             <div class="mb-3 row">
                               <label class="col-3 form-label  wordbold" >汇报对象</label>
                               <div class="col">
-                                <input type="text" class="form-control" name="reportName" >
+                                <input type="text" class="form-control" name="reportName" autocomplete="off">
                               </div>
                               
                             </div>
@@ -537,14 +540,15 @@
                            
                             <div class="col-md-10">
                               <div class="mb-3 row">
-                                <label class="col-3 form-label  wordbold" >职位描述</label>
+                                <label class="col-3 form-label  wordbold required" >职位描述</label>
                                 <div class="col">
                                   <textarea rows="3" class="form-control" name="details"></textarea>
-
+                                  <div class="invalid-feedback">不能为空！</div>
                                 </div>
                                 
                               </div>
                             </div>
+                            <input type="hidden" id="projectId"  >
                             
                           
                           </div>
@@ -562,7 +566,7 @@
                             <div class="mb-3 row">
                               
                               <div class="col">
-                                <select type="text" class="form-select" placeholder="输入名称添加团队成员" id="manageMember" multiple >
+                                <select type="text" class="form-select" placeholder="输入名称添加团队成员" id="manageMember" multiple  autocomplete="off" >
                                 </select>
                                 <small class="form-hint">&nbsp;不添加默认为自己</small>
                               </div>
@@ -809,7 +813,7 @@
                     optgroupField: 'class',
                     optgroups:optgroup,
                     maxOptions:null,
-                    allowEmptyOption: true,
+                    allowEmptyOption: false,
                     duplicates: true,
                     labelField: 'text',
                     valueField: 'value',

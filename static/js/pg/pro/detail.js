@@ -372,7 +372,8 @@ function baseinfo(workId){
 
             $('#formdata').html('')
             let cityCode = '';
-            if(data.cityCode!=null&&data.cityCode.length>4){
+          
+            if(data.cityCode!=null&&!checkFirstFourNotNumber(data.cityCode)){
                 let cityarray = splitOrGet(data.cityCode)
                 if(cityarray!=null&&cityarray.length>0){
                     cityarray.forEach(element => {

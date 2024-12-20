@@ -282,7 +282,7 @@ function getPage(pageNo){
                   
                     let cityCode = '';
 
-                    if(o.cityCode!=null&&o.cityCode.length>4){
+                    if(o.cityCode!=null&&!checkFirstFourNotNumber(o.cityCode)){
                         let cityarray = splitOrGet(o.cityCode)
                         if(cityarray!=null&&cityarray.length>0){
                             cityarray.forEach(element => {
