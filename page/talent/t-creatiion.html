@@ -382,13 +382,13 @@ ii::after {
                           <small class="form-hint">上传简历文档用于解析</small>
                         </div>
                           <div class="me-3">
-                            <a href="#" class="btn btn-info">
+                            <a onclick="test()" class="btn btn-info">
                               <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                               清空
                             </a>
                           </div>
                           <div>
-                            <a href="#" onclick="baseInfoCheck()" class="btn btn-success">
+                            <a  onclick="baseInfoCheck()" class="btn btn-success">
                               <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                               <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg>
                               新增
@@ -758,15 +758,15 @@ ii::after {
                               <div class=" row">
                                 <label class="col-2 form-label required wordbold">工作时间</label>
                                 <div class="col-auto">
-                                  <input type="text" class="form-control " placeholder="开始日期" name="startTime" autocomplete="off">
+                                  <input type="text" class="form-control" id="jd1" placeholder="开始日期" name="startTime" autocomplete="off">
                                   <div class="invalid-feedback">不能为空！</div>
                                 </div>
                                 <div class="col-auto">
-                                  <input type="text" class="form-control " placeholder="结束日期" name="endTime" autocomplete="off">
+                                  <input type="text" class="form-control" id="jd2" placeholder="结束日期" name="endTime" autocomplete="off">
                                   <div class="invalid-feedback">不能为空！</div>
                                 </div>
                                 <label class="form-check form-check-inline col-auto">
-                                  <input class="form-check-input" type="checkbox" value="1" name="is_now">
+                                  <input class="form-check-input" type="checkbox" value="1" name="isNow">
                                   <span class="form-check-label">至今</span>
                                 </label>
                               </div>
@@ -923,15 +923,15 @@ ii::after {
                               <div class=" row">
                                 <label class="col-2 form-label required wordbold">项目时间</label>
                                 <div class="col-auto">
-                                  <input type="text" class="form-control " placeholder="开始日期" name="phone" autocomplete="off">
+                                  <input type="text" class="form-control" id="jd3" placeholder="开始日期" name="startTime" autocomplete="off">
                                   <div class="invalid-feedback">不能为空！</div>
                                 </div>
                                 <div class="col-auto">
-                                  <input type="text" class="form-control " placeholder="结束日期" name="phone" autocomplete="off">
+                                  <input type="text" class="form-control " id="jd4" placeholder="结束日期" name="endTime" autocomplete="off">
                                   <div class="invalid-feedback">不能为空！</div>
                                 </div>
                                 <label class="form-check form-check-inline col-auto">
-                                  <input class="form-check-input" type="checkbox">
+                                  <input class="form-check-input" type="checkbox" name="isNow" value="1">
                                   <span class="form-check-label">至今</span>
                                 </label>
                               </div>
@@ -1050,15 +1050,15 @@ ii::after {
                               <div class=" row">
                                 <label class="col-2 form-label required wordbold">教育日期</label>
                                 <div class="col-auto">
-                                  <input type="text" class="form-control " placeholder="开始日期" name="phone" autocomplete="off">
+                                  <input type="text" class="form-control" id="jd5" placeholder="开始日期" name="startTime" autocomplete="off">
                                   <div class="invalid-feedback">不能为空！</div>
                                 </div>
                                 <div class="col-auto">
-                                  <input type="text" class="form-control " placeholder="结束日期" name="phone" autocomplete="off">
+                                  <input type="text" class="form-control" id="jd6" placeholder="结束日期" name="endTime" autocomplete="off">
                                   <div class="invalid-feedback">不能为空！</div>
                                 </div>
                                 <label class="form-check form-check-inline col-auto">
-                                  <input class="form-check-input" type="checkbox">
+                                  <input class="form-check-input" type="checkbox" name="isNow" value="1">
                                   <span class="form-check-label">至今</span>
                                 </label>
                               </div>
@@ -1067,7 +1067,7 @@ ii::after {
                               <div class=" row">
                                 <label class="col-4 form-label required wordbold">毕业院校</label>
                                 <div class="col-auto">
-                                  <input type="text" class="form-control" name="phone" autocomplete="off">
+                                  <input type="text" class="form-control" name="name" autocomplete="off">
                                   <div class="invalid-feedback">不能为空！</div>
                                 </div>
                                 
@@ -1079,7 +1079,7 @@ ii::after {
                               <div class=" row">
                                 <label class="col-4 form-label required wordbold">所读专业</label>
                                 <div class="col-auto">
-                                  <input type="text" class="form-control" name="phone" autocomplete="off">
+                                  <input type="text" class="form-control" name="class" autocomplete="off">
                                   <div class="invalid-feedback">不能为空！</div>
                                 </div>
                                 
