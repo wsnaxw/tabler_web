@@ -19,7 +19,7 @@ $(function(){
               
               // 对binaryString进行Base64编码
               const base64Encoded = btoa(binaryString);
-              document.getElementById('introduce1').textContent = base64Encoded;
+              // document.getElementById('introduce1').textContent = base64Encoded;
 
 
               testupload(file[0].name,base64Encoded)
@@ -132,7 +132,8 @@ $(function(){
 function testupload(name,code){
 
 
-  kk=getuploadpermission()
+  kk=getuploadpermission();
+  console.log(kk)
 
   const options = {
     method: 'POST',
@@ -152,20 +153,97 @@ fetch(url,options)
 
 
        //数据填充
+      let baseinfo = json.parsing_result.basic_info;
+      let contact_info = json.parsing_result.contact_info;//手机号码填充
+      $("#baseinfoform input[name='phone']").val(toStr(contact_info.phone));
+      $("#baseinfoform input[name='email']").val(toStr(contact_info.email));
+      $("#baseinfoform input[name='name']").val(toStr(baseinfo.name));
+      $("#baseinfoform input[name='age']").val(toStr(baseinfo.age));
+      $("#baseinfoform input[name='lastCompany']").val(toStr(baseinfo.last_company));
+      $("#baseinfoform input[name='job']").val(toStr(baseinfo.current_position));
+
+      // 学历判断
+      let degree = toStr(baseinfo.degree);
+      let xueli = 3; // 默认值
+      if (degree.includes('专')) {
+        xueli = 4;
+      } else if (degree.includes('本')) {
+        xueli = 5;
+      } else if (degree.includes('硕') || degree.includes('研究生')) {
+        xueli = 6;
+      } else if (degree.includes('博')) {
+        xueli = 7;
+      }
+      $(`#baseinfoform input[name='education'][value='${xueli}']`).prop('checked', true);
+      // 工作经验判断
+     // 工作经验判断
+     let numWorkExperience = toStr(baseinfo.num_work_experience);
+     let experienceValue = '不限'; // 默认值
+     if (numWorkExperience < 3) {
+       experienceValue = '3年以下';
+     } else if (numWorkExperience >= 3 && numWorkExperience < 5) {
+       experienceValue = '3~5年';
+     } else if (numWorkExperience >= 5 && numWorkExperience < 10) {
+       experienceValue = '5~10年';
+     } else if (numWorkExperience >= 10) {
+       experienceValue = '10年以上';
+     }
+     $(`#baseinfoform select[name='experience']`).val(experienceValue);
+
+     
+      // 性别判断
+      let gender = baseinfo.gender;
+      let genderValue = 0; // 默认值
+      if (gender === '男') {
+        genderValue = 1;
+      } else if (gender === '女') {
+        genderValue = 2;
+      }
+      $(`#baseinfoform input[name='gender'][value='${genderValue}']`).prop('checked', true);
+      $("#baseinfoform input[name='domicile']").val(toStr(baseinfo.birthplace));
+      $("#baseinfoform input[name='location']").val(toStr(baseinfo.current_location));
 
 
-       
+
+      $("#baseinfoform input[name='salary']").val(toStr(baseinfo.current_salary));
+      $("#baseinfoform input[name='birthday']").val(toStr(baseinfo.date_of_birth));
+
+      $(`#baseinfoform select[name='RIndustry']`).val(toStr(baseinfo.desired_industry));
 
 
+      $("#baseinfoform input[name='RJob']").val(toStr(baseinfo.desired_position));
+      $("#baseinfoform input[name='RSalary']").val(toStr(baseinfo.desired_salary));
+      $("#baseinfoform input[name='RCity']").val(toStr(baseinfo.detailed_location));
+      // $(`#baseinfoform textarea[name='introduce']`).val(json.parsing_result.resume_rawtext);
 
 
+      let projectExperiences = json.parsing_result.project_experience; 
+      let educationExperiences = json.parsing_result.education_experience;
 
-
-
-
-
-
-
+      // 填充工作经验
+      let workExperiences = json.parsing_result.work_experience;
+      if (workExperiences.length === 1) {
+        let workExperience = workExperiences[0];
+        $("#gz01 input[name='name']").val(workExperience.company_name);
+        $("#gz01 select[name='industry']").val(workExperience.job_function);
+        $("#gz01 input[name='job']").val(workExperience.job_title);
+        $("#gz01 textarea[name='duty']").val(workExperience.description);
+        $("#gz01 input[name='startTime']").val(`${workExperience.start_time_year}-${workExperience.start_time_month}`);
+        $("#gz01 input[name='endTime']").val(`${workExperience.end_time_year}-${workExperience.end_time_month}`);
+      } else if (workExperiences.length > 1) {
+        workExperiences.forEach((workExperience, index) => {
+          if (index > 0) {
+            newgzjl(); // 调用 newgzjl 方法
+          }
+         
+          $(`#gz${gzjl} input[name='name']`).val(workExperience.company_name);
+          $(`#gz${gzjl} select[name='industry']`).val(workExperience.job_function);
+          $(`#gz${gzjl} input[name='job']`).val(workExperience.job_title);
+          $(`#gz${gzjl} textarea[name='duty']`).val(workExperience.description);
+          $(`#gz${gzjl} input[name='startTime']`).val(`${workExperience.start_time_year}-${workExperience.start_time_month}`);
+          $(`#gz${gzjl} input[name='endTime']`).val(`${workExperience.end_time_year}-${workExperience.end_time_month}`);
+        });
+      }
 
 
 
@@ -862,7 +940,7 @@ function newjyjl(){
                             </div>
                             <div class="col-md-12">
                               <div class="row">
-                                <label class="col-2 form-label required wordbold">学校经历</label>
+                                <label class="col-2 form-label  wordbold">学校经历</label>
                                 <div class="col-8">
                                   <textarea rows="3" class="form-control" placeholder="奖学金、考试证书、比赛获奖等" name="introduce" autocomplete="off"  ></textarea>
                                 </div>
@@ -890,7 +968,7 @@ function newjyjl(){
 }
 
 
-
+let work1,pro1,edu1=false;
 
 function collectWorkExperienceData() {
   const workExperiences = [];
@@ -922,7 +1000,9 @@ function collectWorkExperienceData() {
          
           $(this).removeClass('is-invalid','is-invalid-lite');
           workExperience[name] = value;
+          work1=true;
         } else {
+          work1=false;
           $(this).addClass('is-invalid','is-invalid-lite');
          
         }
@@ -933,7 +1013,8 @@ function collectWorkExperienceData() {
     workExperiences.push(workExperience);
   });
 
-  return JSON.stringify(workExperiences);
+  // return JSON.stringify(workExperiences);
+  return workExperiences
 }
 
 
@@ -950,7 +1031,7 @@ function collectProjectExperienceData() {
             isCheckboxChecked = true;
           }
         });
-    $(this).find('input, textarea,select').each(function() {
+    $(this).find('input,textarea,select').each(function() {
       const name = $(this).attr('name');
       const value = $(this).val();
       const type = $(this).attr('type');
@@ -964,10 +1045,11 @@ function collectProjectExperienceData() {
       } else  if (type != 'radio') {
         if (value || (isCheckboxChecked && name === 'endTime')) {
 
-
+          pro1=true;
           $(this).removeClass('is-invalid','is-invalid-lite');
           workExperience[name] = value;
         } else {
+          pro1=false;
           $(this).addClass('is-invalid','is-invalid-lite');
          
         }
@@ -975,10 +1057,13 @@ function collectProjectExperienceData() {
         workExperience[name] = value;
       }
     });
+
+
     workExperiences.push(workExperience);
   });
 
-  return JSON.stringify(workExperiences);
+  // return JSON.stringify(workExperiences);
+  return workExperiences
 }
 
 
@@ -995,7 +1080,7 @@ function collectEduExperienceData() {
             isCheckboxChecked = true;
           }
         });
-    $(this).find('input, textarea,select').each(function() {
+    $(this).find('input,select').each(function() {
       const name = $(this).attr('name');
       const value = $(this).val();
       const type = $(this).attr('type');
@@ -1008,7 +1093,9 @@ function collectEduExperienceData() {
         if (value || (isCheckboxChecked && name === 'endTime')) {
           $(this).removeClass('is-invalid','is-invalid-lite');
           workExperience[name] = value;
+          edu1=true;
         } else {
+          edu1=false;
           $(this).addClass('is-invalid','is-invalid-lite');
          
         }
@@ -1016,10 +1103,19 @@ function collectEduExperienceData() {
         workExperience[name] = value;
       }
     });
+
+    
+    $(this).find('textarea').each(function() {
+      const name = $(this).attr('name');
+      const value = $(this).val();
+      console.log(name,value)
+      workExperience[name] = value;
+    });
     workExperiences.push(workExperience);
   });
 
-  return JSON.stringify(workExperiences);
+  // return JSON.stringify(workExperiences);
+  return workExperiences;
 }
 
 
@@ -1034,5 +1130,64 @@ function test(){
   console.log(a3);
 
 
+  return work1&&pro1&&edu1;
 
+}
+
+
+
+function formDataCheck() {
+  let formData = {};
+  let isValid = true;
+
+
+
+  document.querySelectorAll('input, select, textarea').forEach(element => {
+    let name = element.name || element.id;
+    if (name) {
+        formData[name] = element.value;
+    }
+});
+
+// Check if required fields are empty
+document.querySelectorAll('label.required').forEach(label => {
+    let input = label.nextElementSibling.querySelector('input, select, textarea');
+    if (input && !input.value) {
+        isValid = false;
+        input.classList.add('is-invalid','is-invalid-lite'); // Add error class to highlight the empty required field
+       
+    } else if (input) {
+        input.classList.remove('is-invalid','is-invalid-lite');
+        
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+  // Collect additional data from specific methods
+  formData.workExperience = collectWorkExperienceData();
+  formData.projectExperience = collectProjectExperienceData();
+  
+  formData.eduExperience = collectEduExperienceData();
+
+
+  console.log(isValid,formData)
+  console.log("test()",test())
+
+  if (!isValid ||!test()) {
+    showMessage(2,'请填写完整的信息');
+      return null;
+  }
+
+
+
+  return formData;
 }

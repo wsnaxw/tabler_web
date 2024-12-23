@@ -388,7 +388,7 @@ ii::after {
                             </a>
                           </div>
                           <div>
-                            <a  onclick="baseInfoCheck()" class="btn btn-success">
+                            <a  onclick="formDataCheck()" class="btn btn-success">
                               <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                               <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg>
                               新增
@@ -397,7 +397,7 @@ ii::after {
                         </div>
                       </div>
                     </div>
-                    <div class="card-body" >
+                    <div class="card-body" id="baseinfoform">
                       
                       <div class="row row-cards">
 
@@ -469,6 +469,25 @@ ii::after {
                             </div>
                           </div>
                         </div>
+
+                        <div class="col-md-4">
+                          <div class="  row">
+                            <label class="col-3 form-label  wordbold">当前公司</label>
+                            <div  class="col-auto">
+                              <input type="text" class="form-control " placeholder="当前公司" name="lastCompany" >
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="row">
+                            <label class="col-3 form-label  wordbold">当前岗位</label>
+                            <div  class="col-auto">
+                              <input type="text" class="form-control" placeholder="当前岗位" name="job" >
+                            </div>
+                            
+                          </div>
+                        </div>
+
 
 
                         <hr>
@@ -822,7 +841,8 @@ ii::after {
                               <div class="row">
                                 <label class="col-2 form-label required wordbold">工作职责</label>
                                 <div class="col-8">
-                                  <textarea rows="3" class="form-control" name="duty"></textarea>
+                                  <textarea rows="3" class="form-control" name="duty" autocomplete="off"></textarea>
+                                  <div class="invalid-feedback" id="phoneNotice" >不能为空！</div>
                                 </div>
                                 
                               </div>
@@ -940,7 +960,7 @@ ii::after {
                               <div class=" row">
                                 <label class="col-4 form-label required wordbold">项目名称</label>
                                 <div class="col-auto">
-                                  <input type="text" class="form-control" name="phone" autocomplete="off">
+                                  <input type="text" class="form-control" name="name" autocomplete="off">
                                   <div class="invalid-feedback">不能为空！</div>
                                 </div>
                                 
@@ -952,7 +972,7 @@ ii::after {
                               <div class=" row">
                                 <label class="col-4 form-label required wordbold">项目职位</label>
                                 <div class="col-auto">
-                                  <input type="text" class="form-control" name="phone" autocomplete="off">
+                                  <input type="text" class="form-control" name="job" autocomplete="off">
                                   <div class="invalid-feedback">不能为空！</div>
                                 </div>
                                 
@@ -965,6 +985,7 @@ ii::after {
                                 <label class="col-2 form-label required wordbold">项目职责</label>
                                 <div class="col-8">
                                   <textarea rows="3" class="form-control" name="introduce" autocomplete="off"></textarea>
+                                  <div class="invalid-feedback" id="phoneNotice" >不能为空！</div>
                                 </div>
                                 
                               </div>
@@ -1150,7 +1171,7 @@ ii::after {
                             </div>
                             <div class="col-md-12">
                               <div class="row">
-                                <label class="col-2 form-label required wordbold">学校经历</label>
+                                <label class="col-2 form-label  wordbold">学校经历</label>
                                 <div class="col-8">
                                   <textarea rows="3" class="form-control" placeholder="奖学金、考试证书、比赛获奖等" name="introduce" autocomplete="off"  ></textarea>
                                 </div>
