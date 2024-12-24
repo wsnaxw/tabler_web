@@ -934,7 +934,7 @@ ii::after {
                               <div class="ms-2 d-inline-block">
                                 
                                 <a href="#" class="btn btn-info btn-sm" onclick='clearformdiv("xm01")'>清空</a>
-                                <a href="#" class="btn btn-danger btn-sm" onclick='deletegzjl("gz01")'>删除</a>
+                                <a href="#" class="btn btn-danger btn-sm" onclick='deletegzjl("xm01")'>删除</a>
                               </div>
                             </div>
                           </div>
@@ -984,7 +984,7 @@ ii::after {
                               <div class="row">
                                 <label class="col-2 form-label required wordbold">项目职责</label>
                                 <div class="col-8">
-                                  <textarea rows="3" class="form-control" name="introduce" autocomplete="off"></textarea>
+                                  <textarea rows="3" class="form-control" name="duty" autocomplete="off"></textarea>
                                   <div class="invalid-feedback" id="phoneNotice" >不能为空！</div>
                                 </div>
                                 
@@ -1061,8 +1061,8 @@ ii::after {
                             <div class="col-auto ms-auto d-print-none">
                                 
                               <div class="ms-2 d-inline-block">
-                                <a  class="btn btn-info btn-sm" onclick='clearformdiv("gz01")'>清空</a>
-                                <a  class="btn btn-danger btn-sm" onclick='deleteformdiv("gz01")'>删除</a>
+                                <a  class="btn btn-info btn-sm" onclick='clearformdiv("edu01")'>清空</a>
+                                
                               </div>
                             </div>
                           </div>
@@ -1100,7 +1100,7 @@ ii::after {
                               <div class=" row">
                                 <label class="col-4 form-label required wordbold">所读专业</label>
                                 <div class="col-auto">
-                                  <input type="text" class="form-control" name="class" autocomplete="off">
+                                  <input type="text" class="form-control" name="classes" autocomplete="off">
                                   <div class="invalid-feedback">不能为空！</div>
                                 </div>
                                 
@@ -1113,38 +1113,38 @@ ii::after {
                                 <label class="form-label col-md-2 wordbold" >学历</label>
                                 <div  class="col-auto">
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="edu01" value="0" >
-                                    <span class="form-check-label">小学</span>
+                                    <input class="form-check-input" type="radio" name="edu01-education" value="0" >
+                                    <span class="form-check-label">不限</span>
                                   </label>
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="edu01" value="0" >
+                                    <input class="form-check-input" type="radio" name="edu01-education" value="1" >
                                     <span class="form-check-label">初中</span>
                                   </label>
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="edu01" value="0" >
+                                    <input class="form-check-input" type="radio" name="edu01-education" value="2" >
                                     <span class="form-check-label">高中</span>
                                   </label>
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="edu01" value="0" >
+                                    <input class="form-check-input" type="radio" name="edu01-education" value="3" >
                                     <span class="form-check-label">中专</span>
                                   </label>
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="edu01" value="0">
+                                    <input class="form-check-input" type="radio" name="edu01-education" value="4">
                                     <span class="form-check-label">大专</span>
                                   </label>
                                   
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="edu01" value="0" checked>
+                                    <input class="form-check-input" type="radio" name="edu01-education" value="5" checked>
                                     <span class="form-check-label">本科</span>
                                   </label>
                                   
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="edu01" value="0">
+                                    <input class="form-check-input" type="radio" name="edu01-education" value="6">
                                     <span class="form-check-label">硕士</span>
                                   </label>
                                   
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="edu01" value="0">
+                                    <input class="form-check-input" type="radio" name="edu01-education" value="7">
                                     <span class="form-check-label">博士</span>
                                   </label>
                                   
@@ -1156,11 +1156,11 @@ ii::after {
                                 <label class="form-label col-md-4 wordbold" >是否统招</label>
                                 <div  class="col-auto">
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="isAlldayedu01" value="0" checked>
+                                    <input class="form-check-input" type="radio" name="isAlldayedu01-isAllTime" value="0" checked>
                                     <span class="form-check-label">是</span>
                                   </label>
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="isAlldayedu01" value="0" >
+                                    <input class="form-check-input" type="radio" name="isAlldayedu01-isAllTime" value="1" >
                                     <span class="form-check-label">否</span>
                                   </label>
                                
@@ -1173,7 +1173,7 @@ ii::after {
                               <div class="row">
                                 <label class="col-2 form-label  wordbold">学校经历</label>
                                 <div class="col-8">
-                                  <textarea rows="3" class="form-control" placeholder="奖学金、考试证书、比赛获奖等" name="introduce" autocomplete="off"  ></textarea>
+                                  <textarea rows="3" class="form-control" placeholder="奖学金、考试证书、比赛获奖等" name="duty" autocomplete="off"  ></textarea>
                                 </div>
                                 
                               </div>

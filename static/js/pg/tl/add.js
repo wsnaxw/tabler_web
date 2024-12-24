@@ -81,33 +81,33 @@ $(function(){
 
     jeDate("#jd1",{
       theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-      format: "YYYY-MM-DD"
+      format: "YYYY-MM"
     });
 
     
     jeDate("#jd2",{
       theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-      format: "YYYY-MM-DD"
+      format: "YYYY-MM"
     });
     
     jeDate("#jd3",{
       theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-      format: "YYYY-MM-DD"
+      format: "YYYY-MM"
     });
     
     jeDate("#jd4",{
       theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-      format: "YYYY-MM-DD"
+      format: "YYYY-MM"
     });
     
     jeDate("#jd5",{
       theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-      format: "YYYY-MM-DD"
+      format: "YYYY-MM"
     });
     
     jeDate("#jd6",{
       theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-      format: "YYYY-MM-DD"
+      format: "YYYY-MM"
     });
 
 
@@ -155,7 +155,7 @@ fetch(url,options)
        //数据填充
       let baseinfo = json.parsing_result.basic_info;
       let contact_info = json.parsing_result.contact_info;//手机号码填充
-      $("#baseinfoform input[name='phone']").val(toStr(contact_info.phone));
+      $("#baseinfoform input[name='phone']").val(toStr(contact_info.phone_number));
       $("#baseinfoform input[name='email']").val(toStr(contact_info.email));
       $("#baseinfoform input[name='name']").val(toStr(baseinfo.name));
       $("#baseinfoform input[name='age']").val(toStr(baseinfo.age));
@@ -217,8 +217,7 @@ fetch(url,options)
       // $(`#baseinfoform textarea[name='introduce']`).val(json.parsing_result.resume_rawtext);
 
 
-      let projectExperiences = json.parsing_result.project_experience; 
-      let educationExperiences = json.parsing_result.education_experience;
+      
 
       // 填充工作经验
       let workExperiences = json.parsing_result.work_experience;
@@ -234,6 +233,13 @@ fetch(url,options)
         workExperiences.forEach((workExperience, index) => {
           if (index > 0) {
             newgzjl(); // 调用 newgzjl 方法
+          }else{
+            $("#gz01 input[name='name']").val(workExperience.company_name);
+            $("#gz01 select[name='industry']").val(workExperience.job_function);
+            $("#gz01 input[name='job']").val(workExperience.job_title);
+            $("#gz01 textarea[name='duty']").val(workExperience.description);
+            $("#gz01 input[name='startTime']").val(`${workExperience.start_time_year}-${workExperience.start_time_month}`);
+            $("#gz01 input[name='endTime']").val(`${workExperience.end_time_year}-${workExperience.end_time_month}`);
           }
          
           $(`#gz${gzjl} input[name='name']`).val(workExperience.company_name);
@@ -246,6 +252,93 @@ fetch(url,options)
       }
 
 
+      let projectExperiences = json.parsing_result.project_experience; 
+
+      if (projectExperiences.length === 1) {
+        let projectExperience = projectExperiences[0];
+        $("#xm01 input[name='name']").val(projectExperience.project_name);
+        $("#xm01 input[name='job']").val(projectExperience.job_title);
+        $("#xm01 textarea[name='duty']").val(projectExperience.description);
+        $("#xm01 input[name='startTime']").val(`${projectExperience.start_time_year}-${workExperience.start_time_month}`);
+        $("#xm01 input[name='endTime']").val(`${projectExperience.end_time_year}-${workExperience.end_time_month}`);
+      } else if (projectExperiences.length > 1) {
+        projectExperiences.forEach((projectExperience, index) => {
+          if (index > 0) {
+            newxmjl(); // 调用 newxmjl 方法
+          }else{
+            $("#xm01 input[name='name']").val(projectExperience.project_name);
+            $("#xm01 input[name='job']").val(projectExperience.job_title);
+            $("#xm01 textarea[name='duty']").val(projectExperience.description);
+            $("#xm01 input[name='startTime']").val(`${projectExperience.start_time_year}-${projectExperience.start_time_month}`);
+            $("#xm01 input[name='endTime']").val(`${projectExperience.end_time_year}-${projectExperience.end_time_month}`);
+          }
+         
+          $(`#xm${xmjl} input[name='name']`).val(projectExperience.project_name);
+          $(`#xm${xmjl} input[name='job']`).val(projectExperience.job_title);
+          $(`#xm${xmjl} textarea[name='duty']`).val(projectExperience.description);
+          $(`#xm${xmjl} input[name='startTime']`).val(`${projectExperience.start_time_year}-${projectExperience.start_time_month}`);
+          $(`#xm${xmjl} input[name='endTime']`).val(`${projectExperience.end_time_year}-${projectExperience.end_time_month}`);
+        });
+      }
+
+
+      let educationExperiences = json.parsing_result.education_experience;
+
+
+      if(educationExperiences){
+        educationExperiences.forEach((educationExperience, index) => {
+
+          let degree1 = toStr(educationExperience.degree);
+          let xueli1 = 0; // 默认值
+          if (degree1.includes('大专')) {
+            xueli1 = 4;
+          } else if (degree1.includes('本')) {
+            xueli1 = 5;
+          } else if (degree1.includes('硕') || degree1.includes('研究生')) {
+            xueli1 = 6;
+          } else if (degree1.includes('博')) {
+            xueli1 = 7;
+          }else if (degree1.includes('高')) {
+            xueli1 = 2;
+          }else if (degree1.includes('初')) {
+            xueli1 = 1;
+          }else if (degree1.includes('中专')) {
+            xueli1 = 3;
+          }
+
+          let isALL = toStr(educationExperience.study_model);
+          let isALL1 = 0; // 默认值
+          if (isALL.includes('全日制')||isALL.includes('统招')) {
+            isALL1 = 0;
+          } else {
+            isALL1 = 1;
+          }
+
+
+
+          if (index > 0) {
+            newjyjl(); // 调用 newxmjl 方法
+          }else{
+
+            $(`#edu01 input[name='edu01-education'][value='${xueli1}']`).prop('checked', true);
+
+            $(`#edu01 input[name='isAlldayedu01-isAllTime'][value='${isALL1}']`).prop('checked', true);
+
+            $("#edu01 input[name='name']").val(educationExperience.school_name);
+            $("#edu01 input[name='classes']").val(educationExperience.major);
+            $("#edu01 input[name='startTime']").val(`${educationExperience.start_time_year}-${educationExperience.start_time_month}`);
+            $("#edu01 input[name='endTime']").val(`${educationExperience.end_time_year}-${educationExperience.end_time_month}`);
+          }
+
+          $(`#edu${jyjl} input[name='edu${jyjl}-education'][value='${xueli1}']`).prop('checked', true);
+          $(`#edu${jyjl} input[name='isAlldayedu${jyjl}-isAllTime'][value='${isALL1}']`).prop('checked', true);
+          $(`#edu${jyjl} input[name='name']`).val(educationExperience.school_name);
+          $(`#edu${jyjl} input[name='classes']`).val(educationExperience.major);
+          $(`#edu${jyjl} input[name='startTime']`).val(`${educationExperience.start_time_year}-${educationExperience.start_time_month}`);
+          $(`#edu${jyjl} input[name='endTime']`).val(`${educationExperience.end_time_year}-${educationExperience.end_time_month}`);
+        });
+
+      }  
 
 
 
@@ -667,11 +760,11 @@ function newgzjl(){
 
     jeDate("#endgz"+gzjl,{
       theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-      format: "YYYY-MM-DD"
+      format: "YYYY-MM"
   });
   jeDate("#startgz"+gzjl,{
     theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-    format: "YYYY-MM-DD"
+    format: "YYYY-MM"
 });
 
 
@@ -742,7 +835,7 @@ function newxmjl(){
                               <div class="ms-2 d-inline-block">
                                 
                                 <a href="#" class="btn btn-info btn-sm" onclick='clearformdiv("xm${xmjl}")'>清空</a>
-                                <a href="#" class="btn btn-danger btn-sm" onclick='deleteformdiv("gz${xmjl}")'>删除</a>
+                                <a href="#" class="btn btn-danger btn-sm" onclick='deleteformdiv("xm${xmjl}")'>删除</a>
                               </div>
                             </div>
                           </div>
@@ -768,7 +861,7 @@ function newxmjl(){
                               <div class=" row">
                                 <label class="col-4 form-label required wordbold">项目名称</label>
                                 <div class="col-auto">
-                                  <input type="text" class="form-control" name="phone" autocomplete="off">
+                                  <input type="text" class="form-control" name="name" autocomplete="off">
                                   <div class="invalid-feedback">不能为空！</div>
                                 </div>
                                 
@@ -780,7 +873,7 @@ function newxmjl(){
                               <div class=" row">
                                 <label class="col-4 form-label required wordbold">项目职位</label>
                                 <div class="col-auto">
-                                  <input type="text" class="form-control" name="phone" autocomplete="off">
+                                  <input type="text" class="form-control" name="job" autocomplete="off">
                                   <div class="invalid-feedback">不能为空！</div>
                                 </div>
                                 
@@ -792,7 +885,7 @@ function newxmjl(){
                               <div class="row">
                                 <label class="col-2 form-label required wordbold">项目职责</label>
                                 <div class="col-8">
-                                  <textarea rows="3" class="form-control" name="introduce" autocomplete="off"></textarea>
+                                  <textarea rows="3" class="form-control" name="duty" autocomplete="off"></textarea>
                                 </div>
                                 
                               </div>
@@ -807,11 +900,11 @@ function newxmjl(){
 
     jeDate("#endxm"+xmjl,{
       theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-      format: "YYYY-MM-DD"
+      format: "YYYY-MM"
   });
   jeDate("#startxm"+xmjl,{
     theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-    format: "YYYY-MM-DD"
+    format: "YYYY-MM"
 });
 
 
@@ -830,8 +923,8 @@ function newjyjl(){
                             <div class="col-auto ms-auto d-print-none">
                                 
                               <div class="ms-2 d-inline-block">
-                                <a  class="btn btn-info btn-sm" onclick='clearformdiv("gz${jyjl}")'>清空</a>
-                                <a  class="btn btn-danger btn-sm" onclick='deleteformdiv("gz${jyjl}")'>删除</a>
+                                <a  class="btn btn-info btn-sm" onclick='clearformdiv("edu${jyjl}")'>清空</a>
+                                <a  class="btn btn-danger btn-sm" onclick='deleteformdiv("edu${jyjl}")'>删除</a>
                               </div>
                             </div>
                           </div>
@@ -857,7 +950,7 @@ function newjyjl(){
                               <div class=" row">
                                 <label class="col-4 form-label required wordbold">毕业院校</label>
                                 <div class="col-auto">
-                                  <input type="text" class="form-control" name="phone" autocomplete="off">
+                                  <input type="text" class="form-control" name="name" autocomplete="off">
                                   <div class="invalid-feedback">不能为空！</div>
                                 </div>
                                 
@@ -869,7 +962,7 @@ function newjyjl(){
                               <div class=" row">
                                 <label class="col-4 form-label required wordbold">所读专业</label>
                                 <div class="col-auto">
-                                  <input type="text" class="form-control" name="phone" autocomplete="off">
+                                  <input type="text" class="form-control" name="classes" autocomplete="off">
                                   <div class="invalid-feedback">不能为空！</div>
                                 </div>
                                 
@@ -882,38 +975,38 @@ function newjyjl(){
                                 <label class="form-label col-md-2 wordbold" >学历</label>
                                 <div  class="col-auto">
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="edu${jyjl}" value="0" >
-                                    <span class="form-check-label">小学</span>
+                                    <input class="form-check-input" type="radio" name="edu${jyjl}-education" value="0" >
+                                    <span class="form-check-label">不限</span>
                                   </label>
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="edu${jyjl}" value="0" >
+                                    <input class="form-check-input" type="radio" name="edu${jyjl}-education" value="1" >
                                     <span class="form-check-label">初中</span>
                                   </label>
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="edu${jyjl}" value="0" >
+                                    <input class="form-check-input" type="radio" name="edu${jyjl}-education" value="2" >
                                     <span class="form-check-label">高中</span>
                                   </label>
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="edu${jyjl}" value="0" >
+                                    <input class="form-check-input" type="radio" name="edu${jyjl}-education" value="3" >
                                     <span class="form-check-label">中专</span>
                                   </label>
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="edu${jyjl}" value="0">
+                                    <input class="form-check-input" type="radio" name="edu${jyjl}-education" value="4">
                                     <span class="form-check-label">大专</span>
                                   </label>
                                   
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="edu${jyjl}" value="0" checked>
+                                    <input class="form-check-input" type="radio" name="edu${jyjl}-education" value="5" checked>
                                     <span class="form-check-label">本科</span>
                                   </label>
                                   
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="edu${jyjl}" value="0">
+                                    <input class="form-check-input" type="radio" name="edu${jyjl}-education" value="6">
                                     <span class="form-check-label">硕士</span>
                                   </label>
                                   
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="edu${jyjl}" value="0">
+                                    <input class="form-check-input" type="radio" name="edu${jyjl}-education" value="7">
                                     <span class="form-check-label">博士</span>
                                   </label>
                                   
@@ -925,11 +1018,11 @@ function newjyjl(){
                                 <label class="form-label col-md-4 wordbold" >是否统招</label>
                                 <div  class="col-auto">
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="isAlldayedu${jyjl}" value="0" checked>
+                                    <input class="form-check-input" type="radio" name="isAlldayedu${jyjl}-isAllTime" value="0" checked>
                                     <span class="form-check-label">是</span>
                                   </label>
                                   <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="isAlldayedu${jyjl}" value="0" >
+                                    <input class="form-check-input" type="radio" name="isAlldayedu${jyjl}-isAllTime" value="1" >
                                     <span class="form-check-label">否</span>
                                   </label>
                                
@@ -942,7 +1035,7 @@ function newjyjl(){
                               <div class="row">
                                 <label class="col-2 form-label  wordbold">学校经历</label>
                                 <div class="col-8">
-                                  <textarea rows="3" class="form-control" placeholder="奖学金、考试证书、比赛获奖等" name="introduce" autocomplete="off"  ></textarea>
+                                  <textarea rows="3" class="form-control" placeholder="奖学金、考试证书、比赛获奖等" name="duty" autocomplete="off"  ></textarea>
                                 </div>
                                 
                               </div>
@@ -957,11 +1050,11 @@ function newjyjl(){
 
   jeDate("#endjy"+jyjl,{
       theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-      format: "YYYY-MM-DD"
+      format: "YYYY-MM"
   });
   jeDate("#startjy"+jyjl,{
       theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-      format: "YYYY-MM-DD"
+      format: "YYYY-MM"
   });
 
 
@@ -1084,6 +1177,17 @@ function collectEduExperienceData() {
       const name = $(this).attr('name');
       const value = $(this).val();
       const type = $(this).attr('type');
+
+
+      if (name.indexOf('-')!== -1) {
+        workExperience[name.split('-')[1]] = value; 
+      }
+
+
+
+
+
+
       if (type === 'checkbox') {
         if ($(this).is(':checked')) {
           isCheckboxChecked = true;
