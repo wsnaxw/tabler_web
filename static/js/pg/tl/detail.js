@@ -556,23 +556,6 @@ let talentId ;
 
 let editInfo = {}
 
-let filenames = []
-
-function addFileNames(value,key ) {
-    // 创建一个对象，包含键值对
-    let obj = {};
-    obj[key] = value;
-    
-    // 将对象添加到数组中
-    filenames.push(obj);
-}
-
-// 删除元素（通过键匹配）
-function removeFileNames(key) {
-    filenames = filenames.filter(obj => !obj.hasOwnProperty(key));
-}
-
-
 
 
 

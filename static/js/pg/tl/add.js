@@ -216,13 +216,21 @@ fetch(url,options)
       $("#baseinfoform input[name='RCity']").val(toStr(baseinfo.detailed_location));
       // $(`#baseinfoform textarea[name='introduce']`).val(json.parsing_result.resume_rawtext);
 
-
+      let stillWorking = 1;
       
 
       // 填充工作经验
       let workExperiences = json.parsing_result.work_experience;
       if (workExperiences.length === 1) {
+       
         let workExperience = workExperiences[0];
+        if(workExperience.still_active==1){
+          stillWorking = 0;
+
+          $(`#gz01 input[name='isNow']`).prop('checked', true);
+        }
+
+
         $("#gz01 input[name='name']").val(workExperience.company_name);
         $("#gz01 select[name='industry']").val(workExperience.job_function);
         $("#gz01 input[name='job']").val(workExperience.job_title);
@@ -234,6 +242,10 @@ fetch(url,options)
           if (index > 0) {
             newgzjl(); // 调用 newgzjl 方法
           }else{
+            if(workExperience.still_active==1){
+              stillWorking = 0;
+              $(`#gz01 input[name='isNow']`).prop('checked', true);
+            }
             $("#gz01 input[name='name']").val(workExperience.company_name);
             $("#gz01 select[name='industry']").val(workExperience.job_function);
             $("#gz01 input[name='job']").val(workExperience.job_title);
@@ -242,6 +254,10 @@ fetch(url,options)
             $("#gz01 input[name='endTime']").val(`${workExperience.end_time_year}-${workExperience.end_time_month}`);
           }
          
+          if(workExperience.still_active==1){
+            stillWorking = 0;
+            $(`#gz${gzjl} input[name='isNow']`).prop('checked', true);
+          }
           $(`#gz${gzjl} input[name='name']`).val(workExperience.company_name);
           $(`#gz${gzjl} select[name='industry']`).val(workExperience.job_function);
           $(`#gz${gzjl} input[name='job']`).val(workExperience.job_title);
@@ -251,6 +267,8 @@ fetch(url,options)
         });
       }
 
+
+      $(`#baseinfoform input[name='workState'][value='${stillWorking}']`).prop('checked', true);
 
       let projectExperiences = json.parsing_result.project_experience; 
 
@@ -709,7 +727,7 @@ function newgzjl(){
                             
                             <div class="col-md-6">
                               <div class=" row">
-                                <label class="col-4 form-label required wordbold">所属行业</label>
+                                <label class="col-4 form-label  wordbold">所属行业</label>
                                 <div class="col-auto">
                                   <select class="form-select" name="industry">
                                     <option selected value="">不限</option>
@@ -795,12 +813,10 @@ function collectInputsAndMakeJsonJq() {
   var jsonArray = [];
   // console.log( $('#gzjsinfo.trcard'));
   var subDivs = document.getElementById('gzjsinfo').querySelectorAll('.trcard');
-  console.log( subDivs);
   subDivs.forEach(function (subDiv) {
-    console.log( 111);
+    
     var inputObj = {};
     var inputs = subDiv.querySelectorAll('input');
-    console.log( subDiv);
     inputs.forEach(function (input) {
         if (input.type === 'text' || input.type === 'number') {
             inputObj[input.name] = input.value;
@@ -818,7 +834,7 @@ function collectInputsAndMakeJsonJq() {
 
     jsonArray.push(inputObj);
 });
-  console.log(jsonArray);
+  
   return jsonArray;
 }
 
@@ -834,8 +850,8 @@ function newxmjl(){
                                 
                               <div class="ms-2 d-inline-block">
                                 
-                                <a href="#" class="btn btn-info btn-sm" onclick='clearformdiv("xm${xmjl}")'>清空</a>
-                                <a href="#" class="btn btn-danger btn-sm" onclick='deleteformdiv("xm${xmjl}")'>删除</a>
+                                <a class="btn btn-info btn-sm" onclick='clearformdiv("xm${xmjl}")'>清空</a>
+                                <a  class="btn btn-danger btn-sm" onclick='deleteformdiv("xm${xmjl}")'>删除</a>
                               </div>
                             </div>
                           </div>
@@ -1212,7 +1228,6 @@ function collectEduExperienceData() {
     $(this).find('textarea').each(function() {
       const name = $(this).attr('name');
       const value = $(this).val();
-      console.log(name,value)
       workExperience[name] = value;
     });
     workExperiences.push(workExperience);
@@ -1227,11 +1242,11 @@ function collectEduExperienceData() {
 function test(){
 
   const a1 = collectWorkExperienceData();
-  console.log(a1);
+  // console.log(a1);
   const a2 = collectProjectExperienceData();
-  console.log(a2);
+  // console.log(a2);
   const a3 = collectEduExperienceData();
-  console.log(a3);
+  // console.log(a3);
 
 
   return work1&&pro1&&edu1;
@@ -1245,7 +1260,7 @@ function formDataCheck() {
   let isValid = true;
 
 
-
+console.log("isValid",isValid)
   document.querySelectorAll('input, select, textarea').forEach(element => {
     let name = element.name || element.id;
     if (name) {
@@ -1283,7 +1298,7 @@ document.querySelectorAll('label.required').forEach(label => {
   formData.eduExperience = collectEduExperienceData();
 
 
-  console.log(isValid,formData)
+  console.log("isValid",isValid)
   console.log("test()",test())
 
   if (!isValid ||!test()) {
