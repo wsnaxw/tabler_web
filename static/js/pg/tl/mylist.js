@@ -270,7 +270,7 @@ function getPage(pageNo){
                         <td >${checkAndCutString(o.job)}</td>      
                         <td >${toStr(o.userName)}  ${plugins}</td>
                         <td >${toStr(o.updateTime)}</td>    
-                        <td ><a herf='#' onclick='checkDetail("${o.talentId}")' class ='btn'>查看</a><a herf='#' class='btn' onclick='join("${o.talentId}")'>加入项目</a></td>
+                        <td ><a  onclick='checkDetail("${o.talentId}")' class ='btn'>查看</a><a  class='btn' onclick='join("${o.talentId}")'>加入项目</a></td>
                         
                       </tr>
                       <tr name="${i}" class="hidden-row">
@@ -569,9 +569,6 @@ window.open(url, '_blank');
 
 }
 
-function join(id){
-  
-}
 
 function getParameterByName(name) {
      url = window.location.href;
@@ -647,6 +644,10 @@ document.addEventListener("DOMContentLoaded", function () {
       </span>${ escape(item.name) } - ${item.customerName}</div>`;
   
           }
+      },
+      onInitialize: function() {
+        this.clearOptions(); // 清空初始选项
+        this.load(''); // 传入空字符串以加载所有选项或基于默认查询
       },
   });
 });

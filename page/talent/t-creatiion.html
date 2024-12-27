@@ -318,8 +318,8 @@ ii::after {
             <div class="nav-item dropdown">
               <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
                 <div class="d-none d-xl-block ps-2">
-                  <div id="userName">12321</div>
-                  <div class="mt-1 small text-muted" id="userLevel">123</div>
+                  <div id="userName"></div>
+                  <div class="mt-1 small text-muted" id="userLevel"></div>
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -388,7 +388,7 @@ ii::after {
                             </a>
                           </div>
                           <div>
-                            <a  onclick="formDataCheck()" class="btn btn-success">
+                            <a  onclick="addTalent()" class="btn btn-success">
                               <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                               <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg>
                               新增
@@ -405,7 +405,7 @@ ii::after {
                           <div class="  row">
                             <label class="col-3 form-label required wordbold" >手机号码</label>
                             <div  class="col-auto">
-                              <input type="text" class="form-control " placeholder="手机号码" name="phone" >
+                              <input type="text" class="form-control " placeholder="手机号码" id="phoneInput" name="phone" >
                               <div class="invalid-feedback" id="phoneNotice" >不能为空！</div>
                             </div>
                           </div>
@@ -842,7 +842,7 @@ ii::after {
                                 <label class="col-2 form-label required wordbold">工作职责</label>
                                 <div class="col-8">
                                   <textarea rows="3" class="form-control" name="duty" autocomplete="off"></textarea>
-                                  <div class="invalid-feedback" id="phoneNotice" >不能为空！</div>
+                                  <div class="invalid-feedback" >不能为空！</div>
                                 </div>
                                 
                               </div>
@@ -984,7 +984,7 @@ ii::after {
                                 <label class="col-2 form-label required wordbold">项目职责</label>
                                 <div class="col-8">
                                   <textarea rows="3" class="form-control" name="duty" autocomplete="off"></textarea>
-                                  <div class="invalid-feedback" id="phoneNotice" >不能为空！</div>
+                                  <div class="invalid-feedback"  >不能为空！</div>
                                 </div>
                                 
                               </div>
@@ -1237,151 +1237,10 @@ ii::after {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-            
-
-
-
-            
-
             
           </div>
         </div>
         
-
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEnd" aria-labelledby="offcanvasEndLabel" aria-modal="true" role="dialog">
-          <div class="offcanvas-header">
-            <h2 class="offcanvas-title" id="offcanvasEndLabel">沟通记录</h2>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-          </div>
-          <div class="offcanvas-body">
-
-
-            <div class="card-body card-body-scrollable card-body-scrollable-shadow">
-              <div class="divide-y" id="alertcclfq">
-                
-                 
-              </div>
-            </div>
-
-
-            
-           
-          </div>
-        </div>
-
-        
-       
-
-
-
-
-
-
-        <div class="modal modal-blur fade" id="membermodal" tabindex="-1" role="dialog" aria-hidden="true" >
-          <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="formtitle">新增团队成员</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-
-                
-                <div class=" ">
-                  <label class="form-label">职位管理权限</label>
-                  <div>
-                    <label class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="jobManage" value="1" checked>
-                      <span class="form-check-label">有职位管理权限</span>
-                    </label>
-                    <label class="form-check form-check-inline">
-                      <input class="form-check-input" type="radio" name="jobManage" value="2" >
-                      <span class="form-check-label">无职位管理权限</span>
-                    </label>
-                  </div>
-                  <small class="form-hint">默认不选择则都统一为有职位管理权限</small>
-                </div>
-               
-
-
-                <div class=" ">
-                  <label class="form-label">选择成员</label>
-                  <select type="text" class="form-select" placeholder="输入名称查询选择顾问" id="addTeamMember">
-                  </select>
-                </div>
-               
-    
-
-               
-
-
-              </div>
-    
-              
-              <div class="modal-footer">
-                <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
-                  Cancel
-                </a>
-                <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal" onclick="addTeamList()">
-                  <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
-                  新增
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

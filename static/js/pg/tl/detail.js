@@ -11,6 +11,7 @@ $(document).ready(function () {
 })
 
 
+let talentName;
 
 
 function initBaseInfo(){
@@ -95,6 +96,7 @@ function initBaseInfo(){
             workSate = '<a href="#" class="badge badge-outline text-secondary fw-normal badge-pill text-yellow" >待业</a>'
            }
      
+           talentName = data.name;
            str = `      <div class="card">
                           <div class="card-status-start bg-primary"> 
                           </div>
@@ -107,14 +109,14 @@ function initBaseInfo(){
                             <span style="font-weight: bold;">更新时间:</span>
                             <span style="color: rgb(24, 144, 255);font-weight: bold;" >${toStr(data.updateTime).split(' ')[0]}</span>&nbsp;&nbsp;
                             <div class="card-actions">
-                              <a href="#" class="btn btn-primary" onclick="showMessage(1)">
+                              <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#joinmodal">
                                 加入项目 
                               </a>
                               
                               <a href="/wordpage/?talentId=${data.talentId}" class="btn btn-success" target='_blank'>
                                 生成简历报告
                               </a> 
-                              <a href="#" class="btn btn-info"  data-bs-toggle='modal' data-bs-target='#modal-edit' onclick="initEdit()">
+                              <a class="btn btn-info"  data-bs-toggle='modal' data-bs-target='#modal-edit' onclick="initEdit()">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path><path d="M16 5l3 3"></path></svg>
                               </a>
                             </div>
@@ -329,9 +331,9 @@ function initBaseInfo(){
             let infostr = ``;
             educations.forEach(o=>{
                 // <a href="#" class="badge badge-outline  fw-normal badge-pill text-green" >985</a>
-                let tz;
+                let tz='';
                 if(o.isAllTime==0){
-                    tz = `<a href="#" class="badge badge-outline fw-normal badge-pill text-green" >统招</a>`
+                    tz = `<a class="badge badge-outline fw-normal badge-pill text-green" >统招</a>`
                 }
 
                 infostr += `
@@ -775,7 +777,7 @@ function newcc(){
     var content = $('textarea[name="content"]').val()
   
 
-    var data={'customerId':csid,'state':toStr(state),'content':content,'customerName':'默认'};
+    var data={'talentId':talentId,'state':toStr(state),'content':content,'talentName':talentName};
 
     const options = {
         method: 'POST',
@@ -786,13 +788,13 @@ function newcc(){
         body: JSON.stringify(data),
     };
 
-        var url = baseUri+'/customer/addcc';
+        var url = baseUri+'/talent/addTalentC';
     fetch(url,options)
         .then(response => response.json())
         .then(json => {
 
             showMessage(json.code)
-            baseinfo(csid)
+            initTCList()
 
 
             $('#modal-newc').modal('hide')
@@ -827,6 +829,119 @@ function toTextbr(text){
 
     return text.replace(/\n/g, '<br>');
 
+
+
+}
+
+function join(){
+
+
+  $("#joinmodal").modal('show')
+
+
+
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  tomselect = new TomSelect('#addProject',{
+      valueField: 'projectId',
+      labelField: 'name',
+      searchField: 'name',
+      // fetch remote data
+      load: function(query, callback) {
+
+          const options = {
+              method: 'POST',
+              headers: {
+              'Content-Type': 'application/json',
+              'token':localStorage.getItem('token')
+              },
+              body: JSON.stringify({ 'name': query }),
+              };
+
+              var url = baseUri+'/project/myJobList';
+              fetch(url,options)
+              .then(response => response.json())
+              .then(json => {
+                var item = json.data.list;
+      
+                  callback(item);
+              }).catch((error)=>{
+                  callback();
+              });
+
+      },
+      
+      // custom rendering functions for options and items
+      render: {
+          option: function(item, escape) {
+      return `<div><span class="dropdown-item-indicator"  >
+      </span>${ escape(item.name) } - ${item.customerName}</div>`;
+  
+              
+          },
+          item: function(item, escape) {
+      return `<div><span class="dropdown-item-indicator"  >
+      </span>${ escape(item.name) } - ${item.customerName}</div>`;
+  
+          }
+      },
+      onInitialize: function() {
+        this.clearOptions(); // 清空初始选项
+        this.load(''); // 传入空字符串以加载所有选项或基于默认查询
+      },
+  });
+});
+
+
+
+function addProject(){
+
+
+  let projectid ='' ;
+
+  if( tomselect.items !=null&&tomselect.getValue()!=''){
+
+
+    projectid=tomselect.getValue();
+  }
+  var data={'talentId':talentId,'projectId':projectid};
+
+
+  const options = {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      'token':localStorage.getItem('token')
+      },
+      body: JSON.stringify(data),
+  };
+
+      var url = baseUri+'/talent/talentJoinProject';
+  fetch(url,options)
+      .then(response => response.json())
+      .then(json => {
+
+         
+        if(json.code==0){
+                
+          showMessage(0,'加入成功')
+  
+          initBaseInfo();
+  
+              }else{
+                  showMessage(1,json.message)
+              }
+  
+
+
+
+      }).catch((error)=>{
+          console.log(error)
+        
+      });
+
+  
 
 
 }

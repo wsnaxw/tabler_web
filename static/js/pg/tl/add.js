@@ -1,8 +1,8 @@
 
 
 
-$(function(){
-
+$(document).ready(function() {
+  getCode();
     const ct = document.getElementById("jobdiv");  
     ct.innerHTML = '';  
     document.getElementById('fileInput').addEventListener('change', function(event) {
@@ -116,7 +116,11 @@ $(function(){
 
 
 
-
+  // 绑定失去焦点事件
+  $("input[name='phone']").on('blur', function() {
+    const phone = $(this).val();
+    checkPhoneNumber(phone);
+  });
 
 
 
@@ -127,10 +131,88 @@ $(function(){
 
 
 
+function isValidPhone(phone) {
+  const phoneRegex = /^1[3-9]\d{9}$/;
+  return phoneRegex.test(phone);
+}
+
+// 手机号码查询方法
+function checkPhoneNumber(phone) {
+  if (!isValidPhone(phone)) {
+
+
+
+    $("#phoneInput").addClass('is-invalid','is-invalid-lite');
+    $("#phoneNotice").html('手机号码格式不正确!');
+    return;
+  }else{
+    $("#phoneInput").removeClass('is-invalid','is-invalid-lite');
+    $("#phoneNotice").html('不能为空!');
+  }
+
+  // 远程查询接口
+ 
+  const options = {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    'token':localStorage.getItem('token')
+    },
+    body: JSON.stringify({"phone":phone}),
+    };
+
+    var url = baseUri+'/talent/talentCheck';
+    fetch(url,options)
+    .then(response => response.json())
+    .then(json => {
+
+
+      if("1"==json.data){
+        $("#phoneInput").addClass('is-invalid','is-invalid-lite');
+        $("#phoneNotice").html('手机号码已存在!');
+      }else{
+        $("#phoneInput").removeClass('is-invalid','is-invalid-lite');
+        $("#phoneNotice").html('不能为空!');
+      }
+
+      sessionStorage.setItem("permissionkey",json.data)
+    }).catch((error)=>{
+        console.log(error)
+      
+    });
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 function testupload(name,code){
 
+
+  try {
+    
+ 
 
   kk=getuploadpermission();
   console.log(kk)
@@ -161,6 +243,9 @@ fetch(url,options)
       $("#baseinfoform input[name='age']").val(toStr(baseinfo.age));
       $("#baseinfoform input[name='lastCompany']").val(toStr(baseinfo.last_company));
       $("#baseinfoform input[name='job']").val(toStr(baseinfo.current_position));
+
+    
+
 
       // 学历判断
       let degree = toStr(baseinfo.degree);
@@ -360,28 +445,47 @@ fetch(url,options)
 
 
 
-
+      checkPhoneNumber(toStr(contact_info.phone_number));
 
 
     }).catch((error)=>{
         console.log(error)
-      
     });
+
+
+  } catch (error) {
+    showMessage(2,"解析失败！请刷新页面重新请求！") 
+    console.log(error)
+  }
 
 }
 let permissionkey;
 function getuploadpermission(){
 
 
-  let permissionkey = sessionStorage.getItem("permissionkey");
-  if(permissionkey!=null&&permissionkey!=undefined&&permissionkey!=''){
+  let permissionkey = toStr(sessionStorage.getItem("permissionkey"));
+  if(permissionkey!=null&&permissionkey!=undefined&&permissionkey!=''&&permissionkey.length>10){
     return   atob(permissionkey);
 
   }
+  getCode();
 
 
 
 
+
+
+
+
+    return atob(sessionStorage.getItem("permissionkey"));
+
+    
+   
+
+}
+
+
+function getCode(){
   const options = {
     method: 'POST',
     headers: {
@@ -401,9 +505,6 @@ fetch(url,options)
         console.log(error)
       
     });
-    
-    return atob(sessionStorage.getItem("permissionkey"));
-
 }
 
 
@@ -1261,7 +1362,7 @@ function formDataCheck() {
 
 
 console.log("isValid",isValid)
-  document.querySelectorAll('input, select, textarea').forEach(element => {
+  document.querySelectorAll('#baseinfo input, select, textarea').forEach(element => {
     let name = element.name || element.id;
     if (name) {
         formData[name] = element.value;
@@ -1269,7 +1370,7 @@ console.log("isValid",isValid)
 });
 
 // Check if required fields are empty
-document.querySelectorAll('label.required').forEach(label => {
+document.querySelectorAll('#baseinfo label.required').forEach(label => {
     let input = label.nextElementSibling.querySelector('input, select, textarea');
     if (input && !input.value) {
         isValid = false;
@@ -1292,10 +1393,10 @@ document.querySelectorAll('label.required').forEach(label => {
 
 
   // Collect additional data from specific methods
-  formData.workExperience = collectWorkExperienceData();
-  formData.projectExperience = collectProjectExperienceData();
+  formData.gzjl = collectWorkExperienceData();
+  formData.xmjl = collectProjectExperienceData();
   
-  formData.eduExperience = collectEduExperienceData();
+  formData.jyjl = collectEduExperienceData();
 
 
   console.log("isValid",isValid)
@@ -1309,4 +1410,48 @@ document.querySelectorAll('label.required').forEach(label => {
 
 
   return formData;
+}
+
+
+
+function addTalent(){
+
+  let formData = formDataCheck();
+  if (formData){
+
+    
+  const options = {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    'token':localStorage.getItem('token')
+    },
+    body: JSON.stringify(formData),
+    };
+
+    var url = baseUri+'/talent/addTalent';
+    fetch(url,options)
+    .then(response => response.json())
+    .then(json => {
+
+      if(json.code==0){
+        showMessage(0,'添加成功');
+      
+        window.open("my-list.html", '_blank');
+      
+      }else{
+          showMessage(1,'添加失败');
+        }
+
+    }).catch((error)=>{
+        console.log(error)
+      
+    });
+
+
+
+  }
+
+
+
 }
