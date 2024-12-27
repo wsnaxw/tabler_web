@@ -303,7 +303,7 @@ function getMenuInfo(){
 
                         menuLevel2.forEach(o=>{
 
-                            dropmenu3.append("<a class=\"dropdown-item\" href='"+o.url+" '>\n" +
+                            dropmenu3.append("<a class=\"dropdown-item\" href='"+o.url+"'>\n" +
                                 "" + o.name +
                                 "                      </a>")
 
@@ -776,6 +776,7 @@ function usertrip(){
 
 function menuActive(){
   const currentPath = window.location.pathname;
+  console.log("currentPath",currentPath);
 
   $('#menu a').each(function () {
     const menuPath = $(this).attr('href');
