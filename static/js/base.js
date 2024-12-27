@@ -302,67 +302,112 @@ function getMenuInfo(){
         },
         type: 'POST', // 请求类型
         dataType: 'json', // 预期服务器返回的数据类型
+        // success: function(response) {
+        //     if (response && response.code === 0 ) {
+        //         const menuLevel1 = response.data.filter(obj => obj.level===0);
+        //         $("#menu").html("");
+        //         for (let i =0 ;i<menuLevel1.length;i++){
+        //             if (menuLevel1[i].uri !== 'home'){
+        //                 let menu1 = $("<li class=\"nav-item dropdown\" id='"+menuLevel1[i].uri+"'>" +
+        //                     "</li>");
+
+        //                 menu1.append(      "<a class=\"nav-link dropdown-toggle\"  data-bs-toggle=\"dropdown\" data-bs-auto-close=\"false\" role=\"button\" aria-expanded=\"false\" >\n" +
+        //                     ""+   menuicon[i].icon +
+        //                     "                  <span class=\"nav-link-title fw-bold\">\n" +
+        //                     ""                    +menuLevel1[i].name+
+        //                     "                  </span>" +
+        //                     "                </a>" )
+
+        //                 let dropmenu = $('<div class="dropdown-menu">\n' +
+        //                     '            </div>')
+
+        //                 let dropmenu2 = $('<div class="dropdown-menu-columns">\n' +
+        //                     '            </div>')
+
+        //                 let dropmenu3 = $('<div class="dropdown-menu-columns">\n' +
+        //                     '            </div>')
+
+        //                 const menuLevel2 = response.data.filter(obj => (obj.level===1 && obj.superUri === menuLevel1[i].uri ));
+
+        //                 menuLevel2.forEach(o=>{
+
+        //                     dropmenu3.append("<a class=\"dropdown-item\" href='/tabler_web"+o.url+"'>\n" +
+        //                         "" + o.name +
+        //                         "                      </a>")
+
+        //                 })
+        //                 dropmenu2.append(dropmenu3)
+        //                 dropmenu.append(dropmenu2);
+        //                 menu1.append(dropmenu)
+        //                 $("#menu").append(menu1);
+
+        //             }else {
+        //                 let menu1 = $("<li class=\"nav-item\" id='"+menuLevel1[i].uri+"'>" +
+        //                     "</li>");
+
+        //                 menu1.append(      "                <a class=\"nav-link\" href=\"/tabler_web/index.html\" >\n" +
+        //                     ""+   menuicon[i].icon +
+        //                     "                  <span class=\"nav-link-title\">\n" +
+        //                     ""                    +menuLevel1[i].name+
+        //                     "                  </span>" +
+        //                     "                </a>" )
+        //                 $("#menu").append(menu1);
+
+        //             }
+
+        //             if (menuLevel1[i].uri !== 'home'){
+        //                 const menuLevel2 = response.data.filter(obj => (obj.level===1 && obj.superUri === menuLevel1[i].uri ));
+        //             }
+        //         }
+        //         // console.log(document.getElementById('menu').outerHTML)
+        //         localStorage.setItem("menuStr",document.getElementById('menu').outerHTML)
+        //     }
+
+        // },
         success: function(response) {
-            if (response && response.code === 0 ) {
-                const menuLevel1 = response.data.filter(obj => obj.level===0);
-                $("#menu").html("");
-                for (let i =0 ;i<menuLevel1.length;i++){
-                    if (menuLevel1[i].uri !== 'home'){
-                        let menu1 = $("<li class=\"nav-item dropdown\" id='"+menuLevel1[i].uri+"'>" +
-                            "</li>");
-
-                        menu1.append(      "<a class=\"nav-link dropdown-toggle\"  data-bs-toggle=\"dropdown\" data-bs-auto-close=\"false\" role=\"button\" aria-expanded=\"false\" >\n" +
-                            ""+   menuicon[i].icon +
-                            "                  <span class=\"nav-link-title fw-bold\">\n" +
-                            ""                    +menuLevel1[i].name+
-                            "                  </span>" +
-                            "                </a>" )
-
-                        let dropmenu = $('<div class="dropdown-menu">\n' +
-                            '            </div>')
-
-                        let dropmenu2 = $('<div class="dropdown-menu-columns">\n' +
-                            '            </div>')
-
-                        let dropmenu3 = $('<div class="dropdown-menu-columns">\n' +
-                            '            </div>')
-
-                        const menuLevel2 = response.data.filter(obj => (obj.level===1 && obj.superUri === menuLevel1[i].uri ));
-
-                        menuLevel2.forEach(o=>{
-
-                            dropmenu3.append("<a class=\"dropdown-item\" href='/tabler_web"+o.url+"'>\n" +
-                                "" + o.name +
-                                "                      </a>")
-
-                        })
-                        dropmenu2.append(dropmenu3)
-                        dropmenu.append(dropmenu2);
-                        menu1.append(dropmenu)
-                        $("#menu").append(menu1);
-
-                    }else {
-                        let menu1 = $("<li class=\"nav-item\" id='"+menuLevel1[i].uri+"'>" +
-                            "</li>");
-
-                        menu1.append(      "                <a class=\"nav-link\" href=\"/tabler_web/index.html\" >\n" +
-                            ""+   menuicon[i].icon +
-                            "                  <span class=\"nav-link-title\">\n" +
-                            ""                    +menuLevel1[i].name+
-                            "                  </span>" +
-                            "                </a>" )
-                        $("#menu").append(menu1);
-
-                    }
-
-                    if (menuLevel1[i].uri !== 'home'){
-                        const menuLevel2 = response.data.filter(obj => (obj.level===1 && obj.superUri === menuLevel1[i].uri ));
-                    }
-                }
-                // console.log(document.getElementById('menu').outerHTML)
-                localStorage.setItem("menuStr",document.getElementById('menu').outerHTML)
-            }
-
+          if (response && response.code === 0) {
+            const menuLevel1 = response.data.filter(obj => obj.level === 0);
+            $("#menu").html("");
+    
+            menuLevel1.forEach((menu, i) => {
+              if (menu.uri !== 'home') {
+                const menu1 = $(`
+                  <li class="nav-item dropdown" id="${menu.uri}">
+                    <a class="nav-link dropdown-toggle" href="#navbar-extra" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="false">
+                      ${menuicon[i].icon}
+                      <span class="nav-link-title fw-bold">${menu.name}</span>
+                    </a>
+                    <div class="dropdown-menu">
+                      <div class="dropdown-menu-columns">
+                        <div class="dropdown-menu-columns"></div>
+                      </div>
+                    </div>
+                  </li>
+                `);
+    
+                const dropmenu3 = menu1.find('.dropdown-menu-columns > .dropdown-menu-columns');
+                const menuLevel2 = response.data.filter(obj => obj.level === 1 && obj.superUri === menu.uri);
+    
+                menuLevel2.forEach(subMenu => {
+                  dropmenu3.append(`<a class="dropdown-item" href="/tabler_web${subMenu.url}">${subMenu.name}</a>`);
+                });
+    
+                $("#menu").append(menu1);
+              } else {
+                const menu1 = $(`
+                  <li class="nav-item" id="${menu.uri}">
+                    <a class="nav-link" href="/tabler_web/index.html">
+                      ${menuicon[i].icon}
+                      <span class="nav-link-title">${menu.name}</span>
+                    </a>
+                  </li>
+                `);
+                $("#menu").append(menu1);
+              }
+            });
+    
+            localStorage.setItem("menuStr", document.getElementById('menu').outerHTML);
+          }
         },
         error: function(jqXHR, textStatus, errorThrown) {
             // console.error('请求失败:', textStatus, errorThrown);
