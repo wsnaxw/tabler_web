@@ -311,7 +311,7 @@ function getMenuInfo(){
                         let menu1 = $("<li class=\"nav-item dropdown\" id='"+menuLevel1[i].uri+"'>" +
                             "</li>");
 
-                        menu1.append(      "<a class=\"nav-link dropdown-toggle\" href=\"#navbar-extra\" data-bs-toggle=\"dropdown\" data-bs-auto-close=\"false\" role=\"button\" aria-expanded=\"false\" >\n" +
+                        menu1.append(      "<a class=\"nav-link dropdown-toggle\"  data-bs-toggle=\"dropdown\" data-bs-auto-close=\"false\" role=\"button\" aria-expanded=\"false\" >\n" +
                             ""+   menuicon[i].icon +
                             "                  <span class=\"nav-link-title fw-bold\">\n" +
                             ""                    +menuLevel1[i].name+
@@ -816,16 +816,29 @@ function menuActive(){
     }
 
 
+    const currentPath = window.location.pathname;
+    // console.log("currentPath",currentPath);
 
-    if  (key==null || key=='')return;
-    // key = "/tabler_web/page/customer/list.html ";
-    $('a[href*="'+key+'"]').addClass("active");
-    $('a[href*="'+key+'"]').parent().parent().parent()
-    .siblings('a').attr("aria-expanded",true)
+    $('#menu a').each(function () {
+      const menuPath = $(this).attr('href');
+  
+      // 如果当前路径与菜单路径匹配，则高亮该菜单项
+      if (currentPath.startsWith(menuPath)) {
+        $(this).addClass('active'); // 添加高亮样式
+        $(this).parents('li').addClass('active'); // 如果有父菜单，也高亮父菜单
+        $(this).parents('div .dropdown-menu').addClass('show')
+      }
+    });
 
-    $('a[href*="'+key+'"]').parent().parent().parent().addClass("show")
-    $('a[href*="'+key+'"]').parent().parent().parent().parent().addClass("active")
-    // localStorage.setItem("nowactive",'')
+    // if  (key==null || key=='')return;
+    // // key = "/tabler_web/page/customer/list.html ";
+    // $('a[href*="'+key+'"]').addClass("active");
+    // $('a[href*="'+key+'"]').parent().parent().parent()
+    // .siblings('a').attr("aria-expanded",true)
+
+    // $('a[href*="'+key+'"]').parent().parent().parent().addClass("show")
+    // $('a[href*="'+key+'"]').parent().parent().parent().parent().addClass("active")
+    // // localStorage.setItem("nowactive",'')
  
     
 }

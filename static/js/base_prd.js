@@ -243,37 +243,6 @@ $(document).ready(function () {
 
             
 
-            // let menuStr = localStorage.getItem("menuStr")
-            // const menu = document.getElementById('menu');
-            // if(menuStr){
-            //   // 用于存储所有menu链接对应的页面路径
-            //   const menuPaths = [];
-            //   const links = menu.querySelectorAll('a');
-            //   links.forEach(link => {
-            //     const href = link.getAttribute('href');
-            //     menuPaths.push(href);
-            //   });
-            //   const currentPath = window.location.pathname;
-            //   console.log(currentPath)
-            //   if(!currentPath.startsWith('/403.html')||!currentPath.startsWith('/sign_in.html')){
-            //     let isInMenu = false;
-            //     menuPaths.forEach(path => {
-            //       console.log(currentPath.startsWith(path))
-            //       if (currentPath.startsWith(path)) {
-            //         isInMenu = true;
-            //       }
-            //     });
-            //     console.log(isInMenu)
-  
-            //     if (!isInMenu) {
-            //       window.location.href = '/403.html'; // 假设你的403页面路径是/403.html，根据实际情况修改
-            //     }
-            //   }
-           
-  
-  
-            // }
-
 
 
 
@@ -314,7 +283,7 @@ function getMenuInfo(){
                         let menu1 = $("<li class=\"nav-item dropdown\" id='"+menuLevel1[i].uri+"'>" +
                             "</li>");
 
-                        menu1.append(      "<a class=\"nav-link dropdown-toggle\" href=\"#navbar-extra\" data-bs-toggle=\"dropdown\" data-bs-auto-close=\"false\" role=\"button\" aria-expanded=\"false\" >\n" +
+                        menu1.append(      "<a class=\"nav-link dropdown-toggle\"  data-bs-toggle=\"dropdown\" data-bs-auto-close=\"false\" role=\"button\" aria-expanded=\"false\" >\n" +
                             ""+   menuicon[i].icon +
                             "                  <span class=\"nav-link-title fw-bold\">\n" +
                             ""                    +menuLevel1[i].name+
@@ -806,27 +775,18 @@ function usertrip(){
 }
 
 function menuActive(){
-    let nowpagekey = pagemenukey;
-    let key;
-    if(nowpagekey!=null){
-         key = nowpagekey;
-    }else{
-        key = sessionStorage.getItem("nowactive")
-        pagemenukey = key;
+  const currentPath = window.location.pathname;
+
+  $('#menu a').each(function () {
+    const menuPath = $(this).attr('href');
+
+    // 如果当前路径与菜单路径匹配，则高亮该菜单项
+    if (currentPath.startsWith(menuPath)) {
+      $(this).addClass('active'); // 添加高亮样式
+      $(this).parents('li').addClass('active'); // 如果有父菜单，也高亮父菜单
+      $(this).parents('div .dropdown-menu').addClass('show')
     }
-
-
-
-    if  (key==null || key=='')return;
-    // key = "/tabler_web/page/customer/list.html ";
-    $('a[href*="'+key+'"]').addClass("active");
-    $('a[href*="'+key+'"]').parent().parent().parent()
-    .siblings('a').attr("aria-expanded",true)
-
-    $('a[href*="'+key+'"]').parent().parent().parent().addClass("show")
-    $('a[href*="'+key+'"]').parent().parent().parent().parent().addClass("active")
-    // localStorage.setItem("nowactive",'')
- 
+  });
     
 }
 
