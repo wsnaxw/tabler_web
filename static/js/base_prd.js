@@ -362,14 +362,14 @@ function getMenuInfo(){
                 const menuLevel2 = response.data.filter(obj => obj.level === 1 && obj.superUri === menu.uri);
     
                 menuLevel2.forEach(subMenu => {
-                  dropmenu3.append(`<a class="dropdown-item" href="/tabler_web${subMenu.url}">${subMenu.name}</a>`);
+                  dropmenu3.append(`<a class="dropdown-item" href="${subMenu.url}">${subMenu.name}</a>`);
                 });
     
                 $("#menu").append(menu1);
               } else {
                 const menu1 = $(`
                   <li class="nav-item" id="${menu.uri}">
-                    <a class="nav-link" href="/tabler_web/index.html">
+                    <a class="nav-link" href="/index.html">
                       ${menuicon[i].icon}
                       <span class="nav-link-title">${menu.name}</span>
                     </a>
