@@ -228,6 +228,7 @@ function initBaseInfo(){
 
             let infostr = ``;
             companys.forEach(o=>{
+              sessionStorage.setItem('companys-'+o.id,JSON.stringify(o))
                 let isNow = ''
                 if(o.isNow==1){
                     isNow='至今'
@@ -237,7 +238,7 @@ function initBaseInfo(){
 
 
                 infostr += `
-                <div class="card trcard">
+                <div class="card trcard" id='companys-${o.id}'>
 
                           <div class="card-body border-bottom py-3">
                             <div class="d-flex" style="font-weight: bold;">
@@ -248,8 +249,8 @@ function initBaseInfo(){
                               <div class="ms-auto text-secondary">
                                 
                                 <div class="ms-2 d-inline-block">
-                                  <a href="#" class="btn btn-info btn-sm" onclick='editcompany("${o.id}")'>修改</a>
-                                  <a href="#" class="btn btn-danger btn-sm" onclick='deletecompany("${o.id}")'>删除</a>
+                                  <a class="btn btn-info btn-sm" onclick='editcompany("companys-${o.id}")'>修改</a>
+                                  <a  class="btn btn-danger btn-sm" onclick='delectexp("companys-${o.id}")'>删除</a>
                                 </div>
                               </div>
                             </div>
@@ -284,10 +285,10 @@ function initBaseInfo(){
 
             let infostr = ``;
             projects.forEach(o=>{
-          
+              sessionStorage.setItem('projects-'+o.id,JSON.stringify(o))
 
                 infostr += `
-                <div class="card trcard">
+                <div class="card trcard" id='projects-${o.id}'>
 
                           <div class="card-body border-bottom py-3">
                             <div class="d-flex" style="font-weight: bold;">
@@ -298,8 +299,8 @@ function initBaseInfo(){
                               <div class="ms-auto text-secondary">
                                 
                                 <div class="ms-2 d-inline-block">
-                                  <a href="#" class="btn btn-info btn-sm" onclick='editcompany("${o.id}")'>修改</a>
-                                  <a href="#" class="btn btn-danger btn-sm" onclick='deletecompany("${o.id}")'>删除</a>
+                                  <a  class="btn btn-info btn-sm" onclick='editpro("projects-${o.id}")'>修改</a>
+                                  <a  class="btn btn-danger btn-sm" onclick='delectexp("projects-${o.id}")'>删除</a>
                                 </div>
                               </div>
                             </div>
@@ -330,6 +331,7 @@ function initBaseInfo(){
         }else{
             let infostr = ``;
             educations.forEach(o=>{
+                sessionStorage.setItem('educations-'+o.id,JSON.stringify(o))
                 // <a href="#" class="badge badge-outline  fw-normal badge-pill text-green" >985</a>
                 let tz='';
                 if(o.isAllTime==0){
@@ -337,7 +339,7 @@ function initBaseInfo(){
                 }
 
                 infostr += `
-                        <div class="list-group-item">
+                        <div class="list-group-item" id='educations-${o.id}'>
                           <div class="row g-2 align-items-center">
                         
                            
@@ -352,8 +354,8 @@ function initBaseInfo(){
                               </div>
                             </div>
                             <div class="col-auto text-secondary">
-                                    <a href="#" class="btn btn-info btn-sm" onclick='editcompany("${o.id}")'>修改</a>
-                                  <a href="#" class="btn btn-danger btn-sm" onclick='deletecompany("${o.id}")'>删除</a>
+                                    <a  class="btn btn-info btn-sm" onclick='editEdu("educations-${o.id}")'>修改</a>
+                                  <a class="btn btn-danger btn-sm" onclick='delectexp("educations-${o.id}")'>删除</a>
                             </div>          
                           </div>
                         </div>
@@ -944,4 +946,123 @@ function addProject(){
   
 
 
+}
+
+
+function clearformdiv(id){
+  $('#'+id+' input[type="checkbox"], #'+id+' select, #'+id+' input[type="text"], #'+id+' textarea').each(function() {
+    // 将这些元素的值设置为空
+    $(this).val('');
+    // 对于checkbox，还需要取消选中状态
+    if ($(this).is('input[type="checkbox"]')) {
+      $(this).prop('checked', false);
+    }
+  });
+
+
+}
+
+let pro1=false;
+
+function collectData(id1,id2) {
+
+  const workExperiences = [];
+
+
+  $('#'+id1+' #'+id2).each(function() {
+    const workExperience = {};
+    let isCheckboxChecked = false;
+
+        // First pass to check if any checkbox is checked
+        $(this).find('input[type="checkbox"]').each(function() {
+          if ($(this).is(':checked')) {
+            isCheckboxChecked = true;
+          }
+        });
+    $(this).find('input,textarea,select').each(function() {
+      const name = $(this).attr('name');
+      const value = $(this).val();
+      const type = $(this).attr('type');
+    
+      if (type === 'checkbox') {
+        if ($(this).is(':checked')) {
+        
+          isCheckboxChecked = true;
+          workExperience[name] = value;
+        }
+      } else  if (type != 'radio') {
+        if (value || (isCheckboxChecked && name === 'endTime')) {
+
+          pro1=true;
+          $(this).removeClass('is-invalid','is-invalid-lite');
+          workExperience[name] = value;
+        } else {
+          pro1=false;
+          $(this).addClass('is-invalid','is-invalid-lite');
+         
+        }
+      }else{
+        workExperience[name] = value;
+      }
+      workExperience.talentId = talentId;
+    });
+
+
+    workExperiences.push(workExperience);
+  });
+
+
+
+  if(!pro1){
+    showMessage(2,'请填写完整的信息');
+    return null;
+  }
+  console.log(workExperiences)
+  // return JSON.stringify(workExperiences);
+  return workExperiences
+}
+
+
+function editData(projectId) {
+  // 获取表单数据
+  let projectData = {
+      id: projectId,
+      name: $("#xm01 input[name='name']").val(),
+      job: $("#xm01 input[name='job']").val(),
+      duty: $("#xm01 textarea[name='duty']").val(),
+      startTime: $("#xm01 input[name='startTime']").val().replace('-', '.'),
+      endTime: $("#xm01 input[name='endTime']").val().replace('-', '.'),
+      isNow: $("#xm01 input[name='isNow']").prop('checked') ? 1 : 0
+  };
+
+  // 更新 sessionStorage
+  sessionStorage.setItem(projectId, JSON.stringify(projectData));
+
+  // 关闭 modal
+  $('#addmodal-pro').modal('hide');
+
+  console.log(projectData);
+
+  // 其他处理逻辑，例如更新页面显示
+}
+
+
+function editpro(projectId) {
+  // 获取项目数据
+  let projectData = JSON.parse(sessionStorage.getItem(projectId));
+
+  // 填充数据到 modal
+  $("#xm01 input[name='name']").val(projectData.name);
+  $("#xm01 input[name='job']").val(projectData.job);
+  $("#xm01 textarea[name='duty']").val(projectData.duty);
+  $("#xm01 input[name='startTime']").val(projectData.startTime.replace('.', '-'));
+  $("#xm01 input[name='endTime']").val(projectData.endTime ? projectData.endTime.replace('.', '-') : '');
+  $("#xm01 input[name='isNow']").prop('checked', projectData.isNow === 1);
+
+  // 修改按钮文本和 onclick 方法
+  $(".modal-footer .btn-primary").text('修改项目经历');
+  $(".modal-footer .btn-primary").attr('onclick', `editData('${projectId}')`);
+
+  // 打开 modal
+  $('#addmodal-pro').modal('show');
 }

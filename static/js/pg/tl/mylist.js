@@ -190,9 +190,12 @@ function getPage(pageNo){
                     
                     
 
+               
                     if(o.experienceEdus){
-                      o.experienceEdus.forEach(value=>{
-                        exEdu+= `${toStr(value.startTime)} - ${toStr(value.endTime)} | ${value.name} | ${value.classes} | ${value.education} <br>`
+                      o.experienceEdus.forEach((value,index)=>{
+
+                        let backgroundColor = index % 2 === 0 ?'#ffffff': '#f0f0f0'  ;
+                        exEdu+= `<div style="background-color: ${backgroundColor};padding: 2px">${toStr(value.startTime)} - ${toStr(value.endTime)} | ${value.name} | ${value.classes} | ${value.education}</div>`;
                       })
                     }
 
@@ -200,18 +203,21 @@ function getPage(pageNo){
                     let exCom = ``;
 
                     if(o.experienceCompanies){
-                      o.experienceCompanies.forEach(value=>{
+                      o.experienceCompanies.forEach((value,index)=>{
                         let endTime = value.endTime;
 
                         if(value.isNow == 1 && endTime==null){
                           endTime = '至今'
                         }
 
+                        let backgroundColor = index % 2 === 0 ?'#ffffff': '#f0f0f0'  ;
 
-                        exCom +=  `${toStr(value.startTime)} - ${toStr(endTime)} | <span>${value.name}</span> | ${checkAndCutString(value.job)} <br>`
+                        exCom += `<div style="background-color: ${backgroundColor};padding: 2px">${toStr(value.startTime)} - ${toStr(endTime)} | <span>${value.name}</span> | ${checkAndCutString(value.job)}</div>`;
+                      
+
+
                       })
                     }
-
 
                     let plugins = ``;
 

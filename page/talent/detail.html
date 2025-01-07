@@ -526,7 +526,7 @@ ii::after {
                           <div class="card-header">
                             <h3 class="card-title">沟通记录</h3>
                             <div class="card-actions">
-                              <a href="#" class="btn btn-ghost-primary"   data-bs-toggle='modal' data-bs-target='#modal-newc' onclick="initEdit()">
+                              <a  class="btn btn-ghost-primary"   data-bs-toggle='modal' data-bs-target='#modal-newc' onclick="initEdit()">
                                 新增沟通记录
                               </a>
                               <a class="btn btn-info" data-bs-toggle="offcanvas" href="#offcanvasEnd" role="button" aria-controls="offcanvasEnd" onclick="cclfq()">
@@ -587,7 +587,7 @@ ii::after {
                     <div class="card-header">
                       <h3 class="card-title">工作经历</h3>
                         <div class="card-actions">
-                          <a href="#" class="btn btn-ghost-primary">
+                          <a class="btn btn-ghost-primary"  data-bs-toggle='modal' data-bs-target='#addmodal-com'>
                             新增
                           </a>
                         </div>
@@ -662,7 +662,7 @@ ii::after {
                     <div class="card-header">
                       <h3 class="card-title">项目经历</h3>
                         <div class="card-actions">
-                          <a onclick="test()" class="btn btn-ghost-primary">
+                          <a class="btn btn-ghost-primary" data-bs-toggle='modal' data-bs-target='#addmodal-pro'>
                             新增
                           </a>
                         </div>
@@ -722,7 +722,7 @@ ii::after {
                     <div class="card-header">
                       <h3 class="card-title" style="font-weight: bold;">教育经历</h3>
                         <div class="card-actions">
-                          <a href="#" class="btn btn-ghost-primary">
+                          <a class="btn btn-ghost-primary" data-bs-toggle='modal' data-bs-target='#addmodal-edu'>
                             新增
                           </a>
                         </div>
@@ -1498,12 +1498,427 @@ ii::after {
 
 
 
+        
+        <div class="modal modal-blur fade" id="addmodal-com" tabindex="-1" role="dialog" aria-hidden="true" >
+          <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+            <div class="modal-content">
+       
+              <div class="modal-body">
+
+               
+               
+
+
+                <div class="row row-cards"  id="gzjsinfo">
+
+
+                  <div class="card " id="gz01">
+
+                    <div class="card-header border-bottom py-3">
+                      <div class="col-auto ms-auto d-print-none">
+                          
+                        <div class="ms-2 d-inline-block">
+                          <a  class="btn btn-info btn-sm" onclick='clearformdiv("gz01")'>清空</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row row-cards card-body">
+                      <div class="col-md-12">
+                        <div class=" row">
+                          <label class="col-2 form-label required wordbold">工作时间</label>
+                          <div class="col-auto">
+                            <input type="text" class="form-control" id="jd1" placeholder="开始日期" name="startTime" autocomplete="off">
+                            <div class="invalid-feedback">不能为空！</div>
+                          </div>
+                          <div class="col-auto">
+                            <input type="text" class="form-control" id="jd2" placeholder="结束日期" name="endTime" autocomplete="off">
+                            <div class="invalid-feedback">不能为空！</div>
+                          </div>
+                          <label class="form-check form-check-inline col-auto">
+                            <input class="form-check-input" type="checkbox" value="1" name="isNow">
+                            <span class="form-check-label">至今</span>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class=" row">
+                          <label class="col-2 form-label required wordbold">所在公司</label>
+                          <div class="col-auto">
+                            <input type="text" class="form-control " placeholder="所在公司" name="name" autocomplete="off">
+                            <div class="invalid-feedback">不能为空！</div>
+                          </div>
+                          
+                        </div>
+                      </div>
+                 
+                      
+                      <div class="col-md-12">
+                        <div class=" row">
+                          <label class="col-2 form-label  wordbold">所属行业</label>
+                          <div class="col-auto">
+                            <select class="form-select" name="industry">
+                              <option selected value="">不限</option>
+                              <option value="互联网 / 游戏 / 软件">互联网 / 游戏 / 软件</option>
+                              <option value="电子 / 通信 / 硬件">电子 / 通信 / 硬件</option>
+                              <option value="房地产 / 建筑 / 物业 ">房地产 / 建筑 / 物业 </option>
+                              <option value="经济">经济</option>
+                              <option value="消费品">消费品</option>
+                              <option value="汽车 / 机械 / 制造">汽车 / 机械 / 制造</option>
+                              <option value="广告 / 传媒 / 教育 / 文化">广告 / 传媒 / 教育 / 文化</option>
+                              <option value="交通 / 贸易 / 物流">交通 / 贸易 / 物流</option>
+                              <option value="制药 / 医用器械">制药 / 医用器械</option>
+                              <option value="能源 / 化工 / 环保">能源 / 化工 / 环保</option>
+                              <option value="政府 / 农林牧渔">政府 / 农林牧渔</option>
+                            </select>
+                          </div>
+                        </div>
+                        
+                      </div>
+                    
+                      <div class="col-md-12">
+                        <div class=" row">
+                          <label class="col-2 form-label required wordbold">工作岗位</label>
+                          <div class="col-auto">
+                            <input type="text" class="form-control " placeholder="工作岗位" name="job" autocomplete="off">
+                            <div class="invalid-feedback">不能为空！</div>
+                          </div>
+                          
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <div class="row">
+                          <label class="col-2 form-label required wordbold">工作职责</label>
+                          <div class="col-8">
+                            <textarea rows="3" class="form-control" name="duty" autocomplete="off"></textarea>
+                            <div class="invalid-feedback" >不能为空！</div>
+                          </div>
+                          
+                        </div>
+                      </div>
+                      
+                    </div>
+                    
+                  </div>
+
+
+                 
+
+                  
+
+
+
+                </div>
+               
+               
+    
+
+               
+
+
+              </div>
+    
+              
+              <div class="modal-footer">
+                <a class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                  Cancel
+                </a>
+                <a  class="btn btn-primary ms-auto"  onclick="collectData('gzjsinfo','gz01')">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+                  新增工作经历
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+  
+        <div class="modal modal-blur fade" id="addmodal-pro" tabindex="-1" role="dialog" aria-hidden="true" >
+          <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+            <div class="modal-content">
+       
+              <div class="modal-body">
+
+               
+               
+
+
+                <div class="row row-cards" id="xmjlinfo">
+
+
+                  <div class="card " id="xm01">
+
+                    <div class="card-header border-bottom py-3">
+                      <div class="col-auto ms-auto d-print-none">
+                          
+                        <div class="ms-2 d-inline-block">
+                          
+                          <a  class="btn btn-info btn-sm" onclick='clearformdiv("xm01")'>清空</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row row-cards card-body">
+                      <div class="col-md-12">
+                        <div class=" row">
+                          <label class="col-2 form-label required wordbold">项目时间</label>
+                          <div class="col-auto">
+                            <input type="text" class="form-control" id="jd3" placeholder="开始日期" name="startTime" autocomplete="off">
+                            <div class="invalid-feedback">不能为空！</div>
+                          </div>
+                          <div class="col-auto">
+                            <input type="text" class="form-control " id="jd4" placeholder="结束日期" name="endTime" autocomplete="off">
+                            <div class="invalid-feedback">不能为空！</div>
+                          </div>
+                          <label class="form-check form-check-inline col-auto">
+                            <input class="form-check-input" type="checkbox" name="isNow" value="1">
+                            <span class="form-check-label">至今</span>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class=" row">
+                          <label class="col-4 form-label required wordbold">项目名称</label>
+                          <div class="col-auto">
+                            <input type="text" class="form-control" name="name" autocomplete="off">
+                            <div class="invalid-feedback">不能为空！</div>
+                          </div>
+                          
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                      </div>
+                      <div class="col-md-6">
+                        <div class=" row">
+                          <label class="col-4 form-label required wordbold">项目职位</label>
+                          <div class="col-auto">
+                            <input type="text" class="form-control" name="job" autocomplete="off">
+                            <div class="invalid-feedback">不能为空！</div>
+                          </div>
+                          
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                      </div>
+                      <div class="col-md-12">
+                        <div class="row">
+                          <label class="col-2 form-label required wordbold">项目职责</label>
+                          <div class="col-8">
+                            <textarea rows="3" class="form-control" name="duty" autocomplete="off"></textarea>
+                            <div class="invalid-feedback"  >不能为空！</div>
+                          </div>
+                          
+                        </div>
+                      </div>
+                      
+                    </div>
+                    
+                  </div>
+
+                  
+
+
+
+
+                </div>
+               
+               
+    
+
+               
+
+
+              </div>
+    
+              
+              <div class="modal-footer">
+                <a class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                  Cancel
+                </a>
+                <a  class="btn btn-primary ms-auto"  onclick="collectData('xmjlinfo','xm01')">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+                  新增项目经历
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
 
 
 
 
 
 
+
+
+        <div class="modal modal-blur fade" id="addmodal-edu" tabindex="-1" role="dialog" aria-hidden="true" >
+          <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+            <div class="modal-content">
+       
+              <div class="modal-body">
+
+               
+               
+
+
+                <div class="row row-cards" id="jyjlinfo">
+
+
+                  <div class="card " id="edu01">
+
+                    <div class="card-header border-bottom py-3">
+                      <div class="col-auto ms-auto d-print-none">
+                          
+                        <div class="ms-2 d-inline-block">
+                          <a  class="btn btn-info btn-sm" onclick='clearformdiv("edu01")'>清空</a>
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row row-cards card-body">
+                      <div class="col-md-12">
+                        <div class=" row">
+                          <label class="col-2 form-label required wordbold">教育日期</label>
+                          <div class="col-auto">
+                            <input type="text" class="form-control" id="jd5" placeholder="开始日期" name="startTime" autocomplete="off">
+                            <div class="invalid-feedback">不能为空！</div>
+                          </div>
+                          <div class="col-auto">
+                            <input type="text" class="form-control" id="jd6" placeholder="结束日期" name="endTime" autocomplete="off">
+                            <div class="invalid-feedback">不能为空！</div>
+                          </div>
+                          <label class="form-check form-check-inline col-auto">
+                            <input class="form-check-input" type="checkbox" name="isNow" value="1">
+                            <span class="form-check-label">至今</span>
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class=" row">
+                          <label class="col-4 form-label required wordbold">毕业院校</label>
+                          <div class="col-auto">
+                            <input type="text" class="form-control" name="name" autocomplete="off">
+                            <div class="invalid-feedback">不能为空！</div>
+                          </div>
+                          
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                      </div>
+                      <div class="col-md-6">
+                        <div class=" row">
+                          <label class="col-4 form-label required wordbold">所读专业</label>
+                          <div class="col-auto">
+                            <input type="text" class="form-control" name="classes" autocomplete="off">
+                            <div class="invalid-feedback">不能为空！</div>
+                          </div>
+                          
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                      </div>
+                      <div class="col-md-12">
+                        <div class="row">
+                          <label class="form-label col-md-2 wordbold" >学历</label>
+                          <div  class="col-auto">
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="edu01-education" value="0" >
+                              <span class="form-check-label">不限</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="edu01-education" value="1" >
+                              <span class="form-check-label">初中</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="edu01-education" value="2" >
+                              <span class="form-check-label">高中</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="edu01-education" value="3" >
+                              <span class="form-check-label">中专</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="edu01-education" value="4">
+                              <span class="form-check-label">大专</span>
+                            </label>
+                            
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="edu01-education" value="5" checked>
+                              <span class="form-check-label">本科</span>
+                            </label>
+                            
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="edu01-education" value="6">
+                              <span class="form-check-label">硕士</span>
+                            </label>
+                            
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="edu01-education" value="7">
+                              <span class="form-check-label">博士</span>
+                            </label>
+                            
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="row">
+                          <label class="form-label col-md-4 wordbold" >是否统招</label>
+                          <div  class="col-auto">
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="isAlldayedu01-isAllTime" value="0" checked>
+                              <span class="form-check-label">是</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="isAlldayedu01-isAllTime" value="1" >
+                              <span class="form-check-label">否</span>
+                            </label>
+                         
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                      </div>
+                      <div class="col-md-12">
+                        <div class="row">
+                          <label class="col-2 form-label  wordbold">学校经历</label>
+                          <div class="col-8">
+                            <textarea rows="3" class="form-control" placeholder="奖学金、考试证书、比赛获奖等" name="duty" autocomplete="off"  ></textarea>
+                          </div>
+                          
+                        </div>
+                      </div>
+                      
+                    </div>
+                    
+                  </div>
+
+                  
+
+
+
+
+                </div>
+               
+               
+    
+
+               
+
+
+              </div>
+    
+              
+              <div class="modal-footer">
+                <a class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                  Cancel
+                </a>
+                <a  class="btn btn-primary ms-auto" onclick="collectData('jyjlinfo','edu01')">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+                  新增教育经历
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
 
 
 
