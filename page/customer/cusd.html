@@ -44,7 +44,13 @@
 
     </script>
 <style>
+ html, body {
+      height: 100%;
+    }
 
+    #exploredtable {
+      min-height: calc(100vh - 200px); /* Adjust the value based on your header/footer height */
+    }
 </style>
   </head>
   <body  id="webBody" class="layout-fluid">
@@ -231,10 +237,10 @@
                     <div class="card-header">
                       <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
                         <li class="nav-item" role="presentation">
-                          <a href="#" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab" onclick="usermessage()">信箱</a>
+                          <a class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab" onclick="usermessage()">信箱</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                          <a href="#" class="nav-link" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab" onclick="usertrip()">行程</a>
+                          <a class="nav-link" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab" onclick="usertrip()">行程</a>
                         </li>
                       </ul>
                     </div>
@@ -341,7 +347,7 @@
                               <!-- <a href="#" class="btn btn-ghost-success"  id="isvip">
                                 申请认证
                               </a> -->
-                              <a href="#" class="btn btn-ghost-info"  data-bs-toggle='modal' data-bs-target='#modal-edit' onclick="initEdit()">
+                              <a class="btn btn-info"  data-bs-toggle='modal' data-bs-target='#modal-edit' onclick="initEdit()">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path><path d="M16 5l3 3"></path></svg>
                               </a>
                             </div>
@@ -404,7 +410,7 @@
                           <div class="card-header">
                             <h3 class="card-title">沟通记录</h3>
                             <div class="card-actions">
-                              <a href="#" class="btn btn-ghost-primary"   data-bs-toggle='modal' data-bs-target='#modal-newc' onclick="initEdit()">
+                              <a  class="btn btn-ghost-primary"   data-bs-toggle='modal' data-bs-target='#modal-newc' onclick="initEdit()">
                                 新增沟通记录
                               </a>
                               <a class="btn btn-info" data-bs-toggle="offcanvas" href="#offcanvasEnd" role="button" aria-controls="offcanvasEnd" onclick="cclfq()">
@@ -572,315 +578,26 @@
               <div class="col-lg-12">
                 <div class="card">
                   <div class="card-body align-items-center">
-                      <button class="btn btn-outline-primary active" onclick="kzxx()" >扩展信息</button>
-                      <button class="btn btn-outline-primary " onclick="rxxx()">人选信息<span class="badge bg-yellow-lt ms-2" id="rxxxnum">0</span></button>
-                      <button class="btn btn-outline-primary " onclick="job()">职位<span class="badge bg-yellow-lt ms-2" id="zwnum">0</span></button>
-                      <button class="btn btn-outline-primary " onclick="filedivshow()">文件<span class="badge bg-yellow-lt ms-2" id="fileCount">0</span></button>
-                      <button class="btn btn-outline-primary " onclick="move()">转移<span class="badge bg-yellow-lt ms-2" id="zycs">0</span></button>
+                      <a class="btn btn-outline-primary active" onclick="kzxx()" >扩展信息</a>
+                      <a class="btn btn-outline-primary " onclick="rxxx()">人选信息<span class="badge bg-yellow-lt ms-2" id="rxxxnum">0</span></a>
+                      <a class="btn btn-outline-primary " onclick="job()">职位<span class="badge bg-yellow-lt ms-2" id="zwnum">0</span></a>
+                      <a class="btn btn-outline-primary " onclick="filedivshow()">文件<span class="badge bg-yellow-lt ms-2" id="fileCount">0</span></a>
+                      <a class="btn btn-outline-primary " onclick="move()">转移<span class="badge bg-yellow-lt ms-2" id="zycs">0</span></a>
                   </div>
                 </div>
               </div>
 
 
 
-              <div id="exploredtable" >
-                
-                <div class="row row-cards"   id="kzxxdiv" >
-                  <div class="col-lg-12">
-                    <div class="card card-body-scrollable">
-
-                      <div class="card-header">
-                        客户联系人
-                        <div class="card-actions">
-                          <a class="btn btn-ghost-primary" data-bs-toggle="modal" data-bs-target="#contacter-modal">
-                            新增
-                          </a>
-                        </div>
-                      </div>
-
-                      <div class="card-body align-items-center">
-
-
-        
-                        <table class="table card-table table-vcenter text-nowrap datatable ">
-                          <thead>
-                            						
-                            <tr>
-                              <th >联系人</th>
-                              <th >手机</th>
-                              <th>微信</th>
-                              <th>职务</th>
-                              <th>邮箱地址</th>
-                              <th>备注</th>
-                              <th>操作</th>
-                            </tr>
-                          </thead>
-                          <tbody id="khlxrdata">
-                            <tr>
-                              <td colspan="8" style="font-weight: bold;text-align: center;">暂无数据 </td>
-                            </tr>
-                            
-                           
-                            
-                      
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-    
-                  <div class="col-6">
-                    <div class="card">
-                      <div class="card card-body-scrollable">
-
-                        <div class="card-header">
-                          <h3 class="card-title">子公司</h3>
-                            <div class="card-actions">
-                              <a class="btn btn-ghost-primary" data-bs-toggle="modal"  data-bs-target="#company-new-modal">
-                                新增
-                              </a>
-                            </div>
-                        </div>
-  
-                        <div class="card-body align-items-center">
-                          <table class="table card-table table-vcenter text-nowrap datatable ">
-                            <thead>
-                                          
-                              <tr>
-                                <th >公司名称</th>
-                                <th >添加日期</th>
-                     
-                                
-                              </tr>
-                            </thead>
-                            <tbody id="childdata">
-                              <tr>
-                                <td colspan="2" style="font-weight: bold;text-align: center;">暂无数据 </td>
-                              </tr>
-                              
-                              
-                        
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-6">
-                    <div class="card">
-                      <div class="card card-body-scrollable">
-
-                        <div class="card-header">
-                          <h3 class="card-title">关联公司</h3>
-                            <div class="card-actions">
-                              <a href="#" class="btn btn-ghost-primary" data-bs-toggle="modal" data-bs-target="#company-new-modal">
-                                新增
-                              </a>
-                            </div>
-                        </div>
-  
-                        <div class="card-body align-items-center">
-                          <table class="table card-table table-vcenter text-nowrap datatable ">
-                            <thead>
-                                          
-                              <tr>
-                                <th>公司名称</th>
-                                <th>添加日期</th>
-                                
-                                
-                              </tr>
-                            </thead>
-                            <tbody id="gldata">
-                              <tr>
-                                <td colspan="2" style="font-weight: bold;text-align: center;">暂无数据 </td>
-                              </tr>
-                              
-                              
-                        
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- -->
-
-                <div class="row row-cards d-none" id="rxxxdiv" >
-                  <div class="col-lg-12">
-                    <div class="card card-body-scrollable">
-                      <div class="card-header">
-                        <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
-                          <li class="nav-item" role="presentation">
-                            <a id="yjph" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab" onclick="rxxx()">全部</a>
-                          </li>
-                          <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx('0')">加项目</a>
-                          </li>
-                          <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(1)">给客户</a>
-                          </li>
-                          <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(5)">约面试</a>
-                          </li>
-                          <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1"onclick="rxxx(6)">客户面试</a>
-                          </li>
-                          <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(8)">确认offer</a>
-                          </li>
-                          <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(9)">已入职</a>
-                          </li>
-                          <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(10)">人选离职</a>
-                          </li>
-                      
-                          <li class="nav-item" role="presentation">
-                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(4)">放弃人选</a>
-                          </li>
-                        </ul>
-                      </div>
-
-                      <div class="card-body align-items-center">
-                        <table class="table card-table table-vcenter text-nowrap datatable ">
-                          <thead>
-
-                            <tr>
-                              <th>项目名称</th>
-                              <th>推荐人</th>
-                              <th>人选姓名</th>
-                              <th>当前公司</th> 
-                              <th>当前职位</th>                        
-                              <th>推荐时间</th>
-   
-                              <th>操作</th>
-                            </tr>
-                          </thead>
-                          <tbody id="rxxxdata">
-                            <tr>
-                              <td colspan="6" style="font-weight: bold;text-align: center;">暂无数据 </td>
-                            </tr>
-                            
-                            
-                      
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-    
-                </div>
-
-                <!-- -->
-
-                <div class="row row-cards d-none" id="jobdjv" >
-                  <div class="col-lg-12">
-                    <div class="card card-body-scrollable">
-                      <div class="card-header">
-                        <h3>职位信息</h3>
-                      </div>
-
-                      <div class="card-body align-items-center">
-                        <table class="table card-table table-vcenter text-nowrap datatable ">
-                          <thead>
-                            						
-                            <tr>
-                              <th>状态</th>
-                              <th>职位名称</th>
-                              <th>职位年薪</th>
-                              <th>客户</th>
-                              <th>地点</th>
-                              <th>更新时间</th>
-                              <th>操作</th>
-                            </tr>
-                          </thead>
-                          <tbody id="jobdata">
-                           
-                      
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-    
-                </div>
-  
-
-                <!--X-->
-
-                <!-- -->
-
-                <div class="row row-cards d-none" id="filediv" >
-                  <div class="col-lg-12">
-                    <div class="card card-body-scrollable">
-                      <div class="card-header">
-                        <h3>文件信息</h3>
-                      </div>
-
-                      <div class="card-body align-items-center">
-                        <table class="table card-table table-vcenter text-nowrap datatable ">
-                          <thead>
-                            						
-                            <tr>
-                              <th>文件名</th>
-                              <th>操作</th>
-                            </tr>
-                          </thead>
-                          <tbody id="filedata">
-                            <tr>
-                              <td colspan="2" style="font-weight: bold;text-align: center;">暂无数据 </td>
-                            </tr>
-                      
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-    
-                </div>
-  
-
-                <!--X-->
-
-
-                <!-- -->
-
-                <div class="row row-cards d-none" id="movediv" >
-                  <div class="col-lg-12">
-                    <div class="card card-body-scrollable">
-                      <div class="card-header">
-                        <h3>转移信息</h3>
-                      </div>
-
-                      <div class="card-body align-items-center">
-                        <table class="table card-table table-vcenter text-nowrap datatable ">
-                          <thead>
-                            						
-                            <tr>
-                              <th>转出人员</th>
-                              <th>接收人员</th>
-                              <th>转移时间</th>
-                              <th>备注</th>
-                            </tr>
-                          </thead>
-                          <tbody id="movedata">
-                           
-                      
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-    
-                </div>
-  
-
-                <!--X-->
+              <div id="exploredtable">
 
 
               </div>
+
+
+
+
+              
 
 
 
@@ -1117,10 +834,10 @@
     
               
               <div class="modal-footer">
-                <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                <a class="btn btn-link link-secondary" data-bs-dismiss="modal">
                   Cancel
                 </a>
-                <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal" onclick="addTeamList()">
+                <a class="btn btn-primary ms-auto" data-bs-dismiss="modal" onclick="addTeamList()">
                   <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
                   新增
@@ -1293,10 +1010,10 @@
 
               </div>  
               <div class="modal-footer">
-                <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                <a class="btn btn-link link-secondary" data-bs-dismiss="modal">
                   取消
                 </a>
-                <a href="#" class="btn btn-primary" onclick="signC()" >
+                <a class="btn btn-primary" onclick="signC()" >
                   确认签约                  
                 </a>
               </div>
@@ -1418,10 +1135,10 @@
 
               </div>  
               <div class="modal-footer">
-                <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                <a class="btn btn-link link-secondary" data-bs-dismiss="modal">
                   取消
                 </a>
-                <a href="#" class="btn btn-primary" onclick="editCustomer()" >
+                <a class="btn btn-primary" onclick="editCustomer()" >
                   确认修改                 
                 </a>
               </div>
@@ -1481,10 +1198,10 @@
                 
               </div>  
               <div class="modal-footer">
-                <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                <a class="btn btn-link link-secondary" data-bs-dismiss="modal">
                   取消
                 </a>
-                <a href="#" class="btn btn-primary" onclick="newcc()" >
+                <a class="btn btn-primary" onclick="newcc()" >
                   新增                 
                 </a>
               </div>
@@ -1532,7 +1249,7 @@
                 <li class="list-inline-item">
                   Copyright &copy; 2021  
 
-                  <a href="#" class="link-secondary"> 费思福(成都)人力资源咨询有限公司 </a>
+                  <a class="link-secondary"> 费思福(成都)人力资源咨询有限公司 </a>
                 
                 </li>
                 <li class="list-inline-item">

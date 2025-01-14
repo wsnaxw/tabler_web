@@ -6,6 +6,130 @@ $(function(){
     
     // @formatter:on
 
+
+    $('#exploredtable').html(`
+        <div class="row row-cards"   id="kzxxdiv" >
+                  <div class="col-lg-12">
+                    <div class="card card-body-scrollable">
+
+                      <div class="card-header">
+                        客户联系人
+                        <div class="card-actions">
+                          <a class="btn btn-ghost-primary" data-bs-toggle="modal" data-bs-target="#contacter-modal">
+                            新增
+                          </a>
+                        </div>
+                      </div>
+
+                      <div class="card-body align-items-center">
+
+
+        
+                        <table class="table card-table table-vcenter text-nowrap datatable ">
+                          <thead>
+                            						
+                            <tr>
+                              <th >联系人</th>
+                              <th >手机</th>
+                              <th>微信</th>
+                              <th>职务</th>
+                              <th>邮箱地址</th>
+                              <th>备注</th>
+                              <th>操作</th>
+                            </tr>
+                          </thead>
+                          <tbody id="khlxrdata">
+                            <tr>
+                              <td colspan="8" style="font-weight: bold;text-align: center;">暂无数据 </td>
+                            </tr>
+                            
+                           
+                            
+                      
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+    
+                  <div class="col-6">
+                    <div class="card">
+                      <div class="card card-body-scrollable">
+
+                        <div class="card-header">
+                          <h3 class="card-title">子公司</h3>
+                            <div class="card-actions">
+                              <a class="btn btn-ghost-primary" data-bs-toggle="modal"  data-bs-target="#company-new-modal">
+                                新增
+                              </a>
+                            </div>
+                        </div>
+  
+                        <div class="card-body align-items-center">
+                          <table class="table card-table table-vcenter text-nowrap datatable ">
+                            <thead>
+                                          
+                              <tr>
+                                <th >公司名称</th>
+                                <th >添加日期</th>
+                     
+                                
+                              </tr>
+                            </thead>
+                            <tbody id="childdata">
+                              <tr>
+                                <td colspan="2" style="font-weight: bold;text-align: center;">暂无数据 </td>
+                              </tr>
+                              
+                              
+                        
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="card">
+                      <div class="card card-body-scrollable">
+
+                        <div class="card-header">
+                          <h3 class="card-title">关联公司</h3>
+                            <div class="card-actions">
+                              <a class="btn btn-ghost-primary" data-bs-toggle="modal" data-bs-target="#company-new-modal">
+                                新增
+                              </a>
+                            </div>
+                        </div>
+  
+                        <div class="card-body align-items-center">
+                          <table class="table card-table table-vcenter text-nowrap datatable ">
+                            <thead>
+                                          
+                              <tr>
+                                <th>公司名称</th>
+                                <th>添加日期</th>
+                                
+                                
+                              </tr>
+                            </thead>
+                            <tbody id="gldata">
+                              <tr>
+                                <td colspan="2" style="font-weight: bold;text-align: center;">暂无数据 </td>
+                              </tr>
+                              
+                              
+                        
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        `)
+
+
     Dropzone.autoDiscover = false;
    
     var myDropzone = new Dropzone("#dropzone-multiple", {
@@ -89,19 +213,6 @@ $(function(){
     });
 
 
-    // $('#rxxxdiv').hide()
-    // $('#movediv').hide()
-    // $('#filediv').hide()
-    // $('#jobdjv').hide()
-    // $('#kzxxdiv').show()
-
-
-    // $('#movediv').addClass("d-none");
-    // $('#filediv').addClass("d-none");
-    // $('#jobdjv').addClass("d-none");
-    // $('#kzxxdiv').removeClass("d-none");
-    // $('#rxxxdiv').addClass("d-none");
-
 
 
 
@@ -182,6 +293,131 @@ function kzxx(){
     $('#rxxxdiv').addClass("d-none");
 
 
+    $('#exploredtable').html(`
+        <div class="row row-cards"   id="kzxxdiv" >
+                  <div class="col-lg-12">
+                    <div class="card card-body-scrollable">
+
+                      <div class="card-header">
+                        客户联系人
+                        <div class="card-actions">
+                          <a class="btn btn-ghost-primary" data-bs-toggle="modal" data-bs-target="#contacter-modal">
+                            新增
+                          </a>
+                        </div>
+                      </div>
+
+                      <div class="card-body align-items-center">
+
+
+        
+                        <table class="table card-table table-vcenter text-nowrap datatable ">
+                          <thead>
+                            						
+                            <tr>
+                              <th >联系人</th>
+                              <th >手机</th>
+                              <th>微信</th>
+                              <th>职务</th>
+                              <th>邮箱地址</th>
+                              <th>备注</th>
+                              <th>操作</th>
+                            </tr>
+                          </thead>
+                          <tbody id="khlxrdata">
+                            <tr>
+                              <td colspan="8" style="font-weight: bold;text-align: center;">暂无数据 </td>
+                            </tr>
+                            
+                           
+                            
+                      
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+    
+                  <div class="col-6">
+                    <div class="card">
+                      <div class="card card-body-scrollable">
+
+                        <div class="card-header">
+                          <h3 class="card-title">子公司</h3>
+                            <div class="card-actions">
+                              <a class="btn btn-ghost-primary" data-bs-toggle="modal"  data-bs-target="#company-new-modal">
+                                新增
+                              </a>
+                            </div>
+                        </div>
+  
+                        <div class="card-body align-items-center">
+                          <table class="table card-table table-vcenter text-nowrap datatable ">
+                            <thead>
+                                          
+                              <tr>
+                                <th >公司名称</th>
+                                <th >添加日期</th>
+                     
+                                
+                              </tr>
+                            </thead>
+                            <tbody id="childdata">
+                              <tr>
+                                <td colspan="2" style="font-weight: bold;text-align: center;">暂无数据 </td>
+                              </tr>
+                              
+                              
+                        
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="card">
+                      <div class="card card-body-scrollable">
+
+                        <div class="card-header">
+                          <h3 class="card-title">关联公司</h3>
+                            <div class="card-actions">
+                              <a class="btn btn-ghost-primary" data-bs-toggle="modal" data-bs-target="#company-new-modal">
+                                新增
+                              </a>
+                            </div>
+                        </div>
+  
+                        <div class="card-body align-items-center">
+                          <table class="table card-table table-vcenter text-nowrap datatable ">
+                            <thead>
+                                          
+                              <tr>
+                                <th>公司名称</th>
+                                <th>添加日期</th>
+                                
+                                
+                              </tr>
+                            </thead>
+                            <tbody id="gldata">
+                              <tr>
+                                <td colspan="2" style="font-weight: bold;text-align: center;">暂无数据 </td>
+                              </tr>
+                              
+                              
+                        
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+        `)
+
+
+
+
 
 
     // $('#rxxxdiv').hide()
@@ -210,17 +446,113 @@ function kzxx(){
 
 
 
-function rxxx(state){    
+function rxxx(state,pageNo){    
 
 
-    $('#movediv').addClass("d-none");
-    $('#filediv').addClass("d-none");
-    $('#jobdjv').addClass("d-none");
-    $('#kzxxdiv').addClass("d-none");
-    $('#rxxxdiv').removeClass("d-none");
+    // $('#movediv').addClass("d-none");
+    // $('#filediv').addClass("d-none");
+    // $('#jobdjv').addClass("d-none");
+    // $('#kzxxdiv').addClass("d-none");
+    // $('#rxxxdiv').removeClass("d-none");
+
+    $('#exploredtable').html('');
+    $('#exploredtable').html(`
+        <div class="row row-cards" id="rxxxdiv" >
+                  <div class="col-lg-12">
+                    <div class="card card-body-scrollable">
+                      <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
+                          <li class="nav-item" role="presentation">
+                            <a id="yjph" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab" onclick="rxxx()">全部</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx('0')">加项目</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(1)">给客户</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(5)">约面试</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1"onclick="rxxx(6)">客户面试</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(8)">确认offer</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(9)">已入职</a>
+                          </li>
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(10)">人选离职</a>
+                          </li>
+                      
+                          <li class="nav-item" role="presentation">
+                            <a id="hkph" class="nav-link" data-bs-toggle="tab" aria-selected="false" role="tab" tabindex="-1" onclick="rxxx(4)">放弃人选</a>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div class="card-body align-items-center">
+                        <table class="table card-table table-vcenter text-nowrap datatable ">
+                          <thead>
+
+                            <tr>
+                              <th>项目名称</th>
+                              <th>推荐人</th>
+                              <th>人选姓名</th>
+                              <th>当前公司</th> 
+                              <th>当前职位</th>                        
+                              <th>推荐时间</th>
+   
+                              <th>操作</th>
+                            </tr>
+                          </thead>
+                          <tbody id="rxxxdata">
+                            <tr>
+                              <td colspan="6" style="font-weight: bold;text-align: center;">暂无数据 </td>
+                            </tr>
+                            
+                            
+                      
+                          </tbody>
+                        </table>
+                      </div>
+                        <div class="card-footer d-flex align-items-center">
+                        <p class="m-0 text-muted">共<span id="totalPageNum">0</span>条 &nbsp;<span id="totalPageNum1"></span>页</p>
+                        <ul class="pagination m-0 ms-auto" id="pageSelect">
+                          
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+    
+                </div>
+        `)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    var state1 = 999;
+        if(state == state1 ){
+            state = null;
+        }else if(state !='' ){
+            state1 =state;
+        }
 
 
 
@@ -234,17 +566,10 @@ function rxxx(state){
     if(state==null||state==undefined){
         data ={'customerId':csid}
     }else{
-        data ={ 'state': state,'customerId':csid}
+        data ={ 'state': state,'customerId':csid,'pageNo':pageNo}
     }
 
-    const options = {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json',
-        'token':localStorage.getItem('token')
-        },
-        body: JSON.stringify(data),
-    };
+
 
         var url = baseUri+'/customer/twffq';
     fetch(url,getFetchOptions(data))
@@ -268,7 +593,126 @@ function rxxx(state){
 
                 })
 
-                $("#rxxxdata").html(str)                
+                $("#rxxxdata").html(str)  
+                
+                
+
+
+              
+          
+                var pageCount = json.data.count
+                
+
+                $('#totalPageNum').html('');
+                $('#totalPageNum').html(pageCount);
+
+                var totalPage = json.data.totalPage;
+                arrowTotalPage = totalPage;
+           
+                $('#totalPageNum1').html('');
+                $('#totalPageNum1').html(totalPage);
+                //上一页页数
+                var forward = pageNo-1;
+                var forward1 = '';
+                if(pageNo==1){
+                    forward=1;
+                    forward1 = '<li class="page-item disabled">'
+                    +'<a class="page-link" href="#exploredtable"  tabindex="1" aria-disabled="true">'
+                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 6l-6 6l6 6"></path></svg>'
+                      +'prev'
+                    +'</a>'
+                  +'</li>'
+                }else {
+                    forward1 = '<li class="page-item" >'
+                    +'<a class="page-link" href="#exploredtable" onclick="rxxx('+state1+','+forward+');">'
+                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 6l-6 6l6 6"></path></svg>'
+                      +'prev'
+                    +'</a>'
+                  +'</li>'
+                }
+                //下一页页数
+                var backwards = pageNo+1;
+                var backwards1 = '';
+                if(pageNo===json.data.totalPage){
+                    backwards=pageNo;
+
+                    backwards1 = '<li class="page-item disabled">'
+                    +'<a class="page-link" href="#exploredtable"  tabindex="1" aria-disabled="true">'
+                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg>'
+                      +'next'
+                    +'</a>'
+                  +'</li>'
+                }else{
+                    backwards1 = '<li class="page-item">'
+                    +'<a class="page-link" href="#exploredtable"  onclick="rxxx('+state1+','+backwards+');" >'
+                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg>'
+                      +'next'
+                    +'</a>'
+                  +'</li>'
+                }
+
+                str='';
+                str+=forward1;
+
+            
+                //添加首页/上一页按钮功能
+                var count = 0;//记录第一次循环页数按钮, 用来控制显示的按钮数不得超过5个
+                var index = 0;//第二次循环页数
+                var pages= pageNo;
+                for(var i=1;i<=totalPage;i++){
+                    if(pageNo>1){
+                        i=pageNo++;
+                        index = count++;
+                        if(index>4){
+                            break;
+                        }
+                        if(i==pages){
+                            str+= '<li class="page-item active" ><a class="page-link" href="#exploredtable"  onclick="rxxx('+state1+','+i+');" >'+i+'</a></li>'
+                        }else{
+                            str+= '<li class="page-item" ><a class="page-link" href="#exploredtable"  onclick="rxxx('+state1+','+i+');" >'+i+'</a></li>'
+                        }
+                    }else{
+                        count++;
+                        if(count>5){
+                            count=0;
+                            break;
+                        }else{
+                            if(i===pageNo){
+                                str+= '<li class="page-item active" ><a class="page-link" href="#exploredtable"  onclick="rxxx('+state1+','+i+');" >'+i+'</a></li>'
+                            }else{
+                                str+= '<li class="page-item" ><a class="page-link" href="#exploredtable"  onclick="rxxx('+state1+','+i+');" >'+i+'</a></li>'
+                            }
+                        }
+                    }
+                }
+
+                str+=backwards1;
+
+
+               
+                $('#pageSelect').html('');
+                $('#pageSelect').html(str);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             }else{
                 $("#rxxxdata").html(` <tr>
                 <td colspan="6" style="font-weight: bold;text-align: center;">暂无数据 </td>
@@ -288,29 +732,42 @@ function rxxx(state){
 function filedivshow(){
 
 
+     $('#exploredtable').html(`
+        <div class="row row-cards" id="filediv" >
+                  <div class="col-lg-12">
+                    <div class="card card-body-scrollable">
+                      <div class="card-header">
+                        <h3>文件信息</h3>
+                      </div>
 
-    // $('#rxxxdiv').hide()
+                      <div class="card-body align-items-center">
+                        <table class="table card-table table-vcenter text-nowrap datatable ">
+                          <thead>
+                            						
+                            <tr>
+                              <th>文件名</th>
+                              <th>操作</th>
+                            </tr>
+                          </thead>
+                          <tbody id="filedata">
+                            <tr>
+                              <td colspan="2" style="font-weight: bold;text-align: center;">暂无数据 </td>
+                            </tr>
+                      
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
     
-    // $('#movediv').hide()
-    
-    
-    // $('#jobdjv').hide()
-
-
-    // $('#kzxxdiv').hide()
-    // $('#filediv').show()
+                </div>
+        `)
 
 
 
-    $('#movediv').addClass("d-none");
-    $('#filediv').removeClass("d-none");
-    $('#jobdjv').addClass("d-none");
-    $('#kzxxdiv').addClass("d-none");
-    $('#rxxxdiv').addClass("d-none");
 
 
-
-    var data={'customerId':csid};
+    var data={'customerId':csid,pageSize:100,pageNo:1};
 
     const options = {
         method: 'POST',
@@ -376,24 +833,62 @@ function filedivshow(){
 
 }
 
-function job(pageNo){
+function job(){
 
+    $('#exploredtable').html(`
+        <div class="row row-cards" id="jobdjv" >
+                  <div class="col-lg-12">
+                    <div class="card card-body-scrollable">
+                      <div class="card-header">
+                        <h3>职位信息</h3>
+                      </div>
 
+                      <div class="card-body align-items-center">
+                        <table class="table card-table table-vcenter text-nowrap datatable ">
+                          <thead>
+                            						
+                            <tr>
+                              <th>状态</th>
+                              <th>职位名称</th>
+                              <th>职位年薪</th>
+                              <th>客户</th>
+                              <th>地点</th>
+                              <th>更新时间</th>
+                              <th>操作</th>
+                            </tr>
+                          </thead>
+                          <tbody id="jobdata">
+                           
+                      
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
     
-    $('#movediv').addClass("d-none");
-    $('#filediv').addClass("d-none");
-    $('#jobdjv').removeClass("d-none");
-    $('#kzxxdiv').addClass("d-none");
-    $('#rxxxdiv').addClass("d-none");
+                </div>
+        `)
 
 
-    // $('#rxxxdiv').hide()
-    // $('#movediv').hide()
-    // $('#filediv').hide()
-    // $('#kzxxdiv').hide()
-    // $('#jobdjv').show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     pageNo=1;
-    var data={'pageNo':1,'customerId':csid};
+    var data={'pageNo':1,'customerId':csid,'pageSize':100};
 
     const options = {
         method: 'POST',
@@ -507,31 +1002,42 @@ function splitOrGet(str) {
 function move(){
 
 
-    // $('#rxxxdiv').hide()
+    $('#exploredtable').html(`
+        <div class="row row-cards" id="movediv" >
+                  <div class="col-lg-12">
+                    <div class="card card-body-scrollable">
+                      <div class="card-header">
+                        <h3>转移信息</h3>
+                      </div>
+
+                      <div class="card-body align-items-center">
+                        <table class="table card-table table-vcenter text-nowrap datatable ">
+                          <thead>
+                            						
+                            <tr>
+                              <th>转出人员</th>
+                              <th>接收人员</th>
+                              <th>转移时间</th>
+                              <th>备注</th>
+                            </tr>
+                          </thead>
+                          <tbody id="movedata">
+                           
+                      
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
     
-    
-    // $('#filediv').hide()
-    
+                </div>`);
 
-
-    // $('#kzxxdiv').hide()
-    
-    // $('#jobdjv').hide()
-
-    // $('#movediv').show()
-
-
-
-    $('#movediv').removeClass("d-none");
-    $('#filediv').addClass("d-none");
-    $('#jobdjv').addClass("d-none");
-    $('#kzxxdiv').addClass("d-none");
-    $('#rxxxdiv').addClass("d-none");
 
     
 
 
-    var data={'customerId':csid};
+
+    var data={'customerId':csid,pageSize:100,pageNo:1};
 
     const options = {
         method: 'POST',
@@ -1130,7 +1636,7 @@ function custcom(customerId){
                 
                 if(str.length>0)$('#childdata').html(str);
 
-                if(str1.length>0)$('#gldata').html(str);
+                if(str1.length>0)$('#gldata').html(str1);
 
 
 

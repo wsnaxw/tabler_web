@@ -36,7 +36,11 @@ $(document).ready(function () {
       format: "YYYY-MM"
     });
 
-
+  // 绑定失去焦点事件
+  $("#modal-edit input[name='phone']").on('blur', function() {
+    const phone = $(this).val();
+    checkPhoneNumber(phone);
+  });
 })
 
 
@@ -67,6 +71,7 @@ function initBaseInfo(){
            let projects = data.experienceProjects;
            let educations = data.experienceEdus;
            var edu = '';
+           sessionStorage.setItem(data.talentId,JSON.stringify(data));
            switch (data.education) {
                case "0":
                  edu='';
@@ -98,10 +103,10 @@ function initBaseInfo(){
 
            let gender = '' 
            let headphoto = ''
-           if(data.gender == 2){
+           if(data.gender == 2||data.gender == '2'){
             gender='女'
             headphoto = '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#ec3c71"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>'
-           }else if(data.gende == 1){
+           }else if(data.gende == 1||data.gender == '1'){
             gender='男'
             headphoto = '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#1890ff"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-user"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>'
            }else{
@@ -198,7 +203,7 @@ function initBaseInfo(){
                                 <dt class="col-2">当前薪酬:</dt>
                                 <dd class="col-2">${toStr(data.salary)}</dd>
                                 <dt class="col-2">期望地点:</dt>
-                                <dd class="col-2">${toStr(data.city)}</dd>
+                                <dd class="col-2">${toStr(data.rcity)}</dd>
                                 <dt class="col-2">期望行业:</dt>
                                 <dd class="col-2">${toStr(data.rindustry)}</dd>
                               </div>
@@ -754,6 +759,39 @@ function showMessage(type,text) {
 
 function initEdit(){
 
+    let data = JSON.parse(sessionStorage.getItem(talentId));
+
+    if (data) {
+      // 填充基本信息
+      $('#modal-edit input[name="phone"]').val(data.phone);
+      $('#modal-edit input[name="email"]').val(data.email);
+      $('#modal-edit input[name="name"]').val(data.name);
+      $('#modal-edit input[name="age"]').val(data.age);
+      $('#modal-edit input[name="lastCompany"]').val(data.lastCompany);
+      $('#modal-edit input[name="job"]').val(data.job);
+      $('#modal-edit input[name="experience"]').val(data.experience);
+      $('#modal-edit input[name="birthday"]').val(data.birthday);
+      $('#modal-edit input[name="salary"]').val(data.salary);
+      $('#modal-edit input[name="domicile"]').val(data.domicile);
+      $('#modal-edit input[name="location"]').val(data.location);
+      $('#modal-edit input[name="RIndustry"]').val(data.rindustry);
+      $('#modal-edit input[name="RJob"]').val(data.rjob);
+      $('#modal-edit input[name="RSalary"]').val(data.rsalary);
+      $('#modal-edit input[name="RCity"]').val(data.rcity);
+      $('#modal-edit textarea[name="introduce"]').val(data.introduce);
+  
+      // 填充性别
+      $('#modal-edit input[name="gender"][value="' + data.gender + '"]').prop('checked', true);
+  
+      // 填充最高学历
+      $('#modal-edit input[name="education"][value="' + data.education + '"]').prop('checked', true);
+  
+      // 填充工作状态
+      $('#modal-edit input[name="workState"][value="' + data.workSate + '"]').prop('checked', true);
+  
+      
+    }
+  
 
 
 
@@ -1114,29 +1152,6 @@ function collectData(id1,id2) {
 }
 
 
-function editData(projectId) {
-  // 获取表单数据
-  let projectData = {
-      id: projectId,
-      name: $("#xm01 input[name='name']").val(),
-      job: $("#xm01 input[name='job']").val(),
-      duty: $("#xm01 textarea[name='duty']").val(),
-      startTime: $("#xm01 input[name='startTime']").val().replace('-', '.'),
-      endTime: $("#xm01 input[name='endTime']").val().replace('-', '.'),
-      isNow: $("#xm01 input[name='isNow']").prop('checked') ? 1 : 0
-  };
-
-  // 更新 sessionStorage
-  sessionStorage.setItem(projectId, JSON.stringify(projectData));
-
-  // 关闭 modal
-  $('#addmodal-pro').modal('hide');
-
-  console.log(projectData);
-
-  // 其他处理逻辑，例如更新页面显示
-}
-
 
 function editpro(projectId) {
   // 获取项目数据
@@ -1242,4 +1257,291 @@ function deleteExp(id){
 
   }
 
+}
+
+function editTL(){
+  
+  let data = {
+    'talentId': talentId,
+    'phone': $('#modal-edit input[name="phone"]').val(),
+    'email': $('#modal-edit input[name="email"]').val(),
+    'name': $('#modal-edit input[name="name"]').val(),
+    'age': $('#modal-edit input[name="age"]').val(),
+    'lastCompany': $('#modal-edit input[name="lastCompany"]').val(),
+    'job': $('#modal-edit input[name="job"]').val(),
+    'experience': $('#modal-edit input[name="experience"]').val(),
+    'birthday': $('#modal-edit input[name="birthday"]').val(),
+    'salary': $('#modal-edit input[name="salary"]').val(),
+    'domicile': $('#modal-edit input[name="domicile"]').val(),
+    'location': $('#modal-edit input[name="location"]').val(),
+    'RIndustry': $('#modal-edit input[name="RIndustry"]').val(),
+    'RJob': $('#modal-edit input[name="RJob"]').val(),
+    'RSalary': $('#modal-edit input[name="RSalary"]').val(),
+    'RCity': $('#modal-edit input[name="RCity"]').val(),
+    'introduce': $('#modal-edit textarea[name="introduce"]').val(),
+    'gender': $('#modal-edit input[name="gender"]:checked').val(),
+    'education': $('#modal-edit input[name="education"]:checked').val(),
+    'workSate': $('#modal-edit input[name="workState"]:checked').val()
+  }
+  console.log(data);
+
+
+
+  const options = {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    'token':localStorage.getItem('token')
+    },
+    body: JSON.stringify(data),
+};
+
+ 
+    fetch(baseUri+'/talent/updateTalent', options)
+      .then(response => response.json())
+      .then(json => {
+        if (json.code === 0) {
+          showMessage(0,'修改成功！')
+          initBaseInfo();
+
+          $('#modal-edit').modal('hide');
+        } else {
+          showMessage(1,'修改失败！')
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        showMessage(2,'异常！')
+      });
+}
+
+function checkPhoneNumber(phone) {
+
+
+  let data = sessionStorage.getItem(talentId);
+  let phone1 = JSON.parse(data).phone;
+  if(phone1==phone){
+    $("#phoneInput").removeClass('is-invalid','is-invalid-lite');
+    return;
+  }
+
+
+
+
+
+
+
+
+
+
+  if (!isValidPhone(phone)) {
+
+
+
+    $("#phoneInput").addClass('is-invalid','is-invalid-lite');
+    $("#phoneNotice").html('手机号码格式不正确!');
+    return;
+  }else{
+    $("#phoneInput").removeClass('is-invalid','is-invalid-lite');
+    $("#phoneNotice").html('不能为空!');
+  }
+
+  // 远程查询接口
+ 
+  const options = {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    'token':localStorage.getItem('token')
+    },
+    body: JSON.stringify({"phone":phone}),
+    };
+
+    var url = baseUri+'/talent/talentCheck';
+    fetch(url,options)
+    .then(response => response.json())
+    .then(json => {
+
+
+      if("1"==json.data){
+        $("#phoneInput").addClass('is-invalid','is-invalid-lite');
+        $("#phoneNotice").html('手机号码已存在!');
+      }else{
+        $("#phoneInput").removeClass('is-invalid','is-invalid-lite');
+        $("#phoneNotice").html('不能为空!');
+      }
+
+      sessionStorage.setItem("permissionkey",json.data)
+    }).catch((error)=>{
+        console.log(error)
+      
+    });
+
+
+
+
+
+}
+
+function isValidPhone(phone) {
+  const phoneRegex = /^1[3-9]\d{9}$/;
+  return phoneRegex.test(phone);
+}
+
+
+function editcompany(id){
+  let data = JSON.parse(sessionStorage.getItem(id));
+  if (data) {
+    // 填充基本信息
+    $('#addmodal-com input[name="name"]').val(data.name);
+    $('#addmodal-com input[name="job"]').val(data.job);
+    $('#addmodal-com input[name="startTime"]').val(data.startTime.replace('.', '-'));
+    $('#addmodal-com input[name="endTime"]').val(data.endTime ? data.endTime.replace('.', '-') : '');
+    $('#addmodal-com input[name="isNow"]').prop('checked', data.isNow === 1);
+    $('#addmodal-com textarea[name="duty"]').val(data.duty);
+    $('#addmodal-com select[name="industry"]').val(data.industry);
+    $(".modal-footer .btn-primary").text('修改工作经历');
+    $(".modal-footer .btn-primary").attr('onclick', `editData('${id}')`);
+  
+  }
+  $('#addmodal-com').modal('show');
+}
+
+
+function editEdu(id){
+  let data = JSON.parse(sessionStorage.getItem(id));
+  if (data) {
+
+
+    let edu = '0';
+    switch (data.education) {
+      case '初中':
+        edu = '1';
+        break;
+      case '中专':
+        edu = '2';
+        break;
+      case '高中':
+        edu = '3';
+        break;
+      case '大专':
+        edu = '4';
+        break;
+      case '本科':
+        edu = '5';
+        break;
+      case '硕士':
+        edu = '6';
+        break;
+      case '博士':
+        edu = '7';
+        break;
+      default:
+        edu = '0';
+    }
+
+
+
+
+
+    // 填充基本信息
+    $('#addmodal-edu input[name="name"]').val(data.name);
+    $('#addmodal-edu input[name="classes"]').val(data.classes);
+    $('#addmodal-edu input[name="startTime"]').val(data.startTime.replace('.', '-'));
+    $('#addmodal-edu input[name="endTime"]').val(data.endTime ? data.endTime.replace('.', '-') : '');
+    $('#addmodal-edu textarea[name="duty"]').val(data.duty);
+
+    $('#addmodal-edu input[name="isAllTime"][value="' + data.isAllTime + '"]').prop('checked', true);
+
+    $('#addmodal-edu input[name="education"][value="' + edu + '"]').prop('checked', true);
+    $(".modal-footer .btn-primary").text('修改教育经历');
+    $(".modal-footer .btn-primary").attr('onclick', `editData('${id}')`);
+  
+  }
+  $('#addmodal-edu').modal('show');
+}
+
+
+
+function editData(id) {
+
+  let id1 = id.split('-')[0];
+  let id2 = id.split('-')[1];
+  let data = JSON.parse(sessionStorage.getItem(id));
+  let id3 = '';
+  let modalid='';
+  let url='';
+  if (data) {
+   
+    if(id1=='companys'){
+      url = '/talent/updateEC';
+      id3 = 'gz01';
+      modalid='#addmodal-com'
+    }else if(id1=='projects'){
+      url = '/talent/updateEP';
+      id3 = 'xm01';
+       modalid='#addmodal-pro'
+    }else if(id1=='educations'){  
+      url = '/talent/updateEdu';
+      id3 = 'edu01';
+       modalid='#addmodal-edu'
+    }
+  }
+
+
+
+  // 获取表单数据
+  let upData = {
+      id: id2,
+      name: $("#"+id3+" input[name='name']").val(),
+      classes: $("#"+id3+" input[name='classes']").val(),
+      isAllTime: $("#"+id3+" input[name='isAllTime']").val(),
+      industry:$('#'+id3+' select[name="industry"]').val(),
+      job: $("#"+id3+" input[name='job']").val(),
+      duty: $("#"+id3+" textarea[name='duty']").val(),
+      startTime: $("#"+id3+" input[name='startTime']").val(),
+      endTime: $("#"+id3+" input[name='endTime']").val(),
+      isNow: $("#"+id3+" input[name='isNow']").prop('checked') ? 1 : 0
+  };
+  upData.talentId = talentId;
+  // 更新 sessionStorage
+  sessionStorage.setItem(id, JSON.stringify(upData));
+
+
+  const options = {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    'token':localStorage.getItem('token')
+    },
+    body: JSON.stringify(upData),
+  };
+  fetch(baseUri+url, options)
+    .then(response => response.json())
+    .then(json => {
+      if (json.code === 0) {
+        sessionStorage.removeItem(id);
+        $(`#${id1}-${id2}`).remove();
+        showMessage(0,'修改成功！')
+        initBaseInfo();
+        $(modalid).modal('hide');
+      } else {
+        showMessage(1,'修改失败！')
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      showMessage(2,'异常！')
+    });
+
+
+
+
+
+
+  // 关闭 modal
+
+
+  console.log(upData);
+  // 其他处理逻辑，例如更新页面显示
 }
