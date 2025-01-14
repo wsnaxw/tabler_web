@@ -5,8 +5,37 @@ $(document).ready(function () {
     talentId = getParameterByName('workId');
     initBaseInfo();
     initTCList();
+    jeDate("#jd1",{
+      theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+      format: "YYYY-MM"
+    });
 
- 
+    
+    jeDate("#jd2",{
+      theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+      format: "YYYY-MM"
+    });
+    
+    jeDate("#jd3",{
+      theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+      format: "YYYY-MM"
+    });
+    
+    jeDate("#jd4",{
+      theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+      format: "YYYY-MM"
+    });
+    
+    jeDate("#jd5",{
+      theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+      format: "YYYY-MM"
+    });
+    
+    jeDate("#jd6",{
+      theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+      format: "YYYY-MM"
+    });
+
 
 })
 
@@ -83,7 +112,7 @@ function initBaseInfo(){
            let phonestr ;
            if(phone != null && phone.includes('*')){
             phonestr = `<p class="popover-options">
-                        <a href="#" id="phonepopover">${phone}</a></p>`
+                        <a  id="phonepopover">${phone}</a></p>`
            }else{
             phonestr = phone;
            }
@@ -250,7 +279,7 @@ function initBaseInfo(){
                                 
                                 <div class="ms-2 d-inline-block">
                                   <a class="btn btn-info btn-sm" onclick='editcompany("companys-${o.id}")'>修改</a>
-                                  <a  class="btn btn-danger btn-sm" onclick='delectexp("companys-${o.id}")'>删除</a>
+                                  <a  class="btn btn-danger btn-sm deletea"  onclick='delectexp("companys-${o.id}")'>删除</a>
                                 </div>
                               </div>
                             </div>
@@ -275,6 +304,7 @@ function initBaseInfo(){
         }
 
 
+       
 
 
 
@@ -300,7 +330,7 @@ function initBaseInfo(){
                                 
                                 <div class="ms-2 d-inline-block">
                                   <a  class="btn btn-info btn-sm" onclick='editpro("projects-${o.id}")'>修改</a>
-                                  <a  class="btn btn-danger btn-sm" onclick='delectexp("projects-${o.id}")'>删除</a>
+                                  <a  class="btn btn-danger btn-sm deletea"  onclick='delectexp("projects-${o.id}")'>删除</a>
                                 </div>
                               </div>
                             </div>
@@ -355,7 +385,9 @@ function initBaseInfo(){
                             </div>
                             <div class="col-auto text-secondary">
                                     <a  class="btn btn-info btn-sm" onclick='editEdu("educations-${o.id}")'>修改</a>
-                                  <a class="btn btn-danger btn-sm" onclick='delectexp("educations-${o.id}")'>删除</a>
+                                  <a  class="btn btn-danger btn-sm deletea" onclick='delectexp("educations-${o.id}")'>删除</a>
+
+
                             </div>          
                           </div>
                         </div>
@@ -984,7 +1016,7 @@ function collectData(id1,id2) {
       const value = $(this).val();
       const type = $(this).attr('type');
     
-      if (type === 'checkbox') {
+      if (type === 'checkbox'||type === 'radio') {
         if ($(this).is(':checked')) {
         
           isCheckboxChecked = true;
@@ -1009,6 +1041,65 @@ function collectData(id1,id2) {
 
 
     workExperiences.push(workExperience);
+
+    let url= '';
+    let modalid='';
+    if(id1=='gzjsinfo'){
+      url='/talent/addEC';
+      modalid='#addmodal-com'
+
+
+    }else if(id1=='xmjlinfo'){
+      url='/talent/addEP';
+      modalid='#addmodal-pro'
+    }else if(id1=='jyjlinfo'){
+      url='/talent/addEdu';
+      modalid='#addmodal-edu'
+    }
+
+
+    if(url==''){
+      showMessage(2,'异常！');
+      return null;
+    }
+    
+    
+    if(pro1)
+    {
+      const options = {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'token':localStorage.getItem('token')
+        },
+        body: JSON.stringify(workExperiences[0]),
+      };
+      fetch(baseUri+url, options)
+      .then(response => response.json())
+      .then(json => {
+        if (json.code === 0) {
+          showMessage(0,'添加成功！')
+          initBaseInfo();
+        } else {
+          showMessage(1,'添加失败！')
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        showMessage(2,'异常！')
+      });
+
+      $(modalid).modal('hide');
+
+
+    }
+
+
+
+
+
+
+
   });
 
 
@@ -1065,4 +1156,90 @@ function editpro(projectId) {
 
   // 打开 modal
   $('#addmodal-pro').modal('show');
+}
+
+
+function delectexp(id) {
+  $('body').on('click', 'a.deletea', function(e) {
+    e.preventDefault();
+    const $this = $(this);
+
+    // 隐藏所有其他的 popover
+
+    
+
+    $this.popover({
+      content: `<p class='mb-0'>是否删除？<a class='btn btn-teal btn-sm popover1'>是</a>
+                <a class='btn btn-danger btn-sm popover2'>否</a></p>`,
+      html: true, // Ensure HTML content is rendered
+      placement: 'bottom',
+      trigger: 'click'
+    }).on('shown.bs.popover', function() {
+
+       // 解绑之前的事件处理程序(否则会重复调用)
+       $('body').off('click', '.popover1');
+       $('body').off('click', '.popover2');
+
+      // Bind click events to the buttons inside the popover
+      $('body').on('click', '.popover1', function() {
+        deleteExp(id);
+        $this.popover('hide');
+      });
+
+      $('body').on('click', '.popover2', function() {
+        $this.popover('hide');
+      });
+    });
+
+    // Trigger the popover
+   
+  });
+
+
+}
+
+function deleteExp(id){
+  let id1 = id.split('-')[0];
+  let id2 = id.split('-')[1];
+  let data = JSON.parse(sessionStorage.getItem(id));
+  if (data) {
+    let url='/talent/delEC';
+    if(id1=='companys'){
+      url = '/talent/delEC';
+    }else if(id1=='projects'){
+      url = '/talent/delEP';
+    }else if(id1=='educations'){  
+      url = '/talent/delEDU';
+    }
+
+
+
+    const options = {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      'token':localStorage.getItem('token')
+      },
+      body: JSON.stringify({ 'id': id2,'talentId':talentId }),
+    };
+    fetch(baseUri+url, options)
+      .then(response => response.json())
+      .then(json => {
+        if (json.code === 0) {
+          sessionStorage.removeItem(id);
+          $(`#${id1}-${id2}`).remove();
+          showMessage(0,'删除成功！')
+          initBaseInfo();
+        } else {
+          showMessage(1,'删除失败！')
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        showMessage(2,'异常！')
+      });
+
+
+  }
+
 }
