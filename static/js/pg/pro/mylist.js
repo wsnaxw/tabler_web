@@ -517,10 +517,12 @@ function clearForm(){
 
     $('#formdata input[type="checkbox"], #formdata select, #formdata input[type="text"],#formdata input[type="number"],#formdata input[type="hidden"],#formdata input[type="radio"]').each(function() {
         // 将这些元素的值设置为空
-        $(this).val('');
+      
         // 对于checkbox，还需要取消选中状态
         if ($(this).is('input[type="checkbox"]')||$(this).is('input[type="radio"]')) {
           $(this).prop('checked', false);
+        }else{
+          $(this).val('');
         }
       });
 }
