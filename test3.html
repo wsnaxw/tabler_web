@@ -1,70 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>背景水印示例</title>
-  <style>
-    body, html {
-      height: 100%;
-      margin: 0;
-      overflow: hidden; /* 防止页面内容滚动 */
-    }
-
-    .watermark-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(255, 255, 255, 0.5); /* 设置背景颜色及透明度 */
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: watermark-animation 5s linear infinite;
-    }
-
-    @keyframes watermark-animation {
-      0% {
-        transform: translate(0, 0);
-      }
-      100% {
-        transform: translate(-50%, -50%);
-      }
-    }
-
-    /* 设置水印文本的样式 */
-    .watermark-text {
-      position: absolute;
-      font-size: 48px;
-      color: rgba(0, 0, 0, 0.5); /* 设置文本颜色及透明度 */
-      white-space: nowrap;
-      user-select: none; /* 防止用户选择文本 */
-      pointer-events: none; /* 防止鼠标事件影响到水印文本 */
-    }
-  </style>
-  <script>
-    window.onload = function() {
-
-      const watermarkText = 'rsaKaxxK';
-      const numWatermarks = 20; // 水印数量
-
-      for (let i = 0; i < numWatermarks; i++) {
-        const watermarkDiv = document.createElement('div');
-        watermarkDiv.classList.add('watermark-text');
-        watermarkDiv.textContent = watermarkText;
-        watermarkDiv.style.transform = `translate(${Math.random() * 100*i}%, ${Math.random() * 100*i}%)`;
-        document.body.appendChild(watermarkDiv);
-      }
-    }
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSeek Integration</title>
 </head>
 <body>
-<div class="watermark-background"></div>
-<div class="content">
-  <h1>欢迎来到我的网站</h1>
-  <p>这是一个带有用户信息背景水印的网页示例。</p>
-</div>
-<!-- 其他页面内容 -->
+    <h1>DeepSeek API Integration</h1>
+    <input type="text" id="inputText" placeholder="Enter text">
+    <button onclick="callDeepSeekAPI()">Submit</button>
+    <div id="result"></div>
+
+    <script>
+
+// const apiKey = 'sk-9c7e9b799e9c42689973d6e1a065ee67'; // 替换为你的 API 密钥
+const apiKey ='sk-ab61d67a19de4771953c90d42b20eb39';
+const apiUrl = 'https://api.deepseek.com/v1/chat/completions';
+async function callDeepSeekAPI() {
+
+  let value = document.getElementById('inputText').value;
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`
+            },
+            body: JSON.stringify({
+                model: 'deepseek-chat',
+                messages: [
+                    { role: 'user', content: `${value}` }
+                ],
+                stream: false
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log(result); // 打印 API 响应
+        document.getElementById('result').innerText = result.choices[0].message.content;
+        return result;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function callDeepSeekAPI1() {
+    const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({text: "Hello, DeepSeek!"})
+    });
+
+    const result = await response.json();
+    return result;
+}
+
+
+    </script>
 </body>
 </html>
+
