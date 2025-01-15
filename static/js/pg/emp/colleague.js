@@ -49,14 +49,13 @@ function removeEmptyValues(obj) {
 }
 
 
-
-
+let ossPre = 'https://faithful.oss-cn-shanghai.aliyuncs.com/';
+let ossEnd = '?x-oss-process=image/resize,w_200,h_200';
 function getPage(pageNo){
 
   arrowPageNo = pageNo;
-  let data = getFormDate()
+  let name = $('#name').val(); 
 
-  data.pageNo = pageNo;
  
 
 
@@ -72,8 +71,8 @@ function getPage(pageNo){
         },
         dataType:'json',
         type:'post',
-        url:baseUri+'/home/selectTripList',
-        data:JSON.stringify(data),
+        url:baseUri+'/employ/selectEmployList',
+        data:JSON.stringify({name:name,pageNo:pageNo}),
         success:function(obj){
 
             var str="";
@@ -89,24 +88,44 @@ function getPage(pageNo){
 
                     var o = obj.data.list[i];
         
+                    let headUrl = o.headUrl;
+                    let url1 = '';
+                    let url2 = '';
+                    if(headUrl){
+                      url1 = ossPre+headUrl+ossEnd;
+                      url2 = ossPre+headUrl;
+                    }
+
+
 
 
                     str+=
                     `
-                    <tr>
-                        <td style='color:red'>${o.outType}</td>
-                        <td style='color:blue'>${o.time}</td>
-                        <td style='color:red'>${o.name}</td>
-                        <td >${o.details}</td>
-                        <td >${o.createTime}</td>
-                        <td >${o.state==1?'已处理':'未处理'}</td>
-                        <td ><a class='btn btn-danger btn-sm' onclick='deltrip(${o.id})'>删除</a>${o.state==0?"<a class='btn btn-info btn-sm' onclick='changetrip("+o.id+")'>标记为已处理</a>":''}</td>
-       
-                        
-                      </tr>
+                <div class="col-lg-2">
+                  <div class="card">
+                    <div class="card-body p-4 text-center">
+                      <a href="#" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="showImageModal('${url2}')" >
+                        <span class="avatar avatar-xl mb-3 rounded" style="background-image: url('${url1}')"></span>
+                      </a>
+                      <h3 class="m-0 mb-1">${o.flowerName}</h3>
+                      <div class="text-secondary">${o.comName}-${o.roleName}</div>
+                      <div class="mt-3">
+                        <span class="badge bg-purple-lt">${o.workState}</span>
+                      </div>
+                    </div>
+                    <div class="d-flex">
+                      <a title="${toStr(o.email)}" class="card-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2 text-muted" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z"></path><path d="M3 7l9 6l9 -6"></path></svg>
+                        Email</a>
+                      <a title="${o.phone}" class="card-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon me-2 text-muted" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path></svg>
+                        Call</a>
+                    </div>
+                  </div>
+                </div>
                     `
                 }
-                $('#data').html(str);
+                $('#listdata').html(str);
                 
            
                 var pageCount = obj.data.count
@@ -198,7 +217,6 @@ function getPage(pageNo){
 
                 $('#pageSelect').html('');
                 $('#pageSelect').html(str);
-                document.getElementById('table-default').scrollIntoView({ behavior: 'smooth' });
 
 
             }
