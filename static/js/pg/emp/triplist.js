@@ -7,17 +7,16 @@ $(function(){
   jeDate("#ymd02",{
     theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
     format: "YYYY-MM-DD"
-});
-jeDate("#ymd03",{
-  theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-  format: "YYYY-MM-DD"
-});
-jeDate("#ymd04",{
-theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-format: "YYYY-MM-DD"
-});
-
+  });
   
+  document.querySelectorAll('#myform input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+      getPage(1);
+    });
+  });
+
+
+
     // console.log('customerId:'+customerId)
     //默认进行分页数据查询
     getPage(1);
@@ -113,9 +112,9 @@ function getPage(pageNo){
                     `
                     <tr>
                         <td style='color:red'>${o.outType}</td>
-                        <td style='color:blue'>${o.time}</td>
+                        <td style='color:blue'>${toStr(o.time)}</td>
                         <td style='color:red'>${o.name}</td>
-                        <td >${o.details}</td>
+                        <td >${toStr(o.details)}</td>
                         <td >${o.createTime}</td>
                         <td >${o.state==1?'已处理':'未处理'}</td>
                         <td ><a class='btn btn-danger btn-sm' onclick='deltrip(${o.id})'>删除</a>${o.state==0?"<a class='btn btn-info btn-sm' onclick='changetrip("+o.id+")'>标记为已处理</a>":''}</td>
@@ -248,23 +247,141 @@ function searchList(){
 }
 
 
-function checkcusd(id){
+function changetrip(id){
+  const options = {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      'token':localStorage.getItem('token')
+      },
+      body: JSON.stringify({
+        "id": id,
+        "state": 1
+      }),
+      };
+
+      var url = baseUri+'/employ/changeTripState';
+  fetch(url,options)
+      .then(response => response.json())
+      .then(json => {
+          // console.log(json)
+          if(json.code==0){
+              
+      showMessage(0,'处理成功!!')
+
+      getPage(1)
+
+   
+          }else{
+              showMessage(1,"处理失败")
+          }
+
+
+
+      }).catch((error)=>{
+        console.log(error)
+      });
+
+
+}
+
+
+
+function deltrip(id){
+
+  const options = {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    'token':localStorage.getItem('token')
+    },
+    body: JSON.stringify({
+      "id": id
+    }),
+    };
+
+    var url = baseUri+'/employ/delTrip';
+fetch(url,options)
+    .then(response => response.json())
+    .then(json => {
+        // console.log(json)
+        if(json.code==0){
+            
+    showMessage(0,'删除成功!!')
+
+    getPage(1)
+        }else{
+            showMessage(1,"删除失败")
+        }
+
+
+
+    }).catch((error)=>{
+        console.log(error)
+    });
+
+
+}
+
+
+
+
+function addTrip(){
+
+
+  let inputValue = {};
+
+  $('#addtrip input,#addtrip textarea').each(function() {
+    var $input = $(this);
+
  
-    //跳转页面并且携带参数
+    if ($input.attr('name') && $input.val()) {
 
-  let bigNumber = BigInt(id);
-  let customerId = bigNumber.toString(); // 转换为字符串
+      if($input.attr('type')=='radio'){
+          if($input.is(':checked')){
+              inputValue[$input.attr('name')] = $input.val();
+          }
+          
+        }else{
+          inputValue[$input.attr('name')] = $input.val();
+          
+        }
+        
+      
+    }
+
+  });
 
 
-  // 创建一个新的URL，携带参数
-  var url = '../customer/cusd.html?customerId=' + encodeURIComponent(customerId)+'' ;
 
-  sessionStorage.setItem('nowactive','')
+  const options = {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    'token':localStorage.getItem('token')
+    },
+    body: JSON.stringify(inputValue),
+    };
 
-  // 使用jQuery来跳转到新页面
-  // window.location.href = url;
+    var url = baseUri+'/employ/addTrip';
+fetch(url,options)
+    .then(response => response.json())
+    .then(json => {
+        // console.log(json)
+        if(json.code==0){
+            
+    showMessage(0,'添加成功!!')
+    $("#addtrip").modal('hide')
+    getPage(1)
+        }else{
+            showMessage(1,"添加成功")
+        }
 
-  window.open(url, '_blank');
+
+
+    }).catch((error)=>{
+        console.log(error)
+    });
 
 
 }

@@ -251,7 +251,10 @@
 
       <div class="page-wrapper">
 
-
+        <div id="messageContainer" class="message-container">
+          <!-- Messages will be added here dynamically -->
+        </div>
+  
 
         <!-- Page header -->
         <div class="page-header d-print-none">
@@ -283,56 +286,89 @@
                     
      
                        
-                        <div class="col-xl-2" >
-                          <div class="mb=3">
-                              <label class="form-label"  style="font-weight: bold;">offer时间-开始：</label>
-                              <div class="col-md-6 col-xl-12"  >
-                                  <div class="jeinpbox"><input type="text" class="form-control" name="offerDate1" id="ymd01" placeholder="YYYY-MM-DD"></div>
-                              </div>
-                              <small class="form-hint">注：默认查询为本年度的数据</small>
-                          </div>
-                     
-                        </div>
-                        <div class="col-xl-2" >
-                          <div class="mb=3">
-                            <label class="form-label"  style="font-weight: bold;">结束：</label>
-                            <div class="col-md-6 col-xl-12" >
-                                <div class="jeinpbox"><input type="text" class="form-control" name="offerDate12" id="ymd02" placeholder="YYYY-MM-DD"></div>
-                            </div>
+                        <div class="col-lg-2 mb-3 row" >
+                          <label class="form-label wordbold col-4" >创建日期</label>
+                          <div class="col"  >
+                              <div class="jeinpbox"><input type="text" class="form-control" name="createTime" id="ymd01" placeholder="YYYY-MM-DD"></div>
                           </div>
                      
                         </div>
 
-                              
-                        <div class="col-xl-2" >
-                          <div class="mb=3">
-                              <label class="form-label"  style="font-weight: bold;">入职时间-开始：</label>
-                              <div class="col-md-6 col-xl-12"  >
-                                  <div class="jeinpbox"><input type="text" class="form-control" name="startTime" id="ymd03" placeholder="YYYY-MM-DD"></div>
-                              </div>
-                              <small class="form-hint">注：默认查询为本年度的数据</small>
+                        <div class="col-lg-2 mb-3 row" >
+                          <label class="form-label wordbold col-4" >日程标题</label>
+                          <div class="col"  >
+                             <input type="text" class="form-control" name="title"  >
                           </div>
-                     
                         </div>
-                        <div class="col-xl-2" >
-                          <div class="mb=3">
-                            <label class="form-label"  style="font-weight: bold;">结束：</label>
-                            <div class="col-md-6 col-xl-12" >
-                                <div class="jeinpbox"><input type="text" class="form-control" name="endTime" id="ymd04" placeholder="YYYY-MM-DD"></div>
-                            </div>
+                        <div class="col-lg-7 row">
+                          <label class="form-label col-1 wordbold" >当前状态</label>
+                          <div class="col">
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="state" value="" checked>
+                              <span class="form-check-label">全部</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="state" value="0">
+                              <span class="form-check-label">未处理</span>
+                            </label>
+                            
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="state" value="1">
+                              <span class="form-check-label">已处理</span>
+                            </label>                           
                           </div>
-                     
                         </div>
-                   
+                        
+
+                        <div class="col-lg-8 row">
+                          <label class="form-label col-1 wordbold" >日程类型</label>
+                          <div class="col">
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="" checked>
+                              <span class="form-check-label">全部</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="0">
+                              <span class="form-check-label">客户提醒</span>
+                            </label>
+                            
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="1">
+                              <span class="form-check-label">职位提醒</span>
+                            </label>
+                            
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="2">
+                              <span class="form-check-label">简历提醒</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="3">
+                              <span class="form-check-label">面试提醒</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="4">
+                              <span class="form-check-label">待办事项</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="5">
+                              <span class="form-check-label">其他提醒</span>
+                            </label>
+                         
+                            
+                            
+                          </div>
+                        </div>
+                        
                   
   
-                        <div class="col-lg-3" >
-                          <div class="form-label" style="font-weight: bold;">&nbsp;</div>
-                          <a href="#" onclick="clearForm()" class="btn btn-link ms-auto">清空 </a>
-                        
-                          <a href="#" onclick="searchList()" class="btn btn-primary ms-auto">查询</a>
+                        <div class="col-lg-4">
+                          <div class="col">
+                           <a onclick="clearForm()" class="btn btn-link ms-auto ">清空 </a>
+                           <a onclick="searchList()" class="btn btn-primary ms-auto ">查询</a>
+                           <a  class="btn btn-success ms-auto" data-bs-toggle="modal" data-bs-target="#addtrip">创建日程</a>
+                          </div>
+                    
                         </div>
-  
   
                       </div>
 
@@ -414,15 +450,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
             </div>
 
 
@@ -435,7 +462,81 @@
 
 
 
+            <div class="modal modal-blur fade" id="addtrip" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">客户联系人</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+    
+                    <div class="row">
+                      <div class="col-lg-1"></div>
+                      <div class="col-lg-6 mb-3">
+                        <label class="form-label wordbold">日程提醒标题</label>
+                        <input type="text" class="form-control" name="title" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
+                        <label class="form-label wordbold" style="font-weight: bold;">提醒日期</label>
+                        <div class="jeinpbox"><input type="text" class="form-control" name="time" id="ymd02" placeholder="YYYY-MM-DD"></div>
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                  
+                      <div class="mb-3 col-lg-11 ">
+                        <label class="form-label wordbold">类型</label>
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="0">
+                          <span class="form-check-label">客户提醒</span>
+                        </label>
+                        
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="1">
+                          <span class="form-check-label">职位提醒</span>
+                        </label>
+                        
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="2">
+                          <span class="form-check-label">简历提醒</span>
+                        </label>
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="3">
+                          <span class="form-check-label">面试提醒</span>
+                        </label>
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="4">
+                          <span class="form-check-label">待办事项</span>
+                        </label>
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="5">
+                          <span class="form-check-label">其他提醒</span>
+                        </label>
+                      </div>
 
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-10 row">
+                        <label class="form-label wordbold">提醒内容</label>
+                        <textarea class="form-control" rows="5" name="details" ></textarea>
+                      </div>
+    
+                    </div>
+    
+                
+                      
+                    
+    
+                  </div>  
+                  <div class="modal-footer">
+                    <a class="btn btn-primary" onclick="addTrip()" >
+                      添加日程    
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
 

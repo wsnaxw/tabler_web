@@ -1013,3 +1013,48 @@ function checkFirstFourNotNumber(str) {
   const firstFour = str.substring(0, 4);
   return!firstFour.match(/^\d{4}$/);
 }
+
+
+function showMessage(type,text) {
+
+  const messageElement = document.createElement('div');
+  if(type==0||type==='success'){
+      messageElement.className = 'message visible alert alert-success';
+      if(text==null)text='成功！！！';
+
+      messageElement.textContent = text;
+  }else if(type==1||type==='fail'){
+      messageElement.className = 'message visible alert alert-warning';
+      if(text==null)text='失败！！！';
+
+      messageElement.textContent = text;
+  }else if(type==2||type==='error'){
+      messageElement.className = 'message visible alert alert-warning';
+      if(text==null)text='异常！！！';
+
+      messageElement.textContent = text;
+  }else{
+      messageElement.className = 'message visible alert alert-info';
+      if(text==null)text='已操作！！！';
+
+      messageElement.textContent = text;
+  }
+
+
+
+  // Create the message element
+
+
+
+  // Append the message to the container
+  const messageContainer = document.getElementById('messageContainer');
+  messageContainer.appendChild(messageElement);
+
+  // Remove the message after a while
+  setTimeout(() => {
+      messageElement.classList.remove('visible');
+      setTimeout(() => {
+          messageContainer.removeChild(messageElement);
+      }, 300); // Remove from DOM after the opacity transition ends
+  }, 3000); // Display the message for 3 seconds
+}
