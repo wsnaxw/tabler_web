@@ -4,18 +4,7 @@ $(function(){
       theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
       format: "YYYY-MM-DD"
   });
-  jeDate("#ymd02",{
-    theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-    format: "YYYY-MM-DD"
-});
-jeDate("#ymd03",{
-  theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-  format: "YYYY-MM-DD"
-});
-jeDate("#ymd04",{
-theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-format: "YYYY-MM-DD"
-});
+
 
   
     // console.log('customerId:'+customerId)
@@ -138,6 +127,7 @@ function getPage(pageNo){
                     <tr>
                         <td class='wordbold'>${outType}</td>
                         <td style='color:blue'>${o.sendName}</td>
+                        <td style="color: blue;">${o.userName}</td>
                         <td >${o.details}</td>
                         <td >${o.createTime}</td>
                         <td ><a class='btn btn-danger btn-sm' onclick='deltrip(${o.id})'>删除</a>${o.state==0?"<a class='btn btn-info btn-sm' onclick='changetrip("+o.id+")'>标记为已处理</a>":''}</td>
