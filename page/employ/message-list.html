@@ -17,12 +17,15 @@
     <script src="../../static/js/tabler.min.js"></script>
     <link rel="stylesheet" href="../../static/css/tabler.min.css">
     <link rel="stylesheet" href="../../static/css/base.css">
+    <link rel="stylesheet" href="../../static/css/tabler-vendors.min.css">
     <link rel="icon" href="../../static/img/favicon.ico" type="image/x-icon" />
     <script src="../../static/js/jquery.min.js"></script>
     <script src="../../static/js/base.js?1"></script>
     <link type="text/css" rel="stylesheet" href="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/skin/jedate.css">
     <script type="text/javascript" src="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/src/jedate.js"></script>
     <script src="../../static/js/watermark.js"></script>
+    <script src="../../static/js/tom-select.base.min.js" ></script>
+
     <script src="../../static/js/pg/emp/message.js"></script>
     <script>
       function dark(){
@@ -250,7 +253,9 @@
 
 
       <div class="page-wrapper">
-
+        <div id="messageContainer" class="message-container">
+          <!-- Messages will be added here dynamically -->
+        </div>
 
 
         <!-- Page header -->
@@ -280,59 +285,102 @@
                   <div class="card-body" id="formdata">
                     <form id="myForm">
                       <div class="row "> 
-                    
-     
-                       
-                        <div class="col-xl-2" >
-                          <div class="mb=3">
-                              <label class="form-label"  style="font-weight: bold;">offer时间-开始：</label>
-                              <div class="col-md-6 col-xl-12"  >
-                                  <div class="jeinpbox"><input type="text" class="form-control" name="offerDate1" id="ymd01" placeholder="YYYY-MM-DD"></div>
-                              </div>
-                              <small class="form-hint">注：默认查询为本年度的数据</small>
+                        <div class="col-lg-2 mb-3 row" >
+                          <label class="form-label wordbold col-4" >标题</label>
+                          <div class="col"  >
+                             <input type="text" class="form-control" name="name"  >
                           </div>
-                     
-                        </div>
-                        <div class="col-xl-2" >
-                          <div class="mb=3">
-                            <label class="form-label"  style="font-weight: bold;">结束：</label>
-                            <div class="col-md-6 col-xl-12" >
-                                <div class="jeinpbox"><input type="text" class="form-control" name="offerDate12" id="ymd02" placeholder="YYYY-MM-DD"></div>
-                            </div>
-                          </div>
-                     
                         </div>
 
-                              
-                        <div class="col-xl-2" >
-                          <div class="mb=3">
-                              <label class="form-label"  style="font-weight: bold;">入职时间-开始：</label>
-                              <div class="col-md-6 col-xl-12"  >
-                                  <div class="jeinpbox"><input type="text" class="form-control" name="startTime" id="ymd03" placeholder="YYYY-MM-DD"></div>
-                              </div>
-                              <small class="form-hint">注：默认查询为本年度的数据</small>
+                        <div class="col-lg-2 mb-3 row" >
+                          <label class="form-label wordbold col-4" >发件人</label>
+                          <div class="col"  >
+                             <input type="text" class="form-control" name="sendName"  >
                           </div>
-                     
                         </div>
-                        <div class="col-xl-2" >
-                          <div class="mb=3">
-                            <label class="form-label"  style="font-weight: bold;">结束：</label>
-                            <div class="col-md-6 col-xl-12" >
-                                <div class="jeinpbox"><input type="text" class="form-control" name="endTime" id="ymd04" placeholder="YYYY-MM-DD"></div>
-                            </div>
+                
+     
+                       
+                        <div class="col-lg-4 mb-3 row" >
+                          <label class="form-label wordbold col-2" >收件时间</label>
+                          <div class="col"  >
+                              <div class="jeinpbox"><input type="text" class="form-control" name="startTime" id="ymd01" placeholder="YYYY-MM-DD"></div>
                           </div>
-                     
+                          <div class="col"  >
+                            <div class="jeinpbox"><input type="text" class="form-control" name="endTime" id="ymd02" placeholder="YYYY-MM-DD"></div>
                         </div>
                    
+                     
+                        </div>
+                       
+                        <div class="col-lg-8 row">
+                          <label class="form-label col-1 wordbold" >当前状态</label>
+                          <div class="col">
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="state" value="" checked>
+                              <span class="form-check-label">全部</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="state" value="0">
+                              <span class="form-check-label">未读</span>
+                            </label>
+                            
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="state" value="1">
+                              <span class="form-check-label">已读</span>
+                            </label>                           
+                          </div>
+                        </div>
+
+                        <div class="col-lg-8 row">
+                          <label class="form-label col-1 wordbold" >日程类型</label>
+                          <div class="col">
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="" checked>
+                              <span class="form-check-label">全部</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="0">
+                              <span class="form-check-label">客户交流</span>
+                            </label>
+                            
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="1">
+                              <span class="form-check-label">职位交流</span>
+                            </label>
+                            
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="2">
+                              <span class="form-check-label">人选交流</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="3">
+                              <span class="form-check-label">喜报</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="4">
+                              <span class="form-check-label">请假事宜</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="5">
+                              <span class="form-check-label">其他</span>
+                            </label>
+                         
+                            
+                            
+                          </div>
+                        </div>
+                        
                   
   
-                        <div class="col-lg-3" >
-                          <div class="form-label" style="font-weight: bold;">&nbsp;</div>
-                          <a href="#" onclick="clearForm()" class="btn btn-link ms-auto">清空 </a>
-                        
-                          <a href="#" onclick="searchList()" class="btn btn-primary ms-auto">查询</a>
+                        <div class="col-lg-4">
+                          <div class="col">
+                           <a onclick="clearForm()" class="btn btn-link ms-auto ">清空 </a>
+                           <a onclick="searchList()" class="btn btn-primary ms-auto ">查询</a>
+                           <a  class="btn btn-success ms-auto" data-bs-toggle="modal" data-bs-target="#addtrip">写信</a>
+                          </div>
+                    
                         </div>
-  
   
                       </div>
 
@@ -389,6 +437,7 @@
                             <th>通知类型</th>
                             <th>发件人</th>
                             <th >收件人</th>
+                            <th>标题</th>
                             <th>内容</th>
                             <th>发送时间</th>
                             <th>操作</th>
@@ -426,7 +475,95 @@
 
 
 
+            <div class="modal modal-blur fade" id="addtrip" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">发送消息</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+    
+                    <div class="row">
+                      <div class="col-lg-1"></div>
+                      <div class="col-lg-6 mb-3">
+                        <label class="form-label wordbold">信件标题</label>
+                        <input type="text" class="form-control" name="title" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="col-lg-6 mb-3">
+                        <label class="form-label wordbold">选择收件人</label>
+                        <input type="text" class="form-select" placeholder="选择收件人" id="receiver" autocomplete="off"   >
+               
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
 
+
+
+
+
+
+
+
+                  
+                      <div class="mb-3 col-lg-11 ">
+                        <label class="form-label col-2 wordbold" >信件类型</label>
+                        <div class="col">
+                
+                          <label class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="type" value="5" checked>
+                            <span class="form-check-label">其他</span>
+                          </label>
+                          <label class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="type" value="0">
+                            <span class="form-check-label">客户交流</span>
+                          </label>
+                          
+                          <label class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="type" value="1">
+                            <span class="form-check-label">职位交流</span>
+                          </label>
+                          
+                          <label class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="type" value="2">
+                            <span class="form-check-label">人选交流</span>
+                          </label>
+                          <label class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="type" value="3">
+                            <span class="form-check-label">喜报</span>
+                          </label>
+                          <label class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="type" value="4">
+                            <span class="form-check-label">请假事宜</span>
+                          </label>
+                     
+                   
+                      </div>
+          
+
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-10 row">
+                        <label class="form-label wordbold">信件内容</label>
+                        <textarea class="form-control" rows="5" name="details" ></textarea>
+                      </div>
+    
+                    </div>
+    
+                
+                      
+                    
+    
+                  </div>  
+                  <div class="modal-footer">
+                    <a class="btn btn-primary" onclick="addMsg()" >
+                      直接发布    
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
 
@@ -452,13 +589,13 @@
             
           </div>
         </div>
+
+        
+
         <script src="../../static/js/list.min.js" defer></script>
-
-        <script defer>
   
-        </script>
-
-
+ 
+     
        
         <footer class="footer footer-transparent d-print-none">
           <div class="container-xl">

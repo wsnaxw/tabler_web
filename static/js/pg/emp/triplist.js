@@ -9,13 +9,11 @@ $(function(){
     format: "YYYY-MM-DD"
   });
   
-  document.querySelectorAll('#myform input[type="radio"]').forEach(radio => {
+  document.querySelectorAll('#myForm input[type="radio"]').forEach(radio => {
     radio.addEventListener('change', function() {
-      getPage(1);
+        getPage(1);
     });
-  });
-
-
+});
 
     // console.log('customerId:'+customerId)
     //默认进行分页数据查询
@@ -260,7 +258,7 @@ function changetrip(id){
       }),
       };
 
-      var url = baseUri+'/employ/changeTripState';
+      var url = baseUri+'/home/changeTripState';
   fetch(url,options)
       .then(response => response.json())
       .then(json => {
@@ -374,7 +372,7 @@ fetch(url,options)
     $("#addtrip").modal('hide')
     getPage(1)
         }else{
-            showMessage(1,"添加成功")
+            showMessage(1,"添加失败！")
         }
 
 

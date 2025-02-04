@@ -2403,101 +2403,140 @@ function newcc(){
 
 }
 
-function checkProject(id){
-        //跳转页面并且携带参数
 
-        let bigNumber = BigInt(id);
-        let pid = bigNumber.toString(); // 转换为字符串
-    
-    
-    // 创建一个新的URL，携带参数
-    var url = '../project/prod.html?workId=' + encodeURIComponent(pid)+'' ;
-    
-    // 使用jQuery来跳转到新页面
-    // window.location.href = url;
-    
-    window.open(url, '_blank');
+
+function checkProject(id) {
+  try {
+      // Convert ID to string to handle large numbers
+      const projectId = BigInt(id).toString();
+      
+      // Build URL with encoded project ID
+      const url = `../project/prod.html?workId=${encodeURIComponent(projectId)}`;
+      
+      // Open in new tab
+      window.open(url, '_blank');
+  } catch (error) {
+      console.error('Error navigating to project:', error);
+      showMessage(2, 'Failed to open project details');
+  }
 }
-
-function addContacter(){
-    // 获取 modal-edit 容器
-    var modalEditContainer = document.getElementById('contacter-modal');
-    let check =true;
-    // 使用querySelectorAll选择div内的所有input元素
-    const elements = modalEditContainer.querySelectorAll('input,textarea');
-    // 存储获取到的值的对象
-    const values = {};
-
-    elements.forEach((element) => {
-        // 获取元素的name属性作为键
-        const name = element.name || element.id || element.tagName.toLowerCase();
-        // 获取元素的值
-        const value = element.value;
-        // 将值存储到values对象中
-        values[name] = value;
-
-        
-
-    });
-
-    values.customerId=csid;
-
-
-
-    // 遍历 modal-edit 容器内的所有 select 和 input 元素
-    var inputs = modalEditContainer.querySelectorAll('select, input');
-    inputs.forEach(function(input) {
-
-        input.classList.remove('is-valid', 'is-invalid','is-valid-lite','is-invalid-lite');
-        if(input.name == 'name'||input.name =='phone'||input.name =='salary'||input.name =='quot'){
-            input.classList.remove('is-valid', 'is-invalid','is-valid-lite','is-invalid-lite');
-            if (values[input.name]==undefined||values[input.name].trim() == '') {
-                input.classList.add('is-invalid');
-                input.classList.add('is-invalid-lite');
-                check=false;
-  
-              }
-        }
-
-    });
-
-
-
-
-
-    if(check){
-        const options = {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            'token':localStorage.getItem('token')
-            },
-            body: JSON.stringify(values),
-            };
+// function addContacter(){
+//     var modalEditContainer = document.getElementById('contacter-modal');
+//     let check =true;
+//     const elements = modalEditContainer.querySelectorAll('input,textarea');
+//     const values = {};
+//     elements.forEach((element) => {
+//         const name = element.name || element.id || element.tagName.toLowerCase();
+//         const value = element.value;
+//         values[name] = value;
+//     });
+//     values.customerId=csid;
+//     var inputs = modalEditContainer.querySelectorAll('select, input');
+//     inputs.forEach(function(input) {
+//         input.classList.remove('is-valid', 'is-invalid','is-valid-lite','is-invalid-lite');
+//         if(input.name == 'name'||input.name =='phone'||input.name =='salary'||input.name =='quot'){
+//             input.classList.remove('is-valid', 'is-invalid','is-valid-lite','is-invalid-lite');
+//             if (values[input.name]==undefined||values[input.name].trim() == '') {
+//                 input.classList.add('is-invalid');
+//                 input.classList.add('is-invalid-lite');
+//                 check=false;
+//               }
+//         }
+//     });
+//     if(check){
+//         const options = {
+//             method: 'POST',
+//             headers: {
+//             'Content-Type': 'application/json',
+//             'token':localStorage.getItem('token')
+//             },
+//             body: JSON.stringify(values),
+//             };
     
-            var url = baseUri+'/customer/addContact';
-        fetch(url,options)
-            .then(response => response.json())
-            .then(json => {
-                // console.log(json)
-                if(json.code==0){
+//             var url = baseUri+'/customer/addContact';
+//         fetch(url,options)
+//             .then(response => response.json())
+//             .then(json => {
+//                 // console.log(json)
+//                 if(json.code==0){
                     
-                    contactList(csid);
-            showMessage(0,'添加成功！！')
-                }
-    
-    
-    
-            }).catch((error)=>{
-                callback();
-            });
+//                     contactList(csid);
+//             showMessage(0,'添加成功！！')
+//                 }
+//             }).catch((error)=>{
+//                 callback();
+//             });
 
-            $('#contacter-modal').modal('hide')
+//             $('#contacter-modal').modal('hide')
 
 
-    }
+//     }
 
 
+// }
+
+
+
+function addContacter() {
+  const modal = document.getElementById('contacter-modal');
+  if (!modal) {
+      console.error('Contact modal not found');
+      return;
+  }
+
+  // Get all form inputs
+  const inputs = modal.querySelectorAll('input, textarea, select');
+  const formData = {};
+  let isValid = true;
+
+  // Validate and collect form data
+  inputs.forEach(input => {
+      const value = input.value.trim();
+      const isRequired = ['name', 'phone'].includes(input.name);
+      
+      // Clear previous validation states
+      input.classList.remove('is-valid', 'is-invalid', 'is-valid-lite', 'is-invalid-lite');
+      
+      // Validate required fields
+      if (isRequired && !value) {
+          input.classList.add('is-invalid', 'is-invalid-lite');
+          isValid = false;
+      } else if (value) {
+          formData[input.name] = value;
+      }
+  });
+
+  if (!isValid) {
+      showMessage(1, '不能为空！');
+      return;
+  }
+
+  // Add customer ID to form data
+  formData.customerId = csid;
+
+  // Submit form data
+  fetch(`${baseUri}/customer/addContact`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'token': localStorage.getItem('token')
+      },
+      body: JSON.stringify(formData)
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.code === 0) {
+          contactList(csid); // Refresh contact list
+          showMessage(0, '联系人添加成功');
+          $('#contacter-modal').modal('hide');
+      } else {
+          throw new Error(data.message || 'Failed to add contact');
+      }
+  })
+  .catch(error => {
+      console.error('Error adding contact:', error);
+      showMessage(2, error.message || '添加失败');
+  });
 }
 
 

@@ -3,67 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeepSeek Integration</title>
-</head>
-<body>
-    <h1>DeepSeek API Integration</h1>
-    <input type="text" id="inputText" placeholder="Enter text">
-    <button onclick="callDeepSeekAPI()">Submit</button>
-    <div id="result"></div>
+    <title>烟花特效</title>
+    <style>
+        /* styles.css */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background-color: #000;
+}
 
-    <script>
+#fireworks-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
 
-// const apiKey = 'sk-9c7e9b799e9c42689973d6e1a065ee67'; // 替换为你的 API 密钥
-const apiKey ='sk-ab61d67a19de4771953c90d42b20eb39';
-const apiUrl = 'https://api.deepseek.com/v1/chat/completions';
-async function callDeepSeekAPI() {
+/* styles.css */
+.firework {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    border-radius: 50%;
+    animation: explode 1s ease-out;
+}
 
-  let value = document.getElementById('inputText').value;
-    try {
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`
-            },
-            body: JSON.stringify({
-                model: 'deepseek-chat',
-                messages: [
-                    { role: 'user', content: `${value}` }
-                ],
-                stream: false
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const result = await response.json();
-        console.log(result); // 打印 API 响应
-        document.getElementById('result').innerText = result.choices[0].message.content;
-        return result;
-    } catch (error) {
-        console.error('Error:', error);
+@keyframes explode {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
     }
 }
 
-async function callDeepSeekAPI1() {
-    const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${apiKey}`
-        },
-        body: JSON.stringify({text: "Hello, DeepSeek!"})
-    });
-
-    const result = await response.json();
-    return result;
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: #ff0;
+    border-radius: 50%;
+    animation: move 1s linear forwards;
 }
 
+@keyframes move {
+    0% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--vx, 0), var(--vy, 0));
+        opacity: 0;
+    }
+}
+    </style>
 
-    </script>
+    
+</head>
+<body>
+    <div id="fireworks-container"></div>
 </body>
-</html>
+<script>
+    // script.js
+const container = document.getElementById('fireworks-container');
 
+function createFirework(x, y) {
+const firework = document.createElement('div');
+firework.className = 'firework';
+firework.style.left = `${x}px`;
+firework.style.top = `${y}px`;
+container.appendChild(firework);
+
+// 创建烟花粒子
+for (let i = 0; i < 50; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = `${x}px`;
+    particle.style.top = `${y}px`;
+    const angle = Math.random() * 2 * Math.PI;
+    const speed = Math.random() * 5 + 2;
+    particle.style.setProperty('--vx', Math.cos(angle) * speed);
+    particle.style.setProperty('--vy', Math.sin(angle) * speed);
+    container.appendChild(particle);
+
+    // 移除粒子
+    setTimeout(() => {
+        particle.remove();
+    }, 1000);
+}
+
+// 移除烟花
+setTimeout(() => {
+    firework.remove();
+}, 1000);
+}
+
+document.addEventListener('click', (e) => {
+createFirework(e.clientX, e.clientY);
+});
+
+// 自动生成烟花
+setInterval(() => {
+const x = Math.random() * window.innerWidth;
+const y = Math.random() * window.innerHeight;
+createFirework(x, y);
+}, 1000);
+</script>
+</html>

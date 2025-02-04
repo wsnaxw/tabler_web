@@ -1,18 +1,77 @@
-$(function(){
+$(document).ready(function(){
     // var customerId = getParameterByName('customerId');
   jeDate("#ymd01",{
       theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
       format: "YYYY-MM-DD"
   });
+  jeDate("#ymd02",{
+    theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+    format: "YYYY-MM-DD"
+});
 
 
-  
+document.querySelectorAll('#myForm input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        getPage(1);
+    });
+});
+
     // console.log('customerId:'+customerId)
     //默认进行分页数据查询
     getPage(1);
+
+
+    receiver= new TomSelect('#receiver',{
+        maxItems: 1,
+        valueField: 'userId',
+        labelField: 'name',
+        searchField: 'name',
+        // fetch remote data
+        load: function(query, callback) {
+
+            const options = {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                'token':localStorage.getItem('token')
+                },
+                body: JSON.stringify({ 'name': query }),
+                };
+
+                var url = baseUri+'/customer/ulfq';
+            fetch(url,options)
+                .then(response => response.json())
+                .then(json => {
+                  var item = json.data.list;
+        
+                    callback(item);
+                }).catch((error)=>{
+                    callback();
+                });
+
+        },
+        // custom rendering functions for options and items
+        render: {
+            option: function(item, escape) {
+        return `<div><span class="dropdown-item-indicator"  >
+        </span>${ escape(item.name) }</div>`;
+    
+                
+            },
+            item: function(item, escape) {
+        return `<div><span class="dropdown-item-indicator"  >
+        </span>${ escape(item.name) }</div>`;
+    
+            }
+        },
+        onInitialize: function() {
+            this.clearOptions(); // 清空初始选项
+            this.load(''); // 传入空字符串以加载所有选项或基于默认查询
+        },
+    });
 })
 
-
+let receiver;
 
 
 
@@ -128,9 +187,10 @@ function getPage(pageNo){
                         <td class='wordbold'>${outType}</td>
                         <td style='color:blue'>${o.sendName}</td>
                         <td style="color: blue;">${o.userName}</td>
-                        <td >${o.details}</td>
+                        <td >${o.name}</td>
+                        <td class="${o.state==0?'wordbold':''}">${o.details}</td>
                         <td >${o.createTime}</td>
-                        <td ><a class='btn btn-danger btn-sm' onclick='deltrip(${o.id})'>删除</a>${o.state==0?"<a class='btn btn-info btn-sm' onclick='changetrip("+o.id+")'>标记为已处理</a>":''}</td>
+                        <td ><a class='btn btn-danger btn-sm' onclick='delmsg(${o.id})'>删除</a>${o.state==0?"<a class='btn btn-info btn-sm' onclick='changemsg("+o.id+")'>标记为已处理</a>":''}</td>
        
                         
                       </tr>
@@ -138,96 +198,14 @@ function getPage(pageNo){
                 }
                 $('#data').html(str);
                 
-           
-                var pageCount = obj.data.count
+                const pageCount = obj.data.count;
+            const totalPage = obj.data.totalPage;
+            $('#totalPageNum').html(pageCount);
+            $('#totalPageNum1').html(totalPage);
 
-                $('#totalPageNum').html('');
-                $('#totalPageNum').html(pageCount);
-
-                var totalPage = obj.data.totalPage;
-
-                arrowTotalPage = totalPage;
-                $('#totalPageNum1').html('');
-                $('#totalPageNum1').html(totalPage);
-                //上一页页数
-                var forward = pageNo-1;
-                var forward1 = '';
-                if(pageNo==1){
-                    forward=1;
-                    forward1 = '<li class="page-item disabled">'
-                    +'<a class="page-link" href="#"  tabindex="1" aria-disabled="true">'
-                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 6l-6 6l6 6"></path></svg>'
-                      +'prev'
-                    +'</a>'
-                  +'</li>'
-                }else {
-                    forward1 = '<li class="page-item" >'
-                    +'<a class="page-link" href="#" onclick="getPage('+forward+');">'
-                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 6l-6 6l6 6"></path></svg>'
-                      +'prev'
-                    +'</a>'
-                  +'</li>'
-                }
-                //下一页页数
-                var backwards = pageNo+1;
-                var backwards1 = '';
-                if(pageNo===obj.data.totalPage){
-                    backwards=pageNo;
-
-                    backwards1 = '<li class="page-item disabled">'
-                    +'<a class="page-link" href="#"  tabindex="1" aria-disabled="true">'
-                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg>'
-                      +'next'
-                    +'</a>'
-                  +'</li>'
-                }else{
-                    backwards1 = '<li class="page-item">'
-                    +'<a class="page-link" href="#"  onclick="getPage('+backwards+');" >'
-                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg>'
-                      +'next'
-                    +'</a>'
-                  +'</li>'
-                }
-
-                str='';
-                str+=forward1;
-
-                //添加首页/上一页按钮功能
-                var count = 0;//记录第一次循环页数按钮, 用来控制显示的按钮数不得超过5个
-                var index = 0;//第二次循环页数
-                var pages= pageNo;
-                for(var i=1;i<=totalPage;i++){
-                    if(pageNo>1){
-                        i=pageNo++;
-                        index = count++;
-                        if(index>4){
-                            break;
-                        }
-                        if(i==pages){
-                            str+= '<li class="page-item active" ><a class="page-link" href="#"  onclick="getPage('+i+');" >'+i+'</a></li>'
-                        }else{
-                            str+= '<li class="page-item" ><a class="page-link" href="#"  onclick="getPage('+i+');" >'+i+'</a></li>'
-                        }
-                    }else{
-                        count++;
-                        if(count>5){
-                            count=0;
-                            break;
-                        }else{
-                            if(i===pageNo){
-                                str+= '<li class="page-item active" ><a class="page-link" href="#"  onclick="getPage('+i+');" >'+i+'</a></li>'
-                            }else{
-                                str+= '<li class="page-item" ><a class="page-link" href="#"  onclick="getPage('+i+');" >'+i+'</a></li>'
-                            }
-                        }
-                    }
-                }
-
-                str+=backwards1;
-
-
-                $('#pageSelect').html('');
-                $('#pageSelect').html(str);
+            // 生成分页按钮
+            const paginationHTML = generatePagination(pageNo, totalPage);
+            $('#pageSelect').html(paginationHTML);
                 document.getElementById('table-default').scrollIntoView({ behavior: 'smooth' });
 
 
@@ -237,6 +215,16 @@ function getPage(pageNo){
         }
     });
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -280,3 +268,157 @@ function checkcusd(id){
 
 
 }
+
+
+
+function delmsg(id){
+
+    const options = {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      'token':localStorage.getItem('token')
+      },
+      body: JSON.stringify({
+        "id": id
+      }),
+      };
+  
+      var url = baseUri+'/employ/delMsg';
+  fetch(url,options)
+      .then(response => response.json())
+      .then(json => {
+          console.log(json)
+          if(json.code==0){
+              
+      showMessage(0,'删除成功!!')
+  
+      getPage(1)
+          }else{
+              showMessage(1,"删除失败")
+          }
+  
+  
+  
+      }).catch((error)=>{
+          console.log(error)
+      });
+  
+  
+  }
+
+  
+  
+function changemsg(id){
+    const options = {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'token':localStorage.getItem('token')
+        },
+        body: JSON.stringify({
+          "id": id,
+          "state": 1
+        }),
+        };
+  
+        var url = baseUri+'/employ/changeMsgState';
+    fetch(url,options)
+        .then(response => response.json())
+        .then(json => {
+            // console.log(json)
+            if(json.code==0){
+                
+        showMessage(0,'处理成功!!')
+  
+        getPage(1)
+  
+     
+            }else{
+                showMessage(1,"处理失败")
+            }
+  
+  
+  
+        }).catch((error)=>{
+          console.log(error)
+        });
+  
+  
+  }
+  
+
+
+  function addMsg(){
+
+
+    let inputValue = {};
+
+    $('#addtrip input,#addtrip textarea').each(function() {
+      var $input = $(this);
+  
+   
+      if ($input.attr('name') && $input.val()) {
+  
+        if($input.attr('type')=='radio'){
+            if($input.is(':checked')){
+                inputValue[$input.attr('name')] = $input.val();
+            }
+            
+          }else{
+            inputValue[$input.attr('name')] = $input.val();
+            
+          }
+          
+        
+      }
+  
+    });
+    inputValue.receiverId =  receiver.getValue();
+    inputValue.receiverName = receiver.options[receiver.getValue()].name;
+    inputValue.workId = 0;
+
+  console.log(inputValue)
+
+
+
+  const options = {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    'token':localStorage.getItem('token')
+    },
+    body: JSON.stringify(inputValue),
+    };
+
+    var url = baseUri+'/employ/addMsg';
+fetch(url,options)
+    .then(response => response.json())
+    .then(json => {
+        // console.log(json)
+        if(json.code==0){
+            
+    showMessage(0,'添加成功!!')
+    $("#addtrip").modal('hide')
+    getPage(1)
+        }else{
+            showMessage(1,"添加失败！")
+        }
+
+
+
+    }).catch((error)=>{
+        console.log(error)
+    });
+
+
+
+
+
+
+
+
+
+
+
+  }

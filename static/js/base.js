@@ -297,9 +297,10 @@ function getMenuInfo(){
         url: baseUri+'/login/getMenu', // 替换为你的服务器端点
         headers:{
             'Token': localStorage.getItem('token'), // 设置自定义请求头
-            'Content-Type': 'application/json; charset=utf-8', // 设置内容类型为 JSON
+            'Content-Type': 'application/json;charset=utf-8', // 设置内容类型为 JSON
             'Access-Control-Allow-Origin':'*'
         },
+        data:JSON.stringify({}),
         type: 'POST', // 请求类型
         dataType: 'json', // 预期服务器返回的数据类型
         // success: function(response) {
@@ -410,7 +411,7 @@ function getMenuInfo(){
           }
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            // console.error('请求失败:', textStatus, errorThrown);
+            console.error('请求失败:', jqXHR,textStatus, errorThrown);
         }
     });
 }
@@ -1057,4 +1058,92 @@ function showMessage(type,text) {
           messageContainer.removeChild(messageElement);
       }, 300); // Remove from DOM after the opacity transition ends
   }, 3000); // Display the message for 3 seconds
+}
+
+
+
+function generatePagination(pageNo, totalPage) {
+  let paginationHTML = '';
+
+  // 上一页按钮
+  if (pageNo === 1) {
+      paginationHTML += `
+          <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M15 6l-6 6l6 6"></path>
+                  </svg>
+                  prev
+              </a>
+          </li>
+      `;
+  } else {
+      paginationHTML += `
+          <li class="page-item">
+              <a class="page-link" href="#" onclick="getPage(${pageNo - 1});">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M15 6l-6 6l6 6"></path>
+                  </svg>
+                  prev
+              </a>
+          </li>
+      `;
+  }
+
+  // 分页按钮
+  const maxButtons = 5; // 最多显示的分页按钮数
+  let startPage = Math.max(1, pageNo - Math.floor(maxButtons / 2));
+  let endPage = Math.min(totalPage, startPage + maxButtons - 1);
+
+  // 调整起始页码，确保显示的分页按钮数不超过 maxButtons
+  if (endPage - startPage + 1 < maxButtons) {
+      startPage = Math.max(1, endPage - maxButtons + 1);
+  }
+
+  for (let i = startPage; i <= endPage; i++) {
+      if (i === pageNo) {
+          paginationHTML += `
+              <li class="page-item active">
+                  <a class="page-link" href="#" onclick="getPage(${i});">${i}</a>
+              </li>
+          `;
+      } else {
+          paginationHTML += `
+              <li class="page-item">
+                  <a class="page-link" href="#" onclick="getPage(${i});">${i}</a>
+              </li>
+          `;
+      }
+  }
+
+  // 下一页按钮
+  if (pageNo === totalPage) {
+      paginationHTML += `
+          <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                  next
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M9 6l6 6l-6 6"></path>
+                  </svg>
+              </a>
+          </li>
+      `;
+  } else {
+      paginationHTML += `
+          <li class="page-item">
+              <a class="page-link" href="#" onclick="getPage(${pageNo + 1});">
+                  next
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M9 6l6 6l-6 6"></path>
+                  </svg>
+              </a>
+          </li>
+      `;
+  }
+
+  return paginationHTML;
 }

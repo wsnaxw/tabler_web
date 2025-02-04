@@ -328,96 +328,14 @@ function getPage(pageNo){
                 $('#data').html(str);
 
 
+                const pageCount = obj.data.count;
+            const totalPage = obj.data.totalPage;
+            $('#totalPageNum').html(pageCount);
+            $('#totalPageNum1').html(totalPage);
 
-                var pageCount = obj.data.count
-
-                $('#totalPageNum').html('');
-                $('#totalPageNum').html(pageCount);
-
-                var totalPage = obj.data.totalPage;
-                arrowTotalPage = totalPage;
-
-                $('#totalPageNum1').html('');
-                $('#totalPageNum1').html(totalPage);
-                //上一页页数
-                var forward = pageNo-1;
-                var forward1 = '';
-                if(pageNo==1){
-                    forward=1;
-                    forward1 = '<li class="page-item disabled">'
-                    +'<a class="page-link" href="#"  tabindex="1" aria-disabled="true">'
-                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 6l-6 6l6 6"></path></svg>'
-                      +'prev'
-                    +'</a>'
-                  +'</li>'
-                }else {
-                    forward1 = '<li class="page-item" >'
-                    +'<a class="page-link" href="#" onclick="getPage('+forward+');">'
-                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M15 6l-6 6l6 6"></path></svg>'
-                      +'prev'
-                    +'</a>'
-                  +'</li>'
-                }
-                //下一页页数
-                var backwards = pageNo+1;
-                var backwards1 = '';
-                if(pageNo===obj.data.totalPage){
-                    backwards=pageNo;
-
-                    backwards1 = '<li class="page-item disabled">'
-                    +'<a class="page-link" href="#"  tabindex="1" aria-disabled="true">'
-                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg>'
-                      +'next'
-                    +'</a>'
-                  +'</li>'
-                }else{
-                    backwards1 = '<li class="page-item">'
-                    +'<a class="page-link" href="#"  onclick="getPage('+backwards+');" >'
-                      +'<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 6l6 6l-6 6"></path></svg>'
-                      +'next'
-                    +'</a>'
-                  +'</li>'
-                }
-
-                str='';
-                str+=forward1;
-
-                //添加首页/上一页按钮功能
-                var count = 0;//记录第一次循环页数按钮, 用来控制显示的按钮数不得超过5个
-                var index = 0;//第二次循环页数
-                var pages= pageNo;
-                for(var i=1;i<=totalPage;i++){
-                    if(pageNo>1){
-                        i=pageNo++;
-                        index = count++;
-                        if(index>4){
-                            break;
-                        }
-                        if(i==pages){
-                            str+= '<li class="page-item active" ><a class="page-link" href="#"  onclick="getPage('+i+');" >'+i+'</a></li>'
-                        }else{
-                            str+= '<li class="page-item" ><a class="page-link" href="#"  onclick="getPage('+i+');" >'+i+'</a></li>'
-                        }
-                    }else{
-                        count++;
-                        if(count>5){
-                            count=0;
-                            break;
-                        }else{
-                            if(i===pageNo){
-                                str+= '<li class="page-item active" ><a class="page-link" href="#"  onclick="getPage('+i+');" >'+i+'</a></li>'
-                            }else{
-                                str+= '<li class="page-item" ><a class="page-link" href="#"  onclick="getPage('+i+');" >'+i+'</a></li>'
-                            }
-                        }
-                    }
-                }
-
-                str+=backwards1;
-
-
-                $('#pageSelect').html('');
-                $('#pageSelect').html(str);
+            // 生成分页按钮
+            const paginationHTML = generatePagination(pageNo, totalPage);
+            $('#pageSelect').html(paginationHTML);
                 document.getElementById('pageSelect').scrollIntoView({ behavior: 'smooth' });
 
 

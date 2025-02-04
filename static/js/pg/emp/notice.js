@@ -1,25 +1,16 @@
 $(function(){
-    // var customerId = getParameterByName('customerId');
-  jeDate("#ymd01",{
-      theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-      format: "YYYY-MM-DD"
-  });
-  jeDate("#ymd02",{
-    theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-    format: "YYYY-MM-DD"
-});
-jeDate("#ymd03",{
-  theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-  format: "YYYY-MM-DD"
-});
-jeDate("#ymd04",{
-theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-format: "YYYY-MM-DD"
+
+
+
+
+  document.querySelectorAll('#myForm input[type="radio"]').forEach(radio => {
+    radio.addEventListener('change', function() {
+        getPage(1);
+    });
 });
 
-  
-    // console.log('customerId:'+customerId)
-    //默认进行分页数据查询
+
+
     getPage(1);
 })
 
@@ -106,18 +97,38 @@ function getPage(pageNo){
                 for(var i =0;i<obj.data.list.length;i++){
 
                     var o = obj.data.list[i];
-        
+                    // 0、1 、2 3 
+                    let type = o.type;
+                    let typestr=``;
+                    switch (type) {
+                      case 0:
+                        typestr=`公司大事`;
+                        break;
+                        case 1:
+                          typestr=`大元宝`;
+                          break;
+                          case 2:
+                            typestr=`入职周年`;
+                            break;
+                            case 3:
+                              typestr=`大钻石`;
+                              break;
+                    }
+
+
+
 
 
                     str+=
                     `
                     <tr>
-                        <td style='color:red'>${o.title}</td>
+                        <td style='color:red'>${typestr}</td>
+                        <td >${o.title}</td>
                         <td style='color:blue'>${o.publishTime}</td>
                         <td >${o.content}</td>
                         <td >${o.userName}</td>
                         <td >${o.state==1?'已发布':'未发布'}</td>
-                        <td ><a class='btn btn-default btn-sm' onclick='deltrip(${o.id})'>查看</a> <a class='btn btn-default btn-sm' onclick='deltrip(${o.id})'>编辑</a></td>
+                        <td ><a class='btn btn-danger btn-sm' onclick='delSysnotice(${o.id})'>删除</a></td>
        
                         
                       </tr>
@@ -264,6 +275,108 @@ function checkcusd(id){
   // window.location.href = url;
 
   window.open(url, '_blank');
+
+
+}
+
+
+function addSysnotice(){
+
+
+  let inputValue = {};
+
+  $('#addtrip input,#addtrip textarea').each(function() {
+    var $input = $(this);
+
+ 
+    if ($input.attr('name') && $input.val()) {
+
+      if($input.attr('type')=='radio'){
+          if($input.is(':checked')){
+              inputValue[$input.attr('name')] = $input.val();
+          }
+          
+        }else{
+          inputValue[$input.attr('name')] = $input.val();
+          
+        }
+        
+      
+    }
+
+  });
+
+  inputValue.state=1;
+
+  const options = {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    'token':localStorage.getItem('token')
+    },
+    body: JSON.stringify(inputValue),
+    };
+
+    var url = baseUri+'/employ/addNotice';
+fetch(url,options)
+    .then(response => response.json())
+    .then(json => {
+        // console.log(json)
+        if(json.code==0){
+            
+    showMessage(0,'添加成功!!')
+    $("#addtrip").modal('hide')
+    getPage(1)
+        }else{
+            showMessage(1,"添加成功")
+        }
+
+
+
+    }).catch((error)=>{
+        console.log(error)
+    });
+
+
+}
+
+
+
+
+
+function delSysnotice(id){
+
+
+
+  
+
+  const options = {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    'token':localStorage.getItem('token')
+    },
+    body: JSON.stringify({id:id}),
+    };
+
+    var url = baseUri+'/employ/delSysnotice';
+fetch(url,options)
+    .then(response => response.json())
+    .then(json => {
+        // console.log(json)
+        if(json.code==0){
+            
+    showMessage(0,'删除成功!!')
+    getPage(1)
+        }else{
+            showMessage(1,"权限不足！")
+        }
+
+
+
+    }).catch((error)=>{
+        console.log(error)
+    });
 
 
 }

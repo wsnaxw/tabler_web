@@ -5,36 +5,19 @@ $(document).ready(function () {
     talentId = getParameterByName('workId');
     initBaseInfo();
     initTCList();
-    jeDate("#jd1",{
-      theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-      format: "YYYY-MM"
-    });
-
+    // Initialize date pickers
+    const initDatePickers = () => {
+      const datePickerConfig = {
+        theme: { bgcolor: "#4cc9f0", pnColor: "#00CCFF" },
+        format: "YYYY-MM"
+      };
+      
+      for (let i = 1; i <= 6; i++) {
+        jeDate(`#jd${i}`, datePickerConfig);
+      }
+    };
     
-    jeDate("#jd2",{
-      theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-      format: "YYYY-MM"
-    });
-    
-    jeDate("#jd3",{
-      theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-      format: "YYYY-MM"
-    });
-    
-    jeDate("#jd4",{
-      theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-      format: "YYYY-MM"
-    });
-    
-    jeDate("#jd5",{
-      theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-      format: "YYYY-MM"
-    });
-    
-    jeDate("#jd6",{
-      theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-      format: "YYYY-MM"
-    });
+    initDatePickers();
 
   // 绑定失去焦点事件
   $("#modal-edit input[name='phone']").on('blur', function() {
@@ -1166,8 +1149,8 @@ function editpro(projectId) {
   $("#xm01 input[name='isNow']").prop('checked', projectData.isNow === 1);
 
   // 修改按钮文本和 onclick 方法
-  $(".modal-footer .btn-primary").text('修改项目经历');
-  $(".modal-footer .btn-primary").attr('onclick', `editData('${projectId}')`);
+  $("#addmodal-pro .modal-footer .btn-primary").text('修改项目经历');
+  $("#addmodal-pro .modal-footer .btn-primary").attr('onclick', `editData('${projectId}')`);
 
   // 打开 modal
   $('#addmodal-pro').modal('show');
@@ -1400,11 +1383,19 @@ function editcompany(id){
     $('#addmodal-com input[name="isNow"]').prop('checked', data.isNow === 1);
     $('#addmodal-com textarea[name="duty"]').val(data.duty);
     $('#addmodal-com select[name="industry"]').val(data.industry);
-    $(".modal-footer .btn-primary").text('修改工作经历');
-    $(".modal-footer .btn-primary").attr('onclick', `editData('${id}')`);
+    $("#addmodal-com .modal-footer .btn-primary").text('修改工作经历');
+    $("#addmodal-com .modal-footer .btn-primary").attr('onclick', `editData('${id}')`);
   
   }
   $('#addmodal-com').modal('show');
+
+
+}
+
+function addcom(){
+  $("#addmodal-com .modal-footer .btn-primary").text('新增工作经历');
+  $("#addmodal-com .modal-footer .btn-primary").attr('onclick', `collectData('gzjsinfo','gz01')`);
+
 }
 
 
@@ -1454,13 +1445,31 @@ function editEdu(id){
     $('#addmodal-edu input[name="isAllTime"][value="' + data.isAllTime + '"]').prop('checked', true);
 
     $('#addmodal-edu input[name="education"][value="' + edu + '"]').prop('checked', true);
-    $(".modal-footer .btn-primary").text('修改教育经历');
-    $(".modal-footer .btn-primary").attr('onclick', `editData('${id}')`);
+    $("#addmodal-edu .modal-footer .btn-primary").text('修改教育经历');
+    $("#addmodal-edu .modal-footer .btn-primary").attr('onclick', `editData('${id}')`);
   
   }
   $('#addmodal-edu').modal('show');
 }
 
+
+function addpro(){
+  $("#addmodal-com .modal-footer .btn-primary").text('新增教育经历');
+  $("#addmodal-com .modal-footer .btn-primary").attr('onclick', `collectData('gzjsinfo','gz01')`);
+
+}
+
+
+function addedu(){
+  $("#addmodal-edu .modal-footer .btn-primary").text('新增教育经历');
+  $("#addmodal-edu .modal-footer .btn-primary").attr('onclick', `collectData('jyjlinfo','edu01')`);
+
+}
+
+function addpro(){
+  $("#addmodal-pro .modal-footer .btn-primary").text('新增项目经历');
+  $("#addmodal-pro .modal-footer .btn-primary").attr('onclick', `collectData('xmjlinfo','xm01')`);
+}
 
 
 function editData(id) {
@@ -1501,7 +1510,7 @@ function editData(id) {
       duty: $("#"+id3+" textarea[name='duty']").val(),
       startTime: $("#"+id3+" input[name='startTime']").val(),
       endTime: $("#"+id3+" input[name='endTime']").val(),
-      isNow: $("#"+id3+" input[name='isNow']").prop('checked') ? 1 : 0
+      isNow: $("#"+id3+" input[name='isNow']").prop('checked')?1 : '0'
   };
   upData.talentId = talentId;
   // 更新 sessionStorage
