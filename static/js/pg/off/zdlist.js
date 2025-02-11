@@ -1,5 +1,16 @@
-$(function(){
-    // var customerId = getParameterByName('customerId');
+$(document).ready(function(){
+
+
+document.querySelectorAll('#myForm input[type="radio"]').forEach(radio => {
+  radio.addEventListener('change', function() {
+      getPage(1);
+  });
+});
+
+  // console.log('customerId:'+customerId)
+  //默认进行分页数据查询
+  getPage(1);
+
 
 })
 
@@ -8,30 +19,158 @@ $(function(){
 
 
 
+function getFormDate() {
+let form = document.getElementById('myForm');  // 用你的form的ID替换'myForm'
 
-function togglePasswordVisibility(id, element) {
-  const input = document.getElementById(id);
-  const icon = element.querySelector('svg');
-  if (input.type === 'password') {
-    input.type = 'text';
-    icon.outerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-eye">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/>
-        <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"/>
-      </svg>
-    `;
-  } else {
-    input.type = 'password';
-    icon.outerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-eye-off">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <path d="M10.585 10.587a2 2 0 0 0 2.829 2.828"/>
-        <path d="M16.681 16.673a8.717 8.717 0 0 1 -4.681 1.327c-3.6 0 -6.6 -2 -9 -6c1.272 -2.12 2.712 -3.678 4.32 -4.674m2.86 -1.146a9.055 9.055 0 0 1 1.82 -.18c3.6 0 6.6 2 9 6c-.666 1.11 -1.379 2.067 -2.138 2.87"/>
-        <path d="M3 3l18 18"/>
-      </svg>
-    `;
-  }
+let formData = new FormData(form);
+let object = {};
+
+for (let pair of formData.entries()) {
+    object[pair[0]] = pair[1];
+}
+let newJsonData = removeEmptyValues(object);
+
+
+
+return newJsonData;
+
+
+}
+
+function removeEmptyValues(obj) {
+if (obj === null || typeof obj !== 'object') {
+    return obj;
+}
+
+const newObj = Array.isArray(obj) ? [] : {};
+
+for (const key in obj) {
+    if (obj.hasOwnProperty(key)) {
+        const value = removeEmptyValues(obj[key]);
+        if (value !== undefined && value!=='' && value!=='null') {
+            newObj[key] = value;
+        }
+    }
+}
+
+return newObj;
+}
+
+
+
+
+function getPage(pageNo){
+
+arrowPageNo = pageNo;
+let data = getFormDate()
+
+data.pageNo = pageNo;
+
+
+
+
+  $('#data').html('');
+
+
+  $.ajax({
+      headers:{
+          'token':localStorage.getItem("token"),
+          Accept:'application/json',
+          'Content-Type':'application/json;charset=UTF-8'
+      },
+      dataType:'json',
+      type:'post',
+      url:baseUri+'/office/CIList',
+      data:JSON.stringify(data),
+      success:function(obj){
+
+          var str="";
+          if(obj.data.list.length===0){
+            $('.table-sort tbody').append("<tr class='text-c'><td colspan='8'>没有数据 !</td></tr>");
+            $('#pageSelect').html('');
+            $('#totalPageNum').html(0);
+            $('#totalPageNum1').html(0);
+              
+          }else{
+              // $("#countsss").css("display","");
+              for(var i =0;i<obj.data.list.length;i++){
+
+                  var o = obj.data.list[i];
+      
+                  let outType = '其他';
+
+                  switch (o.type) {
+                      case 0:
+                          outType = '行政管理';
+                          break;
+                      case 1:
+                          outType = '奖金提成';
+                          break;
+                      case 2:
+                          outType = '招聘制度';
+                          break;
+                      case 3:
+                          outType = '晋升制度';
+                          break;
+                      case 4:
+                          outType = '合伙人制';
+                          break;
+                      case 5:
+                          outType = '行政管理';
+                          break;
+                      case 6:
+                          outType = '年终奖';
+                          break;
+                      case 7:
+                          outType = '加薪制度';
+                          break;
+                      case 8:
+                          outType = '降薪制度';
+                          break;
+                      case 9:
+                          outType = '财务制度';
+                          break;
+                      case 9:
+                          outType = '其他政策';
+                          break;                                         
+                   
+                  }
+
+               
+
+                  str+=
+                  `
+                  <tr>
+                      <td class='wordbold'>${outType}</td>
+                      <td style='color:blue' onclick='checkdl(${o.id})'>${o.title}</td>
+                      <td >${o.userName}</td>
+                      <td >${o.createTime}</td>
+                      <td ><a class='btn btn-danger btn-sm' onclick='checkdl(${o.id})'>查看</a>${o.state==0?"<a class='btn btn-info btn-sm' onclick='editdl("+o.id+")'>标记为已处理</a>":''}</td>
+     
+                      
+                    </tr>
+                  `
+
+                  sessionStorage.setItem(o.id,JSON.stringify(o));
+              }
+              $('#data').html(str);
+              
+              const pageCount = obj.data.count;
+          const totalPage = obj.data.totalPage;
+          $('#totalPageNum').html(pageCount);
+          $('#totalPageNum1').html(totalPage);
+
+          // 生成分页按钮
+          const paginationHTML = generatePagination(pageNo, totalPage);
+          $('#pageSelect').html(paginationHTML);
+              document.getElementById('table-default').scrollIntoView({ behavior: 'smooth' });
+
+
+          }
+
+
+      }
+  });
 }
 
 
@@ -46,109 +185,188 @@ function togglePasswordVisibility(id, element) {
 
 
 
+function clearForm(){
 
-
-
-
+  $('#formdata input[type="checkbox"], #formdata select, #formdata input[type="text"]').each(function() {
+      // 将这些元素的值设置为空
+      $(this).val('');
+      // 对于checkbox，还需要取消选中状态
+      if ($(this).is('input[type="checkbox"]')) {
+        $(this).prop('checked', false);
+      }
+    });
+}
 
 
 
 
 function searchList(){
-  updatePWD()
+  getPage(1)
 }
 
 
-function validatePasswords() {
-  const newPwd1 = document.getElementById('newPwd1').value;
-  const newPwd2 = document.getElementById('newPwd2').value;
-  if (newPwd1 !== newPwd2) {
-    showMessage(1,'两次密码不匹配');
-    return false;
-  }else{
-    return true;
-  }
+function checkcusd(id){
+
+  //跳转页面并且携带参数
+
+let bigNumber = BigInt(id);
+let customerId = bigNumber.toString(); // 转换为字符串
+
+
+// 创建一个新的URL，携带参数
+var url = '../customer/cusd.html?customerId=' + encodeURIComponent(customerId)+'' ;
+
+sessionStorage.setItem('nowactive','')
+
+// 使用jQuery来跳转到新页面
+// window.location.href = url;
+
+window.open(url, '_blank');
+
+
 }
 
 
-function showMessage(type,text) {
 
-  const messageElement = document.createElement('div');
-  if(type==0||type==='success'){
-      messageElement.className = 'message visible alert alert-success';
-      if(text==null)text='成功！！！';
+function delmsg(id){
 
-      messageElement.textContent = text;
-  }else if(type==1||type==='fail'){
-      messageElement.className = 'message visible alert alert-warning';
-      if(text==null)text='失败！！！';
+  const options = {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    'token':localStorage.getItem('token')
+    },
+    body: JSON.stringify({
+      "id": id
+    }),
+    };
 
-      messageElement.textContent = text;
-  }else if(type==2||type==='error'){
-      messageElement.className = 'message visible alert alert-warning';
-      if(text==null)text='异常！！！';
+    var url = baseUri+'/employ/delMsg';
+fetch(url,options)
+    .then(response => response.json())
+    .then(json => {
+        console.log(json)
+        if(json.code==0){
+            
+    showMessage(0,'删除成功!!')
 
-      messageElement.textContent = text;
-  }else{
-      messageElement.className = 'message visible alert alert-info';
-      if(text==null)text='已操作！！！';
-
-      messageElement.textContent = text;
-  }
-
-
-
-  // Create the message element
-
+    getPage(1)
+        }else{
+            showMessage(1,"删除失败")
+        }
 
 
-  // Append the message to the container
-  const messageContainer = document.getElementById('messageContainer');
-  messageContainer.appendChild(messageElement);
 
-  // Remove the message after a while
-  setTimeout(() => {
-      messageElement.classList.remove('visible');
-      setTimeout(() => {
-          messageContainer.removeChild(messageElement);
-      }, 300); // Remove from DOM after the opacity transition ends
-  }, 3000); // Display the message for 3 seconds
+    }).catch((error)=>{
+        console.log(error)
+    });
+
+
 }
 
 
-function updatePWD(){
 
-  if(validatePasswords()){
-
-
-    let oldPwd = document.getElementById('oldPwd').value;
-    let newPwd1 = document.getElementById('newPwd1').value;
-    let newPwd2 = document.getElementById('newPwd2').value;
-
-    let url = '/employ/updatePwd';
-
-    const options = {
+function changemsg(id){
+  const options = {
       method: 'POST',
       headers: {
       'Content-Type': 'application/json',
       'token':localStorage.getItem('token')
       },
-      body: JSON.stringify({oldPwd:CryptoJS.MD5(oldPwd).toString(),newPwd1:CryptoJS.MD5(newPwd1).toString(),newPwd2:CryptoJS.MD5(newPwd2).toString()}),
-    };
-    fetch(baseUri+url, options)
+      body: JSON.stringify({
+        "id": id,
+        "state": 1
+      }),
+      };
+
+      var url = baseUri+'/employ/changeMsgState';
+  fetch(url,options)
       .then(response => response.json())
       .then(json => {
-        if (json.code === 0) {
-          showMessage(0,'修改成功！')
-        } else {
-          showMessage(1,json.message)
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        showMessage(2,'异常！')
+          // console.log(json)
+          if(json.code==0){
+              
+      showMessage(0,'处理成功!!')
+
+      getPage(1)
+
+   
+          }else{
+              showMessage(1,"处理失败")
+          }
+
+
+
+      }).catch((error)=>{
+        console.log(error)
       });
-  
+
+
+}
+
+
+
+function addMsg(){
+
+
+  let inputValue = {};
+
+  $('#addtrip input,#addtrip textarea').each(function() {
+    var $input = $(this);
+
+ 
+    if ($input.attr('name') && $input.val()) {
+
+      if($input.attr('type')=='radio'){
+          if($input.is(':checked')){
+              inputValue[$input.attr('name')] = $input.val();
+          }
+          
+        }else{
+          inputValue[$input.attr('name')] = $input.val();
+          
+        }
+        
+      
+    }
+
+  });
+  inputValue.receiverId =  receiver.getValue();
+  inputValue.receiverName = receiver.options[receiver.getValue()].name;
+  inputValue.workId = 0;
+
+console.log(inputValue)
+
+
+
+const options = {
+  method: 'POST',
+  headers: {
+  'Content-Type': 'application/json',
+  'token':localStorage.getItem('token')
+  },
+  body: JSON.stringify(inputValue),
+  };
+
+  var url = baseUri+'/employ/addMsg';
+fetch(url,options)
+  .then(response => response.json())
+  .then(json => {
+      // console.log(json)
+      if(json.code==0){
+          
+  showMessage(0,'添加成功!!')
+  $("#addtrip").modal('hide')
+  getPage(1)
+      }else{
+          showMessage(1,"添加失败！")
+      }
+
+
+
+  }).catch((error)=>{
+      console.log(error)
+  });
 
 
 
@@ -156,9 +374,18 @@ function updatePWD(){
 
 
 
-  }else{
-    return;
-  }
 
 
+
+
+}
+
+
+
+function checkdl(id){
+  let o = JSON.parse(sessionStorage.getItem(id));
+  console.log(o)
+  $('#checkdlcontent').html(o.content)
+
+  $('#checkdl').modal('show')
 }

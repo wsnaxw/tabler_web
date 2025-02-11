@@ -23,7 +23,7 @@
     <link type="text/css" rel="stylesheet" href="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/skin/jedate.css">
     <script type="text/javascript" src="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/src/jedate.js"></script>
     <script src="../../static/js/watermark.js"></script>
-    <script src="../../static/js/pg/emp/triplist.js"></script>
+    <script src="../../static/js/pg/off/zdlist.js"></script>
     <script>
       function dark(){
         let body = document.getElementById('webBody')
@@ -280,59 +280,90 @@
                   <div class="card-body" id="formdata">
                     <form id="myForm">
                       <div class="row "> 
-                    
+                        
+
      
                        
-                        <div class="col-xl-2" >
-                          <div class="mb=3">
-                              <label class="form-label"  style="font-weight: bold;">offer时间-开始：</label>
-                              <div class="col-md-6 col-xl-12"  >
-                                  <div class="jeinpbox"><input type="text" class="form-control" name="offerDate1" id="ymd01" placeholder="YYYY-MM-DD"></div>
-                              </div>
-                              <small class="form-hint">注：默认查询为本年度的数据</small>
+                 
+                       
+                        <div class="col-lg-10  row">
+                          <label class="form-label col-1 wordbold" >制度类型</label>
+                          <div class="col">
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="" checked>
+                              <span class="form-check-label">全部</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="0">
+                              <span class="form-check-label">行政管理</span>
+                            </label>
+                            
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="1">
+                              <span class="form-check-label">奖金提成</span>
+                            </label>
+                            
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="2">
+                              <span class="form-check-label">招聘制度</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="3">
+                              <span class="form-check-label">晋升制度</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="4">
+                              <span class="form-check-label">合伙人制</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="5">
+                              <span class="form-check-label">绩效考核</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="6">
+                              <span class="form-check-label">年终奖</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="7">
+                              <span class="form-check-label">加薪制度</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="8">
+                              <span class="form-check-label">降薪制度</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="9">
+                              <span class="form-check-label">财务制度</span>
+                            </label>
+                            <label class="form-check form-check-inline">
+                              <input class="form-check-input" type="radio" name="type" value="10">
+                              <span class="form-check-label">其他</span>
+                            </label>
+                            
+                            
                           </div>
-                     
                         </div>
-                        <div class="col-xl-2" >
-                          <div class="mb=3">
-                            <label class="form-label"  style="font-weight: bold;">结束：</label>
-                            <div class="col-md-6 col-xl-12" >
-                                <div class="jeinpbox"><input type="text" class="form-control" name="offerDate12" id="ymd02" placeholder="YYYY-MM-DD"></div>
-                            </div>
+                        <div class="col-lg-2">
+                          <div class="col">
+                           <!-- <a onclick="clearForm()" class="btn btn-link ms-auto ">清空 </a> -->
+                           <a onclick="searchList()" class="btn btn-primary ms-auto ">查询</a>
+                           <a  class="btn btn-success ms-auto" data-bs-toggle="modal" data-bs-target="#addtrip">发布</a>
                           </div>
-                     
+                    
                         </div>
 
-                              
-                        <div class="col-xl-2" >
-                          <div class="mb=3">
-                              <label class="form-label"  style="font-weight: bold;">入职时间-开始：</label>
-                              <div class="col-md-6 col-xl-12"  >
-                                  <div class="jeinpbox"><input type="text" class="form-control" name="startTime" id="ymd03" placeholder="YYYY-MM-DD"></div>
-                              </div>
-                              <small class="form-hint">注：默认查询为本年度的数据</small>
-                          </div>
-                     
+                        <div class="col-lg-4  row" >
+                          <!-- <label class="form-label wordbold col-3" >制度名称</label>
+                          <div class="col"  >
+                             <input type="text" class="form-control" name="title"  >
+                          </div> -->
                         </div>
-                        <div class="col-xl-2" >
-                          <div class="mb=3">
-                            <label class="form-label"  style="font-weight: bold;">结束：</label>
-                            <div class="col-md-6 col-xl-12" >
-                                <div class="jeinpbox"><input type="text" class="form-control" name="endTime" id="ymd04" placeholder="YYYY-MM-DD"></div>
-                            </div>
-                          </div>
-                     
-                        </div>
-                   
+                        <div class="col-lg-6  row" > </div>
+                        
+                        
                   
   
-                        <div class="col-lg-3" >
-                          <div class="form-label" style="font-weight: bold;">&nbsp;</div>
-                          <a href="#" onclick="clearForm()" class="btn btn-link ms-auto">清空 </a>
-                        
-                          <a href="#" onclick="searchList()" class="btn btn-primary ms-auto">查询</a>
-                        </div>
-  
+                 
   
                       </div>
 
@@ -343,7 +374,6 @@
 
 
                   </div>
-      
       
       
       
@@ -386,12 +416,10 @@
                         <thead>
                           									
                           <tr>
-                            <th>日程类型</th>
-                            <th>提醒时间</th>
-                            <th>日程标题</th>
-                            <th>日程内容</th>
-                            <th>创建时间</th>
-                            <th>状态</th>
+                            <th>类型</th>
+                            <th>标题</th>
+                            <th>发布者</th>
+                            <th>发布日期</th>
                             <th>操作</th>
                           </tr>
                         </thead>
@@ -428,7 +456,105 @@
 
 
 
+            <div class="modal modal-blur fade" id="addtrip" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">发布制度</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+            
+                
+    
+                    <div class="row">
+                      <div class="col-lg-1"></div>
+                      <div class="col-lg-6 mb-3">
+                        <label class="form-label wordbold">制度标题</label>
+                        <input type="text" class="form-control" name="title" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                  
+                      <div class="mb-3 col-lg-11 ">
+                        <label class="form-label wordbold">类型</label>
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="" checked>
+                          <span class="form-check-label">全部</span>
+                        </label>
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="0">
+                          <span class="form-check-label">行政管理</span>
+                        </label>
+                        
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="1">
+                          <span class="form-check-label">奖金提成</span>
+                        </label>
+                        
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="2">
+                          <span class="form-check-label">招聘制度</span>
+                        </label>
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="3">
+                          <span class="form-check-label">晋升制度</span>
+                        </label>
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="4">
+                          <span class="form-check-label">合伙人制</span>
+                        </label>
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="5">
+                          <span class="form-check-label">绩效考核</span>
+                        </label>
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="6">
+                          <span class="form-check-label">年终奖</span>
+                        </label>
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="7">
+                          <span class="form-check-label">加薪制度</span>
+                        </label>
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="8">
+                          <span class="form-check-label">降薪制度</span>
+                        </label>
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="9">
+                          <span class="form-check-label">财务制度</span>
+                        </label>
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="10">
+                          <span class="form-check-label">其他</span>
+                        </label>
+                      </div>
 
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-10 row">
+                        <label class="form-label wordbold">提醒内容</label>
+                        <textarea id="tinymce-mytextarea"  ></textarea>
+                      </div>
+    
+                    </div>
+    
+                
+                      
+                    
+    
+                  </div>  
+                  <div class="modal-footer">
+                    <a class="btn btn-primary" onclick="addTrip()" >
+                      添加日程    
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
 
@@ -444,7 +570,36 @@
 
 
             
-            
+            <div class="modal modal-blur fade" id="checkdl" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">制度</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+    
+                    <div class="card row-cards">
+                      <div id="checkdlcontent" class="card-body">
+
+                      </div>
+
+
+                    </div>  
+    
+                
+                      
+                    
+    
+                  </div>  
+                  <div class="modal-footer">
+                    <a class="btn btn-primary" onclick="addTrip()" >
+                      添加日程    
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
 
@@ -454,11 +609,31 @@
           </div>
         </div>
         <script src="../../static/js/list.min.js" defer></script>
+        <script src="../../static/js/theme.min.js" defer></script>
+        <script src="../../static/js/tinymce.min.js" defer></script>
 
-        <script defer>
-  
+        <script>
+          // @formatter:off
+          document.addEventListener("DOMContentLoaded", function () {
+            let options = {
+              selector: '#tinymce-mytextarea',
+              height: 300,
+              menubar: false,
+              statusbar: false,
+              plugins: [
+     
+              ],
+              toolbar: 'undo redo | formatselect | ' +
+                'bold italic backcolor | alignleft aligncenter ' +
+                'alignright alignjustify | bullist numlist outdent indent | ' +
+                'removeformat',
+              content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; }'
+            }
+          
+            tinyMCE.init(options);
+          })
+          // @formatter:on
         </script>
-
 
        
         <footer class="footer footer-transparent d-print-none">
