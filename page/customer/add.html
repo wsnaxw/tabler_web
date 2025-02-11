@@ -305,7 +305,7 @@
                         <div class="row row-cards">
                           <div class="col-md-10">
                             <div class="mb-3 row">
-                              <label class="col-3 form-label required" style="font-weight: bold;">客户名称</label>
+                              <label class="col-3 form-label required wordbold" >客户名称</label>
                               <div class="col">
                                 <input type="text" class="form-control " placeholder="客户名称" name="customerName" >
                                 <div class="invalid-feedback">名称不正确或不能为空！</div>
@@ -315,7 +315,7 @@
                           </div>
                           <div class="col-md-10">
                             <div class="mb-3 row">
-                              <label class="col-3 form-label required" style="font-weight: bold;">对外展示名称</label>
+                              <label class="col-3 form-label required wordbold" >对外展示名称</label>
                               <div class="col">
                                 <input type="text" class="form-control" placeholder="对外展示名称" name="outName" >
                                 <div class="invalid-feedback">不能为空！</div>
@@ -327,7 +327,7 @@
                
                           <div class="col-md-10">
                             <div class="mb-3 row">
-                              <label class="form-label col-3 " style="font-weight: bold;">公司简介</label>
+                              <label class="form-label col-3 wordbold">公司简介</label>
                               <div class="col">
                                 <textarea rows="3" class="form-control" placeholder="company description" name="introduce"></textarea>
                               </div>
@@ -335,9 +335,9 @@
                           </div>
                           <div class="col-md-6">
                             <div class="mb-3 row">
-                              <label class="col-3 form-label required"  style="font-weight: bold;">所属行业</label>
+                              <label class="col-3 form-label required wordbold">所属行业</label>
 
-                              <select class="form-select input-group input-group-flat col" id="industryType" name="industryType">
+                              <select class="form-select input-group input-group-flat col" title="所属行业" id="industryType" name="industryType">
                                 <option selected value="不限">不限</option>
                                 <option value="互联网 / 游戏 / 软件">互联网 / 游戏 / 软件</option>
                                 <option value="电子 / 通信 / 硬件">电子 / 通信 / 硬件</option>
@@ -356,8 +356,8 @@
                           </div>
                           <div class="col-sm-6">
                             <div class="mb-3 row">
-                              <label class="form-label required col-3" style="font-weight: bold;">公司性质</label>
-                              <select class="form-select input-group input-group-flat col" id="customerNature" name="customerNature">
+                              <label class="form-label required col-3 wordbold">公司性质</label>
+                              <select class="form-select input-group input-group-flat col" title="公司性质"  id="customerNature" name="customerNature">
                                 
                                 <option value="0">国企</option>
                                 <option value="1" selected>民营企业</option>
@@ -373,8 +373,8 @@
                           </div>
                           <div class="col-md-6">
                             <div class="mb-3 row">
-                              <label class="form-label col-3" style="font-weight: bold;">公司规模</label>
-                              <select class="form-select input-group input-group-flat col" id="customerSize" name="customerSize">
+                              <label class="form-label col-3 wordbold" >公司规模</label>
+                              <select class="form-select input-group input-group-flat col" title="公司规模" id="customerSize" name="customerSize">
                                 <option selected value="0">0-15人</option>
                                 <option value="1">15-50人</option>
                                 <option value="2">50-100人</option>
@@ -388,8 +388,8 @@
                     
                           <div class="col-md-6">
                             <div class="mb-3 row">
-                              <div class="form-label required col-3" style="font-weight: bold">客户来源</div>
-                              <select class="form-select  input-group input-group-flat col" id="sourceType" name="sourceType">
+                              <div class="form-label required col-3 wordbold" >客户来源</div>
+                              <select class="form-select  input-group input-group-flat col" title="客户来源" id="sourceType" name="sourceType">
                                 <option value="1">广告呼入</option>
                                 <option value="2" selected>主动BD</option>
                                 <option value="3">电销开发</option>
@@ -399,7 +399,7 @@
                           </div>
                           <div class="col-md-6">
                             <div class="mb-3 row">
-                              <label class="form-label col-3 " style="font-weight: bold;">公司地址</label>
+                              <label class="form-label col-3 wordbold" >公司地址</label>
                               <div class="col">
                                 <input type="test" class="form-control" name="registeredAddress" placeholder="城市 or 详细地址">
                               </div>
@@ -408,7 +408,7 @@
 
                           <div class="col-md-6">
                             <div class="mb-3 row">
-                              <label class="form-label col-3" style="font-weight: bold">客户状态</label>
+                              <label class="form-label col-3 wordbold" >客户状态</label>
                               <div class="col">
                                 <label class="form-check form-check-inline">
                                   <input class="form-check-input" type="radio" name="state" value="0" checked="">
@@ -445,7 +445,7 @@
                         <div class="card-body">
                           <div class="row row-cards">
                             <div class="mb-3 col-lg-6 row">
-                              <label class="form-label col-3"  style="font-weight: bold;">变更管理员</label>
+                              <label class="form-label col-3 wordbold" >变更管理员</label>
                               <div class="col">
                                 <label class="form-check form-check-inline">
                                   <input class="form-check-input" type="radio" name="isChangeManage" value="1" checked>
@@ -462,25 +462,25 @@
                             <div class="mb-3 col-lg-6 row">
                               
                               <div class="col">
-                                <select type="text" class="form-select" placeholder="输入名称查询选择新管理员" id="teamLeader">
+                                <select type="text" class="form-select" title="管理员" placeholder="输入名称查询选择新管理员" id="teamLeader">
                                 </select>
                               </div>
                             </div>
     
                             <div class="mb-3 row">
                               
-                              <label class="form-label col-3" style="font-weight: bold;">有职位管理</label>
+                              <label class="form-label col-3 wordbold" >有职位管理</label>
                               <div class="col">
-                                <select type="text" class="form-select" placeholder="输入名称查询选择新管理员" id="manageMember" multiple >
+                                <select type="text" class="form-select" title="有职位管理" placeholder="输入名称查询选择新管理员" id="manageMember" multiple >
                                 </select>
                               </div>
                                 <small class="form-hint">可为当前客户创建新职位。</small>
                             </div>
                             <div class="mb-3 row">
                               
-                              <label class="form-label col-3" style="font-weight: bold;">无职位管理</label>
+                              <label class="form-label col-3 wordbold" >无职位管理</label>
                               <div class="col">
-                                <select type="text" class="form-select" placeholder="输入名称查询选择新管理员" id="normalMember" multiple >
+                                <select type="text" class="form-select" title="无职位管理" placeholder="输入名称查询选择新管理员" id="normalMember" multiple >
                                 </select>
                               </div>
                                 <small class="form-hint">无法为当前客户创建新职位。</small>
@@ -517,51 +517,52 @@
                           <div class="row row-cards" id="contacter">
                             <div class="mb-3">
                               <dl class="row">
-                                <dt class="col-2"  style="font-weight: bold;">联系人:</dt>
+                                <dt class="col-2 wordbold" >联系人:</dt>
                                 <dd class="col-8"  id="teamlist">
                               
                               
                                 </dd>  
-                                <small class="form-hint">点击姓名查看联系人详情</small>
+                                
                               </dl>
+                              <small class="form-hint">点击上方姓名查看联系人详情</small>
                  
                             </div>
                           
                             <div class="mb-3 col-lg-4 row">
-                              <label class="form-label col-3 required" style="font-weight: bold;">姓名</label>
+                              <label class="form-label col-3 required wordbold" >姓名</label>
                               <div class="col">
-                                <input type="text" class="form-control"  name="contacterName" autocomplete="off">
+                                <input type="text" class="form-control" title="姓名"  name="contacterName" autocomplete="off">
                                 <div class="invalid-feedback">不能为空</div>
                               </div>
                             </div>
                             <div class="mb-3 col-lg-4 row">
-                              <label class="form-label col-3 " style="font-weight: bold;">职位</label>
+                              <label class="form-label col-3 wordbold" >职位</label>
                               <div class="col">
-                                <input type="text" class="form-control" name="contacterJob">
+                                <input type="text" class="form-control" title="职位" name="contacterJob">
                               </div>
                             </div>
                             <div class="mb-3 col-lg-4 row">
-                              <label class="form-label col-3 " style="font-weight: bold;">座机</label>
+                              <label class="form-label col-3 wordbold" >座机</label>
                               <div class="col">
-                                <input type="text" class="form-control" name="contacterLandline">
+                                <input type="text" class="form-control" title="座机" name="contacterLandline">
                               </div>
                             </div>
                             <div class="mb-3 col-lg-4 row">
-                              <label class="form-label col-3 required" style="font-weight: bold;">手机</label>
+                              <label class="form-label col-3 required wordbold" >手机</label>
                               <div class="col">
-                                <input type="text" class="form-control" name="contacterPhone" autocomplete="off">
+                                <input type="text" class="form-control" title="手机" name="contacterPhone" autocomplete="off">
                                 <div class="invalid-feedback">不能为空</div>
                               </div>
                             </div>
                  
                             <div class="mb-3 col-lg-4 row">
-                              <label class="form-label col-3 " style="font-weight: bold;">邮箱</label>
+                              <label class="form-label col-3 wordbold" >邮箱</label>
                               <div class="col">
-                                <input type="text" class="form-control" name="contacterEmail">
+                                <input type="text" class="form-control" title="邮箱" name="contacterEmail">
                               </div>
                             </div>
                             <div class="mb-3 col-lg-4 row">
-                              <label class="form-label col-3 " style="font-weight: bold;">性别</label>
+                              <label class="form-label col-3 wordbold" >性别</label>
                               <div class="col">
                                 <label class="form-check form-check-inline">
                                   <input class="form-check-input" type="radio" name="contacterGender" value="1" >
@@ -574,9 +575,9 @@
                               </div>
                             </div>
                             <div class="mb-3 col-lg-12 row">
-                              <label class="form-label col-1 " style="font-weight: bold;">备注</label>
+                              <label class="form-label col-1 wordbold" >备注</label>
                               <div class="col col-7 ">
-                                <textarea class="form-control" rows="2" name="contacterRemark" ></textarea>
+                                <textarea class="form-control" rows="2" title="备注" name="contacterRemark" ></textarea>
                               </div>
                             </div>
     
@@ -765,26 +766,26 @@
 
                 <div class="row">
                   <div class="mb-3 col-lg-4 row">
-                    <label class="form-label col-3 required" style="font-weight: bold;">姓名</label>
+                    <label class="form-label col-3 required wordbold" >姓名</label>
                     <div class="col">
                       <input type="text" class="form-control"  name="contacterName" >
                       <div class="invalid-feedback">不能为空</div>
                     </div>
                   </div>
                   <div class="mb-3 col-lg-4 row">
-                    <label class="form-label col-3 " style="font-weight: bold;">职位</label>
+                    <label class="form-label col-3 wordbold" >职位</label>
                     <div class="col">
                       <input type="text" class="form-control" name="contacterJob">
                     </div>
                   </div>
                   <div class="mb-3 col-lg-4 row">
-                    <label class="form-label col-3 " style="font-weight: bold;">座机</label>
+                    <label class="form-label col-3 wordbold"  >座机</label>
                     <div class="col">
                       <input type="text" class="form-control" name="contacterLandline">
                     </div>
                   </div>
                   <div class="mb-3 col-lg-4 row">
-                    <label class="form-label col-3 required" style="font-weight: bold;">手机</label>
+                    <label class="form-label col-3 required wordbold"  >手机</label>
                     <div class="col">
                       <input type="text" class="form-control" name="contacterPhone">
                       <div class="invalid-feedback">不能为空</div>
@@ -792,13 +793,13 @@
                   </div>
        
                   <div class="mb-3 col-lg-4 row">
-                    <label class="form-label col-3 " style="font-weight: bold;">邮箱</label>
+                    <label class="form-label col-3 wordbold"  >邮箱</label>
                     <div class="col">
                       <input type="text" class="form-control" name="contacterEmail">
                     </div>
                   </div>
                   <div class="mb-3 col-lg-4 row">
-                    <label class="form-label col-3 " style="font-weight: bold;">性别</label>
+                    <label class="form-label col-3 wordbold"  >性别</label>
                     <div class="col">
                       <label class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="contacterGender" value="1" >
@@ -811,7 +812,7 @@
                     </div>
                   </div>
                   <div class="mb-3 col-lg-12 row">
-                    <label class="form-label col-1 " style="font-weight: bold;">备注</label>
+                    <label class="form-label col-1 wordbold" >备注</label>
                     <div class="col col-7 ">
                       <textarea class="form-control" rows="2" name="contacterRemark" ></textarea>
                     </div>

@@ -12,7 +12,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>签约排行</title>
+    <title>工资管理</title>
     <!-- CSS files -->
     <script src="../../static/js/tabler.min.js"></script>
     <link rel="stylesheet" href="../../static/css/tabler.min.css">
@@ -23,7 +23,7 @@
     <link type="text/css" rel="stylesheet" href="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/skin/jedate.css">
     <script type="text/javascript" src="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/src/jedate.js"></script>
     <script src="../../static/js/watermark.js"></script>
-    <script src="../../static/js/pg/kpi/sign-rank.js"></script>
+    <script src="../../static/js/pg/emp/triplist.js"></script>
     <script>
       function dark(){
         let body = document.getElementById('webBody')
@@ -251,7 +251,10 @@
 
       <div class="page-wrapper">
 
-
+        <div id="messageContainer" class="message-container">
+          <!-- Messages will be added here dynamically -->
+        </div>
+  
 
         <!-- Page header -->
         <div class="page-header d-print-none">
@@ -283,33 +286,36 @@
                     
      
                        
-                        <div class="col-xl-3" id="dateInput">
-                          <div class="mb=3">
-                              <label class="form-label wordbold"  >开始时间：</label>
-                              <div class="col-md-6 col-xl-12"  >
-                                  <div class="jeinpbox"><input type="text" class="form-control" name="startTime" id="ymd01" placeholder="YYYY-MM-DD"></div>
-                              </div>
+                        <div class="col-lg-2 mb-3 row" >
+                          <label class="form-label wordbold col-4" >发放月份</label>
+                          <div class="col"  >
+                              <div class="jeinpbox"><input type="text" class="form-control" name="createTime" id="ymd01" placeholder="YYYY-MM"></div>
                           </div>
                      
                         </div>
-                        <div class="col-xl-3" id="dateInput">
-                          <div class="mb=3">
-                            <label class="form-label wordbold"  >结束时间：</label>
-                            <div class="col-md-6 col-xl-12" >
-                                <div class="jeinpbox"><input type="text" class="form-control" name="endTime" id="ymd02" placeholder="YYYY-MM-DD"></div>
-                            </div>
+
+                        <div class="col-lg-2 mb-3 row" >
+                          <label class="form-label wordbold col-4" >顾问姓名</label>
+                          <div class="col"  >
+                             <input type="text" title="日程标题" class="form-control" name="appUserName"  >
                           </div>
-                     
                         </div>
-                   
+                       
+                        
+
+                       
+                        
                   
   
-                        <div class="col-lg-3" >
-                          <a href="#" onclick="clearForm()" class="btn btn-link ms-auto">清空 </a>
-                        
-                          <a href="#" onclick="searchList()" class="btn btn-primary ms-auto">查询</a>
+                        <div class="col-lg-4">
+                          <div class="col">
+                           <a onclick="clearForm()" class="btn btn-link ms-auto ">清空 </a>
+                           <a onclick="searchList()" class="btn btn-primary ms-auto ">查询</a>
+                           <a class="btn btn-success ms-auto" onclick="document.getElementById('fileInput').click()">上传工资</a>
+                           <input type="file" id="fileInput" hidden>
+                          </div>
+                    
                         </div>
-  
   
                       </div>
 
@@ -363,11 +369,13 @@
                         <thead>
                           									
                           <tr>
-                            <th>顾问名称</th>
-                            <th>签约数量</th>
-
-                            <th>归属公司</th>
-                            <th>职级</th>
+                            <th>日程类型</th>
+                            <th>提醒时间</th>
+                            <th>日程标题</th>
+                            <th>日程内容</th>
+                            <th>创建时间</th>
+                            <th>状态</th>
+                            <th>操作</th>
                           </tr>
                         </thead>
                         <tbody class="table-tbody" id="data">
@@ -389,15 +397,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
             </div>
 
 
@@ -410,7 +409,81 @@
 
 
 
+            <div class="modal modal-blur fade" id="addtrip" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">添加行程</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+    
+                    <div class="row">
+                      <div class="col-lg-1"></div>
+                      <div class="col-lg-6 mb-3">
+                        <label class="form-label wordbold">日程提醒标题</label>
+                        <input type="text" class="form-control" name="title" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
+                        <label class="form-label wordbold" >提醒日期</label>
+                        <div class="jeinpbox"><input type="text" class="form-control" name="time" id="ymd02" placeholder="YYYY-MM-DD"></div>
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                  
+                      <div class="mb-3 col-lg-11 ">
+                        <label class="form-label wordbold">类型</label>
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="0">
+                          <span class="form-check-label">客户提醒</span>
+                        </label>
+                        
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="1">
+                          <span class="form-check-label">职位提醒</span>
+                        </label>
+                        
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="2">
+                          <span class="form-check-label">简历提醒</span>
+                        </label>
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="3">
+                          <span class="form-check-label">面试提醒</span>
+                        </label>
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="4">
+                          <span class="form-check-label">待办事项</span>
+                        </label>
+                        <label class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="type" value="5">
+                          <span class="form-check-label">其他提醒</span>
+                        </label>
+                      </div>
 
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-10 row">
+                        <label class="form-label wordbold">提醒内容</label>
+                        <textarea class="form-control" rows="5" name="details" ></textarea>
+                      </div>
+    
+                    </div>
+    
+                
+                      
+                    
+    
+                  </div>  
+                  <div class="modal-footer">
+                    <a class="btn btn-primary" onclick="addTrip()" >
+                      添加日程    
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
 
 
 
