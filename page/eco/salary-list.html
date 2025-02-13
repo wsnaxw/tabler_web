@@ -311,7 +311,9 @@
                           <div class="col">
                            <a onclick="clearForm()" class="btn btn-link ms-auto ">清空 </a>
                            <a onclick="searchList()" class="btn btn-primary ms-auto ">查询</a>
-                           <a class="btn btn-success ms-auto" onclick="document.getElementById('fileInput').click()">上传工资</a>
+                           <a  class="btn btn-success ms-auto" data-bs-toggle="modal" data-bs-target="#addtrip">新增</a>
+
+                           <a class="btn btn-info ms-auto" onclick="document.getElementById('fileInput').click()">上传+</a>
                            <input type="file" id="fileInput" hidden>
                           </div>
                     
@@ -417,7 +419,7 @@
 
 
             <div class="modal modal-blur fade" id="addtrip" tabindex="-1" role="dialog" aria-hidden="true">
-              <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+              <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title">添加行程</h5>
@@ -428,19 +430,138 @@
                     <div class="row">
                       <div class="col-lg-1"></div>
                       <div class="col-lg-6 mb-3">
-                        <label class="form-label wordbold">日程提醒标题</label>
-                        <input type="text" class="form-control" name="title" >
+                        <label class="form-label wordbold">员工姓名</label>
+                        <input type="text" class="form-control" name="employeeName" >
                       </div>
                       <div class="col-lg-5"></div>
                       <div class="col-lg-1"></div>
                       <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold" >提醒日期</label>
-                        <div class="jeinpbox"><input type="text" class="form-control" name="time" id="ymd02" placeholder="YYYY-MM-DD"></div>
+                        <label class="form-label wordbold">归属公司</label>
+                        <input type="text" class="form-control" name="company" >
                       </div>
                       <div class="col-lg-5"></div>
                       <div class="col-lg-1"></div>
-                  
-                      <div class="mb-3 col-lg-11 ">
+                      <div class="mb-3 col-lg-6 row">
+                        <label class="form-label wordbold">发放日期</label>
+                        <div class="jeinpbox"><input type="text" class="form-control" name="paymentDate" id="ymd02" placeholder="YYYY-MM-DD"></div>
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
+                        <label class="form-label wordbold">基本工资</label>
+                        <input type="text" class="form-control" name="basicSalary" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
+                        <label class="form-label wordbold">提成金额</label>
+                        <input type="text" class="form-control" name="commission" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
+                        <label class="form-label wordbold">考勤天数</label>
+                        <input type="text" class="form-control" name="attendanceDays" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
+                        <label class="form-label wordbold">法定工作日</label>
+                        <input type="text" class="form-control" name="workingDays" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
+                        <label class="form-label wordbold">绩效工资</label>
+                        <input type="text" class="form-control" name="performanceSalary" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
+                        <label class="form-label wordbold">月度绩效</label>
+                        <input type="text" class="form-control" name="monthlyPerformance" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
+                        <label class="form-label wordbold">交通补助</label>
+                        <input type="text" class="form-control" name="transportAllowance" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
+                        <label class="form-label wordbold">餐补</label>
+                        <input type="text" class="form-control" name="mealAllowance" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
+                        <label class="form-label wordbold">其他补助</label>
+                        <input type="text" class="form-control" name="otherAllowance" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
+                        <label class="form-label wordbold">合计扣款</label>
+                        <input type="text" class="form-control" name="totalDeductions" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
+                        <label class="form-label wordbold">实发工资</label>
+                        <input type="text" class="form-control" name="netSalary" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
+                        <label class="form-label wordbold">病假扣款</label>
+                        <input type="text" class="form-control" name="sickLeaveDeduction" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
+                        <label class="form-label wordbold">事假扣款</label>
+                        <input type="text" class="form-control" name="personalLeaveDeduction" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
+                        <label class="form-label wordbold">迟到早退</label>
+                        <input type="text" class="form-control" name="lateEarlyDeduction" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
+                        <label class="form-label wordbold">其他扣款</label>
+                        <input type="text" class="form-control" name="otherDeductions" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
+                        <label class="form-label wordbold">社保扣除</label>
+                        <input type="text" class="form-control" name="socialSecurityDeduction" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
+                        <label class="form-label wordbold">公司社保</label>
+                        <input type="text" class="form-control" name="companySocialSecurity" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
+                        <label class="form-label wordbold">公积金</label>
+                        <input type="text" class="form-control" name="providentFund" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
+                        <label class="form-label wordbold">公司公积金</label>
+                        <input type="text" class="form-control" name="companyProvidentFund" >
+                      </div>
+                      <div class="col-lg-5"></div>
+                      <div class="col-lg-1"></div>
+                      <div class="mb-3 col-lg-6 row">
                         <label class="form-label wordbold">类型</label>
                         <label class="form-check form-check-inline">
                           <input class="form-check-input" type="radio" name="type" value="0">
@@ -469,13 +590,11 @@
                           <span class="form-check-label">其他提醒</span>
                         </label>
                       </div>
-
                       <div class="col-lg-1"></div>
                       <div class="mb-3 col-lg-10 row">
                         <label class="form-label wordbold">提醒内容</label>
                         <textarea class="form-control" rows="5" name="details" ></textarea>
                       </div>
-    
                     </div>
     
                 
