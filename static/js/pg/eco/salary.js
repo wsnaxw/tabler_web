@@ -119,9 +119,9 @@ function getPage(pageNo){
 
                         <td>
                         
-                        <a class='btn btn-ghost btn-sm' onclick='deltrip(${o.id})'>查看</a>
+                        <a class='btn btn-ghost btn-sm' onclick='checkDetails(${o.id})'>查看</a>
                         
-                        <a class='btn btn-info btn-sm' onclick='deltrip(${o.id})'>修改</a>
+                        <a class='btn btn-info btn-sm' onclick='editSalary(${o.id})'>修改</a>
                         <a class='btn btn-danger btn-sm' onclick='deltrip(${o.id})'>删除</a>
                         
                         </td>
@@ -396,4 +396,40 @@ fetch(url,options)
     });
 
 
+}
+
+function checkDetails(id) {
+  const data = JSON.parse(sessionStorage.getItem(id));
+  if (data) {
+    $('#addtrip input, #addtrip textarea').each(function() {
+      const name = $(this).attr('name');
+      if (name && data[name] !== undefined) {
+        $(this).val(data[name]).prop('disabled', true);
+      }
+      
+    });
+
+    $("#totalDays").prop('disabled', true);
+
+    $("#addtrip").modal('show');
+  }
+}
+
+function editSalary(id) {
+  const data = JSON.parse(sessionStorage.getItem(id));
+  if (data) {
+    $('#addtrip input, #addtrip textarea').each(function() {
+      const name = $(this).attr('name');
+      if (name && data[name] !== undefined) {
+        $(this).val(data[name]).prop('disabled', false);
+      }
+    });
+    if (!$('#addtrip input[name="userId"]').length) {
+      $('#addtrip').append('<input type="hidden" name="userId" value="' + data.userId + '">');
+    } else {
+      $('#addtrip input[name="userId"]').val(data.userId);
+    }
+    $("#totalDays").prop('disabled', false);
+    $("#addtrip").modal('show');
+  }
 }
