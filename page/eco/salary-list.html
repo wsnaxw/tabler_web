@@ -422,179 +422,225 @@
               <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title">添加行程</h5>
+                    <h5 class="modal-title">工资管理</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
     
                     <div class="row">
-                      <div class="col-lg-1"></div>
-                      <div class="col-lg-6 mb-3">
-                        <label class="form-label wordbold">员工姓名</label>
-                        <input type="text" class="form-control" name="employeeName" >
+
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold col-4 required " >员工姓名</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="userName" >
+                        </div>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold">归属公司</label>
-                        <input type="text" class="form-control" name="company" >
+
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold col-4 required " >归属公司</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="comName" >
+                        </div>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold">发放日期</label>
-                        <div class="jeinpbox"><input type="text" class="form-control" name="paymentDate" id="ymd02" placeholder="YYYY-MM-DD"></div>
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold col-4 required " >发放月份</label>
+                        <div class="col"  >
+                          <div class="jeinpbox"><input type="text" class="form-control" name="payDay" id="ymd03" placeholder="YYYY-MM">
+                          </div>
+                        </div>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold">基本工资</label>
-                        <input type="text" class="form-control" name="basicSalary" >
+
+                      <hr>
+
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold col-4 required " >基本工资</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="baseSalary" >
+                        </div>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold">提成金额</label>
-                        <input type="text" class="form-control" name="commission" >
+
+                      
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold required col-4" >提成金额</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="commissionFee" >
+                        </div>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold">考勤天数</label>
-                        <input type="text" class="form-control" name="attendanceDays" >
+                   
+                      
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold required col-4" >考勤天数</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="workDays" >
+                        </div>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold">法定工作日</label>
-                        <input type="text" class="form-control" name="workingDays" >
+                      <div class="col-lg-3 mb-3 row" > </div>
+
+
+
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold required col-4" >法定工作日</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="totalDays" value="21.75" >
+                        </div>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold">绩效工资</label>
-                        <input type="text" class="form-control" name="performanceSalary" >
+
+                      
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold required col-4" >绩效工资</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="kpiFee" >
+                        </div>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold">月度绩效</label>
-                        <input type="text" class="form-control" name="monthlyPerformance" >
+                   
+                      
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold required col-4" >月度绩效</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="kpiFeeMonth" >
+                        </div>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold">交通补助</label>
-                        <input type="text" class="form-control" name="transportAllowance" >
+                      <div class="col-lg-3 mb-3 row" > </div>
+
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold col-4" >交通补助</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="traffic" >
+                        </div>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold">餐补</label>
-                        <input type="text" class="form-control" name="mealAllowance" >
+
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold col-4" >餐补</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="food" >
+                        </div>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold">其他补助</label>
-                        <input type="text" class="form-control" name="otherAllowance" >
+                    
+                    
+
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold col-4" >其他补助</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="other" >
+                        </div>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold">合计扣款</label>
-                        <input type="text" class="form-control" name="totalDeductions" >
+
+                      <div class="col-lg-3 mb-3 row" > </div>
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold col-4" >合计扣款</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="reduceFee" >
+                        </div>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold">实发工资</label>
-                        <input type="text" class="form-control" name="netSalary" >
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold col-4" >实发工资</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="salary" >
+                        </div>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold">病假扣款</label>
-                        <input type="text" class="form-control" name="sickLeaveDeduction" >
+                      <div class="col-lg-3 mb-3 row" >
+                        <a href="#" class="btn btn-success">计算工资</a>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold">事假扣款</label>
-                        <input type="text" class="form-control" name="personalLeaveDeduction" >
+
+
+
+                      <hr>
+
+
+                      
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold col-4" >病假扣款</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="sickFee" >
+                        </div>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold">迟到早退</label>
-                        <input type="text" class="form-control" name="lateEarlyDeduction" >
+                    
+                    
+
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold col-4" >事假扣款</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="thingFee" >
+                        </div>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold">其他扣款</label>
-                        <input type="text" class="form-control" name="otherDeductions" >
+
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold col-4" >迟到早退</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="lateEarlyFee" >
+                        </div>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold">社保扣除</label>
-                        <input type="text" class="form-control" name="socialSecurityDeduction" >
+                      <div class="col-lg-3 mb-3 row" > </div>
+                      
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold col-4" >其他扣款</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="otherDeduction" >
+                        </div>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold">公司社保</label>
-                        <input type="text" class="form-control" name="companySocialSecurity" >
+                 
+
+
+                      <hr>
+
+
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold col-4 required " >社保扣除</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="socialInsurance" >
+                        </div>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold">公积金</label>
-                        <input type="text" class="form-control" name="providentFund" >
+
+                      
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold required col-4" >公司社保</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="companyInsurance" >
+                        </div>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold">公司公积金</label>
-                        <input type="text" class="form-control" name="companyProvidentFund" >
+                   
+                      
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold required col-4" >公积金</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="accumulationFund" >
+                        </div>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold">类型</label>
-                        <label class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="type" value="0">
-                          <span class="form-check-label">客户提醒</span>
-                        </label>
-                        
-                        <label class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="type" value="1">
-                          <span class="form-check-label">职位提醒</span>
-                        </label>
-                        
-                        <label class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="type" value="2">
-                          <span class="form-check-label">简历提醒</span>
-                        </label>
-                        <label class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="type" value="3">
-                          <span class="form-check-label">面试提醒</span>
-                        </label>
-                        <label class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="type" value="4">
-                          <span class="form-check-label">待办事项</span>
-                        </label>
-                        <label class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="type" value="5">
-                          <span class="form-check-label">其他提醒</span>
-                        </label>
+                      <div class="col-lg-3 mb-3 row" > </div>
+
+
+
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold required col-4" >公司公积金</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="companyAccumulation" >
+                        </div>
                       </div>
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-10 row">
-                        <label class="form-label wordbold">提醒内容</label>
-                        <textarea class="form-control" rows="5" name="details" ></textarea>
+
+                      
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold required col-4" >个税</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="tax" >
+                        </div>
                       </div>
+                   
+                      
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold  col-4" >员工成本</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="employCost" >
+                        </div>
+                      </div>
+                      <div class="col-lg-3 mb-3 row" > </div>
+                   
+                      <div class="col-lg-8 mb-3 row" >
+                        <label class="form-label wordbold  col-2" >提醒内容</label>
+                        <div class="col"  >
+                          <textarea class="form-control" name="remark" rows="4"></textarea>
+                        </div>
+                      </div>
+                    
                     </div>
     
                 
@@ -603,7 +649,7 @@
     
                   </div>  
                   <div class="modal-footer">
-                    <a class="btn btn-primary" onclick="addTrip()" >
+                    <a class="btn btn-primary" onclick="addSalary()" >
                       添加日程    
                     </a>
                   </div>
