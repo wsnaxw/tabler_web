@@ -83,7 +83,7 @@ function getPage(pageNo){
         },
         dataType:'json',
         type:'post',
-        url:baseUri+'/eco/selectSalaryList',
+        url:baseUri+'/eco/selectKpiList',
         data:JSON.stringify(data),
         success:function(obj){
 
@@ -99,25 +99,33 @@ function getPage(pageNo){
                 for(var i =0;i<obj.data.list.length;i++){
 
                     var o = obj.data.list[i];
+                    let statestr = '';
+                    if(o.state==0){
+                        statestr = `<span style="color:green">待审核</span>`;
+                    }else if(o.state==1){
+                        statestr = `<span style="color:blue">已通过</span>`;
+                    }else if(o.state==2){
+                        statestr = '已驳回'; 
+                    }else if(o.state==3){
+                        statestr = '已退回'; 
+                    }
+
+
         
-                    sessionStorage.setItem(o.id,JSON.stringify(o));
                     str+=
                     `
                     <tr>
-                        <td >${toStr(o.userName)}</td>
                         <td >${toStr(o.comName)}</td>
-                        <td >${toNumber(o.baseSalary)}</td>
-                        <td >${toNumber(o.kpiFee)}</td>
-                        <td >${toStr(o.workDays)}</td>
+                        <td >${toStr(o.ownerName)}</td>
+                        <td >${toStr(o.customerName)}</td>
+                        <td style="color:red">${toNumber(o.serviceFee)}</td>
+                        <td >${toStr(o.talentName)}</td>
                         <td >${toNumber(o.commissionFee)}</td>
-                        <td style="color:blue">${toNumber(o.reduceFee)}</td>
+                        <td >${toStr(o.rate)}</td>
+                        <td >${statestr}</td>
 
-                        <td >${toNumber(o.traffic)}</td>
-                        <td >${toNumber(o.food)}</td>
-                        <td >${toNumber(o.other)}</td>
-                        <td style="color:red">${toNumber(o.salary)}</td>
+                        <td >${toStr(o.userName)}</td>
                         <td >${toStr(o.createTime)}</td>
-                        <td >${toStr(o.details)}</td>
 
 
 
@@ -125,8 +133,7 @@ function getPage(pageNo){
                         
                         <a class='btn btn-ghost btn-sm' onclick='checkDetails(${o.id})'>查看</a>
                         
-                        <a class='btn btn-info btn-sm' onclick='editSalary(${o.id})'>修改</a>
-                        <a class='btn btn-danger btn-sm' onclick='deltrip(${o.id})'>删除</a>
+                        <a class='btn btn-danger btn-sm' onclick='deltrip(${o.id})'>退回</a>
                         
                         </td>
        
