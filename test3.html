@@ -1,116 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>烟花特效</title>
+    <title>角色权限管理</title>
+    <!-- 引入 Bootstrap CSS -->
+    <script src="./static/js/tabler.min.js"></script>
+    <link rel="stylesheet" href="./static/css/tabler.min.css">
+    <link rel="stylesheet" href="./static/css/base.css">
+    <link rel="icon" href="./static/img/favicon.ico" type="image/x-icon" />
+    <script src="./static/js/jquery.min.js"></script>
+    <script src="./static/js/list.min.js"></script>
     <style>
-        /* styles.css */
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    overflow: hidden;
-    background-color: #000;
-}
+        /* 为展开和缩进图标添加样式 */
+       .expand-icon {
+            cursor: pointer;
+            margin-right: 5px;
+        }
 
-#fireworks-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-/* styles.css */
-.firework {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background-color: #fff;
-    border-radius: 50%;
-    animation: explode 1s ease-out;
-}
-
-@keyframes explode {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(2);
-        opacity: 0;
-    }
-}
-
-.particle {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background-color: #ff0;
-    border-radius: 50%;
-    animation: move 1s linear forwards;
-}
-
-@keyframes move {
-    0% {
-        transform: translate(0, 0);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(var(--vx, 0), var(--vy, 0));
-        opacity: 0;
-    }
-}
+        /* 区分两类权限的标题样式 */
+       .permission-type-title {
+            font-weight: bold;
+            margin-top: 20px;
+        }
     </style>
-
-    
 </head>
+
 <body>
-    <div id="fireworks-container"></div>
+    <div class="container mt-5">
+        <h1 class="text-center">角色权限管理</h1>
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div id="page-permissions" class="list-group"></div>
+                <div id="functional-permissions" class="list-group"></div>
+                <button id="save-permissions" class="btn btn-primary mt-3">保存权限</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入 Bootstrap 和 jQuery JavaScript -->
+    <script>
+        // 假设这是你提供的所有权限数据
+        const allPermissionsData =
+        
+        {}
+        
+        ;
+
+        // 假设当前角色的权限数据，这里可以根据实际情况修改
+        const currentRolePermissions = [726];
+
+        // 构建树形结构
+        function buildTree(data) {
+            const tree = [];
+            const rootUrls = [];
+
+            // 找出所有可能的根 URL
+            data.forEach(item => {
+                const parts = item.url.split('/');
+                if (parts.length > 1 &&!rootUrls.includes('/' + parts[1])) {
+                    rootUrls.push('/' + parts[1]);
+                }
+            });
+
+            // 为每个根 URL 创建根节点
+            rootUrls.forEach(rootUrl => {
+                const root = {
+                    id: rootUrl,
+                    name: rootUrl.slice(1),
+                    url: rootUrl,
+                    children: []
+                };
+                data.forEach(item => {
+                    if (item.url.startsWith(rootUrl) && item.url!== rootUrl) {
+                        root.children.push(item);
+                    }
+                });
+                if (root.children.length > 0) {
+                    tree.push(root);
+                }
+            });
+
+            return tree;
+        }
+
+        // 渲染树形结构到页面
+        function renderTree(tree, container) {
+            tree.forEach(item => {
+                const listItem = $('<a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">');
+                const checkbox = $('<input type="checkbox" class="form-check-input">');
+                if (currentRolePermissions.includes(item.id)) {
+                    checkbox.prop('checked', true);
+                }
+                checkbox.data('permission-id', item.id);
+
+                let expandIcon = '';
+                if (item.children && item.children.length > 0) {
+                    expandIcon = '<i class="expand-icon bi bi-plus-square"></i>';
+                }
+
+                listItem.append(expandIcon, checkbox, item.name);
+                container.append(listItem);
+
+                if (item.children && item.children.length > 0) {
+                    const subList = $('<div class="list-group ms-3" style="display: none;">');
+                    renderTree(item.children, subList);
+                    listItem.after(subList);
+
+                    // 为展开图标添加点击事件
+                    listItem.find('.expand-icon').click(function () {
+                        const icon = $(this);
+                        const subTree = listItem.next('.list-group');
+                        if (subTree.is(':visible')) {
+                            subTree.hide();
+                            icon.removeClass('bi-dash-square').addClass('bi-plus-square');
+                        } else {
+                            subTree.show();
+                            icon.removeClass('bi-plus-square').addClass('bi-dash-square');
+                        }
+                    });
+                }
+            });
+        }
+
+        // 保存权限
+        function savePermissions() {
+            const selectedPermissions = [];
+            $('#page-permissions input:checked, #functional-permissions input:checked').each(function () {
+                const permissionId = $(this).data('permission-id');
+                selectedPermissions.push(permissionId);
+            });
+            console.log('保存的权限 ID:', selectedPermissions);
+            // 这里可以添加实际的保存逻辑，如发送 AJAX 请求到服务器
+        }
+
+        // 初始化页面
+        $(document).ready(function () {
+            const allPermissions = allPermissionsData.data.list;
+            const pagePermissions = allPermissions.filter(item => item.url.startsWith('route'));
+            const functionalPermissions = allPermissions.filter(item =>!item.url.startsWith('route'));
+
+            const pageTree = buildTree(pagePermissions);
+            const functionalTree = buildTree(functionalPermissions);
+
+            const pageContainer = $('#page-permissions');
+            const functionalContainer = $('#functional-permissions');
+
+            // 添加标题区分两类权限
+            pageContainer.before('<h4 class="permission-type-title">页面显示权限</h4>');
+            functionalContainer.before('<h4 class="permission-type-title">功能性权限</h4>');
+
+            renderTree(pageTree, pageContainer);
+            renderTree(functionalTree, functionalContainer);
+
+            $('#save-permissions').click(savePermissions);
+        });
+    </script>
 </body>
-<script>
-    // script.js
-const container = document.getElementById('fireworks-container');
 
-function createFirework(x, y) {
-const firework = document.createElement('div');
-firework.className = 'firework';
-firework.style.left = `${x}px`;
-firework.style.top = `${y}px`;
-container.appendChild(firework);
-
-// 创建烟花粒子
-for (let i = 0; i < 50; i++) {
-    const particle = document.createElement('div');
-    particle.className = 'particle';
-    particle.style.left = `${x}px`;
-    particle.style.top = `${y}px`;
-    const angle = Math.random() * 2 * Math.PI;
-    const speed = Math.random() * 5 + 2;
-    particle.style.setProperty('--vx', Math.cos(angle) * speed);
-    particle.style.setProperty('--vy', Math.sin(angle) * speed);
-    container.appendChild(particle);
-
-    // 移除粒子
-    setTimeout(() => {
-        particle.remove();
-    }, 1000);
-}
-
-// 移除烟花
-setTimeout(() => {
-    firework.remove();
-}, 1000);
-}
-
-document.addEventListener('click', (e) => {
-createFirework(e.clientX, e.clientY);
-});
-
-// 自动生成烟花
-setInterval(() => {
-const x = Math.random() * window.innerWidth;
-const y = Math.random() * window.innerHeight;
-createFirework(x, y);
-}, 1000);
-</script>
 </html>

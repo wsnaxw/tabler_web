@@ -12,7 +12,7 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>回款列表</title>
+    <title>发票管理</title>
     <!-- CSS files -->
     <script src="../../static/js/tabler.min.js"></script>
     <link rel="stylesheet" href="../../static/css/tabler.min.css">
@@ -23,7 +23,7 @@
     <link type="text/css" rel="stylesheet" href="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/skin/jedate.css">
     <script type="text/javascript" src="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/src/jedate.js"></script>
     <script src="../../static/js/watermark.js"></script>
-    <script src="../../static/js/pg/eco/bflist.js"></script>
+    <script src="../../static/js/pg/eco/invioce.js"></script>
     <script>
       function dark(){
         let body = document.getElementById('webBody')
@@ -381,16 +381,19 @@
                     <div class="table-responsive" id="table-default">
                       <table class="table card-table table-vcenter text-nowrap datatable">
                         <thead>
-                          											
                           <tr>
-                            <th>回款编号</th>
-                            <th>服务顾问</th>
+                            
+                            <th>发票编号</th>
+                            <th>申请人</th>
                             <th>归属公司</th>
                             <th>客户名称</th>
-                            <th>回款金额</th>
-                            <th>添加人</th>
-                            <th>关联发票</th>
-                            <th>回款时间</th>
+                            <th>发票类型</th>
+                            <th>发票金额</th>
+                            <th>发票状态</th>
+                            <th>开票人</th>
+                            <th>是否回款</th>
+                            <th>开票时间</th>
+                            <th>到账时间</th>
                             <th>备注</th>
                             <th>操作</th>
                           </tr>
