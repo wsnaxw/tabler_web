@@ -1,162 +1,990 @@
-<!DOCTYPE html>
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta19
+* @link https://tabler.io
+* Copyright 2018-2023 The Tabler Authors
+* Copyright 2018-2023 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>角色权限管理</title>
-    <!-- 引入 Bootstrap CSS -->
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <title>费思福咨询</title>
+    <!-- CSS files -->
     <script src="./static/js/tabler.min.js"></script>
     <link rel="stylesheet" href="./static/css/tabler.min.css">
     <link rel="stylesheet" href="./static/css/base.css">
     <link rel="icon" href="./static/img/favicon.ico" type="image/x-icon" />
     <script src="./static/js/jquery.min.js"></script>
-    <script src="./static/js/list.min.js"></script>
-    <style>
-        /* 为展开和缩进图标添加样式 */
-       .expand-icon {
-            cursor: pointer;
-            margin-right: 5px;
-        }
-
-        /* 区分两类权限的标题样式 */
-       .permission-type-title {
-            font-weight: bold;
-            margin-top: 20px;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container mt-5">
-        <h1 class="text-center">角色权限管理</h1>
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <div id="page-permissions" class="list-group"></div>
-                <div id="functional-permissions" class="list-group"></div>
-                <button id="save-permissions" class="btn btn-primary mt-3">保存权限</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- 引入 Bootstrap 和 jQuery JavaScript -->
+    <script src="./static/js/base.js?1"></script>
+    <script src="./static/js/watermark.js"></script>
+    <script src="./static/js/marked.min.js"></script>
+    
     <script>
-        // 假设这是你提供的所有权限数据
-        const allPermissionsData =
+      function dark(){
+        let body = document.getElementById('webBody')
+        body.setAttribute("data-bs-theme","dark")
+      }
+
+      function light(){
+        let body = document.getElementById('webBody')
+        body.setAttribute("data-bs-theme","")
+      }
+
+          
+
+
+    
+
+      function searchList(){
+
+        const scrollableDiv = document.getElementById('scrollable-div');
         
-        {}
-        
-        ;
+        const message =  document.getElementById('chatInput').value.trim();
+      if (message) {
+        const chatBubbles = document.querySelector('.chat-bubbles');
+        const chatItem = document.createElement('div');
+        chatItem.className = 'chat-item';
+        chatItem.innerHTML = `
+          <div class="row align-items-end justify-content-end">
+            <div class="col col-lg-6">
+              <div class="chat-bubble chat-bubble-me">
+                <div class="chat-bubble-title">
+                  <div class="row">
+                    <div class="col chat-bubble-author">用户9527</div>
+                    <div class="col-auto chat-bubble-date">${new Date().toLocaleTimeString()}</div>
+                  </div>
+                </div>
+                <div class="chat-bubble-body">
+                  <p>${message}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-auto">
+              <span class="avatar" style="background-image: url(http://admin.fsfhr.com/banner.svg")"></span>
+            </div>
+          </div>
+        `;
+        chatBubbles.appendChild(chatItem);
+        document.getElementById('chatInput').value = ''; // 清空输入框
+      }
 
-        // 假设当前角色的权限数据，这里可以根据实际情况修改
-        const currentRolePermissions = [726];
 
-        // 构建树形结构
-        function buildTree(data) {
-            const tree = [];
-            const rootUrls = [];
-
-            // 找出所有可能的根 URL
-            data.forEach(item => {
-                const parts = item.url.split('/');
-                if (parts.length > 1 &&!rootUrls.includes('/' + parts[1])) {
-                    rootUrls.push('/' + parts[1]);
-                }
+      scrollableDiv.scrollTo({
+                top: scrollableDiv.scrollHeight,
+                behavior: 'smooth'
             });
 
-            // 为每个根 URL 创建根节点
-            rootUrls.forEach(rootUrl => {
-                const root = {
-                    id: rootUrl,
-                    name: rootUrl.slice(1),
-                    url: rootUrl,
-                    children: []
+      // 滚动到 chat 容器的最下方
+      const chatContainer = document.querySelector('.chat');
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+
+
+      callDeepSeekAPI(message);
+      }
+
+
+      const apiKey ='sk-ab61d67a19de4771953c90d42b20eb39';
+const apiUrl = 'https://api.deepseek.com/v1/chat/completions';
+async function callDeepSeekAPI(message) {
+
+  const scrollableDiv = document.getElementById('scrollable-div');
+    try {
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`
+            },
+            body: JSON.stringify({
+                model: 'deepseek-chat',
+                messages: [
+                    { role: 'user', content: `${message}` }
+                ],
+                stream: false
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        let content =  result.choices[0].message.content;
+
+        const chatBubbles = document.querySelector('.chat-bubbles');
+        const chatItem = document.createElement('div');
+        chatItem.className = 'chat-item';
+        chatItem.innerHTML = `
+
+        <div class="chat-item">
+                          <div class="row align-items-end">
+                            <div class="col-auto"><span class="avatar" style="background-image: url()"></span>
+                            </div>
+                            <div class="col col-lg-6">
+                              <div class="chat-bubble">
+                                <div class="chat-bubble-title">
+                                  <div class="row">
+                                    <div class="col chat-bubble-author">deepseek AI 助手</div>
+                                    <div class="col-auto chat-bubble-date">${new Date().toLocaleTimeString()}</div>
+                                  </div>
+                                </div>
+                                <div class="chat-bubble-body">
+                                   ${marked.parse(content)}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+        `;
+        chatBubbles.appendChild(chatItem);
+
+
+        
+
+        scrollableDiv.scrollTo({
+                top: scrollableDiv.scrollHeight,
+                behavior: 'smooth'
+            });
+        return result;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+    </script>
+
+    <style>
+      
+
+      .modal-xll {
+        max-width: 80%; /* 调整模态框的最大宽度为屏幕的90% */
+        max-height: 80%; /* 调整模态框的最大高度为屏幕的90% */
+        margin: 5% auto; /* 垂直和水平居中，外边距各占5% */
+      }
+    </style>
+
+  </head>
+  <body  id="webBody" class="layout-fluid">
+    <div class="page">
+
+
+      <!--      &lt;!&ndash; Sidebar &ndash;&gt;-->
+      
+      
+      <aside class="navbar navbar-vertical navbar-expand-lg"    >
+        <div class="container-fluid">
+   
+          <h1 class="navbar-brand navbar-brand-autodark">
+            <a href="#" >
+              <img src="http://admin.fsfhr.com/banner.svg" width="110" height="32" alt="faithful" class="navbar-brand-image">
+            </a>
+          </h1>
+
+          <div class="collapse navbar-collapse"   id="sidebar-menu">
+            <ul class="navbar-nav pt-lg-3" id="menu">
+
+              </li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- navbar navbar-expand-md d-print-none d-none d-lg-flex -->
+      <!-- navbar navbar-expand-md d-print-none -->
+      <header class="navbar navbar-expand-md d-print-none d-none d-lg-flex fixed-top">
+        <div class="container-xl">
+
+
+
+          <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal p-0 pe-md-6">
+          </h1>
+
+
+
+          <div class="navbar-nav flex-row order-md-last">
+
+
+
+            <div class="nav-item d-none d-md-flex me-3">
+              <div class="btn-list">
+                <div class="input-icon">
+                    <span class="input-icon-addon">
+                      <!-- Download SVG icon from http://tabler-icons.io/i/search -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path d="M21 21l-6 -6"></path></svg>
+                    </span>
+                  <input type="text" autocomplete="off" class="form-control" id="indexsearch" placeholder="客户名/人选名/项目名" >
+                </div>
+                <a onclick="indexSearch()" class="btn btn-blue" target="_blank" rel="noreferrer">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/brand-github -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"></path></svg>
+                  查询
+                </a>
+              </div>
+            </div>
+
+
+
+            <div class="d-none d-md-flex">
+              <a   onclick="dark()" class="nav-link px-0 hide-theme-dark" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="Enable dark mode" data-bs-original-title="Enable dark mode">
+                <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path></svg>
+              </a>
+              <a onclick="light()" class="nav-link px-0 hide-theme-light" data-bs-toggle="tooltip" data-bs-placement="bottom" aria-label="Enable light mode" data-bs-original-title="Enable light mode">
+                <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"></path></svg>
+              </a>
+
+
+
+              <div class="nav-item dropdown d-none d-md-flex me-3">
+
+
+
+                <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1" aria-label="Show notifications" onclick="usermessage()" data-bs-auto-close="outside">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/bell -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path><path d="M9 17v1a3 3 0 0 0 6 0v-1"></path></svg>
+                  <!-- <span class="badge bg-red"></span> -->
+                </a>
+
+
+
+                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-toggle dropdown-menu-card">
+                  
+                  
+                  
+                  <div class="card">
+                    <div class="card-header">
+                      <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                          <a href="#" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab" onclick="usermessage()">信箱</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <a href="#" class="nav-link" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab" onclick="usertrip()">行程</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="list-group list-group-flush list-group-hoverable">
+                      <div id="messagediv">
+                        <div class="list-group-item divide-y"  id="msgstr"  >
+                          <h3> </h3>
+                        </div>
+                      </div>                      
+                      <div id="tripdiv">
+                        <div class="list-group-item divide-y" id="tripstr">
+                          <h3> </h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                </div>
+
+
+
+              </div>
+            </div>
+
+
+
+
+            <div class="nav-item dropdown">
+              <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
+                <div class="d-none d-xl-block ps-2">
+                  <div id="userName">12321</div>
+                  <div class="mt-1 small text-muted" id="userLevel">123</div>
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <a href="#" class="dropdown-item">个人中心</a>
+                <a href="./page/employ/password-manager.html" class="dropdown-item">修改密码</a>
+                <div class="dropdown-divider"></div>
+                <a id="logOut" class="dropdown-item">退出</a>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+      </header>
+
+
+
+      <div class="page-wrapper">
+
+
+
+        <!-- Page header -->
+        <div class="page-header d-print-none">
+          
+        </div>
+
+
+
+        
+
+      
+
+
+        <!-- Page body -->
+        <div class="page-body container-xl">
+
+
+
+
+
+          <div class="container-xl" >
+
+
+            <div class="row row-deck row-cards">
+
+              <div class="card">
+                <div class="card-body row">
+                    <div class="col-4 row ">
+                        <a href="#" class="btn btn-danger ms-auto" data-bs-toggle="modal" data-bs-target="#addtrip">模态框</a>
+                        <a href="#" onclick="getSelectedMenuIds()"class="btn btn-info">获取值</a>
+                    </div>
+
+                </div>
+
+
+              </div>
+
+
+
+
+
+              
+             
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+
+            <div class="modal modal-blur fade" id="addtrip" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">权限</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body scrollHeight">
+      
+                      <div class="col-lg-12 row">
+                        
+
+                        <table class="table card-table table-vcenter text-nowrap datatable">
+                            <thead>
+                                <h2>菜单显示</h2>
+                            </thead>
+                            <tbody class="table-tbody mb-3" id="data">
+                                <!-- <tr>
+                                    <td >
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox">
+                                            <span class="form-check-label wordbold">Option 1</span>
+                                        </label>
+                                    </td>
+                                    <td >
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox">
+                                            <span class="form-check-label">Option 1</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox">
+                                            <span class="form-check-label">Option 1</span>
+                                        </label>
+                                        <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox">
+                                            <span class="form-check-label">Option 1</span>
+                                        </label>
+                                    </td>
+                                
+                                
+                                
+                                
+                                </tr> -->
+                        
+                            </tbody>
+                            
+                        </table>
+
+                        <table class="table card-table table-vcenter text-nowrap datatable">
+                            <thead>
+                                <h2>功能权限</h2>
+                            </thead>
+                            <tbody class="table-tbody" id="data1">
+                               
+                        
+                            </tbody>
+                            
+                        </table>
+      
+                  
+                        
+                      
+                      </div>
+                    </div>  
+                    <div class="modal-footer">
+                      <a class="btn btn-primary" onclick="addTrip()" >
+                        添加日程    
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+  
+  
+              
+
+
+              
+
+
+
+
+              
+
+
+
+              
+
+
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+            
+
+
+
+            
+
+            
+          </div>
+        </div>
+        <div class="page-loader"></div>
+        <script>
+          window.onload = function () {
+              $('.page-loader').hide();
+          };
+        </script>
+
+
+
+        <script>
+          $(document).ready(function(){
+
+            getABC()
+
+
+
+
+            
+          })
+
+          function getABC(){
+        $.ajax({
+            headers:{
+                'token':localStorage.getItem("token"),
+                Accept:'application/json',
+                'Content-Type':'application/json;charset=UTF-8'
+            },
+            dataType:'json',
+            type:'post',
+            url:baseUri+'/admin/permissionList',
+            data:JSON.stringify({'pageNo':1,'pageSize':10000}),
+            success:function(obj){
+
+                sessionStorage.setItem("permissionList",JSON.stringify(obj.data.list));
+
+                const items = obj.data.list;
+
+                const newList = categorizeMenus(items);
+
+                renderMenusToTable(newList,'data');
+
+
+
+                
+
+                
+                const newList1 = categorizeMenus1(items);
+                renderMenusToTable(newList1,'data1');
+
+
+
+            }
+        });
+
+
+        getABC2();
+
+          }
+
+
+          function getABC2(){
+        $.ajax({
+            headers:{
+                'token':localStorage.getItem("token"),
+                Accept:'application/json',
+                'Content-Type':'application/json;charset=UTF-8'
+            },
+            dataType:'json',
+            type:'post',
+            url:baseUri+'/admin/roleList',
+            data:JSON.stringify({'pageNo':1,'pageSize':10000}),
+            success:function(obj){
+
+                sessionStorage.setItem("permissionList",JSON.stringify(obj.data.list));
+
+                const items = obj.data.list[0].permissionList;
+
+
+                checkMatchingCheckboxes(items);
+
+
+            }
+        });
+
+
+
+
+          }
+
+
+
+
+
+
+
+
+
+
+
+          function categorizeMenus(data) {
+    const menuList = [];
+    const menuMap = {};
+
+    // 先处理一级菜单
+    data.forEach(item => {
+        const parts = item.url.split('/');
+        if (item.url.startsWith('route') && parts.length == 2) {
+            const menu = {
+                id:item.id,
+                name: item.name,
+                url: item.url,
+                childMenus: []
+            };
+            menuList.push(menu);
+            menuMap[item.url] = menu;
+        }
+    });
+
+
+    // 处理子菜单
+    data.forEach(item => {
+        
+        const parts = item.url.split('/');
+        if (item.url.startsWith('route') && parts.length > 2) {
+            const parentUrl = item.url.split('/').slice(0, 2).join('/');
+            if (menuMap[parentUrl]) {
+                const childMenu = {
+                    id:item.id,
+                    name: item.name,
+                    url: item.url
                 };
-                data.forEach(item => {
-                    if (item.url.startsWith(rootUrl) && item.url!== rootUrl) {
-                        root.children.push(item);
+                menuMap[parentUrl].childMenus.push(childMenu);
+            }
+        }
+    });
+
+    return menuList;
+}
+
+
+
+function categorizeMenus1(data) {
+    const menuList = [];
+    const menuMap = {};
+
+    // 先处理一级菜单
+    data.forEach(item => {
+        const parts = item.url.split('/');
+        if (item.url.startsWith('/') && parts.length == 2) {
+            const menu = {
+                id:item.id,
+                name: item.name,
+                url: item.url,
+                childMenus: []
+            };
+            menuList.push(menu);
+            menuMap[item.url] = menu;
+        }
+    });
+
+
+    // 处理子菜单
+    data.forEach(item => {
+        
+        const parts = item.url.split('/');
+        if (item.url.startsWith('/') && parts.length > 2) {
+            const parentUrl = item.url.split('/').slice(0, 2).join('/');
+            if (menuMap[parentUrl]) {
+                const childMenu = {
+                    id:item.id,
+                    name: item.name,
+                    url: item.url
+                };
+                menuMap[parentUrl].childMenus.push(childMenu);
+            }
+        }
+    });
+
+    return menuList;
+}
+
+
+
+
+// function renderMenusToTable(menus,id) {
+//             const tbody = document.getElementById(id);
+//             menus.forEach(menu => {
+//                 const tr = document.createElement('tr');
+
+//                 // 渲染父级菜单
+//                 const parentTd = document.createElement('td');
+//                 const parentLabel = document.createElement('label');
+//                 parentLabel.className = 'form-check form-check-inline';
+//                 const parentCheckbox = document.createElement('input');
+//                 parentCheckbox.className = 'form-check-input';
+//                 parentCheckbox.type = 'checkbox';
+//                 parentCheckbox.value = menu.id;
+//                 const parentSpan = document.createElement('span');
+//                 parentSpan.className = 'form-check-label wordbold';
+//                 parentSpan.textContent = menu.name;
+//                 parentCheckbox.value = menu.id;
+//                 parentLabel.appendChild(parentCheckbox);
+//                 parentLabel.appendChild(parentSpan);
+//                 parentTd.appendChild(parentLabel);
+//                 tr.appendChild(parentTd);
+
+//                 // 渲染子菜单
+//                 const childTd = document.createElement('td');
+//                 let counter = 0;
+//                 menu.childMenus.forEach((childMenu,index)  => {
+//                     const childLabel = document.createElement('label');
+//                     childLabel.className = 'form-check form-check-inline';
+//                     const childCheckbox = document.createElement('input');
+//                     childCheckbox.className = 'form-check-input';
+//                     childCheckbox.type = 'checkbox';
+//                     childCheckbox.value = childMenu.id;
+//                     const childSpan = document.createElement('span');
+//                     childSpan.className = 'form-check-label';
+//                     childSpan.textContent = childMenu.name;
+//                     childLabel.appendChild(childCheckbox);
+//                     childLabel.appendChild(childSpan);
+//                     childTd.appendChild(childLabel);
+
+//                     counter++;
+//                     if (counter % 6 === 0 && index < menu.childMenus.length - 1) {
+//                         const br = document.createElement('br');
+//                         childTd.appendChild(br);
+//                     }
+
+
+//                 });
+//                 tr.appendChild(childTd);
+
+//                 tbody.appendChild(tr);
+//             });
+//         }
+
+
+
+function renderMenusToTable(menus,id) {
+            const tbody = document.getElementById(id);
+            menus.forEach(menu => {
+                const tr = document.createElement('tr');
+
+                // 渲染父级菜单
+                const parentTd = document.createElement('td');
+                const parentLabel = document.createElement('label');
+                parentLabel.className = 'form-check form-check-inline';
+                const parentCheckbox = document.createElement('input');
+                parentCheckbox.className = 'form-check-input';
+                parentCheckbox.type = 'checkbox';
+                parentCheckbox.value = menu.id;
+                const parentSpan = document.createElement('span');
+                parentSpan.className = 'form-check-label wordbold';
+                parentSpan.textContent = menu.name;
+                parentLabel.appendChild(parentCheckbox);
+                parentLabel.appendChild(parentSpan);
+                parentTd.appendChild(parentLabel);
+                tr.appendChild(parentTd);
+
+                // 渲染子菜单
+                const childTd = document.createElement('td');
+                let counter = 0;
+                const childCheckboxes = [];
+                menu.childMenus.forEach((childMenu, index) => {
+                    const childLabel = document.createElement('label');
+                    childLabel.className = 'form-check form-check-inline';
+                    const childCheckbox = document.createElement('input');
+                    childCheckbox.className = 'form-check-input';
+                    childCheckbox.type = 'checkbox';
+                    childCheckbox.value = childMenu.id;
+                    const childSpan = document.createElement('span');
+                    childSpan.className = 'form-check-label';
+                    childSpan.textContent = childMenu.name;
+                    childLabel.appendChild(childCheckbox);
+                    childLabel.appendChild(childSpan);
+                    childTd.appendChild(childLabel);
+                    childCheckboxes.push(childCheckbox);
+
+                    counter++;
+                    if (counter % 5 === 0 && index < menu.childMenus.length - 1) {
+                        const br = document.createElement('br');
+                        childTd.appendChild(br);
                     }
                 });
-                if (root.children.length > 0) {
-                    tree.push(root);
-                }
-            });
+                tr.appendChild(childTd);
 
-            return tree;
-        }
+                tbody.appendChild(tr);
 
-        // 渲染树形结构到页面
-        function renderTree(tree, container) {
-            tree.forEach(item => {
-                const listItem = $('<a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">');
-                const checkbox = $('<input type="checkbox" class="form-check-input">');
-                if (currentRolePermissions.includes(item.id)) {
-                    checkbox.prop('checked', true);
-                }
-                checkbox.data('permission-id', item.id);
-
-                let expandIcon = '';
-                if (item.children && item.children.length > 0) {
-                    expandIcon = '<i class="expand-icon bi bi-plus-square"></i>';
-                }
-
-                listItem.append(expandIcon, checkbox, item.name);
-                container.append(listItem);
-
-                if (item.children && item.children.length > 0) {
-                    const subList = $('<div class="list-group ms-3" style="display: none;">');
-                    renderTree(item.children, subList);
-                    listItem.after(subList);
-
-                    // 为展开图标添加点击事件
-                    listItem.find('.expand-icon').click(function () {
-                        const icon = $(this);
-                        const subTree = listItem.next('.list-group');
-                        if (subTree.is(':visible')) {
-                            subTree.hide();
-                            icon.removeClass('bi-dash-square').addClass('bi-plus-square');
-                        } else {
-                            subTree.show();
-                            icon.removeClass('bi-plus-square').addClass('bi-dash-square');
-                        }
+                // 父级 checkbox 事件处理
+                parentCheckbox.addEventListener('change', function () {
+                    const isChecked = this.checked;
+                    childCheckboxes.forEach(checkbox => {
+                        checkbox.checked = isChecked;
                     });
+                });
+
+                // 子级 checkbox 事件处理
+                childCheckboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', function () {
+                        const allChecked = childCheckboxes.every(cb => cb.checked);
+                        parentCheckbox.checked = allChecked;
+                    });
+                });
+            });
+        }
+
+function getSelectedMenuIds() {
+            const allCheckboxes = document.querySelectorAll('#data input[type="checkbox"]');
+            const menuIds = [];
+            const parentCheckboxes = document.querySelectorAll('#data tr td:first-child input[type="checkbox"]');
+
+            parentCheckboxes.forEach(parentCheckbox => {
+                const parentId = parentCheckbox.value;
+                const childCheckboxes = Array.from(parentCheckbox.closest('tr').querySelectorAll('td:last-child input[type="checkbox"]'));
+                const isAnyChildChecked = childCheckboxes.some(checkbox => checkbox.checked);
+                const isParentChecked = parentCheckbox.checked;
+
+                if (isParentChecked || isAnyChildChecked) {
+                    menuIds.push(Number(parentId));
                 }
             });
-        }
 
-        // 保存权限
-        function savePermissions() {
-            const selectedPermissions = [];
-            $('#page-permissions input:checked, #functional-permissions input:checked').each(function () {
-                const permissionId = $(this).data('permission-id');
-                selectedPermissions.push(permissionId);
+            allCheckboxes.forEach(checkbox => {
+                if (checkbox.checked &&!menuIds.includes(Number(checkbox.value))) {
+                    menuIds.push(Number(checkbox.value));
+                }
             });
-            console.log('保存的权限 ID:', selectedPermissions);
-            // 这里可以添加实际的保存逻辑，如发送 AJAX 请求到服务器
+
+            console.log('选中的菜单 ID 数组:', menuIds);
+            return menuIds;
         }
 
-        // 初始化页面
-        $(document).ready(function () {
-            const allPermissions = allPermissionsData.data.list;
-            const pagePermissions = allPermissions.filter(item => item.url.startsWith('route'));
-            const functionalPermissions = allPermissions.filter(item =>!item.url.startsWith('route'));
 
-            const pageTree = buildTree(pagePermissions);
-            const functionalTree = buildTree(functionalPermissions);
 
-            const pageContainer = $('#page-permissions');
-            const functionalContainer = $('#functional-permissions');
 
-            // 添加标题区分两类权限
-            pageContainer.before('<h4 class="permission-type-title">页面显示权限</h4>');
-            functionalContainer.before('<h4 class="permission-type-title">功能性权限</h4>');
 
-            renderTree(pageTree, pageContainer);
-            renderTree(functionalTree, functionalContainer);
 
-            $('#save-permissions').click(savePermissions);
-        });
-    </script>
-</body>
+        function checkMatchingCheckboxes(newData) {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            newData.forEach(item => {
+                const targetId = item.id.toString();
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.value === targetId) {
+                        checkbox.checked = true;
+                        // 触发子菜单的联动更新
+                        const parentCheckbox = checkbox.closest('tr').querySelector('.form-check-input:first-child');
+                        const childCheckboxes = Array.from(checkbox.closest('td').querySelectorAll('.form-check-input'));
+                        const allChecked = childCheckboxes.every(cb => cb.checked);
+                        parentCheckbox.checked = allChecked;
+                    }
+                });
+            });
+        }
 
+
+
+
+
+
+
+
+
+
+
+        </script>
+
+
+
+
+        <footer class="footer footer-transparent d-print-none">
+          <div class="container-xl">
+            <div class="row text-center align-items-center flex-row-reverse">
+              <div class="col-12">
+              <!-- <div class="col-12 col-lg-auto mt-3 mt-lg-0 text-center "> -->
+                <ul class="list-inline list-inline-dots mb-0">
+                  <li class="list-inline-item">
+                    Copyright &copy; 2021  
+
+                    <a href="." class="link-secondary"> 费思福(成都)人力资源咨询有限公司 </a>
+                  
+                  </li>
+                  <li class="list-inline-item">
+                    蜀ICP备2021005893号-2
+             
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    
+  </body>
 </html>
