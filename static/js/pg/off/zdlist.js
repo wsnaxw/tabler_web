@@ -11,10 +11,7 @@ document.querySelectorAll('#myForm input[type="radio"]').forEach(radio => {
   //默认进行分页数据查询
   getPage(1);
 
-
 })
-
-
 
 
 
@@ -306,8 +303,14 @@ function changemsg(id){
 
 
 
-function addMsg(){
+function addTrip(){
 
+
+  
+  // tinyMCE.get('tinymce-mytextarea').setContent(``)
+    
+    
+    
 
   let inputValue = {};
 
@@ -331,10 +334,7 @@ function addMsg(){
     }
 
   });
-  inputValue.receiverId =  receiver.getValue();
-  inputValue.receiverName = receiver.options[receiver.getValue()].name;
-  inputValue.workId = 0;
-
+  // console.log('123：',tinyMCE.get('tinymce-mytextarea').getContent())
 console.log(inputValue)
 
 
@@ -348,7 +348,7 @@ const options = {
   body: JSON.stringify(inputValue),
   };
 
-  var url = baseUri+'/employ/addMsg';
+  var url = baseUri+'/employ/addMsg111';
 fetch(url,options)
   .then(response => response.json())
   .then(json => {
@@ -384,7 +384,7 @@ fetch(url,options)
 
 function checkdl(id){
   let o = JSON.parse(sessionStorage.getItem(id));
-  console.log(o)
+  // console.log(o)
   $('#checkdlcontent').html(o.content)
 
   $('#checkdl').modal('show')
