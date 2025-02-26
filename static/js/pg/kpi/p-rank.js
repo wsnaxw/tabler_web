@@ -270,3 +270,46 @@ function checkcusd(id){
 
 
 }
+
+
+function checktl(id){
+ 
+  //跳转页面并且携带参数
+
+let bigNumber = BigInt(id);
+let customerId = bigNumber.toString(); // 转换为字符串
+
+
+// 创建一个新的URL，携带参数
+var url = '../talent/detail.html?workId=' + encodeURIComponent(customerId)+'' ;
+
+
+// 使用jQuery来跳转到新页面
+// window.location.href = url;
+
+window.open(url, '_blank');
+
+
+}
+
+
+
+function checkpro(id){
+ 
+  //跳转页面并且携带参数
+
+let bigNumber = BigInt(id);
+let customerId = bigNumber.toString(); // 转换为字符串
+
+
+// 创建一个新的URL，携带参数
+var url = '../project/prod.html?workId=' + encodeURIComponent(customerId)+'' ;
+
+
+// 使用jQuery来跳转到新页面
+// window.location.href = url;
+
+window.open(url, '_blank');
+
+
+}
