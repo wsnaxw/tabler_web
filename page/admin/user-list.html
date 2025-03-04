@@ -312,7 +312,7 @@
                             </label>
                             
                             <label class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="workState" >
+                              <input class="form-check-input" type="radio" name="workState" value="">
                               <span class="form-check-label">全部</span>
                             </label>                           
                           </div>
@@ -327,7 +327,7 @@
                           <div class="col">
                            <a onclick="clearForm()" class="btn btn-link ms-auto ">清空 </a>
                            <a onclick="searchList()" class="btn btn-primary ms-auto ">查询</a>
-                           <a  class="btn btn-success ms-auto" data-bs-toggle="modal" data-bs-target="#addtrip">创建日程</a>
+                           <a  class="btn btn-success ms-auto" data-bs-toggle="modal" data-bs-target="#usermodal">添加员工</a>
                           </div>
                     
                         </div>
@@ -430,11 +430,11 @@
 
 
 
-            <div class="modal modal-blur fade" id="addtrip" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal modal-blur fade" id="usermodal" tabindex="-1" role="dialog" aria-hidden="true">
               <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title">添加行程</h5>
+                    <h5 class="modal-title" id="modaltitle">新增员工</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">

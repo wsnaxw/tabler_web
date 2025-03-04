@@ -106,11 +106,22 @@ function getPage(pageNo){
         
 
                     let workstate = '';
+                    let oprater = ``;
                     if(o.workState=='0'){
-                        workstate = '在职'
+                        workstate = '在职';
+                        oprater =` 
+                        <a class='btn btn-ghost btn-sm' onclick='checkDetails(${o.id})'>编辑</a>
+                        <a class='btn btn-ghost btn-sm' onclick='checkDetails(${o.id})'>重置密码</a>
+                        <a class='btn btn-ghost btn-sm' onclick='checkDetails(${o.id})'>离职</a>
+                        <a class='btn btn-danger btn-sm' onclick='deltrip(${o.id})'>停用</a>`
                     }else {
                         workstate = '离职'  
+                        oprater =` 
+                       `
                     }
+
+
+
 
 
 
@@ -130,13 +141,7 @@ function getPage(pageNo){
                         <td >${toStr(o.comName)}</td>
                         <td>
                         
-                        <a class='btn btn-ghost btn-sm' onclick='checkDetails(${o.id})'>编辑</a>
-                        
-                        <a class='btn btn-ghost btn-sm' onclick='checkDetails(${o.id})'>重置密码</a>
-                        
-                        <a class='btn btn-ghost btn-sm' onclick='checkDetails(${o.id})'>离职</a>
-                        
-                        <a class='btn btn-danger btn-sm' onclick='deltrip(${o.id})'>停用</a>
+                       ${oprater}
                         
                         </td>
                         
@@ -403,5 +408,11 @@ fetch(url,options)
         console.log(error)
     });
 
+
+}
+
+
+function checkDetails(id){
+  $('#usermodal').modal('show');
 
 }
