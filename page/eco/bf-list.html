@@ -17,6 +17,7 @@
     <script src="../../static/js/tabler.min.js"></script>
     <link rel="stylesheet" href="../../static/css/tabler.min.css">
     <link rel="stylesheet" href="../../static/css/base.css">
+    <link rel="stylesheet" href="../../static/css/tabler-vendors.min.css">
     <link rel="icon" href="../../static/img/favicon.ico" type="image/x-icon" />
     <script src="../../static/js/jquery.min.js"></script>
     <script src="../../static/js/base.js?1"></script>
@@ -430,12 +431,21 @@
               <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title">工资管理</h5>
+                    <h5 class="modal-title">新增回款</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
     
                     <div class="row">
+
+                      <div class="mb-3 row">
+                        <label class="col-2 form-label required wordbold" >客户名称</label>
+                        <div class="col">
+                          <select type="text" class="form-select" placeholder="查询客户" id="customerMember" autocomplete="off" name="customerId">
+                          </select>
+                          <div class="invalid-feedback">不能为空！</div>
+                        </div>
+                      </div>
 
                       <div class="col-lg-3 mb-3 row" >
                         <label class="form-label wordbold col-4 required " >员工姓名</label>
@@ -681,12 +691,81 @@
             
           </div>
         </div>
-        <script src="../../static/js/list.min.js" defer></script>
 
-        <script defer>
-  
+
+
+
+
+
+
+        <script>
+ 
+          let customerMember;
+      document.addEventListener('DOMContentLoaded', function() {
+           
+
+         
+          customerMember= new TomSelect('#customerMember',{
+              valueField: 'customerId',
+              labelField: 'name',
+              searchField: 'name',
+              // fetch remote data
+              load: function(query, callback) {
+
+                  const options = {
+                      method: 'POST',
+                      headers: {
+                      'Content-Type': 'application/json',
+                      'token':localStorage.getItem('token')
+                      },
+                      body: JSON.stringify({ 'name': query }),
+                      };
+
+                      var url = baseUri+'/eco/selectCustomerForSF';
+                  fetch(url,options)
+                      .then(response => response.json())
+                      .then(json => {
+                        var item = json.data.list;
+              
+                          callback(item);
+                      }).catch((error)=>{
+                          callback();
+                      });
+
+              },
+              // custom rendering functions for options and items
+              render: {
+                  option: function(item, escape) {
+              return `<div><span class="dropdown-item-indicator"  >
+              </span>${ escape(item.name) }</div>`;
+          
+                      
+                  },
+                  item: function(item, escape) {
+              return `<div><span class="dropdown-item-indicator"  >
+              </span>${ escape(item.name) }</div>`;
+          
+                  }
+              },
+              onInitialize: function() {
+                  this.clearOptions(); // 清空初始选项
+                  this.load(''); // 传入空字符串以加载所有选项或基于默认查询
+              },
+          });
+
+
+
+        });
+
         </script>
 
+
+
+
+
+
+        <script src="../../static/js/list.min.js" defer></script>
+        <script src="../../static/js/tom-select.base.min.js" ></script>
 
        
         <footer class="footer footer-transparent d-print-none">
