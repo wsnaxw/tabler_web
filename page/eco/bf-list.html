@@ -438,7 +438,7 @@
     
                     <div class="row">
 
-                      <div class="mb-3 row">
+                      <div class="mb-3 col-lg-10 row">
                         <label class="col-2 form-label required wordbold" >客户名称</label>
                         <div class="col">
                           <select type="text" class="form-select" placeholder="查询客户" id="customerMember" autocomplete="off" name="customerId">
@@ -447,25 +447,22 @@
                         </div>
                       </div>
 
-                      <div class="col-lg-3 mb-3 row" >
+                      <div class="col-lg-5 mb-3 row" >
                         <label class="form-label wordbold col-4 required " >员工姓名</label>
                         <div class="col"  >
-                          <input type="text" class="form-control" name="userName" >
+                          <select type="text" class="form-select" placeholder="选择顾问" id="employer" autocomplete="off" name="appUserId">
+                          </select>
+                          <div class="invalid-feedback">不能为空！</div>
                         </div>
                       </div>
 
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold col-4 required " >归属公司</label>
+                    
+                      <div class="col-lg-5 mb-3 row" >
+                        <label class="form-label wordbold col-4 required " >回款金额</label>
                         <div class="col"  >
-                          <input type="text" class="form-control" name="comName" >
+                          <input type="text" class="form-control" name="fee" >
                         </div>
-                      </div>
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold col-4 required " >发放月份</label>
-                        <div class="col"  >
-                          <div class="jeinpbox"><input type="text" class="form-control" name="payDay" id="ymd02" placeholder="YYYY-MM">
-                          </div>
-                        </div>
+                        
                       </div>
 
                       <hr>
@@ -699,7 +696,7 @@
 
 
         <script>
- 
+          let employer;
           let customerMember;
       document.addEventListener('DOMContentLoaded', function() {
            
@@ -752,6 +749,68 @@
                   this.load(''); // 传入空字符串以加载所有选项或基于默认查询
               },
           });
+
+
+
+
+
+          employer= new TomSelect('#employer',{
+              valueField: 'userId',
+              labelField: 'name',
+              searchField: 'name',
+              // fetch remote data
+              load: function(query, callback) {
+
+                  const options = {
+                      method: 'POST',
+                      headers: {
+                      'Content-Type': 'application/json',
+                      'token':localStorage.getItem('token')
+                      },
+                      body: JSON.stringify({ 'name': query }),
+                      };
+
+                      var url = baseUri+'/customer/ulfq';
+                  fetch(url,options)
+                      .then(response => response.json())
+                      .then(json => {
+                        var item = json.data.list;
+              
+                          callback(item);
+                      }).catch((error)=>{
+                          callback();
+                      });
+
+              },
+              // custom rendering functions for options and items
+              render: {
+                  option: function(item, escape) {
+              return `<div><span class="dropdown-item-indicator"  >
+              </span>${ escape(item.name) }</div>`;
+          
+                      
+                  },
+                  item: function(item, escape) {
+              return `<div><span class="dropdown-item-indicator"  >
+              </span>${ escape(item.name) }</div>`;
+          
+                  }
+              },
+              onInitialize: function() {
+                  this.clearOptions(); // 清空初始选项
+                  this.load(''); // 传入空字符串以加载所有选项或基于默认查询
+              },
+          });
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,13 +1,13 @@
 $(function(){
     // var customerId = getParameterByName('customerId');
-  jeDate("#ymd01",{
-      theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-      format: "YYYY-MM"
-  });
-  jeDate("#ymd02",{
-    theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-    format: "YYYY-MM"
-});
+//   jeDate("#ymd01",{
+//       theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+//       format: "YYYY-MM"
+//   });
+//   jeDate("#ymd02",{
+//     theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+//     format: "YYYY-MM"
+// });
   
 
 
