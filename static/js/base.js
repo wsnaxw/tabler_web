@@ -105,7 +105,7 @@ $(document).ready(function () {
     $('#logOut').click(function() {
         loginOut();
     });
-    watermark.load({watermark_txt:user.flowerName,watermark_x_space:230})
+    watermark.load({watermark_txt:user.flowerName,watermark_x_space:230,watermark_width:500,watermark_height:500,watermark_alpha:0.10});
     menuClick();
     menuActive();
     // usermessage();
