@@ -517,7 +517,7 @@
           <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">修改客户信息</h5>
+                <h5 class="modal-title">修改职位信息</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
@@ -525,65 +525,43 @@
 
 
                   <div class="row mb-3">
-                    <div class="col-lg-6">
-                      <label class="form-label required"  style="font-weight: bold;">职位名称</label>
-                      <input type="text" class="form-control" name="name">
-
-                      </div>  
-                    </div>
+                   
                     <div class="col-lg-6">
                       <label class="form-label" style="font-weight: bold;">工作地点</label>
-                      <input type="text" class="form-control" name="cityCode">
+                      <input type="text" class="form-control" name="cityCode" id="city-select" >
                     </div>
                   </div>
                   <div class="row mb-3">
                     <div class="col-lg-6">
-                      <label class="form-label" style="font-weight: bold;">公司规模</label>
+                      <label class="form-label" style="font-weight: bold;">学历要求</label>
                       <div class="input-group input-group-flat">
-                        <select class="form-select" id="customerSize" name="customerSize">
-                          <option selected value="0">0-15人</option>
-                          <option value="1">15-50人</option>
-                          <option value="2">50-100人</option>
-                          <option value="3">100-500人</option>
-                          <option value="4">500-1000人</option>
-                          <option value="5">1000-10000人</option>
-                          <option value="6">10000人以上</option>
+                        <select class="form-select " id="state" name="experience">
+                          <option selected value="不限">不限</option>
+                          <option value="3年以下">3年以下</option>
+                          <option value="3-5年">3-5年</option>
+                          <option value="5-10年">5-10年</option>
+                          <option value="10年以上">10年以上</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <label class="form-label" style="font-weight: bold;">学历要求</label>
+                      <div class="input-group input-group-flat">
+                        <select class="form-select " id="state" name="requireEdu">
+                          <option selected value="">不限</option>
+                          <option value="3">大专</option>
+                          <option value="4">本科</option>
+                          <option value="5">研究生</option>
+                          <option value="6">博士</option>
+                          <option value="7">博士后</option>
                         </select>
                       </div>
                     </div>
 
-                    <div class="col-lg-6">
-                      <label class="form-label" style="font-weight: bold;">对外名称</label>
-                      <div class="input-group input-group-flat">
-                        <input type="text" class="form-control" name="outName">
-                      </div>
-                    </div>
-
+                   
 
                   </div>
-                  <div class="row mb-3">
-                    <div class="col-lg-6">
-                      <label class="form-label" style="font-weight: bold;">公司地址</label>
-                      <div class="input-group input-group-flat">
-                        <input type="text" class="form-control" name="registeredAddress">
-                      </div>
-                    </div>
-
-                    
-                    <div class="col-lg-6">
-                      <label class="form-label" style="font-weight: bold;">公司网站</label>
-                      <div class="input-group input-group-flat">
-                        <input type="text" class="form-control" name="webSite">
-                      </div>
-                    </div>
-
-
-
-
-
-
-
-                  </div>
+                  
 
 
                   
@@ -622,7 +600,85 @@
 
 
 
+        <script>
+          let citys;
+          document.addEventListener('DOMContentLoaded', function() {
+            var citySelect = document.getElementById('city-select');
 
+            // 确保 citycode.js 已经加载并且 cn 对象存在
+            if (typeof cn !== 'undefined') {
+                var options = [];
+                var optgroup = [];
+
+
+                var directCities = cn.getProvinces().filter(function(province) {
+            // 假设直辖市的 province.type 属性为 'city' 或者根据其他条件判断
+                return province.type === 'city'; // 这个判断条件需要根据 citycode.js 的实际数据结构调整
+                });
+                directCities.forEach(function(city) {
+                    options.push({
+                      class: '直辖市',
+                        value: city.code,
+                        text: city.name,
+                        group: '直辖市' // 为直辖市创建一个虚拟的省份组
+                    });
+                });
+
+                var provinces = cn.getProvinces();
+                provinces.forEach(function(province) {
+                    var cities = cn.getPrefectures(province.code);
+                    cities.forEach(function(city) {
+                        options.push({
+                            class:province.name,
+                            value:city.name,
+                            text: city.name,
+                            group: province.name
+                        });
+                    
+                        
+                    });
+                    options.push({
+                            class:province.name,
+                            value:province.name,
+                            text: province.name,
+                            group: province.name
+                        });
+                    optgroup.push({
+                            label:province.name,
+                            value:province.name,
+                            label_scientific:province.alias
+                      });
+                });
+
+
+
+                citys = new TomSelect(citySelect, {
+                  options: options,
+                    placeholder: '选择城市...',
+                    multiple: true,
+                    optgroupField: 'class',
+                    optgroups:optgroup,
+                    maxOptions:null,
+                    allowEmptyOption: false,
+                    duplicates: true,
+                    labelField: 'text',
+                    valueField: 'value',
+                    searchField: ['text'],
+                    render: {
+                    optgroup_header: function(data, escape) {
+                      return '<div class="optgroup-header">' + escape(data.label) + ' <span class="scientific">' + escape(data.label_scientific) + '</span></div>';
+                    }
+                  }
+                    // 其他配置...
+                });
+            } else {
+                console.error('citycode.js is not loaded correctly!');
+            }
+
+          });
+
+
+        </script>
 
 
 

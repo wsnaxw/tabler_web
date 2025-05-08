@@ -18,7 +18,7 @@ $(function(){
     
         // 隐藏元素
         $('#rxxqdiv').hide();
-        document.getElementById('rxxxdiv').scrollIntoView({ behavior: 'smooth' });
+        // document.getElementById('exploredtable').scrollIntoView({ behavior: 'smooth' });
     
         // 确保没有其他代码导致页面滚动
         // ... 其他逻辑 ...
@@ -310,7 +310,7 @@ function rxxx(state,pageNo){
             }
 
 
-            if(isForward )document.getElementById('rxxxdata').scrollIntoView({ behavior: 'smooth' });
+            // if(isForward )document.getElementById('rxxxdata').scrollIntoView({ behavior: 'smooth' });
         }).catch((error)=>{
             console.log(error)
         });
@@ -991,46 +991,46 @@ function initEdit(){
 
 
 
-    // 获取select元素
-    const selectElement1 = document.getElementById('customerSize');
-    // 遍历select元素下的所有option元素
-    for (let i = 0; i < selectElement1.options.length; i++) {
-        const option = selectElement1.options[i]; 
-        // 检查option的value是否和后端返回的customerType匹配
-        if (option.value === editInfo.customerSize.toString()) {
-            // 如果匹配，设置该option为selected
-            option.selected = true;
-            break; // 找到匹配项后，跳出循环
-        }
-    }
+    // // 获取select元素
+    // const selectElement1 = document.getElementById('customerSize');
+    // // 遍历select元素下的所有option元素
+    // for (let i = 0; i < selectElement1.options.length; i++) {
+    //     const option = selectElement1.options[i]; 
+    //     // 检查option的value是否和后端返回的customerType匹配
+    //     if (option.value === editInfo.customerSize.toString()) {
+    //         // 如果匹配，设置该option为selected
+    //         option.selected = true;
+    //         break; // 找到匹配项后，跳出循环
+    //     }
+    // }
 
 
-    // 获取select元素
-    const selectElement2 = document.getElementById('customerNature');
-    // 遍历select元素下的所有option元素
-    for (let i = 0; i < selectElement2.options.length; i++) {
-        const option = selectElement2.options[i]; 
-        // 检查option的value是否和后端返回的customerType匹配
-        if (option.value === editInfo.customerNature.toString()) {
-            // 如果匹配，设置该option为selected
-            option.selected = true;
-            break; // 找到匹配项后，跳出循环
-        }
-    }
+    // // 获取select元素
+    // const selectElement2 = document.getElementById('customerNature');
+    // // 遍历select元素下的所有option元素
+    // for (let i = 0; i < selectElement2.options.length; i++) {
+    //     const option = selectElement2.options[i]; 
+    //     // 检查option的value是否和后端返回的customerType匹配
+    //     if (option.value === editInfo.customerNature.toString()) {
+    //         // 如果匹配，设置该option为selected
+    //         option.selected = true;
+    //         break; // 找到匹配项后，跳出循环
+    //     }
+    // }
 
 
-        // 获取select元素
-        const selectElement3 = document.getElementById('industryType');
-        // 遍历select元素下的所有option元素
-        for (let i = 0; i < selectElement3.options.length; i++) {
-            const option = selectElement3.options[i]; 
-            // 检查option的value是否和后端返回的customerType匹配
-            if (option.value === editInfo.industryType.toString()) {
-                // 如果匹配，设置该option为selected
-                option.selected = true;
-                break; // 找到匹配项后，跳出循环
-            }
-        }
+    //     // 获取select元素
+    //     const selectElement3 = document.getElementById('industryType');
+    //     // 遍历select元素下的所有option元素
+    //     for (let i = 0; i < selectElement3.options.length; i++) {
+    //         const option = selectElement3.options[i]; 
+    //         // 检查option的value是否和后端返回的customerType匹配
+    //         if (option.value === editInfo.industryType.toString()) {
+    //             // 如果匹配，设置该option为selected
+    //             option.selected = true;
+    //             break; // 找到匹配项后，跳出循环
+    //         }
+    //     }
     
     
 
@@ -1393,7 +1393,7 @@ function checkDetail(tanlentId,pid){
 
 
     $('#rxxqdiv').show()
-    document.getElementById('rxxqdiv').scrollIntoView({ behavior: 'smooth' });
+    // document.getElementById('exploredtable').scrollIntoView({ behavior: 'smooth' });
 
 }
 
