@@ -2,13 +2,25 @@ $(function(){
     // var customerId = getParameterByName('customerId');
   jeDate("#ymd01",{
       theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-      format: "YYYY-MM"
+      format: "YYYY-MM-DD"
   });
   jeDate("#ymd02",{
     theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-    format: "YYYY-MM"
+    format: "YYYY-MM-DD"
 });
   
+
+    // var customerId = getParameterByName('customerId');
+    jeDate("#ymd03",{
+      theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+      format: "YYYY-MM-DD"
+  });
+  jeDate("#ymd04",{
+    theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+    format: "YYYY-MM-DD"
+});
+  
+
 
 
     // console.log('customerId:'+customerId)
@@ -33,7 +45,7 @@ function getFormDate() {
   }
   let newJsonData = removeEmptyValues(object);
 
-
+  console.log(newJsonData);
 
   return newJsonData;
 
@@ -111,6 +123,18 @@ function getPage(pageNo){
                     }
 
 
+                    let payTypestr = '';
+
+                    if(o.payType==0){
+                      payTypestr = `服务费`;
+                    }else if(o.payType==1){
+                      payTypestr = `咨询费`;
+                    }else if(o.payType==2){
+                      payTypestr = '首付款'; 
+                    }
+
+
+
         
                     str+=
                     `
@@ -120,8 +144,8 @@ function getPage(pageNo){
                         <td >${toStr(o.customerName)}</td>
                         <td style="color:red">${toNumber(o.serviceFee)}</td>
                         <td >${toStr(o.talentName)}</td>
-                        <td >${toNumber(o.commissionFee)}</td>
-                        <td >${toStr(o.rate)}</td>
+                        <td >${toNumber(o.commissionFee)} / ${toStr(o.rate)}%</td>
+                        <td >${toStr(payTypestr)}</td>
                         <td >${statestr}</td>
 
                         <td >${toStr(o.userName)}</td>

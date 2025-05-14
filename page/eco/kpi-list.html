@@ -282,44 +282,72 @@
                 
                   <div class="card-body" id="formdata">
                     <form id="myForm">
-                      <div class="row "> 
-                    
+                      <div class="row col-lg-12"> 
+                        <div class="col-lg-2  row" >
+                          <label class="form-label wordbold col-4" >服务顾问</label>
+                          <div class="col"  >
+                             <input type="text" title="服务顾问" class="form-control" name="appUserName"  >
+                          </div>
+                        </div>
+
+                        <div class="col-lg-2  row" >
+                          <label class="form-label wordbold col-4" >服务客户</label>
+                          <div class="col"  >
+                             <input type="text" title="服务客户" class="form-control" name="customerName"  >
+                          </div>
+                        </div>
      
-                       
-                        <div class="col-lg-2 mb-3 row" >
-                          <label class="form-label wordbold col-4" >发放月份</label>
-                          <div class="col"  >
-                              <div class="jeinpbox"><input type="text" class="form-control" name="createTime" id="ymd01" placeholder="YYYY-MM"></div>
-                          </div>
-                     
-                        </div>
 
-                        <div class="col-lg-2 mb-3 row" >
-                          <label class="form-label wordbold col-4" >顾问姓名</label>
-                          <div class="col"  >
-                             <input type="text" title="日程标题" class="form-control" name="appUserName"  >
+                        <div class="col-lg-2 row">
+                          <label class="form-label wordbold col-4" >业绩来源</label>
+                          <div class="col" >
+                          <select class="form-select" id="payType"  name="payType">
+                            <option selected value="">全部</option>
+                            <option value="2">首付款</option>
+                            <option value="0">服务费</option>
+                            <option value="1">咨询费</option>
+                          </select>
                           </div>
                         </div>
                        
-                        
+                 
 
-                       
-                        
-                  
-  
-                        <div class="col-lg-4">
+                        <div class="col-lg-4  mb-3 row" >
+                          <label class="form-label wordbold col-2" >申请时间</label>
+                          <div class="col"  >
+                              <div class="jeinpbox"><input type="text" class="form-control" name="sqsj1" id="ymd01" placeholder="YYYY-MM-DD"></div>
+                          </div>
+                          <div class="col"  >
+                            <div class="jeinpbox"><input type="text" class="form-control" name="sqsj2" id="ymd02" placeholder="YYYY-MM-DD"></div>
+                          </div>
+                        </div>
+                          
+                        <div class="col-lg-4  mb-3 row" >
+                          <label class="form-label wordbold col-2" >审核时间</label>
+                          <div class="col"  >
+                              <div class="jeinpbox"><input type="text" class="form-control" name="shsj1" id="ymd03" placeholder="YYYY-MM-DD"></div>
+                          </div>
+                          <div class="col"  >
+                            <div class="jeinpbox"><input type="text" class="form-control" name="shsj2" id="ymd04" placeholder="YYYY-MM-DD"></div>
+                          </div>
+                        </div>
+
+
+
+
+
+                        <div class="col-lg-4 ms-auto">
                           <div class="col">
                            <a onclick="clearForm()" class="btn btn-link ms-auto ">清空 </a>
                            <a onclick="searchList()" class="btn btn-primary ms-auto ">查询</a>
                            <a  class="btn btn-success ms-auto" data-bs-toggle="modal" data-bs-target="#addtrip" onclick="initAddtrip()">新增</a>
 
-                           <a class="btn btn-info ms-auto" onclick="document.getElementById('fileInput').click()">上传+</a>
-                           <input type="file" id="fileInput" hidden>
                           </div>
                     
                         </div>
-  
+
                       </div>
+                     
 
                     </form>
                     
@@ -375,8 +403,8 @@
                             <th>客户名称</th>
                             <th>回款金额</th>
                             <th>上岗人选</th>
-                            <th>提成金额</th>
-                            <th>所占比例</th>
+                            <th>提成金额/比例</th>
+                            <th>业绩来源</th>
                             <th>审核状态</th>
                             <th>申请用户</th>
                             <th>申请日期</th>
