@@ -443,18 +443,18 @@
 
 
             <div class="modal modal-blur fade" id="addtrip" tabindex="-1" role="dialog" aria-hidden="true">
-              <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+              <div class="modal-dialog modal-full-width modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title">工资管理</h5>
+                    <h5 class="modal-title">新增业绩</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
     
                     <div class="row">
-
-                      <div class="col-lg-6 mb-3 row" >
-                        <label class="form-label wordbold col-4 required " >员工姓名</label>
+ <div class="col-lg-1 mb-3 row" ></div>
+                      <div class="col-lg-4 mb-3 row" >
+                        <label class="form-label wordbold col-3 required " >回款企业</label>
                         <div class="col"  >
                           <input type="text" class="form-control" name="userName" >
                         </div>
@@ -472,32 +472,68 @@
                           <input type="text" class="form-control" name="comName" >
                         </div>
                       </div>
+                      
+ <div class="col-lg-1 mb-3 row" ></div>
+  <div class="col-lg-1 mb-3 row" ></div>
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold col-4 required " >回款类型</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="comName" >
+                        </div>
+                      </div>
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold col-4 required " >提成比例</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="comName" >
+                        </div>
+                      </div>
 
                       <hr>
 
+                        <div class="col-lg-1 mb-3 row" ></div>
                       <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold col-4 required " >基本工资</label>
+                        <label class="form-label wordbold col-4 required " >当前可用回款金额</label>
                         <div class="col"  >
-                          <input type="text" class="form-control" name="baseSalary" >
+                          <span>10000</span>
                         </div>
                       </div>
 
                       
                       <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold required col-4" >提成金额</label>
+                        <label class="form-label wordbold required col-4" >分配提成金额</label>
                         <div class="col"  >
                           <input type="text" class="form-control" name="commissionFee" >
                         </div>
+                        
                       </div>
                    
                       
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold required col-4" >考勤天数</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="workDays" >
+                      <div class="col-lg-3  row" >
+                        <div class="col">
+
+                        <a class="btn btn-blue btn-sm">新增分配</a>
+                        
+                        <a class="btn btn-blue btn-sm">清空</a>
                         </div>
                       </div>
-                      <div class="col-lg-3 mb-3 row" > </div>
+                      <div class="row" > 
+                          <div class="col-lg-1 mb-3 row" ></div>
+                          <div class="col-lg-3 mb-3 row" >
+                            <label class="form-label wordbold required col-4" >当前分配金额</label>
+                            <div class="col"  >
+                              <span style="color:red">10000</span>
+                            </div>
+                            
+                          </div>
+                      <div class="col-lg-3 mb-3 row" >
+                        <label class="form-label wordbold required col-4" >人选名称</label>
+                        <div class="col"  >
+                          <input type="text" class="form-control" name="totalDays" id="totalDays" value="21.75" >
+                        </div>
+                      </div>
+
+
+                      </div>
 
 
 
