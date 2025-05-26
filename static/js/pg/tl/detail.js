@@ -983,7 +983,7 @@ function addProject(){
           showMessage(0,'加入成功')
   
           initBaseInfo();
-  
+          initTCList();
               }else{
                   showMessage(1,json.message)
               }
@@ -996,7 +996,7 @@ function addProject(){
         
       });
 
-  
+
 
 
 }

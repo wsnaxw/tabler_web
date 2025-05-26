@@ -407,8 +407,7 @@ function formCheck(){
 
 
 
-
-
+    console.log(values)
     let data = cleanseJSON(values);
 
 
