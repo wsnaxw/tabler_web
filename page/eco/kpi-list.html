@@ -453,211 +453,401 @@
 
 
                     <div class="row row-cards">
-                     <div class="col-lg-6" >
-                      <div class="card col-lg-12">
-                        <div class="card-body row">
 
-                        <div class="col-lg-6 mb-3" >
-                        <label class="form-label wordbold col-3 required " >回款企业</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="userName" >
-                        </div>
-                      </div>
+                      <div class="col-lg-6" >
+                        <div class="card col-lg-12">
+                          <div class="card-body row">
+                            <div class="col-lg-6 mb-3" >
+                              <label class="form-label wordbold col-3 required " >回款企业</label>
+                              <div class="col"  >
+                                <input type="text" class="form-control" name="userName" >
+                              </div>
+                            </div>
 
-                      <div class="col-lg-3 " >
-                        <label class="form-label wordbold col-4 required " >回款金额</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="comName" >
-                        </div>
-                      </div>
-                      <div class="col-lg-3  " >
-                        <label class="form-label wordbold col-4 required " >归属公司</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="comName" >
-                        </div>
-                      </div>
+                            <div class="col-lg-3 " >
+                              <label class="form-label wordbold col-4 required " >回款金额</label>
+                              <div class="col"  >
+                                <input type="text" class="form-control" name="comName" >
+                              </div>
+                            </div>
+                            <div class="col-lg-3  " >
+                              <label class="form-label wordbold col-4 required " >归属公司</label>
+                              <div class="col"  >
+                                <input type="text" class="form-control" name="comName" >
+                              </div>
+                            </div>
  
-                      <div class="col-lg-3 " >
-                        <label class="form-label wordbold col-4 required " >回款类型</label>
-                        <div class="col"  >
-                          <select class="form-select" id="payType"  name="payType">
-                            <option selected value="">全部</option>
-                            <option value="2">首付款</option>
-                            <option value="0">服务费</option>
-                            <option value="1">咨询费</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class="col-lg-3 mb-3 " >
-                        <label class="form-label wordbold col-4 required " >提成比例</label>
-                        <div class="col"  >
-                            <select class="form-select" id="payType"  name="payType">
-                            <option selected value="15">15%</option>
-                    
-                          </select>
-                        </div>
-                      </div>
+                            <div class="col-lg-3 " >
+                              <label class="form-label wordbold col-4 required " >回款类型</label>
+                              <div class="col"  >
+                                <select class="form-select" id="payType"  name="payType">
+                                  <option selected value="">全部</option>
+                                  <option value="2">首付款</option>
+                                  <option value="0">服务费</option>
+                                  <option value="1">咨询费</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-lg-3 mb-3 " >
+                              <label class="form-label wordbold col-4 required " >提成比例</label>
+                              <div class="col"  >
+                                  <select class="form-select" id="payType"  name="payType">
+                                  <option selected value="15">15%</option>
+                          
+                                </select>
+                              </div>
+                            </div>
 
-                      <hr>
+                            <hr>
 
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold col-6 required " >可分配金额</label>
-                        <div class="col"  >
-                          <span>10000</span>
-                        </div>
-                      </div>
+                            <div class="col-lg-3 mb-3 row" >
+                              <label class="form-label wordbold col-6 required " >可分配金额</label>
+                              <div class="col"  >
+                                <span>10000</span>
+                              </div>
+                            </div>
 
                       
-                      <div class="col-lg-4 mb-3 row" >
-                        <label class="form-label wordbold required col-4" >分配金额</label>
-                        <div class="col"  >
-                          <input type="number" class="form-control" name="commissionFee" >
-                        </div>
-                        
-                      </div>
+                            <div class="col-lg-4 mb-3 row" >
+                              <label class="form-label wordbold required col-4" >分配金额</label>
+                              <div class="col"  >
+                                <input type="number" class="form-control" name="commissionFee" >
+                              </div>
+                              
+                            </div>
                    
                       
-                      <div class="col-lg-4  row" >
-                        <div class="col">
-                          
-                          <a class="btn btn-blue btn-sm">新增分配</a>
-                          <a class="btn btn-danger btn-sm">清空</a>
-                          <a class="btn btn-blue btn-sm">确认分配</a>
-                        </div>
-                      </div>
-                      <hr>
-
-                      <div class="row" > 
-                          <div class="col-lg-3 mb-3 row" >
-                            <label class="form-label wordbold required col-6" >当前分配额</label>
-                            <div class="col"  >
-                              <span style="color:red">10000</span>
+                            <div class="col-lg-4  row" >
+                              <div class="col">
+                                
+                                <a class="btn btn-blue btn-sm">新增分配</a>
+                                <a class="btn btn-danger btn-sm">清空</a>
+                                <a class="btn btn-blue btn-sm">确认分配</a>
+                              </div>
                             </div>
-                            
-                          </div>
-                        <div class="col-lg-4 mb-3 row" >
-                          <label class="form-label wordbold required col-4" >人选名称</label>
-                          <div class="col"  >
-                            <input type="text" class="form-control"  >
-                          </div>
-                        </div>
+                            <hr>
 
-                         <div class="col-lg-4 mb-3 row" >
-                          <label class="form-label wordbold required col-4" >分配方式</label>
-                          <div class="col"  >
-                            <select class="form-select" id="payType"  name="payType">
-                            <option selected value="">全部</option>
-                            <option value="2">首付款</option>
-                            <option value="0">服务费</option>
-                            <option value="1">咨询费</option>
-                          </select>
-                          </div>
-                        </div>
+                            <div class="row" > 
+                              <div class="col-lg-3 mb-3 row" >
+                                <label class="form-label wordbold required col-6" >当前分配额</label>
+                                <div class="col"  >
+                                  <span style="color:red">10000</span>
+                                </div>
+                                
+                            </div>
+                            <div class="col-lg-4 mb-3 row" >
+                              <label class="form-label wordbold required col-4" >人选名称</label>
+                              <div class="col"  >
+                                <input type="text" class="form-control"  >
+                              </div>
+                            </div>
 
-
-                      </div>
-                
-                      
-                      <div class="row" id="fpjjejs"> 
-                          <div class="col-lg-12 mb-3 row" >
-                            <table class="table card-table table-vcenter text-nowrap datatable">
-                              <thead>
-                                                      
-                                <tr>
-                                  <th>所属类型</th>
-                                  <th>提成人</th>
-                                  <th>所在公司</th>
-                                  <th>业绩比例 <small>已分配：<span style="color: red;">0%</span></small></th>
-                                  <th>业绩金额</th>
-                                  <th>提成金额</th>
-                                </tr>
-                              </thead>
-                              <tbody class="table-tbody" id="data">
-
-                                <tr>
-                                  <td>客户线索</td>
-                                  <td><input type="text"class="form-control"></td>
-                                  <td>成都</td>
-                                  <td><span style="color: red;">10%</span></td>
-                                  <td>0</td>
-                                  <td>0</td>
-                                </tr>
-                                <tr>
-                                  <td>签约谈判</td>
-                                  <td><input type="text"class="form-control"></td>
-                                  <td></td>
-                                  <td><span style="color: red;">10%</span></td>
-                                  <td>0</td>
-                                  <td>0</td>
-                                </tr>
-                                <tr>
-                                  <td>人选线索</td>
-                                  <td><input class="form-control" type="text"></td>
-                                  <td></td>
-                                  <td><span style="color: red;">30%</span></td>
-                                  <td>0</td>
-                                  <td>0</td>
-                                </tr>
-                                <tr>
-                                  <td>人选推荐</td>
-                                  <td><input type="text"class="form-control"></td>
-                                  <td></td>
-                                  <td><span style="color: red;">30%</span></td>
-                                  <td>0</td>
-                                  <td>0</td>
-                                </tr>
-                                <tr>
-                                  <td>职位运作</td>
-                                  <td><input type="text"class="form-control"></td>
-                                  <td></td>
-                                  <td><span style="color: red;">10%</span></td>
-                                  <td>0</td>
-                                  <td>0</td>
-                                </tr>
-                                <tr>
-                                  <td>款项回收</td>
-                                  <td><input type="text"class="form-control"></td>
-                                  <td></td>
-                                  <td><span style="color: red;">10%</span></td>
-                                  <td>0</td>
-                                  <td>0</td>
-                                </tr>
-
-
-
-
-                              
-                              </tbody>
-                            </table>
-                            
-                          </div>
-                        
-
-
-
-
-
-                        </div>
-                        
-                      </div>
-
-
-                     </div>
-                     <div class="col-lg-6" >
-
-
-                      
-                     </div>
-                      
-
-
-                    </div>
-
+                            <div class="col-lg-4 mb-3 row" >
+                              <label class="form-label wordbold required col-4" >分配方式</label>
+                              <div class="col"  >
+                                <select class="form-select" id="payType"  name="payType">
+                                <option selected value="">全部</option>
+                                <option value="2">首付款</option>
+                                <option value="0">服务费</option>
+                                <option value="1">咨询费</option>
+                              </select>
+                              </div>
+                            </div>
 
 
                      
-                    
+                
+                      
+                              <div class="row" id="fpjjejs"> 
+                                <div class="col-lg-12 mb-3 row" >
+                                  <table class="table card-table table-vcenter text-nowrap datatable">
+                                    <thead>
+                                                            
+                                      <tr>
+                                        <th>所属类型</th>
+                                        <th>提成人</th>
+                                        <th>所在公司</th>
+                                        <th>业绩比例 <small>已分配：<span style="color: red;">0%</span></small></th>
+                                        <th>业绩金额</th>
+                                        <th>提成金额</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody class="table-tbody" id="data">
+
+                                      <tr>
+                                        <td>客户线索</td>
+                                        <td><input type="text"class="form-control"></td>
+                                        <td>成都</td>
+                                        <td><span style="color: red;">10%</span></td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                      </tr>
+                                      <tr>
+                                        <td>签约谈判</td>
+                                        <td><input type="text"class="form-control"></td>
+                                        <td></td>
+                                        <td><span style="color: red;">10%</span></td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                      </tr>
+                                      <tr>
+                                        <td>人选线索</td>
+                                        <td><input class="form-control" type="text"></td>
+                                        <td></td>
+                                        <td><span style="color: red;">30%</span></td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                      </tr>
+                                      <tr>
+                                        <td>人选推荐</td>
+                                        <td><input type="text"class="form-control"></td>
+                                        <td></td>
+                                        <td><span style="color: red;">30%</span></td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                      </tr>
+                                      <tr>
+                                        <td>职位运作</td>
+                                        <td><input type="text"class="form-control"></td>
+                                        <td></td>
+                                        <td><span style="color: red;">10%</span></td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                      </tr>
+                                      <tr>
+                                        <td>款项回收</td>
+                                        <td><input type="text"class="form-control"></td>
+                                        <td></td>
+                                        <td><span style="color: red;">10%</span></td>
+                                        <td>0</td>
+                                        <td>0</td>
+                                      </tr>
+
+
+
+
+                                    
+                                    </tbody>
+                                  </table>
+                                  
+                                </div>
+                              </div>
+
+
+                          </div>
+                        
+                        </div>
+
+
+                     
+
+
+
+                       
+                            
+
+
+                      </div>
+                      <!-- 111-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      
+                      
+
+
+
+
+
+
+
+
+                      
+
+
                     </div>
+
+
+                    <div class="col-lg-6" >
+                        <div class="card col-lg-12">
+                          <div class="card-body row">
+
+
+                            <div class="col-lg-6 ">
+                              <div class="card">
+                                <div class="card-header">
+                                  <span style="color: red;"> 
+                                    张三-60%-600-60000 <br>
+                                    李四-60%-600-60000
+                                  </span>
+                             
+                                  <div class="ms-auto">
+                                     <a href="#" class="btn btn-blue btn-sm">编辑</a>
+                                  <a href="#" class="btn btn-blue btn-sm">删除</a>
+                                  </div>
+
+                                 
+                                </div>
+                                <div class="card-body">
+                                  <dl class="row">  
+                                    <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
+                                     <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
+                                     <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
+                                     <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
+                                     <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
+                                     <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
+                                    
+                                  </dl>
+                                 
+
+
+                                </div>
+
+                              </div>
+                              
+
+                            </div>
+
+
+
+                            <div class="col-lg-6 ">
+                              <div class="card">
+                                <div class="card-header">
+                                      <span>
+                                    人选：无 <br>
+                                    组内分配
+                                  </span>
+                                    &nbsp;
+                                  &nbsp;
+                                  <span style="color: red;"> 
+                                    张三-60%-600-60000 <br>
+                                    李四-60%-600-60000
+                                  </span>
+                                
+                              
+                             
+                                  <div class="ms-auto">
+                                     <a href="#" class="btn btn-blue btn-sm">编辑</a>
+                                  <a href="#" class="btn btn-blue btn-sm">删除</a>
+                                  </div>
+
+                                 
+                                </div>
+                                <div class="card-body">
+                                  <dl class="row">  
+                                    <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
+                                     <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
+                                     <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
+                                     <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
+                                     <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
+                                     <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
+                                    
+                                  </dl>
+                                 
+
+
+                                </div>
+
+                              </div>
+                              
+
+                            </div>
+
+
+                        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            
+                        
+                        </div>
+
+
+                     
+                        <div class="card-footer">
+                                   
+                                  <span style="color: red;"> 
+                                    张三-60%-600-60000 <br>
+                                    李四-60%-600-60000
+                                  </span>
+
+                        </div>
+
+
+                       
+                            
+
+
+                      </div>
+                     
+                    
+                    
     
                 
                       
