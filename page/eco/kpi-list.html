@@ -17,6 +17,7 @@
     <script src="../../static/js/tabler.min.js"></script>
     <link rel="stylesheet" href="../../static/css/tabler.min.css">
     <link rel="stylesheet" href="../../static/css/base.css">
+    <link rel="stylesheet" href="../../static/css/tabler-vendors.min.css">
     <link rel="icon" href="../../static/img/favicon.ico" type="image/x-icon" />
     <script src="../../static/js/jquery.min.js"></script>
     <script src="../../static/js/base.js?1"></script>
@@ -286,7 +287,7 @@
                         <div class="col-lg-2  row" >
                           <label class="form-label wordbold col-4" >服务顾问</label>
                           <div class="col"  >
-                             <input type="text" title="服务顾问" class="form-control" name="appUserName"  >
+                             <input type="text" title="服务顾问" class="form-control" name="appUserName"   >
                           </div>
                         </div>
 
@@ -460,20 +461,22 @@
                             <div class="col-lg-6 mb-3" >
                               <label class="form-label wordbold col-3 required " >回款企业</label>
                               <div class="col"  >
-                                <input type="text" class="form-control" name="userName" >
+                                <select type="text" class="form-select" placeholder="查询客户" id="appCustomer" autocomplete="off" name="customerId">
+                                </select>
+                                <div class="invalid-feedback">不能为空！</div>
                               </div>
                             </div>
 
                             <div class="col-lg-3 " >
                               <label class="form-label wordbold col-4 required " >回款金额</label>
                               <div class="col"  >
-                                <input type="text" class="form-control" name="comName" >
+                                <input type="text" class="form-control" name="serviceFee" id="hkfee" readonly>
                               </div>
                             </div>
                             <div class="col-lg-3  " >
                               <label class="form-label wordbold col-4 required " >归属公司</label>
                               <div class="col"  >
-                                <input type="text" class="form-control" name="comName" >
+                                <input type="text" class="form-control" name="comName"  id="comName"readonly  >
                               </div>
                             </div>
  
@@ -481,20 +484,20 @@
                               <label class="form-label wordbold col-4 required " >回款类型</label>
                               <div class="col"  >
                                 <select class="form-select" id="payType"  name="payType">
-                                  <option selected value="">全部</option>
-                                  <option value="2">首付款</option>
-                                  <option value="0">服务费</option>
-                                  <option value="1">咨询费</option>
+                                  <option selected value="3">全额付款提成</option>
+                                  <option value="4">分期付款提成</option>
                                 </select>
                               </div>
                             </div>
                             <div class="col-lg-3 mb-3 " >
                               <label class="form-label wordbold col-4 required " >提成比例</label>
                               <div class="col"  >
-                                  <select class="form-select" id="payType"  name="payType">
-                                  <option selected value="15">15%</option>
-                          
-                                </select>
+                                 <div class="input-group input-group-flat">
+                              <input type="number" class="form-control" autocomplete="off" value="15">
+                              <span class="input-group-text">
+                                <kbd>%</kbd>
+                              </span>
+                            </div>
                               </div>
                             </div>
 
@@ -503,7 +506,7 @@
                             <div class="col-lg-3 mb-3 row" >
                               <label class="form-label wordbold col-6 required " >可分配金额</label>
                               <div class="col"  >
-                                <span>10000</span>
+                                <span id="allotFee">0</span>
                               </div>
                             </div>
 
@@ -545,11 +548,11 @@
                             <div class="col-lg-4 mb-3 row" >
                               <label class="form-label wordbold required col-4" >分配方式</label>
                               <div class="col"  >
-                                <select class="form-select" id="payType"  name="payType">
-                                <option selected value="">全部</option>
-                                <option value="2">首付款</option>
-                                <option value="0">服务费</option>
-                                <option value="1">咨询费</option>
+                                <select class="form-select" id="allotType"  name="type">
+                                <option selected value="1">独立运作</option>
+                                <option value="2">组内合作</option>
+                                <option value="3">同城合作</option>
+                                <option value="4">跨区合作</option>
                               </select>
                               </div>
                             </div>
@@ -576,7 +579,7 @@
 
                                       <tr>
                                         <td>客户线索</td>
-                                        <td><input type="text"class="form-control"></td>
+                                        <td><input type="text"class="form-control" id ='employer'></td>
                                         <td>成都</td>
                                         <td><span style="color: red;">10%</span></td>
                                         <td>0</td>
@@ -879,11 +882,163 @@
             
           </div>
         </div>
-        <script src="../../static/js/list.min.js" defer></script>
 
-        <script defer>
-  
+
+
+        <script>
+          let employer;
+          let customerMember;
+      document.addEventListener('DOMContentLoaded', function() {
+           
+
+         
+          customerMember= new TomSelect('#appCustomer',{
+              valueField: 'sfId',
+              labelField: ['customerName', 'fee'],
+              searchField: 'customerName',
+              // fetch remote data
+              load: function(query, callback) {
+
+                  const options = {
+                      method: 'POST',
+                      headers: {
+                      'Content-Type': 'application/json',
+                      'token':localStorage.getItem('token')
+                      },
+                      body: JSON.stringify({ 'customerName': query }),
+                      };
+
+                      var url = baseUri+'/eco/selectMyServiceFeeList';
+                  fetch(url,options)
+                      .then(response => response.json())
+                      .then(json => {
+                        var item = json.data.list;
+                        
+              
+                          callback(item);
+                      }).catch((error)=>{
+                          callback();
+                      });
+
+              },
+              // custom rendering functions for options and items
+              render: {
+                  option: function(item, escape) {
+
+                    console.log(item);
+              return `<div><span class="dropdown-item-indicator"  >
+              </span>${ escape(item.customerName) } / ${escape(item.fee)}</div>`;
+          
+                      
+                  },
+                  item: function(item, escape) {
+                    console.log(item);
+              return `<div><span class="dropdown-item-indicator"  >
+              </span>${ escape(item.customerName) } / ${escape(item.fee)}</div>`;
+          
+                  }
+              },
+              onInitialize: function() {
+                  this.clearOptions(); // 清空初始选项
+                  this.load(''); // 传入空字符串以加载所有选项或基于默认查询
+              },
+          });
+
+          customerMember.on('change', function(value) {
+            console.log('Selected value:', value);
+            console.log('Selected item:', customerMember.options[value]);
+            // 在这里执行你的逻辑
+
+            $('#allotFee').text(customerMember.options[value].fee || 0);
+            $('#comName').val(customerMember.options[value].comName || '');
+            $('#hkfee').val(customerMember.options[value].fee || 0);
+        
+          });
+
+
+
+
+
+          employer= new TomSelect('#employer',{
+              valueField: 'userId',
+              labelField: 'name',
+              searchField: 'name',
+              // fetch remote data
+              load: function(query, callback) {
+
+                  const options = {
+                      method: 'POST',
+                      headers: {
+                      'Content-Type': 'application/json',
+                      'token':localStorage.getItem('token')
+                      },
+                      body: JSON.stringify({ 'name': query }),
+                      };
+
+                      var url = baseUri+'/customer/ulfq';
+                  fetch(url,options)
+                      .then(response => response.json())
+                      .then(json => {
+                        var item = json.data.list;
+              
+                          callback(item);
+                      }).catch((error)=>{
+                          callback();
+                      });
+
+              },
+              // custom rendering functions for options and items
+              render: {
+                  option: function(item, escape) {
+              return `<div><span class="dropdown-item-indicator"  >
+              </span>${ escape(item.name)  }  / ${escape(item.fee)}</div>`;
+          
+                      
+                  },
+                  item: function(item, escape) {
+              return `<div><span class="dropdown-item-indicator"  >
+              </span>${ escape(item.name) } / ${escape(item.fee)}</div>`;
+          
+                  }
+              },
+              onInitialize: function() {
+            
+                  this.load(''); // 传入空字符串以加载所有选项或基于默认查询
+              },
+          });
+
+
+
+
+
+
+
+
+
+
+
+
+
+        });
+
         </script>
+
+
+       
+
+
+
+
+
+
+
+
+
+
+        <script src="../../static/js/list.min.js" defer></script>
+        <script src="../../static/js/tom-select.base.min.js" ></script>
+
+   
 
 
        
