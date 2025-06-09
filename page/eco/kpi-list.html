@@ -341,7 +341,7 @@
                           <div class="col">
                            <a onclick="clearForm()" class="btn btn-link ms-auto ">清空 </a>
                            <a onclick="searchList()" class="btn btn-primary ms-auto ">查询</a>
-                           <a  class="btn btn-success ms-auto" data-bs-toggle="modal" data-bs-target="#addtrip" onclick="initAdd()">新增</a>
+                           <a  class="btn btn-success ms-auto" data-bs-toggle="modal" data-bs-target="#addtrip" >新增</a>
 
                           </div>
                     
@@ -493,7 +493,7 @@
                               <label class="form-label wordbold col-4 required " >提成比例</label>
                               <div class="col"  >
                                  <div class="input-group input-group-flat">
-                              <input type="number" class="form-control" autocomplete="off" value="15">
+                              <input type="number" class="form-control" autocomplete="off" id="tcbl" value="15">
                               <span class="input-group-text">
                                 <kbd>%</kbd>
                               </span>
@@ -526,7 +526,7 @@
                                 
                                 <a class="btn btn-blue btn-sm" onclick="initWay()">新增分配</a>
                                 <a class="btn btn-danger btn-sm">清空</a>
-                                <a class="btn btn-blue btn-sm">确认分配</a>
+                                <a class="btn btn-blue btn-sm" onclick="confirmAllot()">确认分配</a>
                               </div>
                             </div>
                             <hr>
@@ -540,14 +540,16 @@
                                 
                             </div>
                             <div class="col-lg-4 mb-3 row" >
-                              <label class="form-label wordbold required col-4" >人选名称</label>
+                              <label class="form-label wordbold  col-4" >人选名称</label>
                               <div class="col"  >
-                                <input type="text" class="form-control"  >
+                                <select name="talentId" class="form-select" id="talentInfo">
+                                  
+                                </select>
                               </div>
                             </div>
 
                             <div class="col-lg-4 mb-3 row" >
-                              <label class="form-label wordbold required col-4" >分配方式</label>
+                              <label class="form-label wordbold  col-4" >分配方式</label>
                               <div class="col"  >
                                 <select class="form-select" id="allotType"  name="type">
                                 <option selected value="1">独立运作</option>
@@ -568,15 +570,15 @@
                                     <thead>
                                                             
                                       <tr>
-                                        <th class="col-2">所属类型</th>
+                                        <th class="col-1">所属类型</th>
                                         <th class="col-4">提成人</th>
                                         <th class="col-1">所在公司</th>
-                                        <th class="col-1">业绩比例 <small>已分配：<span style="color: red;">0%</span></small></th>
+                                        <th class="col-2">业绩比例 <small>可分配：<span style="color: red;" id="remaining">0</span></small></th>
                                         <th class="col-2">业绩金额</th>
                                         <th class="col-2">提成金额</th>
                                       </tr>
                                     </thead>
-                                    <tbody class="table-tbody" id="data">
+                                    <tbody class="table-tbody" id="calcData">
 
                                       <tr>
                                         <td>客户线索</td>
@@ -589,7 +591,7 @@
 
 
                                             <div class="input-group input-group-flat">
-                                              <input type="number" class="form-control" autocomplete="off" value="10">
+                                              <input type="number"min="0" class="form-control" autocomplete="off" value="10">
                                               <span class="input-group-text">
                                                 <kbd>%</kbd>
                                               </span>
@@ -607,12 +609,12 @@
                                           </select>
 
                                         </td>
-                                        <td>成都公司</td>
+                                        <td>暂无</td>
                                               <td>
 
 
                                             <div class="input-group input-group-flat">
-                                              <input type="number" class="form-control" autocomplete="off" value="10">
+                                              <input type="number" min="0" class="form-control" autocomplete="off" value="10">
                                               <span class="input-group-text">
                                                 <kbd>%</kbd>
                                               </span>
@@ -630,12 +632,12 @@
                                           </select>
 
                                         </td>
-                                        <td></td>
+                                        <td>暂无</td>
                                               <td>
 
 
                                             <div class="input-group input-group-flat">
-                                              <input type="number" class="form-control" autocomplete="off" value="30">
+                                              <input type="number" min="0" class="form-control" autocomplete="off" value="30">
                                               <span class="input-group-text">
                                                 <kbd>%</kbd>
                                               </span>
@@ -653,12 +655,12 @@
                                           </select>
 
                                         </td>
-                                        <td></td>
+                                        <td>暂无</td>
                                               <td>
 
 
                                             <div class="input-group input-group-flat">
-                                              <input type="number" class="form-control" autocomplete="off" value="30">
+                                              <input type="number" min="0" class="form-control" autocomplete="off" value="30">
                                               <span class="input-group-text">
                                                 <kbd>%</kbd>
                                               </span>
@@ -676,12 +678,12 @@
                                           </select>
 
                                         </td>
-                                        <td></td>
+                                        <td>暂无</td>
                                               <td>
 
 
                                             <div class="input-group input-group-flat">
-                                              <input type="number" class="form-control" autocomplete="off" value="10">
+                                              <input type="number"  min="0" class="form-control" autocomplete="off" value="10">
                                               <span class="input-group-text">
                                                 <kbd>%</kbd>
                                               </span>
@@ -697,12 +699,12 @@
                                           <select type="text" class="form-select" placeholder="查询客户" id="employer6" autocomplete="off" name="appUserId">
                                           </select>
                                         </td>
-                                        <td></td>
+                                        <td>暂无</td>
                                               <td>
 
 
                                             <div class="input-group input-group-flat">
-                                              <input type="number" class="form-control" autocomplete="off" value="10">
+                                              <input type="number" min="0" class="form-control" autocomplete="off" value="10">
                                               <span class="input-group-text">
                                                 <kbd>%</kbd>
                                               </span>
@@ -719,7 +721,9 @@
                                     
                                     </tbody>
                                   </table>
-                                  
+                                  <div id="totalstr" style="color: red;">
+
+                                  </div>
                                 </div>
                               </div>
 
@@ -797,88 +801,14 @@
 
                     <div class="col-lg-6" >
                         <div class="card col-lg-12">
-                          <div class="card-body row">
+                          <div class="card-body row" id="displayData">
 
 
-                            <div class="col-lg-6 ">
-                              <div class="card">
-                                <div class="card-header">
-                                  <span style="color: red;"> 
-                                    张三-60%-600-60000 <br>
-                                    李四-60%-600-60000
-                                  </span>
-                             
-                                  <div class="ms-auto">
-                                     <a href="#" class="btn btn-blue btn-sm">编辑</a>
-                                  <a href="#" class="btn btn-blue btn-sm">删除</a>
-                                  </div>
-
-                                 
-                                </div>
-                                <div class="card-body">
-                                  <dl class="row">  
-                                    <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
-                                     <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
-                                     <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
-                                     <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
-                                     <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
-                                     <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
-                                    
-                                  </dl>
-                                 
-
-
-                                </div>
-
-                              </div>
-                              
-
-                            </div>
+                           
 
 
 
-                            <div class="col-lg-6 ">
-                              <div class="card">
-                                <div class="card-header">
-                                      <span>
-                                    人选：无 <br>
-                                    组内分配
-                                  </span>
-                                    &nbsp;
-                                  &nbsp;
-                                  <span style="color: red;"> 
-                                    张三-60%-600-60000 <br>
-                                    李四-60%-600-60000
-                                  </span>
-                                
-                              
-                             
-                                  <div class="ms-auto">
-                                     <a href="#" class="btn btn-blue btn-sm">编辑</a>
-                                  <a href="#" class="btn btn-blue btn-sm">删除</a>
-                                  </div>
-
-                                 
-                                </div>
-                                <div class="card-body">
-                                  <dl class="row">  
-                                    <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
-                                     <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
-                                     <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
-                                     <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
-                                     <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
-                                     <dt class="col-3">张三</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">300/3000</dd>
-                                    
-                                  </dl>
-                                 
-
-
-                                </div>
-
-                              </div>
-                              
-
-                            </div>
+                            
 
 
                         
@@ -922,9 +852,8 @@
                      
                         <div class="card-footer">
                                    
-                                  <span style="color: red;"> 
-                                    张三-60%-600-60000 <br>
-                                    李四-60%-600-60000
+                                  <span style="color: red;" id = 'totalALL'> 
+                                    
                                   </span>
 
                         </div>
@@ -973,11 +902,18 @@
 
 
         <script>
-          let tomins ={employer1,employer2,employer3,employer4,employer5,employer6};
+          let tomins =[];
           let customerMember;
           let allotFeeSpan,realAllotFeeInput,allocatedAmount   = 0;
+          const inputs = document.querySelectorAll('#calcData input[type="number"]');
       document.addEventListener('DOMContentLoaded', function() {
            
+
+        // 初始化所有输入框
+        inputs.forEach(input => {
+            input.addEventListener('input', updateCalculations);
+            input.addEventListener('blur', enforceLimits);
+        });
 
          
           customerMember= new TomSelect('#appCustomer',{
@@ -1013,14 +949,14 @@
               render: {
                   option: function(item, escape) {
 
-                    console.log(item);
+                   
               return `<div><span class="dropdown-item-indicator"  >
               </span>${ escape(item.customerName) } / ${escape(item.fee)}</div>`;
           
                       
                   },
                   item: function(item, escape) {
-                    console.log(item);
+                   
               return `<div><span class="dropdown-item-indicator"  >
               </span>${ escape(item.customerName) } / ${escape(item.fee)}</div>`;
           
@@ -1042,6 +978,24 @@
             $('#allotFee').text( customerMember.options[value].fee || 0);
             $('#comName').val(customerMember.options[value].comName || '');
             $('#hkfee').val(customerMember.options[value].fee || 0);
+
+            let tpList= customerMember.options[value].tpList || [];
+            if(tpList.length>0){
+              let tpListHtml = '';
+              tpList.forEach((item,index)=>{
+                if(index==0){
+                  tpListHtml += `<option selected value="${item.tpId}">${item.talentName}</option>`; 
+                }else{
+                tpListHtml += `<option value="${item.tpId}">${item.talentName}</option>`;
+
+                }
+              }); 
+              $('#talentInfo').html(tpListHtml); 
+            }
+
+
+
+
         
           });
 
@@ -1146,31 +1100,6 @@
             }
 
 
-        function initWay(){
-
-
-            $('#nowAllotFee').text($('#realAllotFee').val());
-
-            $('#allotFee').text((allotFeeSpan- $('#realAllotFee').val()).toFixed(2));
-            
-
-
-
-            let user = JSON.parse(localStorage.getItem('user'));
-
-            for (let index = 1; index < 7; index++) {
-
-              tomins[index] = document.getElementById('employer' + index).tomselect;
-              tomins[index].addOption({
-                      userId: user.userId,
-                      name: user.name,
-                    });
-              
-                     tomins[index].addItem(user.userId)
-            }
-
- 
-        }
 
         </script>
 

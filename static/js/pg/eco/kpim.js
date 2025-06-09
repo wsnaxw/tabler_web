@@ -22,13 +22,10 @@ $(function(){
   
 
 
-
     // console.log('customerId:'+customerId)
     //默认进行分页数据查询
     getPage(1);
 })
-
-
 
 
 
@@ -45,7 +42,7 @@ function getFormDate() {
   }
   let newJsonData = removeEmptyValues(object);
 
-  console.log(newJsonData);
+  
 
   return newJsonData;
 
@@ -450,29 +447,522 @@ function checkDetails(id) {
   }
 }
 
-function editSalary(id) {
-  const data = JSON.parse(sessionStorage.getItem(id));
-  if (data) {
-    $('#addtrip input, #addtrip textarea').each(function() {
-      const name = $(this).attr('name');
-      if (name && data[name] !== undefined) {
-        $(this).val(data[name]).prop('disabled', false);
-      }
-    });
-    if (!$('#addtrip input[name="userId"]').length) {
-      $('#addtrip').append('<input type="hidden" name="userId" value="' + data.userId + '">');
-    } else {
-      $('#addtrip input[name="userId"]').val(data.userId);
-    }
-    $("#totalDays").prop('disabled', false);
-    $("#addtrip").modal('show');
+
+let isTrue = false;
+function initWay(){
+
+
+  if( $('#allotFee').text()=='0'||allotFeeSpan==0){
+    return;
   }
-}
+
+
+  if($('#realAllotFee').val()==0){
+
+      $('#nowAllotFee').text(allotFeeSpan);
+      $('#realAllotFee').val(allotFeeSpan);
+      allotFeeSpan=0;
+       $('#allotFee').text(allotFeeSpan);
+
+  }else{
+      $('#nowAllotFee').text($('#realAllotFee').val());
+      $('#allotFee').text((allotFeeSpan- $('#realAllotFee').val()).toFixed(2));
+      allotFeeSpan = (allotFeeSpan- $('#realAllotFee').val()).toFixed(2);
+  }
 
 
 
-function initAdd(){
+
+
+  let user = JSON.parse(localStorage.getItem('user'));
+  for (let index = 0; index < 6; index++) {
+
+      tomins[index] = document.getElementById('employer' + (index+1)).tomselect;
+      tomins[index].addOption({
+           userId: user.userId,
+          name: user.name,
+      });
+              
+    tomins[index].addItem(user.userId);
+
+
+     tomins[index].on('change', function() {
+        confirmUserKpi()
+     })
+
+  }
+
+  const table = document.getElementById('calcData');
+  const rows = table.querySelectorAll('tr');
+
+    rows.forEach((row, index) => {
+
+    const cells = row.querySelectorAll('td');
+    cells[2].textContent = user.comName;
+
+    })
+
+isTrue=true;
+
+    confirmUserKpi()  
+    
+
+
+
+
+
+  }
+
+
+
+  function confirmUserKpi(){
+
+    let rate = $('#tcbl').val();
+    let serviceFee = $('#realAllotFee').val();
+
+
+    let kpiUserInfos = [];
+
+    const jsonData = {
+      "rate": rate,
+      "serviceFee": serviceFee,
+    }
+
+
+  const table = document.getElementById('calcData');
+  const rows = table.querySelectorAll('tr');
+
+    rows.forEach((row, index) => {
+
+    const cells = row.querySelectorAll('td');
+    const percentageInput = cells[3].querySelector('input');
+                    const percentage = parseInt(percentageInput.value);
+
+    let selectEl = tomins[index];
+
+
+
+      kpiUserInfos.push({
+        userId: selectEl.options[selectEl.getValue()].userId,
+        userName: selectEl.options[selectEl.getValue()].name,
+        rate:percentage
+      })
+
+
+
+    })
+
+
+  
+
+    jsonData.kpiUserInfos = kpiUserInfos;
+      console.log(jsonData)
+
+
+
+
+        const options = {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      'token':localStorage.getItem('token')
+      },
+      body: JSON.stringify(jsonData),
+      };
+
+      var url = baseUri+'/eco/confirmUserKpi';
+  fetch(url,options)
+      .then(response => response.json())
+      .then(json => {
+          // console.log(json)
+          if(json.code==0){
+              
+            console.log(json.data)
+
+              const table = document.getElementById('calcData');
+              const rows = table.querySelectorAll('tr');
+
+                rows.forEach((row, index) => {
+
+                const cells = row.querySelectorAll('td');
+
+                cells[4].textContent = parseFloat(json.data[index].kpiFee).toFixed(2);
+                cells[5].textContent = parseFloat(json.data[index].commissionFee).toFixed(2);
+
+                })
+
+
+                const mergedData = {}; 
+                let totalKpiFee = 0;
+                let totalCommissionFee = 0;
+                totalstr = '';
+                json.data.forEach(item => {
+                                const userId = item.userId;
+                                
+                                if (!mergedData[userId]) {
+                                    mergedData[userId] = {
+                                        userId: userId,
+                                        userName: item.userName,
+                                        kpiFee: 0,
+                                        commissionFee: 0,
+                                        count: 0,
+                                        rate:0
+                                    };
+                                }
+                                
+                                // 累加金额
+                                mergedData[userId].kpiFee += parseFloat(item.kpiFee);
+                                mergedData[userId].commissionFee += parseFloat(item.commissionFee);
+                                mergedData[userId].rate+= parseFloat(item.rate);
+                                mergedData[userId].count++;
+                                
+                                // 累加总计
+                                totalKpiFee += parseFloat(item.kpiFee);
+                                totalCommissionFee += parseFloat(item.commissionFee);
+                                
+                    });
+
+                            console.log(mergedData)
+
+                            Object.keys(mergedData).forEach(key => {
+                            
+                              totalstr +=`${mergedData[key].userName} : ${mergedData[key].rate.toFixed(2)}%-${mergedData[key].kpiFee.toFixed(2)} / ${mergedData[key].commissionFee.toFixed(2)} <br>`;
+                            })
+
+                            totalstr+=`总计：${totalKpiFee.toFixed(2)} / ${totalCommissionFee.toFixed(2)}`;
+
+                            $('#totalstr').html(totalstr);
+                            
+
+        
+                }else{
+                    showMessage(1,"计算失败")
+                }
+
+
+
+      }).catch((error)=>{
+        console.log(error)
+      });
+
+
+
+
+
+
+
+
+
+
+  }
+
+ 
+
+ 
  
 
 
+const MAX_TOTAL = 100;
+
+
+        function updateCalculations() {
+          
+
+        const remainingDisplay = document.getElementById('remaining');
+
+            let sum = 0;
+            inputs.forEach(input => {
+                sum += Number(Math.max(0, Number(input.value) || 0)) || 0;
+            });
+
+            // 更新显示
+       
+            const remaining = Math.max(0, MAX_TOTAL - sum);
+
+            console.log(remainingDisplay)
+
+            remainingDisplay.textContent = remaining || 0;
+            
+            // 高亮超额情况
+            remainingDisplay.className = sum > MAX_TOTAL ? 'error' : '';
+             confirmUserKpi();
+        }
+
+        function enforceLimits() {
+            let sum = 0;
+            const activeInputs = [];
+            
+            // 计算非当前输入框的总和
+            inputs.forEach(input => {
+                if (input !== this) {
+                    sum += Number(Math.max(0, Number(input.value) || 0)) || 0;
+                } else {
+                    activeInputs.push(input);
+                }
+            });
+
+            // 对当前输入框应用限制
+            activeInputs.forEach(input => {
+                const maxAllowed = Math.max(0, MAX_TOTAL - sum);
+                if (Number(Math.max(0, Number(input.value) || 0)) > maxAllowed) {
+                    input.value = maxAllowed;
+                }
+            });
+
+            updateCalculations();
+            confirmUserKpi();
+        }
+
+let allotInfos = [];
+let count=0
+let serviceFeeTatol = 0;
+let commissionFeeTotal = 0;
+let kpiUserInfosAll = [];
+let kpiUserInfosOne = [];
+function confirmAllot(){
+
+  if(!isTrue){
+    return;
+  }
+  isTrue= false;
+  let user = JSON.parse(localStorage.getItem('user'));
+  let kpiUserInfos = [];
+
+  
+    let rate = $('#tcbl').val();
+    let serviceFee = $('#realAllotFee').val();
+
+
+  const table = document.getElementById('calcData');
+  const rows = table.querySelectorAll('tr');
+
+    rows.forEach((row, index) => {
+
+    const cells = row.querySelectorAll('td');
+    const percentageInput = cells[3].querySelector('input');
+                    const percentage = parseInt(percentageInput.value);
+
+    let selectEl = tomins[index];
+
+        var selectElement = $('#talentInfo');
+        var selectedOption = selectElement.find('option:selected');
+        let talentId= '';
+        let talentName = '';
+        if (selectedOption.length > 0 && selectedOption.val()) {
+            // 有选中值的情况
+             talentId = selectedOption.val();
+             talentName = selectedOption.text();
+        } 
+
+      kpiUserInfos.push({
+        userId: selectEl.options[selectEl.getValue()].userId,
+        userName: selectEl.options[selectEl.getValue()].name,
+        rate:percentage,
+        type:$('#allotType').val(),
+        typeName:$('#allotType option:selected').text(),
+        commissionFee: cells[5].textContent,
+        kpiFee: cells[4].textContent,
+        serviceFee: serviceFee,
+        comId:user.comId,
+        comName:user.comName,
+        talentId:talentId,
+        talentName:talentName,
+        comisType:cells[0].textContent,
+      })
+
+        kpiUserInfosAll.push({
+        userId: selectEl.options[selectEl.getValue()].userId,
+        userName: selectEl.options[selectEl.getValue()].name,
+        rate:percentage,
+        type:$('#allotType').val(),
+        typeName:$('#allotType option:selected').text(),
+        commissionFee: cells[5].textContent,
+        kpiFee: cells[4].textContent,
+        serviceFee: serviceFee,
+        comId:user.comId,
+        comName:user.comName,
+        talentId:talentId,
+        talentName:talentName,
+        comisType:cells[0].textContent,
+      })
+
+            
+
+    })
+
+    let id = 'displayData'+count;
+
+    kpiUserInfosOne.push({
+      id:kpiUserInfos,
+    })
+
+
+    const mergedData = {}; 
+           
+                totalstr = '';
+                kpiUserInfos.forEach(item => {
+                                const userId = item.userId;
+                                
+                                if (!mergedData[userId]) {
+                                    mergedData[userId] = {
+                                        userId: userId,
+                                        userName: item.userName,
+                                        kpiFee: 0,
+                                        commissionFee: 0,
+                                        count: 0,
+                                        rate:0
+                                    };
+                                }
+                                
+                                // 累加金额
+                                mergedData[userId].kpiFee += parseFloat(item.kpiFee);
+                                mergedData[userId].commissionFee += parseFloat(item.commissionFee);
+                                mergedData[userId].rate+= parseFloat(item.rate);
+                                mergedData[userId].count++;
+                                
+                                // 累加总计
+                
+                                
+                    });
+
+                            console.log(mergedData)
+
+                            Object.keys(mergedData).forEach(key => {
+                            
+                              totalstr +=`${mergedData[key].userName} : ${mergedData[key].rate.toFixed(2)}%-${mergedData[key].kpiFee.toFixed(2)} / ${mergedData[key].commissionFee.toFixed(2)} <br>`;
+                            })
+
+                  
+
+
+
+
+
+
+
+                const mergedDataAll = {}; 
+                let totalKpiFee = 0;
+                let totalCommissionFee = 0;
+                let totalstrALL = '';
+                kpiUserInfosAll.forEach(item => {
+                                const userId = item.userId;
+                                
+                                if (!mergedDataAll[userId]) {
+                                    mergedDataAll[userId] = {
+                                        userId: userId,
+                                        userName: item.userName,
+                                        kpiFee: 0,
+                                        commissionFee: 0,
+                                        count: 0,
+                                        rate:0
+                                    };
+                                }
+                                
+                                // 累加金额
+                                mergedDataAll[userId].kpiFee += parseFloat(item.kpiFee);
+                                mergedDataAll[userId].commissionFee += parseFloat(item.commissionFee);
+                                mergedDataAll[userId].rate+= parseFloat(item.rate);
+                                mergedDataAll[userId].count++;
+                                
+                                // 累加总计
+                                totalKpiFee += parseFloat(item.kpiFee);
+                                totalCommissionFee += parseFloat(item.commissionFee);
+                                
+                    });
+
+
+                            Object.keys(mergedDataAll).forEach(key => {
+                            
+                              totalstrALL +=`${mergedDataAll[key].userName} : ${mergedDataAll[key].rate.toFixed(2)}%-${mergedDataAll[key].kpiFee.toFixed(2)} / ${mergedDataAll[key].commissionFee.toFixed(2)} <br>`;
+                            })
+
+                             totalstrALL += `总计：${totalKpiFee.toFixed(2)} / ${totalCommissionFee.toFixed(2)}`;
+
+                              console.log('kpiUserInfosAll',kpiUserInfosAll)
+
+                              $('#totalALL').html(totalstrALL);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    let str = `<div class="col-lg-6 " id="displayData${count}">
+                              <div class="card">
+                                <div class="card-header">
+                                      <span>
+                                    人选：${kpiUserInfos[0].talentName || '暂无  '} <br>
+                                    ${kpiUserInfos[0].typeName} 
+                                  </span>
+                                    &nbsp;
+                                  &nbsp;
+                                  <span style="color: red;"> 
+                                    ${totalstr}
+                                  </span>
+                             
+                                            
+                                  <div class="ms-auto">
+                                     <a  class="btn btn-blue btn-sm"  onclick='editinfo("displayData${count}")'>编辑</a>
+                                  <a  class="btn btn-danger btn-sm" onclick='delinfo("displayData${count}")'>删除</a>
+                                  </div>
+
+
+                                 
+                                </div>
+                                <div class="card-body">
+                                  <dl class="row">  
+                                    <dt class="col-3">${kpiUserInfos[0].userName}</dt><dd class="col-3">${kpiUserInfos[0].comisType}</dd> <dt class="col-3">${kpiUserInfos[0].rate}%</dt><dd class="col-3">${kpiUserInfos[0].commissionFee}/${kpiUserInfos[0].kpiFee}</dd>
+                                     <dt class="col-3">${kpiUserInfos[1].userName}</dt><dd class="col-3">${kpiUserInfos[1].comisType}</dd> <dt class="col-3">${kpiUserInfos[1].rate}%</dt><dd class="col-3">${kpiUserInfos[1].commissionFee}/${kpiUserInfos[1].kpiFee}</dd>
+                                     <dt class="col-3">${kpiUserInfos[2].userName}</dt><dd class="col-3">${kpiUserInfos[2].comisType}</dd> <dt class="col-3">${kpiUserInfos[2].rate}%</dt><dd class="col-3">${kpiUserInfos[2].commissionFee}/${kpiUserInfos[2].kpiFee}</dd>
+                                     <dt class="col-3">${kpiUserInfos[3].userName}</dt><dd class="col-3">${kpiUserInfos[3].comisType}</dd> <dt class="col-3">${kpiUserInfos[3].rate}%</dt><dd class="col-3">${kpiUserInfos[3].commissionFee}/${kpiUserInfos[3].kpiFee}</dd>
+                                     <dt class="col-3">${kpiUserInfos[4].userName}</dt><dd class="col-3">${kpiUserInfos[4].comisType}</dd> <dt class="col-3">${kpiUserInfos[4].rate}%</dt><dd class="col-3">${kpiUserInfos[4].commissionFee}/${kpiUserInfos[4].kpiFee}</dd>
+                                     <dt class="col-3">${kpiUserInfos[5].userName}</dt><dd class="col-3">${kpiUserInfos[5].comisType}</dd> <dt class="col-3">${kpiUserInfos[5].rate}%</dt><dd class="col-3">${kpiUserInfos[5].commissionFee}/${kpiUserInfos[5].kpiFee}</dd>
+                                    
+                                  </dl>
+                                 
+
+
+                                </div>
+
+                              </div>
+                              
+
+                            </div>`;
+    
+  
+
+
+
+
+
+
+    kpiUserInfos.forEach((item,index)=>{
+      
+    })
+
+
+
+
+    
+
+    console.log(kpiUserInfos)
+
+
+
+
+    $('#displayData').append(str);
+count++;
 }
