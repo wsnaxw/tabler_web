@@ -472,12 +472,7 @@ function editSalary(id) {
 
 
 function initAdd(){
+ 
 
 
-  //自动填充当前登录人
-  $('#addtrip input, #addtrip textarea').each(function() {
-    const name = $(this).attr('name');
-    $(this).prop('disabled', false);
-  
-  });
 }
