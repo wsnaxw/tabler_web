@@ -268,7 +268,7 @@ function getPage(pageNo){
 
 function toNumber(str){
   const num = Number(str);
-  return num.toFixed(2);
+  return num.toFixed(3);
 }
 
 function clearForm(){
@@ -452,7 +452,8 @@ let isTrue = false;
 function initWay(){
 
 
-  if( $('#allotFee').text()=='0'||allotFeeSpan==0){
+  if( parseFloat($('#allotFee').text()).toFixed(3)=='0.000'&&allotFeeSpan<=0){
+    allotFeeSpan==0;
     return;
   }
 
@@ -466,8 +467,8 @@ function initWay(){
 
   }else{
       $('#nowAllotFee').text($('#realAllotFee').val());
-      $('#allotFee').text((allotFeeSpan- $('#realAllotFee').val()).toFixed(2));
-      allotFeeSpan = (allotFeeSpan- $('#realAllotFee').val()).toFixed(2);
+      $('#allotFee').text((allotFeeSpan- $('#realAllotFee').val()).toFixed(3));
+      allotFeeSpan = (allotFeeSpan- $('#realAllotFee').val()).toFixed(3);
   }
 
 
@@ -586,8 +587,8 @@ isTrue=true;
 
                 const cells = row.querySelectorAll('td');
 
-                cells[4].textContent = parseFloat(json.data[index].kpiFee).toFixed(2);
-                cells[5].textContent = parseFloat(json.data[index].commissionFee).toFixed(2);
+                cells[4].textContent = parseFloat(json.data[index].kpiFee).toFixed(3);
+                cells[5].textContent = parseFloat(json.data[index].commissionFee).toFixed(3);
 
                 })
 
@@ -626,10 +627,10 @@ isTrue=true;
 
                             Object.keys(mergedData).forEach(key => {
                             
-                              totalstr +=`${mergedData[key].userName} : ${mergedData[key].rate.toFixed(2)}%-${mergedData[key].kpiFee.toFixed(2)} / ${mergedData[key].commissionFee.toFixed(2)} <br>`;
+                              totalstr +=`${mergedData[key].userName} : ${mergedData[key].rate.toFixed(3)}%-${mergedData[key].kpiFee.toFixed(3)} / ${mergedData[key].commissionFee.toFixed(3)} <br>`;
                             })
 
-                            totalstr+=`总计：${totalKpiFee.toFixed(2)} / ${totalCommissionFee.toFixed(2)}`;
+                            totalstr+=`总计：${totalKpiFee.toFixed(3)} / ${totalCommissionFee.toFixed(3)}`;
 
                             $('#totalstr').html(totalstr);
                             
@@ -718,7 +719,7 @@ let count=0
 let serviceFeeTatol = 0;
 let commissionFeeTotal = 0;
 let kpiUserInfosAll = [];
-let kpiUserInfosOne = [];
+let kpiUserInfosOne = {};
 function confirmAllot(){
 
   if(!isTrue){
@@ -770,35 +771,16 @@ function confirmAllot(){
         comisType:cells[0].textContent,
       })
 
-        kpiUserInfosAll.push({
-        userId: selectEl.options[selectEl.getValue()].userId,
-        userName: selectEl.options[selectEl.getValue()].name,
-        rate:percentage,
-        type:$('#allotType').val(),
-        typeName:$('#allotType option:selected').text(),
-        commissionFee: cells[5].textContent,
-        kpiFee: cells[4].textContent,
-        serviceFee: serviceFee,
-        comId:user.comId,
-        comName:user.comName,
-        talentId:talentId,
-        talentName:talentName,
-        comisType:cells[0].textContent,
-      })
 
-            
 
     })
 
-    let id = 'displayData'+count;
+    let allotId = 'displayData'+count;
 
-    kpiUserInfosOne.push({
-      id:kpiUserInfos,
-    })
-
-
+    kpiUserInfosOne[allotId] = kpiUserInfos;
+   
     const mergedData = {}; 
-           
+
                 totalstr = '';
                 kpiUserInfos.forEach(item => {
                                 const userId = item.userId;
@@ -829,7 +811,7 @@ function confirmAllot(){
 
                             Object.keys(mergedData).forEach(key => {
                             
-                              totalstr +=`${mergedData[key].userName} : ${mergedData[key].rate.toFixed(2)}%-${mergedData[key].kpiFee.toFixed(2)} / ${mergedData[key].commissionFee.toFixed(2)} <br>`;
+                              totalstr +=`${mergedData[key].userName} : ${mergedData[key].rate.toFixed(3)}%-${mergedData[key].kpiFee.toFixed(3)} / ${mergedData[key].commissionFee.toFixed(3)} <br>`;
                             })
 
                   
@@ -840,11 +822,21 @@ function confirmAllot(){
 
 
 
-                const mergedDataAll = {}; 
-                let totalKpiFee = 0;
+
+
+    const mergedDataAll = {};
+       let totalKpiFee = 0;
                 let totalCommissionFee = 0;
                 let totalstrALL = '';
-                kpiUserInfosAll.forEach(item => {
+
+         Object.keys(kpiUserInfosOne).forEach(key => {
+
+
+
+
+             
+             
+                kpiUserInfosOne[key].forEach(item => {
                                 const userId = item.userId;
                                 
                                 if (!mergedDataAll[userId]) {
@@ -871,21 +863,23 @@ function confirmAllot(){
                     });
 
 
-                            Object.keys(mergedDataAll).forEach(key => {
+                          
+
+
+
                             
-                              totalstrALL +=`${mergedDataAll[key].userName} : ${mergedDataAll[key].rate.toFixed(2)}%-${mergedDataAll[key].kpiFee.toFixed(2)} / ${mergedDataAll[key].commissionFee.toFixed(2)} <br>`;
+          })
+
+            Object.keys(mergedDataAll).forEach(key => {
+                            
+                              totalstrALL +=`${mergedDataAll[key].userName} : ${mergedDataAll[key].rate.toFixed(3)}%-${mergedDataAll[key].kpiFee.toFixed(3)} / ${mergedDataAll[key].commissionFee.toFixed(3)} <br>`;
                             })
 
-                             totalstrALL += `总计：${totalKpiFee.toFixed(2)} / ${totalCommissionFee.toFixed(2)}`;
+                             totalstrALL += `总计：${totalKpiFee.toFixed(3)} / ${totalCommissionFee.toFixed(3)}`;
 
                               console.log('kpiUserInfosAll',kpiUserInfosAll)
 
                               $('#totalALL').html(totalstrALL);
-
-
-
-
-
 
 
 
@@ -915,7 +909,7 @@ function confirmAllot(){
                              
                                             
                                   <div class="ms-auto">
-                                     <a  class="btn btn-blue btn-sm"  onclick='editinfo("displayData${count}")'>编辑</a>
+                                    
                                   <a  class="btn btn-danger btn-sm" onclick='delinfo("displayData${count}")'>删除</a>
                                   </div>
 
@@ -958,11 +952,174 @@ function confirmAllot(){
 
     
 
-    console.log(kpiUserInfos)
+    console.log(kpiUserInfosOne)
 
-
+   
 
 
     $('#displayData').append(str);
 count++;
+}
+
+
+function delinfo(id){
+
+ let returnFee = kpiUserInfosOne[id][0].serviceFee
+
+ allotFeeSpan = (parseFloat(allotFeeSpan) + parseFloat(returnFee)).toFixed(3);
+  $('#allotFee').text(allotFeeSpan);
+  isTrue=true;
+
+   $('#realAllotFee').val(0);
+
+
+  delete kpiUserInfosOne[id];
+
+  $('#displayData #' + id).remove();
+
+  $('#totalALL').html('');
+  //重新计算
+  if (Object.keys(kpiUserInfosOne).length === 0) {
+    console.log("JSON 是空的");
+} else {
+    const mergedDataAll = {};
+       let totalKpiFee = 0;
+                let totalCommissionFee = 0;
+                let totalstrALL = '';
+
+         Object.keys(kpiUserInfosOne).forEach(key => {
+
+
+
+
+             
+             
+                kpiUserInfosOne[key].forEach(item => {
+                                const userId = item.userId;
+                                
+                                if (!mergedDataAll[userId]) {
+                                    mergedDataAll[userId] = {
+                                        userId: userId,
+                                        userName: item.userName,
+                                        kpiFee: 0,
+                                        commissionFee: 0,
+                                        count: 0,
+                                        rate:0
+                                    };
+                                }
+                                
+                                // 累加金额
+                                mergedDataAll[userId].kpiFee += parseFloat(item.kpiFee);
+                                mergedDataAll[userId].commissionFee += parseFloat(item.commissionFee);
+                                mergedDataAll[userId].rate+= parseFloat(item.rate);
+                                mergedDataAll[userId].count++;
+                                
+                                // 累加总计
+                                totalKpiFee += parseFloat(item.kpiFee);
+                                totalCommissionFee += parseFloat(item.commissionFee);
+                                
+                    });
+
+
+                          
+
+
+
+                            
+          })
+
+            Object.keys(mergedDataAll).forEach(key => {
+                            
+                              totalstrALL +=`${mergedDataAll[key].userName} : ${mergedDataAll[key].rate.toFixed(3)}%-${mergedDataAll[key].kpiFee.toFixed(3)} / ${mergedDataAll[key].commissionFee.toFixed(3)} <br>`;
+                            })
+
+                             totalstrALL += `总计：${totalKpiFee.toFixed(3)} / ${totalCommissionFee.toFixed(3)}`;
+
+                              console.log('kpiUserInfosAll',kpiUserInfosAll)
+
+                              $('#totalALL').html(totalstrALL);
+
+
+}
+
+
+
+}
+
+
+function addKPi(){
+
+  //数据汇总
+
+
+  let jsonData={
+    sfId:customerMember.options[customerMember.getValue()].sfId,
+    customerId:customerMember.options[customerMember.getValue()].customerId,
+    customerName:customerMember.options[customerMember.getValue()].customerName,
+    serviceFee:customerMember.options[customerMember.getValue()].fee,
+    serviceType:customerMember.options[customerMember.getValue()].serviceType,
+    type:$("#tcfl").val(),
+    rate:$('#tcbl').val(),
+  }
+
+
+  console.log(jsonData)
+
+
+
+const mergedDataAll = {};
+       let totalKpiFee = 0;
+                let totalCommissionFee = 0;
+                let totalstrALL = '';
+
+         Object.keys(kpiUserInfosOne).forEach(key => {
+
+
+
+
+             
+             
+                kpiUserInfosOne[key].forEach(item => {
+
+                  kpiUserInfosAll.push(item);
+                                const userId = item.userId;
+                                
+                                if (!mergedDataAll[userId]) {
+                                    mergedDataAll[userId] = {
+                                        userId: userId,
+                                        userName: item.userName,
+                                        kpiFee: 0,
+                                        commissionFee: 0,
+                                        count: 0,
+                                        rate:0
+                                    };
+                                }
+                                
+                                // 累加金额
+                                mergedDataAll[userId].kpiFee += parseFloat(item.kpiFee);
+                                mergedDataAll[userId].commissionFee += parseFloat(item.commissionFee);
+                                mergedDataAll[userId].rate+= parseFloat(item.rate);
+                                mergedDataAll[userId].count++;
+                                
+                                // 累加总计
+                                totalKpiFee += parseFloat(item.kpiFee);
+                                totalCommissionFee += parseFloat(item.commissionFee);
+                                
+                    });
+
+
+                          
+
+
+
+                            
+          })
+
+
+          jsonData.allotPlan = kpiUserInfosAll;
+          jsonData.commissionFee = totalCommissionFee;
+
+  console.log(jsonData)
+
+
 }
