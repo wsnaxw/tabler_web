@@ -152,7 +152,7 @@ function getPage(pageNo){
 
                         <td>
                         
-                        <a class='btn btn-ghost btn-sm' onclick='checkDetails(${o.id})'>查看</a>
+                        <a class='btn btn-ghost btn-sm' onclick='checkDetails(${o.sourceId})'>查看</a>
                         
                         <a class='btn btn-danger btn-sm' onclick='deltrip(${o.id})'>退回</a>
                         
@@ -291,43 +291,6 @@ function searchList(){
 }
 
 
-function changetrip(id){
-  const options = {
-      method: 'POST',
-      headers: {
-      'Content-Type': 'application/json',
-      'token':localStorage.getItem('token')
-      },
-      body: JSON.stringify({
-        "id": id,
-        "state": 1
-      }),
-      };
-
-      var url = baseUri+'/home/changeTripState';
-  fetch(url,options)
-      .then(response => response.json())
-      .then(json => {
-          // console.log(json)
-          if(json.code==0){
-              
-      showMessage(0,'处理成功!!')
-
-      getPage(1)
-
-   
-          }else{
-              showMessage(1,"处理失败")
-          }
-
-
-
-      }).catch((error)=>{
-        console.log(error)
-      });
-
-
-}
 
 
 
@@ -369,83 +332,6 @@ fetch(url,options)
 
 
 
-
-function addTrip(){
-
-
-  let inputValue = {};
-
-  $('#addtrip input,#addtrip textarea').each(function() {
-    var $input = $(this);
-
- 
-    if ($input.attr('name') && $input.val()) {
-
-      if($input.attr('type')=='radio'){
-          if($input.is(':checked')){
-              inputValue[$input.attr('name')] = $input.val();
-          }
-          
-        }else{
-          inputValue[$input.attr('name')] = $input.val();
-          
-        }
-        
-      
-    }
-
-  });
-
-
-
-  const options = {
-    method: 'POST',
-    headers: {
-    'Content-Type': 'application/json',
-    'token':localStorage.getItem('token')
-    },
-    body: JSON.stringify(inputValue),
-    };
-
-    var url = baseUri+'/employ/addTrip';
-fetch(url,options)
-    .then(response => response.json())
-    .then(json => {
-        // console.log(json)
-        if(json.code==0){
-            
-    showMessage(0,'添加成功!!')
-    $("#addtrip").modal('hide')
-    getPage(1)
-        }else{
-            showMessage(1,"添加失败！")
-        }
-
-
-
-    }).catch((error)=>{
-        console.log(error)
-    });
-
-
-}
-
-function checkDetails(id) {
-  const data = JSON.parse(sessionStorage.getItem(id));
-  if (data) {
-    $('#addtrip input, #addtrip textarea').each(function() {
-      const name = $(this).attr('name');
-      if (name && data[name] !== undefined) {
-        $(this).val(data[name]).prop('disabled', true);
-      }
-      
-    });
-
-    $("#totalDays").prop('disabled', true);
-
-    $("#addtrip").modal('show');
-  }
-}
 
 
 let isTrue = false;
@@ -938,18 +824,6 @@ function confirmAllot(){
     
   
 
-
-
-
-
-
-    kpiUserInfos.forEach((item,index)=>{
-      
-    })
-
-
-
-
     
 
     console.log(kpiUserInfosOne)
@@ -1122,4 +996,265 @@ const mergedDataAll = {};
   console.log(jsonData)
 
 
+}
+
+
+
+function checkDetails(id){
+
+  
+  const options = {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    'token':localStorage.getItem('token')
+    },
+    body: JSON.stringify({'sourceId':id}),
+    };
+
+    var url = baseUri+'/eco/selectKpiFeeById';
+fetch(url,options)
+    .then(response => response.json())
+    .then(json => {
+        // console.log(json)
+        if(json.code==0){
+            
+            let data = json.data;
+            console.log(data)
+
+            let payTypestr = '';
+            if(data.payType==0){
+              payTypestr = '服务费'
+            }else if(data.payType==1){
+              payTypestr = '咨询费'
+            }else if(data.payType==2){
+              payTypestr = '首付款'
+            }else {
+              payTypestr = '其他'
+            }
+
+
+            let allotPlans = data.allotPlans;
+
+            let kpiUserInfosAll = allotPlans[0].kpiUserInfos;
+
+            let kpiusergroup = groupArray(kpiUserInfosAll, 6);
+            console.log(kpiusergroup)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            let mainStr = `<div class="row row-cards">
+                        <div class="col-lg-12  row">
+                          <div class="col-4 row">
+                             <label class="form-label wordbold col-3" >回款信息:</label>
+                              <div class="col"  >
+                                    <span> ${data.customerName}</span>
+                              </div>
+                          </div>
+
+                             <div class="col-4 row">
+                             <label class="form-label wordbold col-5" >回款金额/提成比例:</label>
+                              <div class="col"  >
+                                    ${data.serviceFee} / ${data.rate}%
+                              </div>
+                          </div>
+                              <div class="col-2 row">
+                             <label class="form-label wordbold col-6" >归属公司:</label>
+                              <div class="col"  >
+                                    ${data.comName}
+                              </div>
+                          </div>
+                              <div class="col-2 row">
+                             <label class="form-label wordbold col-6" >提成分类:</label>
+                              <div class="col"  >
+                                    ${payTypestr}
+                              </div>
+                          </div>
+                           
+                        
+                        </div>
+                        <hr>
+                        <div class="col-lg-12  row">
+
+                          <div class="col-lg-6 " id="displayData0">
+                              <div class="card">
+                                <div class="card-header">
+                                      <span>
+                                    人选：暂无   <br>
+                                    独立运作 
+                                  </span>
+                                    &nbsp;
+                                  &nbsp;
+                                  <span style="color: red;"> 
+                                    test : 100.000%-1000.000 / 150.000 <br>
+                                  </span>
+                             
+                                            
+                            
+
+
+                                 
+                                </div>
+                                <div class="card-body">
+                                  <dl class="row">  
+                                    <dt class="col-3">test</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">15.000/100.000</dd>
+                                     <dt class="col-3">test</dt><dd class="col-3">签约谈判</dd> <dt class="col-3">10%</dt><dd class="col-3">15.000/100.000</dd>
+                                     <dt class="col-3">test</dt><dd class="col-3">人选线索</dd> <dt class="col-3">30%</dt><dd class="col-3">45.000/300.000</dd>
+                                     <dt class="col-3">test</dt><dd class="col-3">人选推荐</dd> <dt class="col-3">30%</dt><dd class="col-3">45.000/300.000</dd>
+                                     <dt class="col-3">test</dt><dd class="col-3">职位运作</dd> <dt class="col-3">10%</dt><dd class="col-3">15.000/100.000</dd>
+                                     <dt class="col-3">test</dt><dd class="col-3">款项回收</dd> <dt class="col-3">10%</dt><dd class="col-3">15.000/100.000</dd>
+                                    
+                                  </dl>
+                                 
+
+
+                                </div>
+
+                              </div>
+                              
+
+                            </div>
+
+
+
+
+                       
+
+                        </div>
+                        <hr>
+                        <div class="card-footer"><span style="color: red;" id="totalALL">test : 100.000%-1000.000 / 150.000 <br>总计：1000.000 / 150.000</span></div>
+
+
+                      </div>`;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        $('#showdetailbody').html(mainStr);
+
+
+
+
+        }else{
+            showMessage(1,"查询失败")
+        }
+
+
+
+    }).catch((error)=>{
+        console.log(error)
+    });
+
+
+ $("#showdetail").modal('show')
+
+}
+
+
+function groupArray(data, groupSize) {
+    const groups = [];
+    for (let i = 0; i < data.length; i += groupSize) {
+        groups.push(data.slice(i, i + groupSize));
+    }
+    return groups;
 }
