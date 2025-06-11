@@ -154,7 +154,7 @@ function getPage(pageNo){
                         
                         <a class='btn btn-ghost btn-sm' onclick='checkDetails(${o.sourceId})'>查看</a>
                         
-                        <a class='btn btn-danger btn-sm' onclick='deltrip(${o.id})'>退回</a>
+                        <a class='btn btn-danger btn-sm' onclick='deltrip(${o.id})'>退款</a>
                         
                         </td>
        
