@@ -448,7 +448,7 @@
                       </div>
 
                       <div class="col-lg-5 mb-3 row" >
-                        <label class="form-label wordbold col-4 required " >员工姓名</label>
+                        <label class="form-label wordbold col-4 required " >服务顾问</label>
                         <div class="col"  >
                           <select type="text" class="form-select" placeholder="选择顾问" id="employer" autocomplete="off" name="appUserId">
                           </select>
@@ -465,194 +465,103 @@
                         
                       </div>
 
-                      <hr>
-
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold col-4 required " >基本工资</label>
+                      <div class="col-lg-5 mb-3 row" >
+                        <label class="form-label wordbold col-4 required " >归属公司</label>
                         <div class="col"  >
-                          <input type="text" class="form-control" name="baseSalary" >
+                          <input type="text" class="form-control" name="comName" id="comName" readonly >
                         </div>
                       </div>
 
-                      
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold required col-4" >提成金额</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="commissionFee" >
-                        </div>
-                      </div>
-                   
-                      
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold required col-4" >考勤天数</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="workDays" >
-                        </div>
-                      </div>
-                      <div class="col-lg-3 mb-3 row" > </div>
-
-
-
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold required col-4" >法定工作日</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="totalDays" id="totalDays" value="21.75" >
-                        </div>
-                      </div>
-
-                      
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold required col-4" >绩效工资</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="kpiFee" >
-                        </div>
-                      </div>
-                   
-                      
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold required col-4" >月度绩效</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="kpiFeeMonth" >
-                        </div>
-                      </div>
-                      <div class="col-lg-3 mb-3 row" > </div>
-
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold col-4" >交通补助</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="traffic" >
-                        </div>
-                      </div>
-
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold col-4" >餐补</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="food" >
-                        </div>
-                      </div>
                     
+                      <div class="col-lg-5 mb-3 row" >
+                        <label class="form-label wordbold col-4" >支付方式</label>
+                          <div class="col" >
+                          <select class="form-select" name="payWay">
+                            <option value="0">现金支付</option>
+                            <option value="1">支票转账</option>
+                            <option selected value="2">网银转账</option>
+                            <option value="3">其他方式</option>
+                            <option value="4">个人电汇</option>
+                          </select>
+                          </div>
+                        
+                      </div>
+
+                      <div class="col-lg-5 mb-3 row" >
+                           <label class="form-label wordbold col-4" >收入类型</label>
+                          <div class="col" >
+                          <select class="form-select"  name="payType">
+                            <option selected value="">全部</option>
+                            <option value="2">首付款</option>
+                            <option value="0">服务费</option>
+                            <option value="1">咨询费</option>
+                          </select>
+                          </div>
+                      </div>
+
                     
-
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold col-4" >其他补助</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="other" >
-                        </div>
+                      <div class="col-lg-5 mb-3 row" >
+                         <label class="form-label wordbold col-4" >业务类型</label>
+                          <div class="col" >
+                          <select class="form-select"   name="serviceType">
+                            <option selected value="0">猎头业务</option>
+                            <option value="1">咨询业务</option>
+                            <option value="2">其他</option>
+                          </select>
+                          </div>
+                        
                       </div>
 
-                      <div class="col-lg-3 mb-3 row" > </div>
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold col-4" >合计扣款</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="reduceFee" >
-                        </div>
+                      <div class="col-lg-5 mb-3 row" >
+                            <label class="form-label wordbold col-4" >回款期限</label>
+                          <div class="col" >
+                          <select class="form-select"  name="dateType">
+                            <option selected value="全款">全款</option>
+                            <option value="一期">一期</option>
+                            <option value="二期">二期</option>
+                            <option value="三期">三期</option>
+                          </select>
+                          </div>
                       </div>
-                      <div class="col-lg-3 mb-3 row" style="color: red;">
-                        <label class="form-label wordbold col-4" >实发工资</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="salary" >
-                        </div>
+
+                    
+                      <div class="col-lg-5 mb-3 row" >
+                        <label class="form-check form-switch">
+                                  <input class="form-check-input" type="checkbox" name="range" id="range" onclick="isRange()">
+                                  <span class="form-check-label">是否关联人选</span>
+                              </label>
+                        
                       </div>
-                      <!-- <div class="col-lg-3 mb-3 row" style="display: none;">
-                        <a href="#" class="btn btn-success">计算工资</a>
-                      </div> -->
+
+
+
+
+
+
 
 
 
                       <hr>
 
-
-                      
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold col-4" >病假扣款</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="sickFee" >
+                      <div class="col-lg-12 mb-3 row" id="talentDiv" aria-readonly="true">
+                        <div class="mb-3 col-lg-10 row">
+                        <label class="col-2 form-label required wordbold" >人选信息</label>
+                        <div class="col">
+                          <select type="text" class="form-select" placeholder="人选查询" id="talentInfo" autocomplete="off" multiple>
+                          </select>
+                          <div class="invalid-feedback">不能为空！</div>
                         </div>
                       </div>
-                    
-                    
-
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold col-4" >事假扣款</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="thingFee" >
-                        </div>
                       </div>
-
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold col-4" >迟到早退</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="lateEarlyFee" >
-                        </div>
-                      </div>
-                      <div class="col-lg-3 mb-3 row" > </div>
-                      
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold col-4" >其他扣款</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="otherDeduction" >
-                        </div>
-                      </div>
-                 
-
 
                       <hr>
 
 
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold col-4 required " >社保扣除</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="socialInsurance" >
-                        </div>
-                      </div>
-
                       
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold required col-4" >公司社保</label>
+                      <div class="col-lg-10 mb-3 row" >
+                        <label class="form-label wordbold col-2  " >备注</label>
                         <div class="col"  >
-                          <input type="text" class="form-control" name="companyInsurance" >
-                        </div>
-                      </div>
-                   
-                      
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold required col-4" >公积金</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="accumulationFund" >
-                        </div>
-                      </div>
-                      <div class="col-lg-3 mb-3 row" > </div>
-
-
-
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold required col-4" >公司公积金</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="companyAccumulation" >
-                        </div>
-                      </div>
-
-                      
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold required col-4" >个税</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="tax" >
-                        </div>
-                      </div>
-                   
-                      
-                      <div class="col-lg-3 mb-3 row" >
-                        <label class="form-label wordbold  col-4" >员工成本</label>
-                        <div class="col"  >
-                          <input type="text" class="form-control" name="employCost" >
-                        </div>
-                      </div>
-                      <div class="col-lg-3 mb-3 row" > </div>
-                   
-                      <div class="col-lg-8 mb-3 row" >
-                        <label class="form-label wordbold  col-2" >提醒内容</label>
-                        <div class="col"  >
-                          <textarea class="form-control" name="remark" rows="4"></textarea>
+                          <textarea name="remark" class="form-control"  rows="5"></textarea>
                         </div>
                       </div>
                     
@@ -698,6 +607,7 @@
         <script>
           let employer;
           let customerMember;
+          let talentInfo;
       document.addEventListener('DOMContentLoaded', function() {
            
 
@@ -803,6 +713,73 @@
           });
 
 
+customerMember.on('change', function(value) {
+   
+            // 在这里执行你的逻辑
+
+            
+            $('#comName').val(customerMember.options[value].comName || '');
+
+          
+
+
+
+
+        
+          });
+
+          talentInfo= new TomSelect('#talentInfo',{
+              valueField: 'id',
+              labelField: 'talentName',
+              searchField: 'talentName',
+              // fetch remote data
+              load: function(query, callback) {
+let cust = customerMember.getValue();
+           let empl = employer.getValue();
+
+             if(cust=='' && empl==''){
+            showMessage(1,'请先确定客户和顾问')
+            talentInfo.clear();
+            return;
+           }
+       const options = {
+                      method: 'POST',
+                      headers: {
+                      'Content-Type': 'application/json',
+                      'token':localStorage.getItem('token')
+                      },
+                      body: JSON.stringify({ 'name': query,'customerId':cust,'appUserId':empl }),
+                      };
+
+                      var url = baseUri+'/eco/selectTPListForInvoice';
+                  fetch(url,options)
+                      .then(response => response.json())
+                      .then(json => {
+                        var item = json.data.list;
+              
+                          callback(item);
+                      }).catch((error)=>{
+                          callback();
+                      });
+                 
+
+              },
+              // custom rendering functions for options and items
+              render: {
+                  option: function(item, escape) {
+              return `<div><span class="dropdown-item-indicator"  >
+              </span>${ escape(item.talentName) }</div>`;
+          
+                      
+                  },
+                  item: function(item, escape) {
+              return `<div><span class="dropdown-item-indicator"  >
+              </span>${ escape(item.talentName) }</div>`;
+          
+                  }
+              },
+            
+          });
 
 
 
@@ -811,6 +788,9 @@
 
 
 
+
+
+            talentInfo.disable();
 
 
 

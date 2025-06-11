@@ -803,13 +803,13 @@ function confirmAllot(){
                                  
                                 </div>
                                 <div class="card-body">
-                                  <dl class="row">  
-                                    <dt class="col-3">${kpiUserInfos[0].userName}</dt><dd class="col-3">${kpiUserInfos[0].comisType}</dd> <dt class="col-3">${kpiUserInfos[0].rate}%</dt><dd class="col-3">${kpiUserInfos[0].commissionFee}/${kpiUserInfos[0].kpiFee}</dd>
-                                     <dt class="col-3">${kpiUserInfos[1].userName}</dt><dd class="col-3">${kpiUserInfos[1].comisType}</dd> <dt class="col-3">${kpiUserInfos[1].rate}%</dt><dd class="col-3">${kpiUserInfos[1].commissionFee}/${kpiUserInfos[1].kpiFee}</dd>
-                                     <dt class="col-3">${kpiUserInfos[2].userName}</dt><dd class="col-3">${kpiUserInfos[2].comisType}</dd> <dt class="col-3">${kpiUserInfos[2].rate}%</dt><dd class="col-3">${kpiUserInfos[2].commissionFee}/${kpiUserInfos[2].kpiFee}</dd>
-                                     <dt class="col-3">${kpiUserInfos[3].userName}</dt><dd class="col-3">${kpiUserInfos[3].comisType}</dd> <dt class="col-3">${kpiUserInfos[3].rate}%</dt><dd class="col-3">${kpiUserInfos[3].commissionFee}/${kpiUserInfos[3].kpiFee}</dd>
-                                     <dt class="col-3">${kpiUserInfos[4].userName}</dt><dd class="col-3">${kpiUserInfos[4].comisType}</dd> <dt class="col-3">${kpiUserInfos[4].rate}%</dt><dd class="col-3">${kpiUserInfos[4].commissionFee}/${kpiUserInfos[4].kpiFee}</dd>
-                                     <dt class="col-3">${kpiUserInfos[5].userName}</dt><dd class="col-3">${kpiUserInfos[5].comisType}</dd> <dt class="col-3">${kpiUserInfos[5].rate}%</dt><dd class="col-3">${kpiUserInfos[5].commissionFee}/${kpiUserInfos[5].kpiFee}</dd>
+                                  <dl class="row"  style="text-align: left">  
+                                    <dt class="col-3">${kpiUserInfos[0].userName}</dt><dd class="col-3">${kpiUserInfos[0].comisType}</dd> <dt class="col-2">${kpiUserInfos[0].rate}%</dt><dd class="col-4">${kpiUserInfos[0].commissionFee}/${kpiUserInfos[0].kpiFee}</dd>
+                                     <dt class="col-3">${kpiUserInfos[1].userName}</dt><dd class="col-3">${kpiUserInfos[1].comisType}</dd> <dt class="col-2">${kpiUserInfos[1].rate}%</dt><dd class="col-4">${kpiUserInfos[1].commissionFee}/${kpiUserInfos[1].kpiFee}</dd>
+                                     <dt class="col-3">${kpiUserInfos[2].userName}</dt><dd class="col-3">${kpiUserInfos[2].comisType}</dd> <dt class="col-2">${kpiUserInfos[2].rate}%</dt><dd class="col-4">${kpiUserInfos[2].commissionFee}/${kpiUserInfos[2].kpiFee}</dd>
+                                     <dt class="col-3">${kpiUserInfos[3].userName}</dt><dd class="col-3">${kpiUserInfos[3].comisType}</dd> <dt class="col-2">${kpiUserInfos[3].rate}%</dt><dd class="col-4">${kpiUserInfos[3].commissionFee}/${kpiUserInfos[3].kpiFee}</dd>
+                                     <dt class="col-3">${kpiUserInfos[4].userName}</dt><dd class="col-3">${kpiUserInfos[4].comisType}</dd> <dt class="col-2">${kpiUserInfos[4].rate}%</dt><dd class="col-4">${kpiUserInfos[4].commissionFee}/${kpiUserInfos[4].kpiFee}</dd>
+                                     <dt class="col-3">${kpiUserInfos[5].userName}</dt><dd class="col-3">${kpiUserInfos[5].comisType}</dd> <dt class="col-2">${kpiUserInfos[5].rate}%</dt><dd class="col-4">${kpiUserInfos[5].commissionFee}/${kpiUserInfos[5].kpiFee}</dd>
                                     
                                   </dl>
                                  
@@ -923,10 +923,10 @@ function delinfo(id){
 
 function addKPi(){
 
-  //数据汇总
 
 
-  let jsonData={
+  try {
+    let jsonData={
     sfId:customerMember.options[customerMember.getValue()].sfId,
     customerId:customerMember.options[customerMember.getValue()].customerId,
     customerName:customerMember.options[customerMember.getValue()].customerName,
@@ -936,64 +936,55 @@ function addKPi(){
     rate:$('#tcbl').val(),
   }
 
+  const mergedDataAll = {};
+  let totalCommissionFee = 0;
 
-  console.log(jsonData)
-
-
-
-const mergedDataAll = {};
-       let totalKpiFee = 0;
-                let totalCommissionFee = 0;
-                let totalstrALL = '';
-
-         Object.keys(kpiUserInfosOne).forEach(key => {
+  Object.keys(kpiUserInfosOne).forEach(key => {
 
 
-
-
-             
-             
-                kpiUserInfosOne[key].forEach(item => {
-
-                  kpiUserInfosAll.push(item);
-                                const userId = item.userId;
-                                
-                                if (!mergedDataAll[userId]) {
-                                    mergedDataAll[userId] = {
-                                        userId: userId,
-                                        userName: item.userName,
-                                        kpiFee: 0,
-                                        commissionFee: 0,
-                                        count: 0,
-                                        rate:0
-                                    };
-                                }
+    kpiUserInfosOne[key].forEach(item => {
+    kpiUserInfosAll.push(item);
+    const userId = item.userId;
+    if (!mergedDataAll[userId]) {
+          mergedDataAll[userId] = {
+          userId: userId,
+          userName: item.userName,
+          kpiFee: 0,
+          commissionFee: 0,
+          count: 0,
+          rate:0
+          };
+    }
                                 
                                 // 累加金额
-                                mergedDataAll[userId].kpiFee += parseFloat(item.kpiFee);
-                                mergedDataAll[userId].commissionFee += parseFloat(item.commissionFee);
-                                mergedDataAll[userId].rate+= parseFloat(item.rate);
-                                mergedDataAll[userId].count++;
+    mergedDataAll[userId].kpiFee += parseFloat(item.kpiFee);
+    mergedDataAll[userId].commissionFee += parseFloat(item.commissionFee);
+    mergedDataAll[userId].rate+= parseFloat(item.rate);
+    mergedDataAll[userId].count++;                                                                                                               
+    totalCommissionFee += parseFloat(item.commissionFee);
                                 
-                                // 累加总计
-                                totalKpiFee += parseFloat(item.kpiFee);
-                                totalCommissionFee += parseFloat(item.commissionFee);
-                                
-                    });
+    });
+  })
 
 
-                          
+  jsonData.allotPlan = kpiUserInfosAll;
+  jsonData.commissionFee = totalCommissionFee;
 
 
-
-                            
-          })
-
-
-          jsonData.allotPlan = kpiUserInfosAll;
-          jsonData.commissionFee = totalCommissionFee;
+  if(jsonData.allotPlan.length ===0 || jsonData.allotPlan.length%6 !==0){
+   showMessage(1,'请先完成分配')
+   return;
+  }
 
   console.log(jsonData)
+  } catch (error) {
+     showMessage(1,'请先完成分配')
+  }
+
+  //数据汇总
+
+
+  
 
 
 }
@@ -1043,6 +1034,95 @@ fetch(url,options)
 
 
 
+            let allotStr = ``;
+            if(kpiusergroup){
+              kpiusergroup.forEach(kpiUserInfos => {
+
+                const mergedData = {}; 
+
+                let totalstr1 = '';
+                kpiUserInfos.forEach(item => {
+                                const userId = item.userId;
+                                
+                                if (!mergedData[userId]) {
+                                    mergedData[userId] = {
+                                        userId: userId,
+                                        userName: item.userName,
+                                        kpiFee: 0,
+                                        commissionFee: 0,
+                                        count: 0,
+                                        rate:0
+                                    };
+                                }
+                                
+                                // 累加金额
+                                mergedData[userId].kpiFee += parseFloat(item.kpiFee);
+                                mergedData[userId].commissionFee += parseFloat(item.commissionFee);
+                                mergedData[userId].rate+= parseFloat(item.rate);
+                                mergedData[userId].count++;
+                                
+                                // 累加总计
+                
+                                
+                    });
+
+
+                            Object.keys(mergedData).forEach(key => {
+                            
+                              totalstr1 +=`${mergedData[key].userName} : ${mergedData[key].rate.toFixed(3)}%-${mergedData[key].kpiFee.toFixed(3)} / ${mergedData[key].commissionFee.toFixed(3)} <br>`;
+                            })
+
+
+                            let type = '';
+                            if(kpiUserInfos[0].typeName==0){
+                              type = '独立运作';
+                            }else if(kpiUserInfos[0].typeName==1){
+                              type = '合作运作'; 
+                            }else if(kpiUserInfos[0].typeName==2){
+                              type = '团队运作';
+                            }else{
+                              type = '跨区合作';}
+
+
+
+                 allotStr += `<div class="col-lg-6 " id="displayData${count}">
+                              <div class="card">
+                                <div class="card-header">
+                                      <span>
+                                    人选：${kpiUserInfos[0].talentName || '暂无  '} <br>
+                                    ${type} 
+                                  </span>
+                                    &nbsp;
+                                  &nbsp;
+                                  <span style="color: red;"> 
+                                    ${totalstr1}
+                                  </span>
+                             
+                                            
+                          
+
+                                 
+                                </div>
+                                <div class="card-body">
+                                  <dl class="row" style="text-align: left">  
+                                    <dt class="col-3">${kpiUserInfos[0].userName}</dt><dd class="col-3">${kpiUserInfos[0].comisType}</dd> <dt class="col-2">${kpiUserInfos[0].rate}%</dt><dd class="col-4">${parseFloat(kpiUserInfos[0].commissionFee).toFixed(2)}/${parseFloat(kpiUserInfos[0].kpiFee).toFixed(2)}</dd>
+                                     <dt class="col-3">${kpiUserInfos[1].userName}</dt><dd class="col-3">${kpiUserInfos[1].comisType}</dd> <dt class="col-2">${kpiUserInfos[1].rate}%</dt><dd class="col-4">${parseFloat(kpiUserInfos[1].commissionFee).toFixed(2)}/${parseFloat(kpiUserInfos[1].kpiFee).toFixed(2)}</dd>
+                                     <dt class="col-3">${kpiUserInfos[2].userName}</dt><dd class="col-3">${kpiUserInfos[2].comisType}</dd> <dt class="col-2">${kpiUserInfos[2].rate}%</dt><dd class="col-4">${parseFloat(kpiUserInfos[2].commissionFee).toFixed(2)}/${parseFloat(kpiUserInfos[2].kpiFee).toFixed(2)}</dd>
+                                     <dt class="col-3">${kpiUserInfos[3].userName}</dt><dd class="col-3">${kpiUserInfos[3].comisType}</dd> <dt class="col-2">${kpiUserInfos[3].rate}%</dt><dd class="col-4">${parseFloat(kpiUserInfos[3].commissionFee).toFixed(2)}/${parseFloat(kpiUserInfos[3].kpiFee).toFixed(2)}</dd>
+                                     <dt class="col-3">${kpiUserInfos[4].userName}</dt><dd class="col-3">${kpiUserInfos[4].comisType}</dd> <dt class="col-2">${kpiUserInfos[4].rate}%</dt><dd class="col-4">${parseFloat(kpiUserInfos[4].commissionFee).toFixed(2)}/${parseFloat(kpiUserInfos[4].kpiFee).toFixed(2)}</dd>
+                                     <dt class="col-3">${kpiUserInfos[5].userName}</dt><dd class="col-3">${kpiUserInfos[5].comisType}</dd> <dt class="col-2">${kpiUserInfos[5].rate}%</dt><dd class="col-4">${parseFloat(kpiUserInfos[5].commissionFee).toFixed(2)}/${parseFloat(kpiUserInfos[5].kpiFee).toFixed(2)}</dd>
+                                    
+                                  </dl>
+                                 
+
+
+                                </div>
+
+                              </div>
+                              
+
+                            </div>`;
+    
 
 
 
@@ -1070,7 +1150,104 @@ fetch(url,options)
 
 
 
-            let mainStr = `<div class="row row-cards">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+               
+              })
+            }
+
+
+
+
+
+
+             const mergedData = {}; 
+
+                  let totalKpiFee = 0;
+                let totalCommissionFee = 0;
+                let totalstr1 = '';
+                kpiUserInfosAll.forEach(item => {
+                                const userId = item.userId;
+                                
+                                if (!mergedData[userId]) {
+                                    mergedData[userId] = {
+                                        userId: userId,
+                                        userName: item.userName,
+                                        kpiFee: 0,
+                                        commissionFee: 0,
+                                        count: 0,
+                                        rate:0
+                                    };
+                                }
+                                
+                                // 累加金额
+                                mergedData[userId].kpiFee += parseFloat(item.kpiFee);
+                                mergedData[userId].commissionFee += parseFloat(item.commissionFee);
+                                mergedData[userId].rate+= parseFloat(item.rate);
+                                mergedData[userId].count++;
+                                
+                                // 累加总计
+                
+                                totalKpiFee += parseFloat(item.kpiFee);
+                                totalCommissionFee += parseFloat(item.commissionFee);
+                                
+                    });
+
+
+                            Object.keys(mergedData).forEach(key => {
+                            
+                              totalstr1 +=`${mergedData[key].userName} : ${mergedData[key].rate.toFixed(3)}%-${mergedData[key].kpiFee.toFixed(3)} / ${mergedData[key].commissionFee.toFixed(3)} <br>`;
+                            })
+
+
+
+
+                              totalstr1+=`总计：${totalKpiFee.toFixed(3)} / ${totalCommissionFee.toFixed(3)}`;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            let mainStr = `<div class="row row-cards" style='text-align: left'>
                         <div class="col-lg-12  row">
                           <div class="col-4 row">
                              <label class="form-label wordbold col-3" >回款信息:</label>
@@ -1103,44 +1280,7 @@ fetch(url,options)
                         <hr>
                         <div class="col-lg-12  row">
 
-                          <div class="col-lg-6 " id="displayData0">
-                              <div class="card">
-                                <div class="card-header">
-                                      <span>
-                                    人选：暂无   <br>
-                                    独立运作 
-                                  </span>
-                                    &nbsp;
-                                  &nbsp;
-                                  <span style="color: red;"> 
-                                    test : 100.000%-1000.000 / 150.000 <br>
-                                  </span>
-                             
-                                            
-                            
-
-
-                                 
-                                </div>
-                                <div class="card-body">
-                                  <dl class="row">  
-                                    <dt class="col-3">test</dt><dd class="col-3">客户线索</dd> <dt class="col-3">10%</dt><dd class="col-3">15.000/100.000</dd>
-                                     <dt class="col-3">test</dt><dd class="col-3">签约谈判</dd> <dt class="col-3">10%</dt><dd class="col-3">15.000/100.000</dd>
-                                     <dt class="col-3">test</dt><dd class="col-3">人选线索</dd> <dt class="col-3">30%</dt><dd class="col-3">45.000/300.000</dd>
-                                     <dt class="col-3">test</dt><dd class="col-3">人选推荐</dd> <dt class="col-3">30%</dt><dd class="col-3">45.000/300.000</dd>
-                                     <dt class="col-3">test</dt><dd class="col-3">职位运作</dd> <dt class="col-3">10%</dt><dd class="col-3">15.000/100.000</dd>
-                                     <dt class="col-3">test</dt><dd class="col-3">款项回收</dd> <dt class="col-3">10%</dt><dd class="col-3">15.000/100.000</dd>
-                                    
-                                  </dl>
-                                 
-
-
-                                </div>
-
-                              </div>
-                              
-
-                            </div>
+                         ${allotStr}
 
 
 
@@ -1149,7 +1289,17 @@ fetch(url,options)
 
                         </div>
                         <hr>
-                        <div class="card-footer"><span style="color: red;" id="totalALL">test : 100.000%-1000.000 / 150.000 <br>总计：1000.000 / 150.000</span></div>
+                        <div class="card-footer" >
+                        <div class="col-lg-12 row">
+                            <div class="col-lg-1"></div>
+                        
+                            
+                            <div class="col-lg-6" style='text-align: left'>
+                            <span style="color: red;" >${totalstr1}</span>
+                            </div>
+                        </div>
+                       
+                        </div>
 
 
                       </div>`;

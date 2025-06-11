@@ -451,3 +451,28 @@ function initAddtrip(){
   
   });
 }
+
+
+function isRange() {
+  var checkbox = document.getElementById('range');
+
+
+
+
+
+ 
+
+
+  if (checkbox.checked) {
+
+    
+
+      talentInfo.enable();
+      console.log('Checkbox is checked.');
+  } else {
+
+       talentInfo.disable();
+      console.log('Checkbox is not checked.');
+  }
+}
+
