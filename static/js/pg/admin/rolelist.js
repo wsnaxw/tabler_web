@@ -1,44 +1,66 @@
 $(function(){
-//     // var customerId = getParameterByName('customerId');
-//   jeDate("#ymd01",{
-//       theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-//       format: "YYYY-MM"
-//   });
-//   jeDate("#ymd02",{
-//     theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-//     format: "YYYY-MM"
-// });
-  
+    // var customerId = getParameterByName('customerId');
+  // jeDate("#ymd01",{
+  //     theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+  //     format: "YYYY-MM-DD"
+  // });
+  // jeDate("#ymd02",{
+  //   theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+  //   format: "YYYY-MM-DD"
+  // });
 
 
     // console.log('customerId:'+customerId)
     //默认进行分页数据查询
     getPage(1);
+
+   getABC();
+    
 })
 
 
 
+function getABC(){
+        $.ajax({
+            headers:{
+                'token':localStorage.getItem("token"),
+                Accept:'application/json',
+                'Content-Type':'application/json;charset=UTF-8'
+            },
+            dataType:'json',
+            type:'post',
+            url:baseUri+'/admin/permissionList',
+            data:JSON.stringify({'pageNo':1,'pageSize':10000}),
+            success:function(obj){
+
+                sessionStorage.setItem("permissionList",JSON.stringify(obj.data.list));
+
+                const items = obj.data.list;
+
+                const newList = categorizeMenus(items);
+
+                renderMenusToTable(newList,'data');
 
 
 
+                
 
-function getFormDate() {
-  let form = document.getElementById('myForm');  // 用你的form的ID替换'myForm'
- 
-  let formData = new FormData(form);
-  let object = {};
-
-  for (let pair of formData.entries()) {
-      object[pair[0]] = pair[1];
-  }
-  let newJsonData = removeEmptyValues(object);
+                
+                const newList1 = categorizeMenus1(items);
+                renderMenusToTable(newList1,'data1');
 
 
 
-  return newJsonData;
+            }
+        });
+
 
 
 }
+
+
+
+
 
 function removeEmptyValues(obj) {
   if (obj === null || typeof obj !== 'object') {
@@ -60,19 +82,20 @@ function removeEmptyValues(obj) {
 }
 
 
+let roleList;
 
 
 function getPage(pageNo){
 
   arrowPageNo = pageNo;
-  let data = getFormDate()
+  let data= {}
 
   data.pageNo = pageNo;
  
 
 
 
-    $('#data').html('');
+    $('#roleData').html('');
 
 
     $.ajax({
@@ -83,7 +106,7 @@ function getPage(pageNo){
         },
         dataType:'json',
         type:'post',
-        url:baseUri+'/eco/selectInvoiceList',
+        url:baseUri+'/admin/roleList',
         data:JSON.stringify(data),
         success:function(obj){
 
@@ -95,68 +118,38 @@ function getPage(pageNo){
               $('#totalPageNum1').html(0);
                 
             }else{
+                roleList = obj.data.list;
                 // $("#countsss").css("display","");
                 for(var i =0;i<obj.data.list.length;i++){
 
                     var o = obj.data.list[i];
-                    let statestr = '';
-                    if(o.state==0){
-                        statestr = `申请中`;
-                    }else if(o.state==1){
-                        statestr = `已开出`;
-                    }else if(o.state==2){
-                        statestr = '已作废'; 
-                    }
-
-                    let typeStr = '';
-                    if(o.type==0){
-                      typeStr = `普通发票`;
-                    }else if(o.type==1){
-                      typeStr = `专用发票`;
-                    }else if(o.type==2){
-                      typeStr = '电子普通发票'; 
-                    }
-
-
         
+
+
+
+
+
+
+
+
                     str+=
                     `
                     <tr>
+                        <td >${o.name}</td>
+                        <td >${toStr(o.remark)}</td>
+                        <td >${o.outName}</td>
+                        <td >${toStr(o.createTime)}</td>
                     
-                        <td >${toStr(o.invoiceNumber)}</td>
-                        <td >${toStr(o.userName)}</td>
-                        <td >${toStr(o.comName)}</td>
-                        <td >${toStr(o.customerName)}</td>
-                        <td >${toStr(typeStr)}</td>
-
-                        
-                        <td style="color:red">${toNumber(o.fee)}</td>
-                        <td >${toStr(statestr)}</td>
-
-
-                        
-                        <td >${toStr(o.auditorName)}</td>
-                        <td >${toStr(o.isPay != 0?'是':'否')}</td>
-                        <td >${toStr(o.invoiceTime)}</td>
-                        <td >${toStr(o.payTime)}</td>
-                        <td title='${o.remark}'>${toStr(o.remark).slice(0,5)}</td>
-
                         <td>
                         
-                        <a class='btn btn-ghost btn-sm' onclick='checkDetails(${o.id})'>查看</a>
-                        <a class='btn btn-ghost btn-sm' onclick='checkDetails(${o.id})'>到账</a>
-                        <a class='btn btn-ghost btn-sm' onclick='checkDetails(${o.id})'>新增编号</a>
-                        <a class='btn btn-ghost btn-sm' onclick='checkDetails(${o.id})'>关联回款</a>
-                        
-                        <a class='btn btn-danger btn-sm' onclick='deltrip(${o.id})'>作废</a>
+                          <a class='btn btn-ghost btn-sm' onclick='editRole(${i})'>编辑</a>
                         
                         </td>
-       
                         
                       </tr>
                     `
                 }
-                $('#data').html(str);
+                $('#roleData').html(str);
                 
            
                 var pageCount = obj.data.count
@@ -259,23 +252,6 @@ function getPage(pageNo){
 }
 
 
-
-function toNumber(str){
-  const num = Number(str);
-  return num.toFixed(2);
-}
-
-function clearForm(){
-
-    $('#formdata input[type="checkbox"], #formdata select, #formdata input[type="text"]').each(function() {
-        // 将这些元素的值设置为空
-        $(this).val('');
-        // 对于checkbox，还需要取消选中状态
-        if ($(this).is('input[type="checkbox"]')) {
-          $(this).prop('checked', false);
-        }
-      });
-}
 
 
 
@@ -424,48 +400,202 @@ fetch(url,options)
 
 }
 
-function checkDetails(id) {
-  const data = JSON.parse(sessionStorage.getItem(id));
-  if (data) {
-    $('#addtrip input, #addtrip textarea').each(function() {
-      const name = $(this).attr('name');
-      if (name && data[name] !== undefined) {
-        $(this).val(data[name]).prop('disabled', true);
-      }
-      
-    });
 
-    $("#totalDays").prop('disabled', true);
+function checkDetails(id){
+  $('#usermodal').modal('show');
 
-    $("#addtrip").modal('show');
-  }
-}
 
-function editSalary(id) {
-  const data = JSON.parse(sessionStorage.getItem(id));
-  if (data) {
-    $('#addtrip input, #addtrip textarea').each(function() {
-      const name = $(this).attr('name');
-      if (name && data[name] !== undefined) {
-        $(this).val(data[name]).prop('disabled', false);
-      }
-    });
-    if (!$('#addtrip input[name="userId"]').length) {
-      $('#addtrip').append('<input type="hidden" name="userId" value="' + data.userId + '">');
-    } else {
-      $('#addtrip input[name="userId"]').val(data.userId);
-    }
-    $("#totalDays").prop('disabled', false);
-    $("#addtrip").modal('show');
-  }
-}
+};
 
 
 
-function initAddtrip(){
-  $('#addtrip input, #addtrip textarea').each(function() {
-    const name = $(this).attr('name');
-    $(this).prop('disabled', false);
+
+function editRole(id){
+
+   
+    $('#modaltitle').html('编辑角色');
+
+    $('#addTrip').modal('hide');
+
+    const items = roleList[id].permissionList;
+
+
+    checkMatchingCheckboxes(items);
+
+    $('#addTrip').modal('show');
   
-  });
 }
+
+
+
+
+function categorizeMenus1(data) {
+    const menuList = [];
+    const menuMap = {};
+
+    // 先处理一级菜单
+    data.forEach(item => {
+        const parts = item.url.split('/');
+        if (item.url.startsWith('/') && parts.length == 2) {
+            const menu = {
+                id:item.id,
+                name: item.name,
+                url: item.url,
+                childMenus: []
+            };
+            menuList.push(menu);
+            menuMap[item.url] = menu;
+        }
+    });
+
+
+    // 处理子菜单
+    data.forEach(item => {
+        
+        const parts = item.url.split('/');
+        if (item.url.startsWith('/') && parts.length > 2) {
+            const parentUrl = item.url.split('/').slice(0, 2).join('/');
+            if (menuMap[parentUrl]) {
+                const childMenu = {
+                    id:item.id,
+                    name: item.name,
+                    url: item.url
+                };
+                menuMap[parentUrl].childMenus.push(childMenu);
+            }
+        }
+    });
+
+    return menuList;
+}
+
+
+
+
+function categorizeMenus(data) {
+    const menuList = [];
+    const menuMap = {};
+
+    // 先处理一级菜单
+    data.forEach(item => {
+        const parts = item.url.split('/');
+        if (item.url.startsWith('route') && parts.length == 2) {
+            const menu = {
+                id:item.id,
+                name: item.name,
+                url: item.url,
+                childMenus: []
+            };
+            menuList.push(menu);
+            menuMap[item.url] = menu;
+        }
+    });
+
+
+    // 处理子菜单
+    data.forEach(item => {
+        
+        const parts = item.url.split('/');
+        if (item.url.startsWith('route') && parts.length > 2) {
+            const parentUrl = item.url.split('/').slice(0, 2).join('/');
+            if (menuMap[parentUrl]) {
+                const childMenu = {
+                    id:item.id,
+                    name: item.name,
+                    url: item.url
+                };
+                menuMap[parentUrl].childMenus.push(childMenu);
+            }
+        }
+    });
+
+    return menuList;
+}
+
+
+function renderMenusToTable(menus,id) {
+            const tbody = document.getElementById(id);
+            menus.forEach(menu => {
+                const tr = document.createElement('tr');
+
+                // 渲染父级菜单
+                const parentTd = document.createElement('td');
+                const parentLabel = document.createElement('label');
+                parentLabel.className = 'form-check form-check-inline';
+                const parentCheckbox = document.createElement('input');
+                parentCheckbox.className = 'form-check-input';
+                parentCheckbox.type = 'checkbox';
+                parentCheckbox.value = menu.id;
+                const parentSpan = document.createElement('span');
+                parentSpan.className = 'form-check-label wordbold';
+                parentSpan.textContent = menu.name;
+                parentLabel.appendChild(parentCheckbox);
+                parentLabel.appendChild(parentSpan);
+                parentTd.appendChild(parentLabel);
+                tr.appendChild(parentTd);
+
+                // 渲染子菜单
+                const childTd = document.createElement('td');
+                let counter = 0;
+                const childCheckboxes = [];
+                menu.childMenus.forEach((childMenu, index) => {
+                    const childLabel = document.createElement('label');
+                    childLabel.className = 'form-check form-check-inline';
+                    const childCheckbox = document.createElement('input');
+                    childCheckbox.className = 'form-check-input';
+                    childCheckbox.type = 'checkbox';
+                    childCheckbox.value = childMenu.id;
+                    const childSpan = document.createElement('span');
+                    childSpan.className = 'form-check-label';
+                    childSpan.textContent = childMenu.name;
+                    childLabel.appendChild(childCheckbox);
+                    childLabel.appendChild(childSpan);
+                    childTd.appendChild(childLabel);
+                    childCheckboxes.push(childCheckbox);
+
+                    counter++;
+                    if (counter % 5 === 0 && index < menu.childMenus.length - 1) {
+                        const br = document.createElement('br');
+                        childTd.appendChild(br);
+                    }
+                });
+                tr.appendChild(childTd);
+
+                tbody.appendChild(tr);
+
+                // 父级 checkbox 事件处理
+                parentCheckbox.addEventListener('change', function () {
+                    const isChecked = this.checked;
+                    childCheckboxes.forEach(checkbox => {
+                        checkbox.checked = isChecked;
+                    });
+                });
+
+                // 子级 checkbox 事件处理
+                childCheckboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', function () {
+                        const allChecked = childCheckboxes.every(cb => cb.checked);
+                        parentCheckbox.checked = allChecked;
+                    });
+                });
+            });
+}
+
+
+
+        function checkMatchingCheckboxes(newData) {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            newData.forEach(item => {
+                const targetId = item.id.toString();
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.value === targetId) {
+                        checkbox.checked = true;
+                        // 触发子菜单的联动更新
+                        const parentCheckbox = checkbox.closest('tr').querySelector('.form-check-input:first-child');
+                        const childCheckboxes = Array.from(checkbox.closest('td').querySelectorAll('.form-check-input'));
+                        const allChecked = childCheckboxes.every(cb => cb.checked);
+                        parentCheckbox.checked = allChecked;
+                    }
+                });
+            });
+        }

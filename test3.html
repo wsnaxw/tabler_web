@@ -652,7 +652,7 @@ async function callDeepSeekAPI(message) {
           }
 
 
-          function getABC2(){
+function getABC2(){
         $.ajax({
             headers:{
                 'token':localStorage.getItem("token"),
@@ -679,7 +679,7 @@ async function callDeepSeekAPI(message) {
 
 
 
-          }
+}
 
 
 
@@ -691,7 +691,7 @@ async function callDeepSeekAPI(message) {
 
 
 
-          function categorizeMenus(data) {
+function categorizeMenus(data) {
     const menuList = [];
     const menuMap = {};
 
@@ -900,9 +900,9 @@ function renderMenusToTable(menus,id) {
         }
 
 function getSelectedMenuIds() {
-            const allCheckboxes = document.querySelectorAll('#data input[type="checkbox"]');
+            const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
             const menuIds = [];
-            const parentCheckboxes = document.querySelectorAll('#data tr td:first-child input[type="checkbox"]');
+            const parentCheckboxes = document.querySelectorAll('tr td:first-child input[type="checkbox"]');
 
             parentCheckboxes.forEach(parentCheckbox => {
                 const parentId = parentCheckbox.value;
@@ -922,6 +922,7 @@ function getSelectedMenuIds() {
             });
 
             console.log('选中的菜单 ID 数组:', menuIds);
+            console.log('选中的菜单 ID 数组:', allCheckboxes);
             return menuIds;
         }
 
