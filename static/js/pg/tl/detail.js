@@ -914,7 +914,7 @@ document.addEventListener("DOMContentLoaded", function () {
               body: JSON.stringify({ 'name': query }),
               };
 
-              var url = baseUri+'/project/myJobList';
+              var url = baseUri+'/project/selectPForJohn';
               fetch(url,options)
               .then(response => response.json())
               .then(json => {
