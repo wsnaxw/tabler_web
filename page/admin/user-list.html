@@ -17,11 +17,13 @@
     <script src="../../static/js/tabler.min.js"></script>
     <link rel="stylesheet" href="../../static/css/tabler.min.css">
     <link rel="stylesheet" href="../../static/css/base.css">
+    <link rel="stylesheet" href="../../static/css/dropzone.css">
     <link rel="icon" href="../../static/img/favicon.ico" type="image/x-icon" />
     <script src="../../static/js/jquery.min.js"></script>
     <script src="../../static/js/base.js?1"></script>
     <link type="text/css" rel="stylesheet" href="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/skin/jedate.css">
     <script type="text/javascript" src="https://faithful.oss-cn-shanghai.aliyuncs.com/static/jdate/src/jedate.js"></script>
+    <script type="text/javascript" src="https://gosspublic.alicdn.com/aliyun-oss-sdk-6.18.0.min.js"></script>
     <script src="../../static/js/watermark.js"></script>
     <script src="../../static/js/pg/admin/userlist.js "></script>
     <script>
@@ -299,8 +301,8 @@
                              <input type="text" title="日程标题" class="form-control" name="phone"  >
                           </div>
                         </div>
-                        <div class="col-lg-7 row">
-                          <label class="form-label col-1 wordbold" >当前状态</label>
+                        <div class="col-lg-5 row">
+                          <label class="form-label col-2 wordbold" >工作状态</label>
                           <div class="col">
                             <label class="form-check form-check-inline">
                               <input class="form-check-input" type="radio" name="workState" value="0" checked>
@@ -323,7 +325,7 @@
                         
                   
   
-                        <div class="col-lg-4">
+                        <div class="col-lg-3 ms-auto">
                           <div class="col">
                            <a onclick="clearForm()" class="btn btn-link ms-auto ">清空 </a>
                            <a onclick="searchList()" class="btn btn-primary ms-auto ">查询</a>
@@ -430,7 +432,7 @@
 
 
             <div class="modal modal-blur fade" id="usermodal" tabindex="-1" role="dialog" aria-hidden="true">
-              <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+              <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
                     <h5 class="modal-title" id="modaltitle">新增员工</h5>
@@ -439,55 +441,98 @@
                   <div class="modal-body">
     
                     <div class="row">
-                      <div class="col-lg-1"></div>
-                      <div class="col-lg-6 mb-3">
-                        <label class="form-label wordbold">日程提醒标题</label>
-                        <input type="text" class="form-control" name="title" >
+                     
+                      <div class="col-lg-6 mb-3 row">
+                        <label class="col-4 form-label wordbold">头像</label>
+                        <div class="col">
+                           <form class="dropzone" id="avatarDropzone"  autocomplete="off" novalidate> </form>   
+                   
+                   
+                        </div>
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
                       <div class="mb-3 col-lg-6 row">
-                        <label class="form-label wordbold" >提醒日期</label>
-                        <div class="jeinpbox"><input type="text" class="form-control" name="time" id="ymd02" placeholder="YYYY-MM-DD"></div>
+                        <label class="col-4 form-label wordbold">个人简介</label>
+                         <div class="col"> <textarea class="form-control" rows="5" name="details" ></textarea></div>
+                       
                       </div>
-                      <div class="col-lg-5"></div>
-                      <div class="col-lg-1"></div>
-                  
-                      <div class="mb-3 col-lg-11 ">
-                        <label class="form-label wordbold">类型</label>
-                        <label class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="type" value="0">
-                          <span class="form-check-label">客户提醒</span>
-                        </label>
-                        
-                        <label class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="type" value="1">
-                          <span class="form-check-label">职位提醒</span>
-                        </label>
-                        
-                        <label class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="type" value="2">
-                          <span class="form-check-label">简历提醒</span>
-                        </label>
-                        <label class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="type" value="3">
-                          <span class="form-check-label">面试提醒</span>
-                        </label>
-                        <label class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="type" value="4">
-                          <span class="form-check-label">待办事项</span>
-                        </label>
-                        <label class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="type" value="5">
-                          <span class="form-check-label">其他提醒</span>
-                        </label>
+               
+                        <div class="col-lg-6 row mb-3">
+                        <label class="col-4 form-label required  wordbold">登录账户</label>
+                        <div class="col">
+                          <input type="text" class="form-control" name="title" >
+                          <div class="invalid-feedback" id="accountCheck">名称不正确或不能为空！</div>
+                        </div>
                       </div>
-
-                      <div class="col-lg-1"></div>
-                      <div class="mb-3 col-lg-10 row">
-                        <label class="form-label wordbold">提醒内容</label>
-                        <textarea class="form-control" rows="5" name="details" ></textarea>
+                        <div class="col-lg-6 row mb-3">
+                        <label class="col-4 form-label required  wordbold">姓名</label>
+                        <div class="col">
+                          <input type="text" class="form-control" name="title" >
+                          <div class="invalid-feedback" >名称不正确或不能为空！</div>
+                        </div>
                       </div>
+                        <div class="col-lg-6 row mb-3">
+                        <label class="col-4 form-label required  wordbold">电话</label>
+                        <div class="col">
+                          <input type="text" class="form-control" name="title" >
+                          <div class="invalid-feedback" id="accountCheck">名称不正确或不能为空！</div>
+                        </div>
+                      </div>
+                        <div class="col-lg-6 row mb-3">
+                        <label class="col-4 form-label required  wordbold">职级</label>
+                        <div class="col">
+                          <input type="text" class="form-control" name="title" >
+                          <div class="invalid-feedback" id="accountCheck">名称不正确或不能为空！</div>
+                        </div>
+                      </div>
+                                 <div class="col-lg-6 row mb-3">
+                        <label class="col-4 form-label required  wordbold">花名</label>
+                        <div class="col">
+                          <input type="text" class="form-control" name="title" >
+                          <div class="invalid-feedback" id="accountCheck">名称不正确或不能为空！</div>
+                        </div>
+                      </div>
+                        <div class="col-lg-6 row mb-3">
+                        <label class="col-4 form-label required  wordbold">所属大区</label>
+                        <div class="col">
+                          <input type="text" class="form-control" name="title" >
+                          <div class="invalid-feedback" id="accountCheck">名称不正确或不能为空！</div>
+                        </div>
+                      </div>
+                        <div class="col-lg-6 row mb-3">
+                        <label class="col-4 form-label required  wordbold">所属公司</label>
+                        <div class="col">
+                          <input type="text" class="form-control" name="title" >
+                          <div class="invalid-feedback" id="accountCheck">名称不正确或不能为空！</div>
+                        </div>
+                      </div>
+           
+                        <div class="col-lg-6 row mb-3">
+                        <label class="col-4 form-label required  wordbold">角色</label>
+                        <div class="col">
+                          <input type="text" class="form-control" name="title" >
+                          <div class="invalid-feedback" id="accountCheck">名称不正确或不能为空！</div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 row mb-3">
+                        <label class="col-4 form-label required  wordbold">Email</label>
+                        <div class="col">
+                          <input type="text" class="form-control" name="title" >
+                        </div>
+                      </div>
+                       <div class="col-lg-6 row mb-3">
+                        <label class="col-4 form-label required  wordbold">上岗位日期</label>
+                        <div class="col">
+                          <input type="text" class="form-control" name="title" id="ymd01" >
+                        </div>
+                      </div>
+                      <div class="col-lg-6 row mb-3">
+                        <label class="col-4 form-label required  wordbold">招聘渠道</label>
+                        <div class="col">
+                          <input type="text" class="form-control" name="title" >
+                        </div>
+                      </div>
+               
+          
     
                     </div>
     
@@ -522,6 +567,11 @@
           </div>
         </div>
         <script src="../../static/js/list.min.js" defer></script>
+
+        
+        <script src="../../static/js/tom-select.base.min.js" ></script>
+       
+        <script src="../../static/js/dropzone-min.js" ></script>
 
         <script defer>
   

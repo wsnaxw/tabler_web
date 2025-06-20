@@ -1,9 +1,9 @@
 $(function(){
     // var customerId = getParameterByName('customerId');
-  // jeDate("#ymd01",{
-  //     theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
-  //     format: "YYYY-MM-DD"
-  // });
+  jeDate("#ymd01",{
+      theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
+      format: "YYYY-MM-DD"
+  });
   // jeDate("#ymd02",{
   //   theme:{bgcolor:"#4cc9f0",pnColor:"#00CCFF"},
   //   format: "YYYY-MM-DD"
@@ -18,12 +18,248 @@ $(function(){
     // console.log('customerId:'+customerId)
     //默认进行分页数据查询
     getPage(1);
+
+
+
+
+
+
+
+
+
+
+
+    Dropzone.autoDiscover = false;
+   
+    var myDropzone = new Dropzone("#avatarDropzone", {
+        url:'test',
+        dictDefaultMessage:"点击或拖拽文件到此上传！",
+        addRemoveLinks: true,//是否有删除文件的功能
+        dictRemoveFile: "移除",//移除文件链接的文本。只设置addRemoveLinks: true 没有这个 会找不到删除按钮
+        dictRemoveFileConfirmation: '确定删除此文件吗?',
+
+        autoProcessQueue: false, // 设置为false，表示不自动上传文件队列
+        // acceptedFiles: ".jpg,.png,.jpeg.JPG,.PNG,.JPEG",//支持的格式
+        // accept: function(file, done) {
+      
+        // },
+
+        // 其他配置选项...
+        init: function() {
+            this.on("success", function(file, response) {
+                // 假设服务器返回的response是一个对象，其中包含上传成功的信息
+                // console.log("文件上传成功:", file,response);
+                // console.log("文件上传成功:", response);
+
+            // 创建一个新的<img>元素用于预览
+            file.url='/'+response.name
+          
+            // 将<img>元素添加到预览区域
+    
+                // 更新UI以显示上传成功
+                // 你可以根据需要自定义这部分代码
+                var previewElement = file.previewElement;
+                previewElement.classList.add("dz-success"); // 添加成功类
+                // previewElement.classList.remove("dz-progress"); // 移除处理中类
+                previewElement.classList.remove("dz-processing");
+                // // ...其他UI更新操作...
+                // $('.dz-progress').each(function() {
+                //     // 移除dz-processing类
+                //     $(this).removeClass('dz-progress');
+                //     // 添加dz-success类
+                //     $(this).addClass('dz-success');
+                // });
+
+
+            });
+            this.on("removedfile",function (file){
+                removeFileNames(file.url);
+                console.log(file)
+                console.log(filenames)
+            });
+    
+        }
+    });
+
+
+
+    myDropzone.on("addedfile", function(file) {  
+        upload(file,myDropzone)
+        // 你可以在这里添加预览逻辑  
+        // myDropzone.createThumbnailFromUrl(...);  
+    });  
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 })
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+  function checkFileExtension(file) {
+    // 定义一个允许的扩展名数组，注意不需要区分大小写
+    const allowedExtensions = ['jpg', 'png', 'jpeg'];
+
+    // 获取文件扩展名
+    const extension = file.name.toLowerCase().split('.').pop();
+
+    // 检查扩展名是否在允许的列表中
+    if (!allowedExtensions.includes(extension)) {
+        alert('请上传正确文件');
+        return false;
+    }
+
+    return true;
+}
+
+
+
+
+
+function upload(file,myDropzone){
+
+
+
+
+    if(!checkFileExtension(file)){return}
+
+
+
+
+    let stsTokendata="" ;
+    let picnumber = "";
+
+    
+    getData({},'/login/getToken').then(data => {
+        // 这里处理从getData返回的数据
+        try {
+            sessionStorage.setItem("picnumber",data.token)
+        } catch (error) {
+        }
+
+    }).catch(error => {
+        // 处理错误
+        console.error('获取数据失败:', error);
+    });
+
+
+    getData({},'/admin/getALLSTSToken').then(data => {
+        // 这里处理从getData返回的数据
+        try {
+            sessionStorage.setItem("stsTokendata",data)
+        } catch (error) {
+        }
+
+    }).catch(error => {
+        // 处理错误
+        console.error('获取数据失败:', error);
+    });
+
+    stsTokendata=JSON.parse(sessionStorage.getItem("stsTokendata")).credentials
+    picnumber = sessionStorage.getItem("picnumber")
+    
+
+    const client = new OSS({
+        // yourRegion填写Bucket所在地域。以华东1（杭州）为例，yourRegion填写为oss-cn-hangzhou。
+        region: "oss-cn-shanghai",
+        // 从STS服务获取的临时访问密钥（AccessKey ID和AccessKey Secret）。
+        accessKeyId: stsTokendata.accessKeyId,
+        accessKeySecret: stsTokendata.accessKeySecret,
+        // 从STS服务获取的安全令牌（SecurityToken）。
+        stsToken: stsTokendata.securityToken,
+        // 填写Bucket名称。
+        bucket: "faithful",
+      });
+
+
+    
+    var path = '/head/'+file.name;
+      filename =path;
+    
+
+    console.log(filename)
+    addFileNames(file.name,path)
+
+    
+    // myDropzone.emit("thumbnail", file, 'http://faithful.oss-cn-shanghai.aliyuncs.com'+path)
+    putObject(path,file,client,myDropzone);
+      
+}
+
+let filename = '';
+
+let filenames = []
+
+function addFileNames(value,key ) {
+    // 创建一个对象，包含键值对
+    let obj = {};
+    obj[key] = value;
+    
+    // 将对象添加到数组中
+    filenames.push(obj);
+}
+
+// 删除元素（通过键匹配）
+function removeFileNames(key) {
+    filenames = filenames.filter(obj => !obj.hasOwnProperty(key));
+}
+
+
+
+async function putObject(path,data,client,myDropzone) {
+    try {
+      // 填写Object完整路径。Object完整路径中不能包含Bucket名称。
+      // 您可以通过自定义文件名（例如exampleobject.txt）或文件完整路径（例如exampledir/exampleobject.txt）的形式实现将数据上传到当前Bucket或Bucket中的指定目录。
+      // data对象可以自定义为file对象、Blob数据或者OSS Buffer。
+      const options = {
+        meta: { temp: "demo" },
+        mime: "json",
+        headers: { "Content-Type": "text/plain" },
+      };
+      const result = await client.put(path, data, options);
+      myDropzone.emit("success", data, result)
+      myDropzone.emit("complete", data);
+    //   console.log(result);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
 
 function getFormDate() {
