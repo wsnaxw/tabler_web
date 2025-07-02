@@ -99,17 +99,7 @@ function getPage(pageNo){
                 for(var i =0;i<obj.data.list.length;i++){
 
                     var o = obj.data.list[i];
-                    let statestr = '';
-                    if(o.state==0){
-                        statestr = `<span style="color:green">待审核</span>`;
-                    }else if(o.state==1){
-                        statestr = `<span style="color:blue">已通过</span>`;
-                    }else if(o.state==2){
-                        statestr = '已驳回'; 
-                    }else if(o.state==3){
-                        statestr = '已退回'; 
-                    }
-
+    
 
         
                     str+=
@@ -130,13 +120,15 @@ function getPage(pageNo){
                         
                         <a class='btn btn-ghost btn-sm' onclick='checkDetails(${o.id})'>查看</a>
                         
-                        <a class='btn btn-info btn-sm' onclick='deltrip(${o.id})'>编辑</a>
+               
                         
                         </td>
        
                         
                       </tr>
                     `
+
+                             // <a class='btn btn-info btn-sm' onclick='deltrip(${o.id})'>编辑</a>
                 }
                 $('#data').html(str);
                 
@@ -407,6 +399,239 @@ fetch(url,options)
 }
 
 function checkDetails(id) {
+
+
+  const options = {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json',
+    'token':localStorage.getItem('token')
+    },
+    body:  JSON.stringify({id:id}),
+    };
+
+    var url = baseUri+'/eco/selectServiceFeeById';
+fetch(url,options)
+    .then(response => response.json())
+    .then(json => {
+        // console.log(json)
+        if(json.code==0){
+
+
+          let o = json.data;
+
+          let payWaystr = ``;
+          switch (o.payWay) {
+            case 0:
+              payWaystr='现金支付';
+              break;
+            case 1:
+              payWaystr='支票转账';
+              break;
+            case 2:
+              payWaystr='网银转账';
+              break;
+            case 3:
+              payWaystr='其他方式';
+              break;
+            case 4:
+              payWaystr='个人电汇';
+              break;
+                        
+          }  
+          let payTypeStr = ``;
+          switch (o.payType) {   
+            case 0:
+              payTypeStr='服务费';
+              break;
+            case 1:
+              payTypeStr='咨询费';
+              break;
+            case 2:
+              payTypeStr='首付款';
+              break;
+          }              
+          let serviceTypeStr = ``;
+          switch (o.serviceType) {
+            case 0:
+              serviceTypeStr='猎头业务';
+              break;
+            case 1:
+              serviceTypeStr='咨询业务';
+              break;
+            case 2:
+              serviceTypeStr='其他';
+              break;
+          
+          }
+
+          let tpList = o.tpList || [];
+          let tpStr = ``;
+          let isTpList=`否`
+          if(tpList.length>0){
+            isTpList = `是`
+
+            let namestr=``;
+            for(let i=0;i<tpList.length;i++){
+              let tp = tpList[i];
+              namestr+=`<span class="badge">${toStr(tp.talentName)}</span> `
+            }
+
+            tpStr =`                         <hr>
+                       <dl class="row">
+                        <dt class="col-2">
+                          人选
+                        </dt>
+                        <dd class="col-10">
+                         ${namestr}
+                        </dd>
+                      </dl>`;
+
+
+          }
+
+          let invoiceSet = o.invoiceSet || [];
+          let invoiceStr = ``;
+          let isInvoiceSet=`否`
+          if(invoiceSet.length>0){
+            isInvoiceSet = `是` 
+
+
+          }
+
+
+
+
+          let str = `
+                      <dl class="row">
+                        <dt class="col-2">
+                          回款金额
+                        </dt>
+                        <dd class="col-2">
+                          <span style="color: red;">${o.fee}</span>
+                        </dd>
+                        <dt class="col-2">
+                          服务顾问
+                        </dt>
+                        <dd class="col-2">
+                          <span style="color: red;">${o.userName}</span>
+                        </dd>
+                        <dt class="col-2">
+                          归属公司
+                        </dt>
+                        <dd class="col-2">
+                          ${o.comName}
+                        </dd>
+                        <dt class="col-2">
+                          客户名称
+                        </dt>
+                        <dd class="col-4">
+                          ${o.customerName}
+                        </dd>
+                      </dl>
+
+                      
+                      <dl class="row">
+                        <dt class="col-2">
+                          支付方式
+                        </dt>
+                        <dd class="col-2">
+                          ${payWaystr}
+                        </dd>
+                        <dt class="col-2">
+                          收入类型
+                        </dt>
+                        <dd class="col-2">
+                          ${payTypeStr}
+                        </dd>
+                        <dt class="col-2">
+                          业务类型
+                        </dt>
+                        <dd class="col-2">
+                          ${serviceTypeStr}
+                        </dd>
+
+                        <dt class="col-2">
+                          是否关联人选
+                        </dt>
+                        <dd class="col-2">
+                          ${isTpList}
+                        </dd>
+
+                        <dt class="col-2">
+                          是否关联发票
+                        </dt>
+                        <dd class="col-2">
+                          ${isInvoiceSet}
+                        </dd>
+
+
+
+                      </dl>
+                  ${tpStr}
+
+                  ${invoiceStr}
+
+                      <hr>
+                       <dl class="row">
+                        <dt class="col-2">
+                          备注
+                        </dt>
+                        <dd class="col-10">
+                          ${o.remark}
+                        </dd>
+                      </dl>`;
+
+
+
+          $('#bfdata').html(str);
+
+
+
+          $("#bfdetails").modal('show');
+
+
+
+
+
+
+
+
+
+
+
+            
+        }else{
+            showMessage(1,"查询失败")
+        }
+
+
+
+    }).catch((error)=>{
+        console.log(error)
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   const data = JSON.parse(sessionStorage.getItem(id));
   if (data) {
     $('#addtrip input, #addtrip textarea').each(function() {
