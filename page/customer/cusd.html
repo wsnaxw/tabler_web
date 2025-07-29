@@ -329,110 +329,9 @@
                 
                   <div class="card-body" id="formdata">
 
-                    <div class="row row-cards"> 
-                    
 
-                      <div class="col-lg-6">
-                        <div class="card">
-                          <div class="card-status-start bg-primary"> 
-
-                          </div>
-                          <div class="card-header">
-                            <h3 class="card-title" id="basecname" style="font-weight: bold;">基本信息</h3><span class="form-check-description" style="color: rgb(77, 150, 193);" id="bmxx" onclick="copyTextToClipboard('bmxx')"></span>
-                            <div class="card-actions">
-                              <a href="../project/p-creation.html" target="_blank" class="btn btn-ghost-primary">
-                                新增职位 
-                              </a>
-                              
-                              <!-- <a href="#" class="btn btn-ghost-success"  id="isvip">
-                                申请认证
-                              </a> -->
-                              <a class="btn btn-info"  data-bs-toggle='modal' data-bs-target='#modal-edit' onclick="initEdit()">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path><path d="M16 5l3 3"></path></svg>
-                              </a>
-                            </div>
-                          </div>
-                          <div class="card-body">
-
-                            <dl class="row">
-                              <div class="row mb-2">
-                                <dt class="col-3">归属公司:</dt>
-                                <dd class="col-3" id="gsgs">无</dd>
-                                <dt class="col-3">推荐人:</dt>
-                                <dd class="col-3" id="tjr">无</dd>
-                              </div>
-                              <div class="row mb-2">  
-                                <dt class="col-3">客户来源:</dt>
-                                <dd class="col-3"><span class="flag flag-country-pl" id="khly">无</span></dd>
-                                <dt class="col-3">服务顾问:</dt>
-                                <dd class="col-3" id="fwgw">无</dd>
-                              </div>
-
-                              <div class="row mb-3">  
-                                <dt class="col-3">所属行业:</dt>
-                                <dd class="col-9" id="syhy">无</dd>
-                              </div>
-                              <div class="row mb-2"> 
-                                <dt class="col-3">公司规模:</dt>
-                                <dd class="col-3" id="gsgm">无</dd>
-                                <dt class="col-3">公司性质:</dt>
-                                <dd class="col-3" id="gsxz">无</dd>
-                              </div>
-                              <div class="row mb-2"> 
-                                <dt class="col-3">公司地址:</dt>
-                                <dd class="col-3" id="raddress">无</dd>
-                                <dt class="col-3">公司网站:</dt>
-                                <dd class="col-3" id="website">无</dd>
-                              </div>
-
-                              <dt class="col-3">创建时间:</dt>
-                              <dd class="col-9" id="cjsj">无</dd>
-                              <dt class="col-3">执行团队:</dt>
-                              <dd class="col-9">
-                                <div id="teamlist">
-                                  
-                                </div>
-                            
-                              </dd>  
-                              <dt class="col-3">签约状态:</dt>
-                              <dd class="col-9" id="signstate">无</dd>
-                            </dl>
-
-                           
-
-                          </div>
-                        </div>
-                      </div>
-
-
-                      <div class="col-lg-6">
-                        <div class="card" style="height: 23rem">
-                          <div class="card-header">
-                            <h3 class="card-title">沟通记录</h3>
-                            <div class="card-actions">
-                              <a  class="btn btn-ghost-primary"   data-bs-toggle='modal' data-bs-target='#modal-newc' onclick="initEdit()">
-                                新增沟通记录
-                              </a>
-                              <a class="btn btn-info" data-bs-toggle="offcanvas" href="#offcanvasEnd" role="button" aria-controls="offcanvasEnd" onclick="cclfq()">
-                                展开
-                              </a>
-                            </div>
-                          </div>
-                          <div class="card-body card-body-scrollable card-body-scrollable-shadow">
-                            <div class="divide-y" id="cclistout">              
-                            </div>
-                          </div>
-                        </div>
-
-                        
-                        
-         
-                      </div>
-
-
-                      <div class="col-md-1 col-lg-1">
-
-                      </div>
+                    <div class="row row-cards mb-3">
+                  
 
                       <div class="col-md-2 col-lg-2">
                         <div class="card card-sm">
@@ -541,6 +440,113 @@
                             </div>
                         </div>
                       </div>
+
+                    </div>
+
+
+
+                    <div class="row row-cards"> 
+                    
+
+                      <div class="col-lg-8">
+                        <div class="card">
+                          <div class="card-status-start bg-primary"> 
+
+                          </div>
+                          <div class="card-header">
+                            <h3 class="card-title" id="basecname" style="font-weight: bold;">基本信息</h3><span class="form-check-description" style="color: rgb(77, 150, 193);" id="bmxx" onclick="copyTextToClipboard('bmxx')"></span>
+                            <div class="card-actions">
+                              <a href="../project/p-creation.html" target="_blank" class="btn btn-ghost-primary">
+                                新增职位 
+                              </a>
+                              
+                              <!-- <a href="#" class="btn btn-ghost-success"  id="isvip">
+                                申请认证
+                              </a> -->
+                              <a class="btn btn-info"  data-bs-toggle='modal' data-bs-target='#modal-edit' onclick="initEdit()">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon ms-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"></path><path d="M16 5l3 3"></path></svg>
+                              </a>
+                            </div>
+                          </div>
+                          <div class="card-body">
+
+                            <dl class="row">
+                              <div class="row mb-2">
+                                <dt class="col-3">归属公司:</dt>
+                                <dd class="col-3" id="gsgs">无</dd>
+                                <dt class="col-3">推荐人:</dt>
+                                <dd class="col-3" id="tjr">无</dd>
+                              </div>
+                              <div class="row mb-2">  
+                                <dt class="col-3">客户来源:</dt>
+                                <dd class="col-3"><span class="flag flag-country-pl" id="khly">无</span></dd>
+                                <dt class="col-3">服务顾问:</dt>
+                                <dd class="col-3" id="fwgw">无</dd>
+                              </div>
+
+                              <div class="row mb-3">  
+                                <dt class="col-3">所属行业:</dt>
+                                <dd class="col-9" id="syhy">无</dd>
+                              </div>
+                              <div class="row mb-2"> 
+                                <dt class="col-3">公司规模:</dt>
+                                <dd class="col-3" id="gsgm">无</dd>
+                                <dt class="col-3">公司性质:</dt>
+                                <dd class="col-3" id="gsxz">无</dd>
+                              </div>
+                              <div class="row mb-2"> 
+                                <dt class="col-3">公司地址:</dt>
+                                <dd class="col-3" id="raddress">无</dd>
+                                <dt class="col-3">公司网站:</dt>
+                                <dd class="col-3" id="website">无</dd>
+                              </div>
+
+                              <dt class="col-3">创建时间:</dt>
+                              <dd class="col-9" id="cjsj">无</dd>
+                              <dt class="col-3">执行团队:</dt>
+                              <dd class="col-9">
+                                <div id="teamlist">
+                                  
+                                </div>
+                            
+                              </dd>  
+                              <dt class="col-3">签约状态:</dt>
+                              <dd class="col-9" id="signstate">无</dd>
+                            </dl>
+
+                           
+
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="col-lg-4">
+                        <div class="card" style="height: 23rem">
+                          <div class="card-header">
+                            <h3 class="card-title">沟通记录</h3>
+                            <div class="card-actions">
+                              <a  class="btn btn-ghost-primary"   data-bs-toggle='modal' data-bs-target='#modal-newc' onclick="initEdit()">
+                                新增沟通记录
+                              </a>
+                              <a class="btn btn-info" data-bs-toggle="offcanvas" href="#offcanvasEnd" role="button" aria-controls="offcanvasEnd" onclick="cclfq()">
+                                展开
+                              </a>
+                            </div>
+                          </div>
+                          <div class="card-body card-body-scrollable card-body-scrollable-shadow">
+                            <div class="divide-y" id="cclistout">              
+                            </div>
+                          </div>
+                        </div>
+
+                        
+                        
+         
+                      </div>
+
+
+                      
 
 
                     </div>
