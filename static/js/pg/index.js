@@ -268,7 +268,9 @@ function sstj(){
                 }
 
                
-
+                if (o.salary && typeof o.salary === 'string') {
+                o.salary = o.salary.replace(/万/g, '');
+                }
                 str += "<tr><td class='text-nowrap'  style='color: red;'>"
                 + o.stateName + "</td><td class='text-nowrap text-secondary'>"
                 + o.comName +"</td><td class='text-secondary text-nowrap'>"
