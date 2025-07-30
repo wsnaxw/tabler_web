@@ -1195,8 +1195,8 @@ function collectWorkExperienceData() {
         }
       });
 
-
-    $(this).find('input, textarea,select').each(function() {
+      // ,select
+    $(this).find('input, textarea').each(function() {
       const name = $(this).attr('name');
       const value = $(this).val();
       const type = $(this).attr('type');
@@ -1241,7 +1241,7 @@ function collectProjectExperienceData() {
             isCheckboxChecked = true;
           }
         });
-    $(this).find('input,textarea,select').each(function() {
+    $(this).find('input,textarea').each(function() {
       const name = $(this).attr('name');
       const value = $(this).val();
       const type = $(this).attr('type');
@@ -1290,7 +1290,7 @@ function collectEduExperienceData() {
             isCheckboxChecked = true;
           }
         });
-    $(this).find('input,select').each(function() {
+    $(this).find('input').each(function() {
       const name = $(this).attr('name');
       const value = $(this).val();
       const type = $(this).attr('type');
@@ -1372,6 +1372,7 @@ console.log("isValid",isValid)
 // Check if required fields are empty
 document.querySelectorAll('#baseinfo label.required').forEach(label => {
     let input = label.nextElementSibling.querySelector('input, select, textarea');
+    console.log("input",input)
     if (input && !input.value) {
         isValid = false;
         input.classList.add('is-invalid','is-invalid-lite'); // Add error class to highlight the empty required field
