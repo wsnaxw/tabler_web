@@ -1344,13 +1344,14 @@ function test(){
 
   const a1 = collectWorkExperienceData();
   // console.log(a1);
-  const a2 = collectProjectExperienceData();
+  // const a2 = collectProjectExperienceData();
   // console.log(a2);
   const a3 = collectEduExperienceData();
   // console.log(a3);
 
 
-  return work1&&pro1&&edu1;
+  // return work1&&pro1&&edu1;
+  return work1&&edu1;
 
 }
 
