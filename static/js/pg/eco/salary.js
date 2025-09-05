@@ -14,6 +14,10 @@ $(function(){
     // console.log('customerId:'+customerId)
     //默认进行分页数据查询
     getPage(1);
+
+    document.getElementById('fileInput').addEventListener('change', function() {
+    uploadFile();
+});
 })
 
 
@@ -116,7 +120,7 @@ function getPage(pageNo){
                         <td >${toNumber(o.food)}</td>
                         <td >${toNumber(o.other)}</td>
                         <td style="color:red">${toNumber(o.salary)}</td>
-                        <td >${toStr(o.createTime)}</td>
+                        <td >${toStr(o.payDay)}</td>
                         <td >${toStr(o.details)}</td>
 
 
@@ -445,5 +449,44 @@ function initAddtrip(){
     const name = $(this).attr('name');
     $(this).prop('disabled', false);
   
+  });
+}
+
+
+function uploadFile(){
+  const fileInput = document.getElementById('fileInput');
+  const file = fileInput.files[0];
+  if (!file) {
+    alert('请选择文件');
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append('file', file); // 'file'是服务器端接收文件时使用的字段名，根据实际情况修改
+ var url = baseUri+'/eco/uploadSalary';
+  // 使用Fetch API发送请求
+  fetch(url, { // 替换为你的上传接口URL
+       headers: {
+    'token':localStorage.getItem('token')
+    },
+    method: 'POST',
+    body: formData,
+    // 注意：使用FormData时，不要设置Content-Type header，因为浏览器会自动设置正确的Content-Type（包括boundary）
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('上传失败');
+    }
+    return response.json(); // 假设服务器返回JSON数据
+  })
+  .then(data => {
+      showMessage(0,'上传成功!!')
+    console.log('上传成功', data);
+    // 处理成功情况
+  })
+  .catch(error => {
+     showMessage(1,"上传失败！")
+    console.error('上传出错:', error);
+    // 处理错误情况
   });
 }
